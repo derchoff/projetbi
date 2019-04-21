@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
+  <TalendMetadata:FileExcelConnection xmi:id="_XhQxcGNhEemyL6IczH9wEw" name="liste_des_indicateurs" dataPackage="_XhQxcWNhEemyL6IczH9wEw" Server="Localhost 127.0.0.1" FilePath="C:/Talend/TOS_DI-Win32-20190325_1906-V7.2.1M4/workspace/PROJETBI/indicateurs_2019.xls" Encoding="windows-1252" UseHeader="true" HeaderValue="1" FirstLineCaption="true" SheetName="indicateurs" firstColumn="1" thousandSeparator="','" decimalSeparator="'.'" selectAllSheets="true" sheetList="indicateurs:w&#xA;">
+    <sheetColumns>A</sheetColumns>
+    <sheetColumns>B</sheetColumns>
+  </TalendMetadata:FileExcelConnection>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_XhQxcWNhEemyL6IczH9wEw" name="default" dataManager="_XhQxcGNhEemyL6IczH9wEw">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_XhQxcmNhEemyL6IczH9wEw" id="_PCspsGNhEemyL6IczH9wEw" label="metadata">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_XhQxc2NhEemyL6IczH9wEw" label="Abbreviation" length="6" talendType="id_String" key="true" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_XhQxdGNhEemyL6IczH9wEw" label="Nom" length="17" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+    </ownedElement>
+  </orgomg.cwm.resource.record:RecordFile>
+</xmi:XMI>

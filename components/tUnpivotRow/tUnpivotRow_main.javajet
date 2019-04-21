@@ -1,0 +1,82 @@
+/*
+	&copy; British Telecommunications plc, 2009, All Rights Reserved. Licensed for general use under the terms of GPL v2.
+*/
+<%@ jet
+imports="
+    org.talend.core.model.process.EConnectionType
+	org.talend.core.model.process.INode
+    org.talend.core.model.process.ElementParameterParser
+    org.talend.core.model.process.IConnection
+    org.talend.core.model.metadata.IMetadataTable
+    org.talend.core.model.metadata.IMetadataColumn
+    org.talend.designer.codegen.config.CodeGeneratorArgument
+    java.util.List
+    java.util.Map
+    java.util.ArrayList
+    org.talend.commons.utils.StringUtils
+"
+%>
+<%	CodeGeneratorArgument codeGenArgument = (CodeGeneratorArgument) argument;
+	INode node = (INode)codeGenArgument.getArgument();
+	
+	String cid = node.getUniqueName();
+
+	List<Map<String, String>> rowKeys = (List<Map<String,String>>)ElementParameterParser.getObjectValue(node,"__ROW_KEYS__");
+		
+	String incomingConnName = null;
+	String outgoingConnName = null;
+
+	IMetadataTable inMetadata = null;
+		
+	List< ? extends IConnection> inConns = node.getIncomingConnections();
+	if (inConns != null && !inConns.isEmpty()) {
+		IConnection inConn = inConns.get(0);
+		inMetadata = inConn.getMetadataTable();
+		incomingConnName = inConn.getName();
+	}
+		
+	List< ? extends IConnection> outConns = node.getOutgoingConnections(EConnectionType.FLOW_MAIN);
+	if (outConns != null && !outConns.isEmpty()) {
+		IConnection outConn = outConns.get(0);
+		outgoingConnName = outConn.getName();
+	} 
+
+	StringBuilder keyFieldsPassThru = new StringBuilder();
+	List<String> pivotKeyIndexesArray = new ArrayList<String>();
+
+	for (IMetadataColumn column: inMetadata.getListColumns()) {
+		boolean isRowKey = false;
+		for (Map<String, String> rowKey : rowKeys) {
+			if (column.getLabel().equals(rowKey.get("COLUMN"))) {
+				isRowKey = true;
+			}
+		}
+
+		if (isRowKey) {
+			keyFieldsPassThru.append(outgoingConnName);
+			keyFieldsPassThru.append(".");
+			keyFieldsPassThru.append(column.getLabel());
+			keyFieldsPassThru.append("=");
+			keyFieldsPassThru.append(incomingConnName);
+			keyFieldsPassThru.append(".");
+			keyFieldsPassThru.append(column.getLabel());
+			keyFieldsPassThru.append(";\n");
+		} else {
+			pivotKeyIndexesArray.add("\"" + column.getLabel() + "\"");
+		}
+	} %>
+	String[] pivotKeysArray = {<%= StringUtils.join(pivotKeyIndexesArray.toArray(),",")%>};
+
+	for (String field : pivotKeysArray) {
+		<%= keyFieldsPassThru.toString() %>
+		<%=outgoingConnName %>.pivot_key = field;
+		try {
+			<%=outgoingConnName %>.pivot_value = <%=incomingConnName%>.getClass().getDeclaredField(field).get(<%=incomingConnName%>).toString();
+		} catch (Exception e) {
+			<%=outgoingConnName %>.pivot_value = null;
+		}
+	<%	if(("false").equals(ElementParameterParser.getValue(node,"__INCLUDE_EMPTY_VALUES__"))) { %>
+		if (<%=outgoingConnName %>.pivot_value == null || <%=outgoingConnName %>.pivot_value.trim().equals("")) {
+			continue;
+		}
+	<%	} %>

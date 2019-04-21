@@ -1,0 +1,3 @@
+$fileDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+cd $fileDir
+java '-Dtalend.component.manager.m2.repository=%cd%/../lib' '-Xms256M' '-Xmx1024M' '-Dfile.encoding=UTF-8' -cp '.;../lib/routines.jar;../lib/log4j-1.2.17.jar;../lib/xmlbeans-2.6.0.jar;../lib/serializer-2.7.2.jar;../lib/commons-codec-1.10.jar;../lib/poi-ooxml-schemas-3.16.jar;../lib/xalan-2.7.2.jar;../lib/curvesapi-1.04.jar;../lib/poi-3.16.jar;../lib/poi-ooxml-3.16.jar;../lib/dom4j-1.6.1.jar;../lib/commons-collections4-4.1.jar;../lib/jlo-talendcomp-excel-8.9.jar;verification_du_nom_des_onglets_0_1.jar;' projetbi.verification_du_nom_des_onglets_0_1.verification_du_nom_des_onglets  %*
