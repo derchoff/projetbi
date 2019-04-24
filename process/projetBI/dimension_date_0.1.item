@@ -157,11 +157,14 @@
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="months" expression="projetBi.getNormalizedMonthList()" type="id_List"/>
+        <mapperTableEntries name="year" expression="projetBi.getCurrentYear()" type="id_Integer"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="dates">
-        <mapperTableEntries name="mois" expression="projetBi.getMonthList()[row1.SEQ_NUM].toLowerCase()" type="id_String"/>
-        <mapperTableEntries name="annee" expression="projetBi.getCurrentYear()" type="id_Integer"/>
-        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row1.SEQ_NUM, projetBi.getCurrentYear()) " type="id_Date"/>
+        <mapperTableEntries name="mois" expression="(String)Var.months.get(row1.SEQ_NUM) " type="id_String"/>
+        <mapperTableEntries name="annee" expression="Var.year" type="id_Integer"/>
+        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row1.SEQ_NUM, Var.year) " type="id_Date"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="SEQ_NUM" type="id_Integer" nullable="true"/>
@@ -298,9 +301,11 @@
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="year" expression="projetBi.getCurrentYear()-2" type="id_Integer"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="suppression_N_moins_2">
-        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row3.SEQ_NUM3, projetBi.getCurrentYear()-2) " type="id_Date"/>
+        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row3.SEQ_NUM3, Var.year) " type="id_Date"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row3" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="SEQ_NUM3" type="id_Integer" nullable="true"/>
@@ -432,11 +437,14 @@
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="months" expression="projetBi.getNormalizedMonthList()" type="id_List"/>
+        <mapperTableEntries name="year" expression="projetBi.getCurrentYear()-1" type="id_Integer"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="old_dates">
-        <mapperTableEntries name="mois" expression="projetBi.getMonthList()[row2.SEQ_NUM2].toLowerCase()" type="id_String"/>
-        <mapperTableEntries name="annee" expression="projetBi.getCurrentYear()-1" type="id_Integer"/>
-        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row2.SEQ_NUM2, projetBi.getCurrentYear()-1) " type="id_Date"/>
+        <mapperTableEntries name="mois" expression="(String)Var.months.get(row2.SEQ_NUM2) " type="id_String"/>
+        <mapperTableEntries name="annee" expression="Var.year" type="id_Integer"/>
+        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row2.SEQ_NUM2, Var.year) " type="id_Date"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="SEQ_NUM2" type="id_Integer" nullable="true"/>

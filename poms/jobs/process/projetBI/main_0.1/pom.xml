@@ -64,12 +64,12 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>integration_des_magasins_et_region</artifactId>
+      <artifactId>integration_magasins</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>initialisation_de_la_dimension_date</artifactId>
+      <artifactId>dimension_date</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>
@@ -79,7 +79,7 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>initialisation_de_la_dimension_indicateurs</artifactId>
+      <artifactId>dimension_indicateurs</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>
@@ -89,7 +89,7 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>initialisation_de_la_dimension_produit</artifactId>
+      <artifactId>dimension_produit</artifactId>
       <version>0.1.0</version>
     </dependency>
   </dependencies>

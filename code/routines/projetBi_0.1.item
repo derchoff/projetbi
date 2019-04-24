@@ -57,10 +57,15 @@ public class projetBi {
     	}
     	return ret;
     }
+
+    private static String normalizeMonth(String month) {
+    	return Normalizer.normalize(month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase(), Normalizer.Form.NFD)
+	              .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    }
     
     /**
      * getNormalizedMonthList: retourne la liste des nom de mois normalisés
-     * Par normalisé il faut entendre : pas d'accente, première lettre en majuscule
+     * Par normalisé il faut entendre : pas d'accent, première lettre en majuscule
      * 
      * 
      * {talendTypes} String[]
@@ -73,8 +78,7 @@ public class projetBi {
     public static List<String> getNormalizedMonthList() {
 
     	return Arrays.asList(getMonthList()).stream()
-									.map( s -> Normalizer.normalize(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase(), Normalizer.Form.NFD)
-													     .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""))    													
+									.map( s -> normalizeMonth(s))    													
 									.collect(Collectors.toList());
 
     }
@@ -92,13 +96,40 @@ public class projetBi {
      */
     public static Date getDateFromMonthAndYear(int month, int year) {
     	Calendar cal = Calendar.getInstance();
-    	cal.set(year, month, 1, 0, 0, 1);
+    	cal.set(year, month, 1, 0, 0, 0);
     	//MILLISECOND à zéro sinon les dates seront considérées comme différentes
     	//et Talend les ajoutera en bdd même si elles existent déjà
     	cal.set(Calendar.MILLISECOND, ZERO_MILLISECOND);
     	    	
     	return cal.getTime();
     }     
+    
+    /**
+     * getDateFromMonth: génère une date 01/month/année
+     * month est 0 indexed
+     * 
+     * {talendTypes} Date
+     * 
+     * {Category} User Defined
+     * 
+     * {example} getDateFromMonth(5,2019) # 01/05/2019
+     * @throws Exception si le mois 'month' n'est pas trouvé
+     */
+    public static Date getDateFromMonthAndYear(String month, int year) throws Exception {
+    	//Première letter en majusculen,sans accent
+    	String normalizedMonth = normalizeMonth(month);
+    	
+    	//recherche l'index du mois à l'aide de sont nom
+    	// sur une liste normalisée : minuscule sans accent
+    	int idx_month = getNormalizedMonthList().indexOf(normalizedMonth);
+    	
+    	//si le mois n'a pas été trouvé alors exception
+    	if (idx_month == -1) {
+    		throw new Exception(String.format("mois %s non trouvé", month));
+    	}
+    	    	    	
+    	return getDateFromMonthAndYear(idx_month, year);
+    }      
         
     /**
      * getCurrentYear: retourne l'année courante.
@@ -144,43 +175,4 @@ public class projetBi {
     	
     	return filename_parts[filename_parts.length-MONTH];
     }
-        
-    
-    /**
-     * getDateFromMonth: génère une date 01/month/année
-     * month est 0 indexed
-     * 
-     * {talendTypes} Date
-     * 
-     * {Category} User Defined
-     * 
-     * {example} getDateFromMonth(5,2019) # 01/05/2019
-     * @throws Exception si le mois 'month' n'est pas trouvé
-     */
-    public static Date getDateFromMonthAndYear(String month, int year) throws Exception {
-    	//mois en minuscule, sans accent
-    	String normalizedMonth = Normalizer.normalize(month.toLowerCase(), Normalizer.Form.NFD)
-				 						   .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-    	
-    	//recherche l'index du mois à l'aide de sont nom
-    	// sur une liste normalisée : minuscule sans accent
-    	int idx_month = Arrays.asList(getMonthList()).stream()
-    													.map( s -> Normalizer.normalize(s.toLowerCase(), Normalizer.Form.NFD)
-    																		 .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""))    													
-    													.collect(Collectors.toList())
-    													.indexOf(normalizedMonth.toLowerCase());
-    	
-    	//si le mois n'a pas été trouvé alors exception
-    	if (idx_month == -1) {
-    		throw new Exception(String.format("mois %s non trouvé", month));
-    	}
-    	
-    	Calendar cal = Calendar.getInstance();
-    	cal.set(year, idx_month, 1, 0, 0, 1);
-    	//MILLISECOND à zéro sinon les dates seront considérées comme différentes
-    	//et Talend les ajoutera en bdd même si elles existent déjà
-    	cal.set(Calendar.MILLISECOND, ZERO_MILLISECOND);
-    	    	
-    	return cal.getTime();
-    }       
 }
