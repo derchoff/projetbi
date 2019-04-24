@@ -8,6 +8,8 @@ Les jobs d'intégration ont été développés avec __Talend Open Studio Data Co
 Il est téléchargeable à cette adresse : https://fr.talend.com/products/data-integration-manuals-release-notes/
 ### Composants Talend additionnels 
 Dans le dossier [components](/components/) il y a une liste de composant Additionel qui sont utilisés pour l'intégration depuis des fichiers Excel.
+Pour les installer il faut suivre la procédure : https://help.talend.com/reader/2AWmA~w4VvlfP3JC7dTR2w/root
+C'est à dire : Menu Windows> Preferences > Talend > Component, dans la fenêtre il faut choisir le chemin vers le dossier "components" du workspace.
 ### Fichier Excel prêts
 Dans le dossier [fichiers excel prêts](/fichiers%20excel%20prêts/) vous trouverez l'ensemble des fichiers Excel prêts à fonctionner avec les jobs Talend.
 ### Entrepôt des données
