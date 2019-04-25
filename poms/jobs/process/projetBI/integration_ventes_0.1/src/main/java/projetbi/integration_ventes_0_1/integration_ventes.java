@@ -534,6 +534,16 @@ public class integration_ventes implements TalendJob {
 		tFileList_1_onSubJobError(exception, errorComponent, globalMap);
 	}
 
+	public void tDBInput_7_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tAdvancedHash_row2_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
@@ -575,6 +585,16 @@ public class integration_ventes implements TalendJob {
 	}
 
 	public void tAdvancedHash_row8_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tAdvancedHash_row12_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
 		end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -2576,6 +2596,7 @@ public class integration_ventes implements TalendJob {
 				tDBInput_3Process(globalMap);
 				tDBInput_4Process(globalMap);
 				tDBInput_5Process(globalMap);
+				tDBInput_7Process(globalMap);
 
 				row10Struct row10 = new row10Struct();
 				row11Struct row11 = new row11Struct();
@@ -2591,13 +2612,13 @@ public class integration_ventes implements TalendJob {
 				 * [tFileList_1 begin ] start
 				 */
 
-				int NB_ITERATE_tFileExcelWorkbookOpen_1 = 0; // for statistics
-
-				int NB_ITERATE_tRunJob_1 = 0; // for statistics
-
 				int NB_ITERATE_tDBInput_6 = 0; // for statistics
 
 				int NB_ITERATE_tFileInputExcel_1 = 0; // for statistics
+
+				int NB_ITERATE_tRunJob_1 = 0; // for statistics
+
+				int NB_ITERATE_tFileExcelWorkbookOpen_1 = 0; // for statistics
 
 				ok_Hash.put("tFileList_1", false);
 				start_Hash.put("tFileList_1", System.currentTimeMillis());
@@ -2862,11 +2883,11 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row10", 3, 0);
+						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+						runStat.updateStatOnConnection("row10", 3, 0);
 					}
 
 					if (execStat) {
@@ -2920,7 +2941,7 @@ public class integration_ventes implements TalendJob {
 					java.util.Date year0_tDBInput_6 = calendar_tDBInput_6.getTime();
 					int nb_line_tDBInput_6 = 0;
 					java.sql.Connection conn_tDBInput_6 = null;
-					String driverClass_tDBInput_6 = "com.mysql.jdbc.Driver";
+					String driverClass_tDBInput_6 = "com.mysql.cj.jdbc.Driver";
 					java.lang.Class.forName(driverClass_tDBInput_6);
 					String dbUser_tDBInput_6 = context.db_user;
 
@@ -3411,15 +3432,15 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileExcelWorkbookOpen_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row7", 3, 0);
-					}
-
-					if (execStat) {
 						runStat.updateStatOnConnection("row9", 3, 0);
 					}
 
 					if (execStat) {
 						runStat.updateStatOnConnection("liste_colonnes", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("row7", 3, 0);
 					}
 
 					if (execStat) {
@@ -3500,15 +3521,15 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileExcelSheetList_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row7", 3, 0);
-					}
-
-					if (execStat) {
 						runStat.updateStatOnConnection("row9", 3, 0);
 					}
 
 					if (execStat) {
 						runStat.updateStatOnConnection("liste_colonnes", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("row7", 3, 0);
 					}
 
 					if (execStat) {
@@ -4444,7 +4465,7 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileInputExcel_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row1", 3, 0);
+						runStat.updateStatOnConnection("row6", 3, 0);
 					}
 
 					if (execStat) {
@@ -4452,7 +4473,7 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row6", 3, 0);
+						runStat.updateStatOnConnection("row1", 3, 0);
 					}
 
 					if (execStat) {
@@ -4602,6 +4623,14 @@ public class integration_ventes implements TalendJob {
 
 					row5Struct row5HashKey = new row5Struct();
 					row5Struct row5Default = new row5Struct();
+
+					org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row12Struct> tHash_Lookup_row12 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row12Struct>) ((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row12Struct>) globalMap
+							.get("tHash_Lookup_row12"));
+
+					tHash_Lookup_row12.initGet();
+
+					row12Struct row12HashKey = new row12Struct();
+					row12Struct row12Default = new row12Struct();
 // ###############################        
 
 // ###############################
@@ -5212,157 +5241,207 @@ public class integration_ventes implements TalendJob {
 											row5 = fromLookup_row5;
 										}
 
-										// ###############################
-										{ // start of Var scope
+										///////////////////////////////////////////////
+										// Starting Lookup Table "row12"
+										///////////////////////////////////////////////
+
+										boolean forceLooprow12 = false;
+
+										row12Struct row12ObjectFromLookup = null;
+
+										if (!rejectedInnerJoin_tMap_1) { // G_TM_M_020
+
+											tHash_Lookup_row12.lookup(row12HashKey);
+
+											if (!tHash_Lookup_row12.hasNext()) { // G_TM_M_090
+
+												forceLooprow12 = true;
+
+											} // G_TM_M_090
+
+										} // G_TM_M_020
+
+										else { // G 20 - G 21
+											forceLooprow12 = true;
+										} // G 21
+
+										row12Struct row12 = null;
+
+										while ((tHash_Lookup_row12 != null && tHash_Lookup_row12.hasNext())
+												|| forceLooprow12) { // G_TM_M_043
+
+											// CALL close loop of lookup 'row12'
+
+											row12Struct fromLookup_row12 = null;
+											row12 = row12Default;
+
+											if (!forceLooprow12) { // G 46
+
+												fromLookup_row12 = tHash_Lookup_row12.next();
+
+												if (fromLookup_row12 != null) {
+													row12 = fromLookup_row12;
+												}
+
+											} // G 46
+
+											forceLooprow12 = false;
 
 											// ###############################
-											// # Vars tables
+											{ // start of Var scope
 
-											Var__tMap_1__Struct Var = Var__tMap_1;// ###############################
-											// ###############################
-											// # Output tables
+												// ###############################
+												// # Vars tables
 
-											ventes = null;
+												Var__tMap_1__Struct Var = Var__tMap_1;// ###############################
+												// ###############################
+												// # Output tables
 
-											if (!rejectedInnerJoin_tMap_1) {
+												ventes = null;
+
+												if (!rejectedInnerJoin_tMap_1) {
 
 // # Output table : 'ventes'
-												ventes_tmp.id = 0;
-												ventes_tmp.id_produit = row2.id;
-												ventes_tmp.id_magasin = row4.id;
-												ventes_tmp.id_devise = 1;
-												ventes_tmp.id_date = row3.id;
-												ventes_tmp.id_indicateur = row5.id;
-												ventes_tmp.reel = Float.parseFloat(row6.pivot_value);
-												ventes_tmp.objectif = null;
-												ventes = ventes_tmp;
-											} // closing inner join bracket (2)
+													ventes_tmp.id = 0;
+													ventes_tmp.id_produit = row2.id;
+													ventes_tmp.id_magasin = row4.id;
+													ventes_tmp.id_devise = row12.id;
+													ventes_tmp.id_date = row3.id;
+													ventes_tmp.id_indicateur = row5.id;
+													ventes_tmp.reel = Float.parseFloat(row6.pivot_value);
+													ventes_tmp.objectif = null;
+													ventes = ventes_tmp;
+												} // closing inner join bracket (2)
 // ###############################
 
-										} // end of Var scope
+											} // end of Var scope
 
-										rejectedInnerJoin_tMap_1 = false;
+											rejectedInnerJoin_tMap_1 = false;
 
-										tos_count_tMap_1++;
+											tos_count_tMap_1++;
 
-										/**
-										 * [tMap_1 main ] stop
-										 */
+											/**
+											 * [tMap_1 main ] stop
+											 */
 
-										/**
-										 * [tMap_1 process_data_begin ] start
-										 */
+											/**
+											 * [tMap_1 process_data_begin ] start
+											 */
 
-										currentComponent = "tMap_1";
+											currentComponent = "tMap_1";
 
-										/**
-										 * [tMap_1 process_data_begin ] stop
-										 */
+											/**
+											 * [tMap_1 process_data_begin ] stop
+											 */
 // Start of branch "ventes"
-										if (ventes != null) {
+											if (ventes != null) {
 
-											/**
-											 * [tDBOutput_1 main ] start
-											 */
+												/**
+												 * [tDBOutput_1 main ] start
+												 */
 
-											currentComponent = "tDBOutput_1";
+												currentComponent = "tDBOutput_1";
 
-											// ventes
-											// ventes
+												// ventes
+												// ventes
 
-											if (execStat) {
-												runStat.updateStatOnConnection("ventes" + iterateId, 1, 1);
-											}
-
-											whetherReject_tDBOutput_1 = false;
-											int updateFlag_tDBOutput_1 = 0;
-											pstmtUpdate_tDBOutput_1.setInt(1, ventes.id_produit);
-
-											pstmtUpdate_tDBOutput_1.setInt(2, ventes.id_magasin);
-
-											pstmtUpdate_tDBOutput_1.setInt(3, ventes.id_devise);
-
-											pstmtUpdate_tDBOutput_1.setInt(4, ventes.id_date);
-
-											pstmtUpdate_tDBOutput_1.setInt(5, ventes.id_indicateur);
-
-											pstmtUpdate_tDBOutput_1.setFloat(6, ventes.reel);
-
-											pstmtUpdate_tDBOutput_1.setInt(7 + count_tDBOutput_1, ventes.id_produit);
-
-											pstmtUpdate_tDBOutput_1.setInt(8 + count_tDBOutput_1, ventes.id_magasin);
-
-											pstmtUpdate_tDBOutput_1.setInt(9 + count_tDBOutput_1, ventes.id_date);
-
-											pstmtUpdate_tDBOutput_1.setInt(10 + count_tDBOutput_1,
-													ventes.id_indicateur);
-
-											try {
-												updateFlag_tDBOutput_1 = pstmtUpdate_tDBOutput_1.executeUpdate();
-												updatedCount_tDBOutput_1 = updatedCount_tDBOutput_1
-														+ updateFlag_tDBOutput_1;
-
-												if (updateFlag_tDBOutput_1 == 0) {
-
-													pstmtInsert_tDBOutput_1.setInt(1, ventes.id_produit);
-
-													pstmtInsert_tDBOutput_1.setInt(2, ventes.id_magasin);
-
-													pstmtInsert_tDBOutput_1.setInt(3, ventes.id_devise);
-
-													pstmtInsert_tDBOutput_1.setInt(4, ventes.id_date);
-
-													pstmtInsert_tDBOutput_1.setInt(5, ventes.id_indicateur);
-
-													pstmtInsert_tDBOutput_1.setFloat(6, ventes.reel);
-
-													insertedCount_tDBOutput_1 = insertedCount_tDBOutput_1
-															+ pstmtInsert_tDBOutput_1.executeUpdate();
-													nb_line_tDBOutput_1++;
-												} else {
-													nb_line_tDBOutput_1++;
+												if (execStat) {
+													runStat.updateStatOnConnection("ventes" + iterateId, 1, 1);
 												}
-											} catch (java.lang.Exception e) {
-												whetherReject_tDBOutput_1 = true;
-												nb_line_tDBOutput_1++;
-												System.err.print(e.getMessage());
-											}
-											commitCounter_tDBOutput_1++;
 
-											if (commitEvery_tDBOutput_1 <= commitCounter_tDBOutput_1) {
+												whetherReject_tDBOutput_1 = false;
+												int updateFlag_tDBOutput_1 = 0;
+												pstmtUpdate_tDBOutput_1.setInt(1, ventes.id_produit);
 
-												conn_tDBOutput_1.commit();
-												commitCounter_tDBOutput_1 = 0;
+												pstmtUpdate_tDBOutput_1.setInt(2, ventes.id_magasin);
 
-											}
+												pstmtUpdate_tDBOutput_1.setInt(3, ventes.id_devise);
 
-											tos_count_tDBOutput_1++;
+												pstmtUpdate_tDBOutput_1.setInt(4, ventes.id_date);
 
-											/**
-											 * [tDBOutput_1 main ] stop
-											 */
+												pstmtUpdate_tDBOutput_1.setInt(5, ventes.id_indicateur);
 
-											/**
-											 * [tDBOutput_1 process_data_begin ] start
-											 */
+												pstmtUpdate_tDBOutput_1.setFloat(6, ventes.reel);
 
-											currentComponent = "tDBOutput_1";
+												pstmtUpdate_tDBOutput_1.setInt(7 + count_tDBOutput_1,
+														ventes.id_produit);
 
-											/**
-											 * [tDBOutput_1 process_data_begin ] stop
-											 */
+												pstmtUpdate_tDBOutput_1.setInt(8 + count_tDBOutput_1,
+														ventes.id_magasin);
 
-											/**
-											 * [tDBOutput_1 process_data_end ] start
-											 */
+												pstmtUpdate_tDBOutput_1.setInt(9 + count_tDBOutput_1, ventes.id_date);
 
-											currentComponent = "tDBOutput_1";
+												pstmtUpdate_tDBOutput_1.setInt(10 + count_tDBOutput_1,
+														ventes.id_indicateur);
 
-											/**
-											 * [tDBOutput_1 process_data_end ] stop
-											 */
+												try {
+													updateFlag_tDBOutput_1 = pstmtUpdate_tDBOutput_1.executeUpdate();
+													updatedCount_tDBOutput_1 = updatedCount_tDBOutput_1
+															+ updateFlag_tDBOutput_1;
 
-										} // End of branch "ventes"
+													if (updateFlag_tDBOutput_1 == 0) {
+
+														pstmtInsert_tDBOutput_1.setInt(1, ventes.id_produit);
+
+														pstmtInsert_tDBOutput_1.setInt(2, ventes.id_magasin);
+
+														pstmtInsert_tDBOutput_1.setInt(3, ventes.id_devise);
+
+														pstmtInsert_tDBOutput_1.setInt(4, ventes.id_date);
+
+														pstmtInsert_tDBOutput_1.setInt(5, ventes.id_indicateur);
+
+														pstmtInsert_tDBOutput_1.setFloat(6, ventes.reel);
+
+														insertedCount_tDBOutput_1 = insertedCount_tDBOutput_1
+																+ pstmtInsert_tDBOutput_1.executeUpdate();
+														nb_line_tDBOutput_1++;
+													} else {
+														nb_line_tDBOutput_1++;
+													}
+												} catch (java.lang.Exception e) {
+													whetherReject_tDBOutput_1 = true;
+													nb_line_tDBOutput_1++;
+													System.err.print(e.getMessage());
+												}
+												commitCounter_tDBOutput_1++;
+
+												if (commitEvery_tDBOutput_1 <= commitCounter_tDBOutput_1) {
+
+													conn_tDBOutput_1.commit();
+													commitCounter_tDBOutput_1 = 0;
+
+												}
+
+												tos_count_tDBOutput_1++;
+
+												/**
+												 * [tDBOutput_1 main ] stop
+												 */
+
+												/**
+												 * [tDBOutput_1 process_data_begin ] start
+												 */
+
+												currentComponent = "tDBOutput_1";
+
+												/**
+												 * [tDBOutput_1 process_data_begin ] stop
+												 */
+
+												/**
+												 * [tDBOutput_1 process_data_end ] start
+												 */
+
+												currentComponent = "tDBOutput_1";
+
+												/**
+												 * [tDBOutput_1 process_data_end ] stop
+												 */
+
+											} // End of branch "ventes"
+
+										} // close loop of lookup 'row12' // G_TM_M_043
 
 										/**
 										 * [tMap_1 process_data_end ] start
@@ -5584,6 +5663,9 @@ public class integration_ventes implements TalendJob {
 
 			// free memory for "tMap_1"
 			globalMap.remove("tHash_Lookup_row5");
+
+			// free memory for "tMap_1"
+			globalMap.remove("tHash_Lookup_row12");
 
 			try {
 
@@ -6061,7 +6143,8 @@ public class integration_ventes implements TalendJob {
 				// connection name:row2
 				// source node:tDBInput_1 - inputs:(after_tFileList_1) outputs:(row2,row2) |
 				// target node:tAdvancedHash_row2 - inputs:(row2) outputs:()
-				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5) outputs:(ventes)
+				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5,row12)
+				// outputs:(ventes)
 
 				org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row2 = org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
 
@@ -6090,7 +6173,7 @@ public class integration_ventes implements TalendJob {
 				java.util.Date year0_tDBInput_1 = calendar_tDBInput_1.getTime();
 				int nb_line_tDBInput_1 = 0;
 				java.sql.Connection conn_tDBInput_1 = null;
-				String driverClass_tDBInput_1 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_1 = "com.mysql.cj.jdbc.Driver";
 				java.lang.Class.forName(driverClass_tDBInput_1);
 				String dbUser_tDBInput_1 = context.db_user;
 
@@ -6567,7 +6650,8 @@ public class integration_ventes implements TalendJob {
 				// connection name:row3
 				// source node:tDBInput_2 - inputs:(after_tFileList_1) outputs:(row3,row3) |
 				// target node:tAdvancedHash_row3 - inputs:(row3) outputs:()
-				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5) outputs:(ventes)
+				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5,row12)
+				// outputs:(ventes)
 
 				org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row3 = org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
 
@@ -6596,7 +6680,7 @@ public class integration_ventes implements TalendJob {
 				java.util.Date year0_tDBInput_2 = calendar_tDBInput_2.getTime();
 				int nb_line_tDBInput_2 = 0;
 				java.sql.Connection conn_tDBInput_2 = null;
-				String driverClass_tDBInput_2 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_2 = "com.mysql.cj.jdbc.Driver";
 				java.lang.Class.forName(driverClass_tDBInput_2);
 				String dbUser_tDBInput_2 = context.db_user;
 
@@ -7092,7 +7176,8 @@ public class integration_ventes implements TalendJob {
 				// connection name:row4
 				// source node:tDBInput_3 - inputs:(after_tFileList_1) outputs:(row4,row4) |
 				// target node:tAdvancedHash_row4 - inputs:(row4) outputs:()
-				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5) outputs:(ventes)
+				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5,row12)
+				// outputs:(ventes)
 
 				org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row4 = org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
 
@@ -7121,7 +7206,7 @@ public class integration_ventes implements TalendJob {
 				java.util.Date year0_tDBInput_3 = calendar_tDBInput_3.getTime();
 				int nb_line_tDBInput_3 = 0;
 				java.sql.Connection conn_tDBInput_3 = null;
-				String driverClass_tDBInput_3 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_3 = "com.mysql.cj.jdbc.Driver";
 				java.lang.Class.forName(driverClass_tDBInput_3);
 				String dbUser_tDBInput_3 = context.db_user;
 
@@ -7607,7 +7692,8 @@ public class integration_ventes implements TalendJob {
 				// connection name:row5
 				// source node:tDBInput_4 - inputs:(after_tFileList_1) outputs:(row5,row5) |
 				// target node:tAdvancedHash_row5 - inputs:(row5) outputs:()
-				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5) outputs:(ventes)
+				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5,row12)
+				// outputs:(ventes)
 
 				org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row5 = org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
 
@@ -7636,7 +7722,7 @@ public class integration_ventes implements TalendJob {
 				java.util.Date year0_tDBInput_4 = calendar_tDBInput_4.getTime();
 				int nb_line_tDBInput_4 = 0;
 				java.sql.Connection conn_tDBInput_4 = null;
-				String driverClass_tDBInput_4 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_4 = "com.mysql.cj.jdbc.Driver";
 				java.lang.Class.forName(driverClass_tDBInput_4);
 				String dbUser_tDBInput_4 = context.db_user;
 
@@ -8054,7 +8140,7 @@ public class integration_ventes implements TalendJob {
 				java.util.Date year0_tDBInput_5 = calendar_tDBInput_5.getTime();
 				int nb_line_tDBInput_5 = 0;
 				java.sql.Connection conn_tDBInput_5 = null;
-				String driverClass_tDBInput_5 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_5 = "com.mysql.cj.jdbc.Driver";
 				java.lang.Class.forName(driverClass_tDBInput_5);
 				String dbUser_tDBInput_5 = context.db_user;
 
@@ -8270,6 +8356,387 @@ public class integration_ventes implements TalendJob {
 		}
 
 		globalMap.put("tDBInput_5_SUBPROCESS_STATE", 1);
+	}
+
+	public static class row12Struct implements routines.system.IPersistableRow<row12Struct> {
+		final static byte[] commonByteArrayLock_PROJETBI_integration_ventes = new byte[0];
+		static byte[] commonByteArray_PROJETBI_integration_ventes = new byte[0];
+
+		public int id;
+
+		public int getId() {
+			return this.id;
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_PROJETBI_integration_ventes) {
+
+				try {
+
+					int length = 0;
+
+					this.id = dis.readInt();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.id);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("id=" + String.valueOf(id));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row12Struct other) {
+
+			int returnValue = -1;
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public void tDBInput_7Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+		globalMap.put("tDBInput_7_SUBPROCESS_STATE", 0);
+
+		final boolean execStat = this.execStat;
+
+		String iterateId = "";
+
+		String currentComponent = "";
+		java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+		try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { // start the resume
+				globalResumeTicket = true;
+
+				row12Struct row12 = new row12Struct();
+
+				/**
+				 * [tAdvancedHash_row12 begin ] start
+				 */
+
+				ok_Hash.put("tAdvancedHash_row12", false);
+				start_Hash.put("tAdvancedHash_row12", System.currentTimeMillis());
+
+				currentComponent = "tAdvancedHash_row12";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null) {
+
+						runStat.updateStatOnConnection("row12" + iterateId, 0, 0);
+
+					}
+				}
+
+				int tos_count_tAdvancedHash_row12 = 0;
+
+				// connection name:row12
+				// source node:tDBInput_7 - inputs:(after_tFileList_1) outputs:(row12,row12) |
+				// target node:tAdvancedHash_row12 - inputs:(row12) outputs:()
+				// linked node: tMap_1 - inputs:(row6,row2,row3,row4,row5,row12)
+				// outputs:(ventes)
+
+				org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row12 = org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.ALL_ROWS;
+
+				org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row12Struct> tHash_Lookup_row12 = org.talend.designer.components.lookup.memory.AdvancedMemoryLookup
+						.<row12Struct>getLookup(matchingModeEnum_row12);
+
+				globalMap.put("tHash_Lookup_row12", tHash_Lookup_row12);
+
+				/**
+				 * [tAdvancedHash_row12 begin ] stop
+				 */
+
+				/**
+				 * [tDBInput_7 begin ] start
+				 */
+
+				ok_Hash.put("tDBInput_7", false);
+				start_Hash.put("tDBInput_7", System.currentTimeMillis());
+
+				currentComponent = "tDBInput_7";
+
+				int tos_count_tDBInput_7 = 0;
+
+				java.util.Calendar calendar_tDBInput_7 = java.util.Calendar.getInstance();
+				calendar_tDBInput_7.set(0, 0, 0, 0, 0, 0);
+				java.util.Date year0_tDBInput_7 = calendar_tDBInput_7.getTime();
+				int nb_line_tDBInput_7 = 0;
+				java.sql.Connection conn_tDBInput_7 = null;
+				String driverClass_tDBInput_7 = "com.mysql.cj.jdbc.Driver";
+				java.lang.Class.forName(driverClass_tDBInput_7);
+				String dbUser_tDBInput_7 = context.db_user;
+
+				final String decryptedPassword_tDBInput_7 = context.db_pwd;
+
+				String dbPwd_tDBInput_7 = decryptedPassword_tDBInput_7;
+
+				String url_tDBInput_7 = "jdbc:mysql://" + context.db_host + ":" + context.db_port + "/"
+						+ context.db_database + "?" + "noDatetimeStringSync=true";
+
+				conn_tDBInput_7 = java.sql.DriverManager.getConnection(url_tDBInput_7, dbUser_tDBInput_7,
+						dbPwd_tDBInput_7);
+
+				java.sql.Statement stmt_tDBInput_7 = conn_tDBInput_7.createStatement();
+
+				String dbquery_tDBInput_7 = "SELECT \n  `devise`.`id`\nFROM `devise`\nLIMIT 1";
+
+				globalMap.put("tDBInput_7_QUERY", dbquery_tDBInput_7);
+				java.sql.ResultSet rs_tDBInput_7 = null;
+
+				try {
+					rs_tDBInput_7 = stmt_tDBInput_7.executeQuery(dbquery_tDBInput_7);
+					java.sql.ResultSetMetaData rsmd_tDBInput_7 = rs_tDBInput_7.getMetaData();
+					int colQtyInRs_tDBInput_7 = rsmd_tDBInput_7.getColumnCount();
+
+					String tmpContent_tDBInput_7 = null;
+
+					while (rs_tDBInput_7.next()) {
+						nb_line_tDBInput_7++;
+
+						if (colQtyInRs_tDBInput_7 < 1) {
+							row12.id = 0;
+						} else {
+
+							row12.id = rs_tDBInput_7.getInt(1);
+							if (rs_tDBInput_7.wasNull()) {
+								throw new RuntimeException("Null value in non-Nullable column");
+							}
+						}
+
+						/**
+						 * [tDBInput_7 begin ] stop
+						 */
+
+						/**
+						 * [tDBInput_7 main ] start
+						 */
+
+						currentComponent = "tDBInput_7";
+
+						tos_count_tDBInput_7++;
+
+						/**
+						 * [tDBInput_7 main ] stop
+						 */
+
+						/**
+						 * [tDBInput_7 process_data_begin ] start
+						 */
+
+						currentComponent = "tDBInput_7";
+
+						/**
+						 * [tDBInput_7 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tAdvancedHash_row12 main ] start
+						 */
+
+						currentComponent = "tAdvancedHash_row12";
+
+						// row12
+						// row12
+
+						if (execStat) {
+							runStat.updateStatOnConnection("row12" + iterateId, 1, 1);
+						}
+
+						row12Struct row12_HashRow = new row12Struct();
+
+						row12_HashRow.id = row12.id;
+
+						tHash_Lookup_row12.put(row12_HashRow);
+
+						tos_count_tAdvancedHash_row12++;
+
+						/**
+						 * [tAdvancedHash_row12 main ] stop
+						 */
+
+						/**
+						 * [tAdvancedHash_row12 process_data_begin ] start
+						 */
+
+						currentComponent = "tAdvancedHash_row12";
+
+						/**
+						 * [tAdvancedHash_row12 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tAdvancedHash_row12 process_data_end ] start
+						 */
+
+						currentComponent = "tAdvancedHash_row12";
+
+						/**
+						 * [tAdvancedHash_row12 process_data_end ] stop
+						 */
+
+						/**
+						 * [tDBInput_7 process_data_end ] start
+						 */
+
+						currentComponent = "tDBInput_7";
+
+						/**
+						 * [tDBInput_7 process_data_end ] stop
+						 */
+
+						/**
+						 * [tDBInput_7 end ] start
+						 */
+
+						currentComponent = "tDBInput_7";
+
+					}
+				} finally {
+					if (rs_tDBInput_7 != null) {
+						rs_tDBInput_7.close();
+					}
+					if (stmt_tDBInput_7 != null) {
+						stmt_tDBInput_7.close();
+					}
+					if (conn_tDBInput_7 != null && !conn_tDBInput_7.isClosed()) {
+
+						conn_tDBInput_7.close();
+
+					}
+
+				}
+
+				globalMap.put("tDBInput_7_NB_LINE", nb_line_tDBInput_7);
+
+				ok_Hash.put("tDBInput_7", true);
+				end_Hash.put("tDBInput_7", System.currentTimeMillis());
+
+				/**
+				 * [tDBInput_7 end ] stop
+				 */
+
+				/**
+				 * [tAdvancedHash_row12 end ] start
+				 */
+
+				currentComponent = "tAdvancedHash_row12";
+
+				tHash_Lookup_row12.endPut();
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null || !((Boolean) resourceMap.get("inIterateVComp"))) {
+						runStat.updateStatOnConnection("row12" + iterateId, 2, 0);
+					}
+				}
+
+				ok_Hash.put("tAdvancedHash_row12", true);
+				end_Hash.put("tAdvancedHash_row12", System.currentTimeMillis());
+
+				/**
+				 * [tAdvancedHash_row12 end ] stop
+				 */
+
+			} // end the resume
+
+		} catch (java.lang.Exception e) {
+
+			TalendException te = new TalendException(e, currentComponent, globalMap);
+
+			throw te;
+		} catch (java.lang.Error error) {
+
+			runStat.stopThreadStat();
+
+			throw error;
+		} finally {
+
+			try {
+
+				/**
+				 * [tDBInput_7 finally ] start
+				 */
+
+				currentComponent = "tDBInput_7";
+
+				/**
+				 * [tDBInput_7 finally ] stop
+				 */
+
+				/**
+				 * [tAdvancedHash_row12 finally ] start
+				 */
+
+				currentComponent = "tAdvancedHash_row12";
+
+				/**
+				 * [tAdvancedHash_row12 finally ] stop
+				 */
+
+			} catch (java.lang.Exception e) {
+				// ignore
+			} catch (java.lang.Error error) {
+				// ignore
+			}
+			resourceMap = null;
+		}
+
+		globalMap.put("tDBInput_7_SUBPROCESS_STATE", 1);
 	}
 
 	public static class row_talendStats_STATSStruct
@@ -10869,6 +11336,6 @@ public class integration_ventes implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 316564 characters generated by Talend Open Studio for Data Integration on the
- * 24 avril 2019 14:34:43 CEST
+ * 330017 characters generated by Talend Open Studio for Data Integration on the
+ * 25 avril 2019 23:07:04 CEST
  ************************************************************************************************/

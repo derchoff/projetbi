@@ -112,6 +112,10 @@
     "version" : "Latest",
     "type" : "routine"
   }, {
+    "id" : "_Sork8GHMEemeqeVfACt5KQ - devise",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
     "id" : "_Sork8GHMEemeqeVfACt5KQ - produit",
     "version" : "Latest",
     "type" : "schema"
@@ -371,6 +375,10 @@
     "id" : "_Sork8GHMEemeqeVfACt5KQ - produit",
     "version" : "Latest",
     "type" : "schema"
+  }, {
+    "id" : "_VQb8YGeVEemhN_k_i9_Pwg - metadata",
+    "version" : "Latest",
+    "type" : "schema"
   } ]
 }, {
   "baseItem" : {
@@ -388,7 +396,7 @@
     "type" : "job"
   }, {
     "id" : "PROJETBI:_pROXAGOsEemeCqdBCCBwiA",
-    "version" : "Latest",
+    "version" : "0.1",
     "type" : "job"
   }, {
     "id" : "PROJETBI:_vE6acGOMEem3g57GDjk1DQ",
@@ -549,7 +557,15 @@
     "version" : "Latest",
     "type" : "routine"
   }, {
+    "id" : "_Sork8GHMEemeqeVfACt5KQ - devise",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
     "id" : "_Sork8GHMEemeqeVfACt5KQ - produit",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_Sork8GHMEemeqeVfACt5KQ - vente",
     "version" : "Latest",
     "type" : "schema"
   } ]

@@ -249,7 +249,6 @@
                 <include>org.talend.libraries:jakarta-oro-2.0.8:jar:6.0.0</include>
                 <include>org.talend.libraries:poi-3.16:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:external_sort:jar:6.0.0</include>
-                <include>org.talend.libraries:mysql-connector-java-5.1.30-bin:jar:6.0.0</include>
                 <include>org.talend.libraries:trove:jar:6.0.0</include>
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
@@ -261,6 +260,7 @@
                 <include>commons-codec:commons-codec:jar:1.10</include>
                 <include>org.apache.commons:commons-collections4:jar:4.1</include>
                 <include>commons-collections:commons-collections:jar:3.2.2</include>
+                <include>mysql:mysql-connector-java:jar:8.0.12</include>
                 <include>dom4j:dom4j:jar:1.6.1</include>
                 <include>xalan:xalan:jar:2.7.2</include>
                 <include>xalan:serializer:jar:2.7.2</include>

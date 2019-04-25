@@ -260,6 +260,7 @@
                 <include>commons-codec:commons-codec:jar:1.10</include>
                 <include>org.apache.commons:commons-collections4:jar:4.1</include>
                 <include>commons-collections:commons-collections:jar:3.2.2</include>
+                <include>mysql:mysql-connector-java:jar:8.0.12</include>
                 <include>dom4j:dom4j:jar:1.6.1</include>
                 <include>xalan:xalan:jar:2.7.2</include>
                 <include>xalan:serializer:jar:2.7.2</include>
