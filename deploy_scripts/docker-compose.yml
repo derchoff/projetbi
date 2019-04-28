@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-            
+
     mysqldb:
-     image: mysql:${DB_VERSION}     
+     image: mysql:latest     
      command : '--disable-partition-engine-check'
      ports:
        - '3306:3306'     
@@ -11,11 +11,11 @@ services:
        - db_data:/var/lib/mysql
      restart: always
      environment:
-       MYSQL_RANDOM_ROOT_PASSWORD:yes
-       MYSQL_DATABASE: db_darties
+        MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+        MYSQL_DATABASE: db_darties
      networks:
        mysql_network:
-                         
+
 volumes:
     db_data:
         driver: local
