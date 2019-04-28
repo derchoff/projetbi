@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+            
+    mysqldb:
+     image: mysql:${DB_VERSION}     
+     command : '--disable-partition-engine-check'
+     ports:
+       - '3306:3306'     
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_RANDOM_ROOT_PASSWORD:yes
+       MYSQL_DATABASE: db_darties
+     networks:
+       mysql_network:
+                         
+volumes:
+    db_data:
+        driver: local
+    
+# Custom network so all services can communicate using a FQDN
+networks:
+    mysql_network:
