@@ -100,7 +100,7 @@ public class projetBi {
     	//MILLISECOND à zéro sinon les dates seront considérées comme différentes
     	//et Talend les ajoutera en bdd même si elles existent déjà
     	cal.set(Calendar.MILLISECOND, ZERO_MILLISECOND);
-    	    	
+    	
     	return cal.getTime();
     }     
     
@@ -117,11 +117,11 @@ public class projetBi {
      */
     public static Date getDateFromMonthAndYear(String month, int year) throws Exception {
     	//Première letter en majusculen,sans accent
-    	String normalizedMonth = normalizeMonth(month);
-    	
+    	String normalizedMonth = normalizeMonth(month);    	   
+
     	//recherche l'index du mois à l'aide de sont nom
     	// sur une liste normalisée : minuscule sans accent
-    	int idx_month = getNormalizedMonthList().indexOf(normalizedMonth);
+    	int idx_month = getNormalizedMonthList().indexOf(normalizedMonth);    	    	
     	
     	//si le mois n'a pas été trouvé alors exception
     	if (idx_month == -1) {

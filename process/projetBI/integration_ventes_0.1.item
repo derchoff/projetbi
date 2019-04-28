@@ -373,7 +373,7 @@
     <elementParameter field="CHECK" name="INCLUDE_PHONETICRUNS" value="true" show="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="metadata" name="tFileInputExcel_1">
-      <column comment="" key="false" length="16" name="Villes" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
+      <column comment="" key="true" length="16" name="Villes" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="V_Janvier" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="CA_Janvier" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="MB_Janvier" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float" usefulColumn="true"/>
@@ -468,7 +468,7 @@
       </inputTables>
       <inputTables sizeState="INTERMEDIATE" name="row3" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" innerJoin="true">
         <mapperTableEntries name="id" type="id_Integer"/>
-        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(row6.pivot_key.split(&quot;_&quot;)[1], projetBi.getYearFromFile((String)globalMap.get(&quot;tFileList_1_CURRENT_FILE&quot;)) ) " type="id_Date" nullable="true" operator="="/>
+        <mapperTableEntries name="datetime" expression="projetBi.getDateFromMonthAndYear(projetBi.getMonthFromFile((String)globalMap.get(&quot;tFileList_1_CURRENT_FILE&quot;)), projetBi.getYearFromFile((String)globalMap.get(&quot;tFileList_1_CURRENT_FILE&quot;)) ) " type="id_Date" nullable="true" operator="="/>
       </inputTables>
       <inputTables sizeState="INTERMEDIATE" name="row4" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" innerJoin="true">
         <mapperTableEntries name="id" expression="" type="id_Integer"/>

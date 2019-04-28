@@ -2314,6 +2314,12 @@ public class integration_ventes implements TalendJob {
 	public static class row1Struct implements routines.system.IPersistableRow<row1Struct> {
 		final static byte[] commonByteArrayLock_PROJETBI_integration_ventes = new byte[0];
 		static byte[] commonByteArray_PROJETBI_integration_ventes = new byte[0];
+		protected static final int DEFAULT_HASHCODE = 1;
+		protected static final int PRIME = 31;
+		protected int hashCode = DEFAULT_HASHCODE;
+		public boolean hashCodeDirty = true;
+
+		public String loopKey;
 
 		public String Villes;
 
@@ -2337,6 +2343,56 @@ public class integration_ventes implements TalendJob {
 
 		public Float getMB_Janvier() {
 			return this.MB_Janvier;
+		}
+
+		@Override
+		public int hashCode() {
+			if (this.hashCodeDirty) {
+				final int prime = PRIME;
+				int result = DEFAULT_HASHCODE;
+
+				result = prime * result + ((this.Villes == null) ? 0 : this.Villes.hashCode());
+
+				this.hashCode = result;
+				this.hashCodeDirty = false;
+			}
+			return this.hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final row1Struct other = (row1Struct) obj;
+
+			if (this.Villes == null) {
+				if (other.Villes != null)
+					return false;
+
+			} else if (!this.Villes.equals(other.Villes))
+
+				return false;
+
+			return true;
+		}
+
+		public void copyDataTo(row1Struct other) {
+
+			other.Villes = this.Villes;
+			other.V_Janvier = this.V_Janvier;
+			other.CA_Janvier = this.CA_Janvier;
+			other.MB_Janvier = this.MB_Janvier;
+
+		}
+
+		public void copyKeysDataTo(row1Struct other) {
+
+			other.Villes = this.Villes;
+
 		}
 
 		private String readString(ObjectInputStream dis) throws IOException {
@@ -2469,6 +2525,11 @@ public class integration_ventes implements TalendJob {
 		public int compareTo(row1Struct other) {
 
 			int returnValue = -1;
+
+			returnValue = checkNullsAndCompare(this.Villes, other.Villes);
+			if (returnValue != 0) {
+				return returnValue;
+			}
 
 			return returnValue;
 		}
@@ -2612,13 +2673,13 @@ public class integration_ventes implements TalendJob {
 				 * [tFileList_1 begin ] start
 				 */
 
-				int NB_ITERATE_tDBInput_6 = 0; // for statistics
-
-				int NB_ITERATE_tFileInputExcel_1 = 0; // for statistics
-
 				int NB_ITERATE_tRunJob_1 = 0; // for statistics
 
 				int NB_ITERATE_tFileExcelWorkbookOpen_1 = 0; // for statistics
+
+				int NB_ITERATE_tDBInput_6 = 0; // for statistics
+
+				int NB_ITERATE_tFileInputExcel_1 = 0; // for statistics
 
 				ok_Hash.put("tFileList_1", false);
 				start_Hash.put("tFileList_1", System.currentTimeMillis());
@@ -2879,7 +2940,7 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tDBInput_6++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row11", 3, 0);
+						runStat.updateStatOnConnection("row10", 3, 0);
 					}
 
 					if (execStat) {
@@ -2887,7 +2948,7 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row10", 3, 0);
+						runStat.updateStatOnConnection("row11", 3, 0);
 					}
 
 					if (execStat) {
@@ -3432,7 +3493,11 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileExcelWorkbookOpen_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row9", 3, 0);
+						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate3", 3, 0);
 					}
 
 					if (execStat) {
@@ -3440,11 +3505,7 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row7", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+						runStat.updateStatOnConnection("row9", 3, 0);
 					}
 
 					if (execStat) {
@@ -3452,7 +3513,7 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate3", 3, 0);
+						runStat.updateStatOnConnection("row7", 3, 0);
 					}
 
 					if (execStat) {
@@ -3521,7 +3582,7 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileExcelSheetList_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row9", 3, 0);
+						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}
 
 					if (execStat) {
@@ -3529,15 +3590,15 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row7", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+						runStat.updateStatOnConnection("row9", 3, 0);
 					}
 
 					if (execStat) {
 						runStat.updateStatOnConnection("liste_indicateurs", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("row7", 3, 0);
 					}
 
 					if (execStat) {
@@ -4465,7 +4526,7 @@ public class integration_ventes implements TalendJob {
 					NB_ITERATE_tFileInputExcel_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row6", 3, 0);
+						runStat.updateStatOnConnection("row1", 3, 0);
 					}
 
 					if (execStat) {
@@ -4473,7 +4534,7 @@ public class integration_ventes implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("row1", 3, 0);
+						runStat.updateStatOnConnection("row6", 3, 0);
 					}
 
 					if (execStat) {
@@ -5105,7 +5166,9 @@ public class integration_ventes implements TalendJob {
 											hasCasePrimitiveKeyWithNull_tMap_1 = false;
 
 											row3HashKey.datetime = projetBi.getDateFromMonthAndYear(
-													row6.pivot_key.split("_")[1], projetBi.getYearFromFile(
+													projetBi.getMonthFromFile(
+															(String) globalMap.get("tFileList_1_CURRENT_FILE")),
+													projetBi.getYearFromFile(
 															(String) globalMap.get("tFileList_1_CURRENT_FILE")));
 
 											row3HashKey.hashCodeDirty = true;
@@ -11336,6 +11399,6 @@ public class integration_ventes implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 330017 characters generated by Talend Open Studio for Data Integration on the
- * 25 avril 2019 23:07:04 CEST
+ * 331549 characters generated by Talend Open Studio for Data Integration on the
+ * 28 avril 2019 10:56:45 CEST
  ************************************************************************************************/
