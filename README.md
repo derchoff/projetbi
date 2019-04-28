@@ -15,5 +15,6 @@ Dans le dossier [fichiers excel prêts](/fichiers%20excel%20prêts/) vous trouve
 Il y a une fichier Excel de ventes par mois dans le dossier.
 ### Entrepôt des données
 Le SGBD utilisé est MySQL version 8.
-Le sscript SQL de création de la base de donnée est téléchargeable depuis ce projet GitHub : [MCD](MCD.sql)
-Le dossier BDD contient un fichier sql pour le MCD (MCD_2019_04_28.sql) et un fichier sql (dump_2019_04_28.sql) pour la créatino du schéma + insertion des données 
+Le script SQL de création de la base de donnée est téléchargeable depuis ce projet GitHub : [MCD](BDD/MCD_2019_04_28.sql).
+
+Le dossier BDD contient un fichier sql pour le [MCD](BDD/MCD_2019_04_28.sql) et un fichier sql [DUMP](BDD/dump_2019_04_28.sql) pour la créatino du schéma + insertion des données 
