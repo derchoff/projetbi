@@ -12,6 +12,9 @@ Pour les installer il faut suivre la procédure : https://help.talend.com/reader
 C'est à dire : Menu Windows> Preferences > Talend > Component, dans la fenêtre il faut choisir le chemin vers le dossier "components" du workspace.
 ### Fichier Excel prêts
 Dans le dossier [fichiers excel prêts](/fichiers%20excel%20prêts/) vous trouverez l'ensemble des fichiers Excel prêts à fonctionner avec les jobs Talend.
+Il y a une fichier Excel de ventes par mois dans le dossier.
 ### Entrepôt des données
 Le SGBD utilisé est MySQL version 8.
-Le sscript SQL de création de la base de donnée est téléchargeable depuis ce projet GitHub : [MCD](MCD.sql)
+Le script SQL de création de la base de donnée est téléchargeable depuis ce projet GitHub : [MCD](BDD/MCD_2019_04_28.sql).
+
+Le dossier BDD contient un fichier sql pour le [MCD](BDD/MCD_2019_04_28.sql) et un fichier sql [DUMP](BDD/dump_2019_04_28.sql) pour la créatino du schéma + insertion des données 
