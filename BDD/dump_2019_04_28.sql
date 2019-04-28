@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `darties_db` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `darties_db`;
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: darties_db
@@ -14,6 +16,174 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `date`
+--
+
+DROP TABLE IF EXISTS `date`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `date` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mois` varchar(10) NOT NULL,
+  `annee` int(11) NOT NULL,
+  `datetime` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `date`
+--
+
+LOCK TABLES `date` WRITE;
+/*!40000 ALTER TABLE `date` DISABLE KEYS */;
+INSERT INTO `date` VALUES (157,'Janvier',2019,'2018-12-31 23:00:00'),(158,'Fevrier',2019,'2019-01-31 23:00:00'),(159,'Mars',2019,'2019-02-28 23:00:00'),(160,'Avril',2019,'2019-03-31 22:00:00'),(161,'Mai',2019,'2019-04-30 22:00:00'),(162,'Juin',2019,'2019-05-31 22:00:00'),(163,'Juillet',2019,'2019-06-30 22:00:00'),(164,'Aout',2019,'2019-07-31 22:00:00'),(165,'Septembre',2019,'2019-08-31 22:00:00'),(166,'Octobre',2019,'2019-09-30 22:00:00'),(167,'Novembre',2019,'2019-10-31 23:00:00'),(168,'Decembre',2019,'2019-11-30 23:00:00'),(169,'Janvier',2018,'2017-12-31 23:00:00'),(170,'Fevrier',2018,'2018-01-31 23:00:00'),(171,'Mars',2018,'2018-02-28 23:00:00'),(172,'Avril',2018,'2018-03-31 22:00:00'),(173,'Mai',2018,'2018-04-30 22:00:00'),(174,'Juin',2018,'2018-05-31 22:00:00'),(175,'Juillet',2018,'2018-06-30 22:00:00'),(176,'Aout',2018,'2018-07-31 22:00:00'),(177,'Septembre',2018,'2018-08-31 22:00:00'),(178,'Octobre',2018,'2018-09-30 22:00:00'),(179,'Novembre',2018,'2018-10-31 23:00:00'),(180,'Decembre',2018,'2018-11-30 23:00:00');
+/*!40000 ALTER TABLE `date` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `devise`
+--
+
+DROP TABLE IF EXISTS `devise`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `devise` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) NOT NULL,
+  `symbole` varchar(45) NOT NULL,
+  `taux_conversion_euro` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `nom_UNIQUE` (`nom`),
+  UNIQUE KEY `symbole_UNIQUE` (`symbole`),
+  UNIQUE KEY `taux_conversion_euro_UNIQUE` (`taux_conversion_euro`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `devise`
+--
+
+LOCK TABLES `devise` WRITE;
+/*!40000 ALTER TABLE `devise` DISABLE KEYS */;
+INSERT INTO `devise` VALUES (2,'Euro','€','1');
+/*!40000 ALTER TABLE `devise` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `indicateur`
+--
+
+DROP TABLE IF EXISTS `indicateur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `indicateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) DEFAULT NULL,
+  `abbreviation` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `indicateur`
+--
+
+LOCK TABLES `indicateur` WRITE;
+/*!40000 ALTER TABLE `indicateur` DISABLE KEYS */;
+INSERT INTO `indicateur` VALUES (6,'Chiffre d\'affaire','CA'),(7,'Marge brute','MB'),(8,'Ventes','V');
+/*!40000 ALTER TABLE `indicateur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `magasin`
+--
+
+DROP TABLE IF EXISTS `magasin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `magasin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enseigne` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `ville` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `code_postal` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `code_departement` int(11) NOT NULL,
+  `departement` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `region` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `pays` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idpays_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `magasin`
+--
+
+LOCK TABLES `magasin` WRITE;
+/*!40000 ALTER TABLE `magasin` DISABLE KEYS */;
+INSERT INTO `magasin` VALUES (49,'Darty','Alencon','',0,'','Nord_Ouest',''),(50,'Leroy_merlin','Amiens','',0,'','Nord_Ouest',''),(51,'Boulanger','Angers','',0,'','Nord_Ouest',''),(52,'Darty','Angouleme','',0,'','Nord_Ouest',''),(53,'Leroy_merlin','Arras','',0,'','Nord_Est',''),(54,'Boulanger','Bastia','',0,'','Sud_Ouest',''),(55,'Darty','Besancon','',0,'','Nord_Est',''),(56,'Darty','Bobigny','',0,'','Region_parisienne',''),(57,'Leroy_merlin','Bordeaux','',0,'','Sud_Ouest',''),(58,'Boulanger','Bourges','',0,'','Sud_Est',''),(59,'Darty','Carcassonne','',0,'','Sud_Est',''),(60,'Leroy_merlin','Cergy_Pontoise','',0,'','Region_parisienne',''),(61,'Boulanger','Chambery','',0,'','Sud_Est',''),(62,'Darty','Clermont_Ferrand','',0,'','Sud_Est',''),(63,'Darty','Creteil','',0,'','Region_parisienne',''),(64,'Leroy_merlin','Digne','',0,'','Sud_Est',''),(65,'Boulanger','Dijon','',0,'','Nord_Est',''),(66,'Darty','Evry','',0,'','Region_parisienne',''),(67,'Leroy_merlin','Foix','',0,'','Sud_Est',''),(68,'Boulanger','Grenoble','',0,'','Nord_Est',''),(69,'Darty','Lille','',0,'','Nord_Ouest',''),(70,'Darty','Limoges','',0,'','Sud_Ouest',''),(71,'Darty','Lyon','',0,'','Sud_Est',''),(72,'Leroy_merlin','Marseille','',0,'','Sud_Est',''),(73,'Boulanger','Melun','',0,'','Nord_Ouest',''),(74,'Darty','Metz','',0,'','Nord_Est',''),(75,'Leroy_merlin','Nimes','',0,'','Sud_Est',''),(76,'Boulanger','Nancy','',0,'','Nord_Est',''),(77,'Darty','Nanterre','',0,'','Nord_Ouest',''),(78,'Darty','Nantes','',0,'','Nord_Ouest',''),(79,'Leroy_merlin','Nice','',0,'','Sud_Est',''),(80,'Boulanger','Perigueux','',0,'','Sud_Ouest',''),(81,'Darty','Paris_Nord','',0,'','Region_parisienne',''),(82,'Leroy_merlin','Paris_Sud','',0,'','Region_parisienne',''),(83,'Darty','Pau','',0,'','Sud_Est',''),(84,'Leroy_merlin','Quimper','',0,'','Nord_Ouest',''),(85,'Boulanger','Rodez','',0,'','Sud_Ouest',''),(86,'Darty','Rouen','',0,'','Nord_Ouest',''),(87,'Leroy_merlin','St_Brieuc','',0,'','Nord_Ouest',''),(88,'Boulanger','St_Etienne','',0,'','Sud_Est',''),(89,'Darty','Strasbourg','',0,'','Nord_Est',''),(90,'Darty','Tarbes','',0,'','Sud_Ouest',''),(91,'Leroy_merlin','Toulon','',0,'','Sud_Ouest',''),(92,'Boulanger','Tours','',0,'','Sud_Ouest',''),(93,'Darty','Troyes','',0,'','Nord_Est',''),(94,'Leroy_merlin','Valence','',0,'','Sud_Ouest',''),(95,'Boulanger','Valenciennes','',0,'','Nord_Est',''),(96,'Darty','Versailles','',0,'','Region_parisienne','');
+/*!40000 ALTER TABLE `magasin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `produit`
+--
+
+DROP TABLE IF EXISTS `produit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_produit` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `type_produit_UNIQUE` (`type_produit`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produit`
+--
+
+LOCK TABLES `produit` WRITE;
+/*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+INSERT INTO `produit` VALUES (5,'Fours'),(7,'Hifi'),(6,'Magneto');
+/*!40000 ALTER TABLE `produit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) NOT NULL,
+  `prenom` varchar(45) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `mdp` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+LOCK TABLES `utilisateur` WRITE;
+/*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
+/*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `vente`
@@ -65,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-28 11:13:32
+-- Dump completed on 2019-04-28 11:18:27
