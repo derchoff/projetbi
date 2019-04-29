@@ -1,10 +1,9 @@
 version: '3'
-
+# pour récupérer le mot de pass sudo docker logs deploy_scripts_mysqldb_1 2>&1 | grep "GENERATED ROOT PASSWORD"
 services:
 
     mysqldb:
-     image: mysql:latest     
-     command : '--disable-partition-engine-check'
+     image: mysql:latest          
      ports:
        - '3306:3306'     
      volumes:

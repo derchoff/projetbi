@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27 avr. 2019, 15:25:44
+    Author     : APOIZAT
+*/
+
+h2 {
+  display: block;
+  color: white; 
+  background-color: cornflowerblue;
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+  border-radius:16px;
+}
+
+.bouton
+{
+    background-color: silver;
+    color: black; 
+    border-radius:16px;
+}
+
+.label-file {
+    cursor: pointer;
+    color: brown;
+    font-weight: bold;
+}
+
+.input-file {
+  top: 0; left: 0;
+  width: 30%;
+  background-color: blanchedalmond;
+  color: brown; 
+}
