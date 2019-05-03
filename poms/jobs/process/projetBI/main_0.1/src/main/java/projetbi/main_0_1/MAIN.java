@@ -178,6 +178,12 @@ public class MAIN implements TalendJob {
 
 			}
 
+			if (mask_produits != null) {
+
+				this.setProperty("mask_produits", mask_produits.toString());
+
+			}
+
 			if (mask_ventes != null) {
 
 				this.setProperty("mask_ventes", mask_ventes.toString());
@@ -244,6 +250,12 @@ public class MAIN implements TalendJob {
 
 		public String getMask_prevision_ventes() {
 			return this.mask_prevision_ventes;
+		}
+
+		public String mask_produits;
+
+		public String getMask_produits() {
+			return this.mask_produits;
 		}
 
 		public String mask_ventes;
@@ -718,7 +730,7 @@ public class MAIN implements TalendJob {
 					}
 
 					void setFiles() {
-						String directoryt = context.excel_input_repository;
+						String directoryt = "C:/Users/d_erc/Documents/Google Drive/Cours/Cours MIAGE M2/D234/Pre╠üsentation Projet/test";
 						String filemaskt = "*.*" + "$";
 
 						if (filemaskt.indexOf("^") == -1) {
@@ -862,15 +874,7 @@ public class MAIN implements TalendJob {
 					NB_ITERATE_tFileList_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("If5", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate2", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("If4", 3, 0);
+						runStat.updateStatOnConnection("iterate5", 3, 0);
 					}
 
 					if (execStat) {
@@ -878,11 +882,31 @@ public class MAIN implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate6", 3, 0);
+						runStat.updateStatOnConnection("iterate2", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate4", 3, 0);
 					}
 
 					if (execStat) {
 						runStat.updateStatOnConnection("iterate7", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If3", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If1", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If4", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate6", 3, 0);
 					}
 
 					if (execStat) {
@@ -894,19 +918,7 @@ public class MAIN implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("If1", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate4", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate5", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("If3", 3, 0);
+						runStat.updateStatOnConnection("If5", 3, 0);
 					}
 
 					if (execStat) {
@@ -946,7 +958,7 @@ public class MAIN implements TalendJob {
 					final boolean case_sensitive_tFileList_1 = true;
 					String excludefilemask_tFileList_1 = context.mask_fichier_indicateurs + ","
 							+ context.mask_fichier_magasins + "," + context.mask_prevision_ventes + ","
-							+ context.mask_ventes;
+							+ context.mask_ventes + "," + context.mask_produits;
 					final List<java.util.regex.Pattern> excludefileNameEachPattern_tFileList_1 = new java.util.ArrayList<java.util.regex.Pattern>();
 					if (excludefilemask_tFileList_1 != null && !"".equals(excludefilemask_tFileList_1)) {
 						for (String excludefilemaskEach_tFileList_1 : excludefilemask_tFileList_1.split(",")) {
@@ -2640,7 +2652,7 @@ public class MAIN implements TalendJob {
 
 					Object obj_tRunJob_5 = null;
 
-					projetbi.integration_ventes_0_1.integration_ventes childJob_tRunJob_5 = new projetbi.integration_ventes_0_1.integration_ventes();
+					projetbi.integration_objectif_0_1.integration_objectif childJob_tRunJob_5 = new projetbi.integration_objectif_0_1.integration_objectif();
 					// pass DataSources
 					java.util.Map<String, routines.system.TalendDataSource> talendDataSources_tRunJob_5 = (java.util.Map<String, routines.system.TalendDataSource>) globalMap
 							.get(KEY_DB_DATASOURCES);
@@ -2982,7 +2994,7 @@ public class MAIN implements TalendJob {
 
 					Object obj_tRunJob_4 = null;
 
-					projetbi.integration_objectif_0_1.integration_objectif childJob_tRunJob_4 = new projetbi.integration_objectif_0_1.integration_objectif();
+					projetbi.integration_ventes_0_1.integration_ventes childJob_tRunJob_4 = new projetbi.integration_ventes_0_1.integration_ventes();
 					// pass DataSources
 					java.util.Map<String, routines.system.TalendDataSource> talendDataSources_tRunJob_4 = (java.util.Map<String, routines.system.TalendDataSource>) globalMap
 							.get(KEY_DB_DATASOURCES);
@@ -5498,6 +5510,8 @@ public class MAIN implements TalendJob {
 					context.mask_fichier_magasins = (String) context.getProperty("mask_fichier_magasins");
 					context.setContextType("mask_prevision_ventes", "id_String");
 					context.mask_prevision_ventes = (String) context.getProperty("mask_prevision_ventes");
+					context.setContextType("mask_produits", "id_String");
+					context.mask_produits = (String) context.getProperty("mask_produits");
 					context.setContextType("mask_ventes", "id_String");
 					context.mask_ventes = (String) context.getProperty("mask_ventes");
 				}
@@ -5545,6 +5559,9 @@ public class MAIN implements TalendJob {
 			}
 			if (parentContextMap.containsKey("mask_prevision_ventes")) {
 				context.mask_prevision_ventes = (String) parentContextMap.get("mask_prevision_ventes");
+			}
+			if (parentContextMap.containsKey("mask_produits")) {
+				context.mask_produits = (String) parentContextMap.get("mask_produits");
 			}
 			if (parentContextMap.containsKey("mask_ventes")) {
 				context.mask_ventes = (String) parentContextMap.get("mask_ventes");
@@ -5759,6 +5776,6 @@ public class MAIN implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 178221 characters generated by Talend Open Studio for Data Integration on the
- * 25 avril 2019 22:37:50 CEST
+ * 178860 characters generated by Talend Open Studio for Data Integration on the
+ * 2 mai 2019 22:43:21 CEST
  ************************************************************************************************/
