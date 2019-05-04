@@ -1,6 +1,7 @@
 package routines;
 
 import java.util.Calendar;
+import java.util.SimpleTimeZone;
 import java.util.Date;
 import java.util.List;
 import java.util.Arrays;
@@ -95,8 +96,11 @@ public class projetBi {
      * {example} getDateFromMonth(5,2019) # 01/05/2019
      */
     public static Date getDateFromMonthAndYear(int month, int year) {
-    	Calendar cal = Calendar.getInstance();
+    	Calendar cal = Calendar.getInstance(new SimpleTimeZone(0, "GMT"));
+    	System.out.println(year);
+    	System.out.println(month);
     	cal.set(year, month, 1, 0, 0, 0);
+    	System.out.println(cal.getTime());
     	//MILLISECOND à zéro sinon les dates seront considérées comme différentes
     	//et Talend les ajoutera en bdd même si elles existent déjà
     	cal.set(Calendar.MILLISECOND, ZERO_MILLISECOND);

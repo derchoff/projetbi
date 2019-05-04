@@ -20,16 +20,17 @@ services:
     tomcat:
      depends_on:
        - mysqldb    
-     image: bitnami/tomcat:latest
+     image: tomcat:latest
+     user: root
      environment:
         TOMCAT_USERNAME: root
-        TOMCAT_PASSWORD: ${DB_TOMCAT_PWD}
+        TOMCAT_PASSWORD: ${TOMCAT_PWD}
      links:
-       - db:mysqldb
+       - mysqldb:mysql
      ports:
-       - '8585:8080'
+       - '80:8080'
      volumes:
-       - /opt/tomcat:/bitnami/tomcat
+       - /usr/src/tomcat:/bitnami
      networks:
        mysql_network:         
          

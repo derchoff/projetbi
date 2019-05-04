@@ -8,18 +8,24 @@ startme() {
 
     #pwgen n'est pas installer sur la VPS  et je ne souhaite pas gérer une installation via le script
     DB_ROOT_PWD=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`;    
-    DB_TOMCAT_PWD=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`;    
+    TOMCAT_PWD=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`;    
     BI_SRC_PATH="/usr/src/projetbi/BDD";
 
     echo '---------------------------------------';
     echo '| GENERATED PASSWORD';
     echo "| Db Root            : $DB_ROOT_PWD";    
-    echo "| Tomcat Root        : $DB_TOMCAT_PWD";    
+    echo "| Tomcat Root        : $TOMCAT_PWD";    
     echo '---------------------------------------';
 
     export DB_ROOT_PWD;
+    export TOMCAT_PWD;
 
+    mkdir /usr/src/tomcat;
+    
     docker-compose up -d --build;
+        
+    sudo cp /usr/src/projetbi/web-service/SiteWeb_DARTIES/dist/SiteWeb_DARTIES.war /usr/src/tomcat/tomcat/data/;
+    sudo cp /usr/src/projetbi/web-service/WebService_DARTIES/dist/WebService_DARTIES.war /usr/src/tomcat/tomcat/data/;
     
     #attend que la bdd mysql soit instancié
 #    until nc -z -v -w30 localhost 3306;
