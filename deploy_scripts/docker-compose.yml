@@ -10,7 +10,7 @@ services:
        - db_data:/var/lib/mysql
      restart: always
      environment:
-        MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+        MYSQL_ROOT_PASSWORD: ${DB_ROOT_PWD}
         MYSQL_DATABASE: db_darties
      networks:
        mysql_network:
