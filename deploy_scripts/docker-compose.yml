@@ -3,7 +3,8 @@ version: '3'
 services:
 
     mysqldb:
-     container_name: mysql:latest          
+     image: mysql:latest
+     container_name: mysqldb 
      ports:
        - '3306:3306'     
      volumes:
@@ -17,16 +18,16 @@ services:
        mysql_network:
        
     tomcat:
-       image: bitnami/tomcat:latest
-       environment:
-          - TOMCAT_USERNAME=root
-          - TOMCAT_PASSWORD=${DB_TOMCAT_PWD}
-       links:
-         - db:mysqldb
-       ports:
-         - 8585:8080
-       volumes:
-         - /opt/tomcat:/bitnami/tomcat
+     image: bitnami/tomcat:latest
+     environment:
+        TOMCAT_USERNAME: root
+        TOMCAT_PASSWORD: ${DB_TOMCAT_PWD}
+     links:
+       - db:mysqldb
+     ports:
+       - '8585:8080'
+     volumes:
+       - /opt/tomcat:/bitnami/tomcat
      networks:
        mysql_network:         
          
