@@ -22,14 +22,14 @@ startme() {
     docker-compose up -d --build;
     
     #attend que la bdd mysql soit instancié
-    until nc -z -v -w30 mysqldb 3306;
-    do
-        echo "Waiting for database connection..."
+#    until nc -z -v -w30 localhost 3306;
+#    do
+#        echo "Waiting for database connection..."
         # wait for 5 seconds before check again
-        sleep 5
-    done;   
+#        sleep 5
+#    done;   
     
-    echo 'execute le script SQL pour installer les tables de bdd'
+#    echo 'execute le script SQL pour installer les tables de bdd'
 #    docker exec mysqldb /bin/bash -c 'chown -R mysql:mysql /var/lib/mysql'
 #   docker exec mysqldb /bin/bash -c "mysql -h mysqldb -u root -p$DB_ROOT_PWD db_darties < $BI_SRC_PATH/MCD_2019_04_28.sql";
 }

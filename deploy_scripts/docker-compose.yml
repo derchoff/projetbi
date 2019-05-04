@@ -18,6 +18,8 @@ services:
        mysql_network:
        
     tomcat:
+     depends_on:
+       - mysqldb    
      image: bitnami/tomcat:latest
      environment:
         TOMCAT_USERNAME: root
