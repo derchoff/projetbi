@@ -3,7 +3,7 @@
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="nom du fichier à analyser" name="nom_fichier" prompt="nom_fichier?" promptNeeded="false" type="id_String" value="context.nom_fichier"/>
     <contextParameter comment="indique s'il faut vérifier le mois dans fichier" name="verifier_mois" prompt="verifier_mois?" promptNeeded="false" type="id_Boolean" value="false"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/d_erc/Documents/Google Drive/Cours/Cours MIAGE M2/D234/Pre╠üsentation Projet/projetbi/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichiers excel prêts/"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>
@@ -107,6 +107,7 @@
     <routinesParameter id="_-2D8kGGrEemeqeVfACt5KQ" name="TalendStringUtil"/>
     <routinesParameter id="_-19O4GGrEemeqeVfACt5KQ" name="TalendString"/>
     <routinesParameter id="_fnZ3oGHsEemX4a9vaTXaNA" name="projetBi"/>
+    <routinesParameter id="_ebdhoG_REem5OpJhYkK-EA" name="ErreurFichier"/>
   </parameters>
   <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJava_1" show="false"/>
