@@ -8,11 +8,6 @@
             <file>file:/C:/Users/apoizat/Documents/Miage/D234/SiteWeb_DARTIES/SiteWeb_DARTIES/web/WebService/gestionWSFichier.jsp</file>
             <file>file:/C:/Users/apoizat/Documents/Miage/D234/SiteWeb_DARTIES/SiteWeb_DARTIES/web/WebService/pageTelechargementFichier.jsp</file>
         </group>
-        <group name="DARTIES">
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WebService/pageTelechargementFichier.jsp</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/src/conf/xml-resources/web-service-references/DARTIES_TransfererFichier/wsdl/localhost_13137/WebService_DARTIES/DARTIES_TransfererFichier.wsdl</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WebService/gestionWSFichier.jsp</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/index.html</file>
-        </group>
+        <group name="DARTIES"/>
     </open-files>
 </project-private>
