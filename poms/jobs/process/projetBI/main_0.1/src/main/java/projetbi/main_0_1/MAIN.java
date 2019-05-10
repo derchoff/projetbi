@@ -41,6 +41,27 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.util.Comparator;
 
+//the import part of tJava_1
+//import java.util.List;
+
+//the import part of tJava_3
+//import java.util.List;
+
+//the import part of tJava_4
+//import java.util.List;
+
+//the import part of tJava_6
+//import java.util.List;
+
+//the import part of tJava_7
+//import java.util.List;
+
+//the import part of tJava_5
+//import java.util.List;
+
+//the import part of tJava_2
+//import java.util.List;
+
 @SuppressWarnings("unused")
 
 /**
@@ -160,6 +181,42 @@ public class MAIN implements TalendJob {
 
 			}
 
+			if (excel_output_done_repository != null) {
+
+				this.setProperty("excel_output_done_repository", excel_output_done_repository.toString());
+
+			}
+
+			if (excel_output_erreur_repository != null) {
+
+				this.setProperty("excel_output_erreur_repository", excel_output_erreur_repository.toString());
+
+			}
+
+			if (excel_output_warning_repository != null) {
+
+				this.setProperty("excel_output_warning_repository", excel_output_warning_repository.toString());
+
+			}
+
+			if (mail_send_darties != null) {
+
+				this.setProperty("mail_send_darties", mail_send_darties.toString());
+
+			}
+
+			if (mail_send_password != null) {
+
+				this.setProperty("mail_send_password", mail_send_password.toString());
+
+			}
+
+			if (mail_si_darties != null) {
+
+				this.setProperty("mail_si_darties", mail_si_darties.toString());
+
+			}
+
 			if (mask_fichier_indicateurs != null) {
 
 				this.setProperty("mask_fichier_indicateurs", mask_fichier_indicateurs.toString());
@@ -187,6 +244,18 @@ public class MAIN implements TalendJob {
 			if (mask_ventes != null) {
 
 				this.setProperty("mask_ventes", mask_ventes.toString());
+
+			}
+
+			if (smtp_port != null) {
+
+				this.setProperty("smtp_port", smtp_port.toString());
+
+			}
+
+			if (smtp_server != null) {
+
+				this.setProperty("smtp_server", smtp_server.toString());
 
 			}
 
@@ -234,6 +303,42 @@ public class MAIN implements TalendJob {
 			return this.excel_input_repository;
 		}
 
+		public String excel_output_done_repository;
+
+		public String getExcel_output_done_repository() {
+			return this.excel_output_done_repository;
+		}
+
+		public String excel_output_erreur_repository;
+
+		public String getExcel_output_erreur_repository() {
+			return this.excel_output_erreur_repository;
+		}
+
+		public String excel_output_warning_repository;
+
+		public String getExcel_output_warning_repository() {
+			return this.excel_output_warning_repository;
+		}
+
+		public String mail_send_darties;
+
+		public String getMail_send_darties() {
+			return this.mail_send_darties;
+		}
+
+		public java.lang.String mail_send_password;
+
+		public java.lang.String getMail_send_password() {
+			return this.mail_send_password;
+		}
+
+		public String mail_si_darties;
+
+		public String getMail_si_darties() {
+			return this.mail_si_darties;
+		}
+
 		public String mask_fichier_indicateurs;
 
 		public String getMask_fichier_indicateurs() {
@@ -262,6 +367,18 @@ public class MAIN implements TalendJob {
 
 		public String getMask_ventes() {
 			return this.mask_ventes;
+		}
+
+		public String smtp_port;
+
+		public String getSmtp_port() {
+			return this.smtp_port;
+		}
+
+		public String smtp_server;
+
+		public String getSmtp_server() {
+			return this.smtp_server;
 		}
 	}
 
@@ -302,6 +419,7 @@ public class MAIN implements TalendJob {
 		globalMap.put(KEY_DB_DATASOURCES_RAW, new java.util.HashMap<String, javax.sql.DataSource>(dataSources));
 	}
 
+	LogCatcherUtils tLogCatcher_1 = new LogCatcherUtils();
 	LogCatcherUtils talendLogs_LOGS = new LogCatcherUtils();
 	StatCatcherUtils talendStats_STATS = new StatCatcherUtils("_J5RNsGRREem1D8Ft0pk_Ew", "0.1");
 	MetterCatcherUtils talendMeter_METTER = new MetterCatcherUtils("_J5RNsGRREem1D8Ft0pk_Ew", "0.1");
@@ -399,9 +517,15 @@ public class MAIN implements TalendJob {
 					}
 
 					if (!(e instanceof TDieException)) {
+						tLogCatcher_1.addMessage("Java Exception", currentComponent, 6,
+								e.getClass().getName() + ":" + e.getMessage(), 1);
 						talendLogs_LOGS.addMessage("Java Exception", currentComponent, 6,
 								e.getClass().getName() + ":" + e.getMessage(), 1);
-						talendLogs_LOGSProcess(globalMap);
+						try {
+							tLogCatcher_1Process(globalMap);
+						} finally {
+							talendLogs_LOGSProcess(globalMap);
+						}
 					}
 				} catch (TalendException e) {
 					// do nothing
@@ -413,8 +537,58 @@ public class MAIN implements TalendJob {
 		}
 	}
 
+	public void tLogCatcher_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tLogCatcher_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tLogRow_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tLogCatcher_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tRunJob_8_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tLogCatcher_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tSendMail_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tLogCatcher_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tWaitForFile_2_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tWaitForFile_2_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tJava_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
 
 		end_Hash.put(errorComponent, System.currentTimeMillis());
 
@@ -443,6 +617,16 @@ public class MAIN implements TalendJob {
 		tFileList_2_onSubJobError(exception, errorComponent, globalMap);
 	}
 
+	public void tJava_3_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_2_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tRunJob_1_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
@@ -455,6 +639,16 @@ public class MAIN implements TalendJob {
 
 	public void tFileList_3_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_3_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tJava_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
 
 		end_Hash.put(errorComponent, System.currentTimeMillis());
 
@@ -483,6 +677,16 @@ public class MAIN implements TalendJob {
 		tFileList_4_onSubJobError(exception, errorComponent, globalMap);
 	}
 
+	public void tJava_6_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_4_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tRunJob_3_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
@@ -495,6 +699,16 @@ public class MAIN implements TalendJob {
 
 	public void tFileList_5_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_5_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tJava_7_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
 
 		end_Hash.put(errorComponent, System.currentTimeMillis());
 
@@ -533,6 +747,16 @@ public class MAIN implements TalendJob {
 		tFileList_6_onSubJobError(exception, errorComponent, globalMap);
 	}
 
+	public void tJava_5_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileList_6_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tRunJob_4_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
@@ -541,6 +765,16 @@ public class MAIN implements TalendJob {
 		status = "failure";
 
 		tFileList_6_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tJava_2_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tWaitForFile_2_onSubJobError(exception, errorComponent, globalMap);
 	}
 
 	public void tDie_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
@@ -602,6 +836,14 @@ public class MAIN implements TalendJob {
 		status = "failure";
 
 		talendMeter_METTER_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tLogCatcher_1_onSubJobError(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		resumeUtil.addLog("SYSTEM_LOG", "NODE:" + errorComponent, "", Thread.currentThread().getId() + "", "FATAL", "",
+				exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception), "");
+
 	}
 
 	public void tWaitForFile_2_onSubJobError(Exception exception, String errorComponent,
@@ -676,6 +918,1247 @@ public class MAIN implements TalendJob {
 
 	}
 
+	public static class row3Struct implements routines.system.IPersistableRow<row3Struct> {
+		final static byte[] commonByteArrayLock_PROJETBI_MAIN = new byte[0];
+		static byte[] commonByteArray_PROJETBI_MAIN = new byte[0];
+
+		public String message;
+
+		public String getMessage() {
+			return this.message;
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_PROJETBI_MAIN.length) {
+					if (length < 1024 && commonByteArray_PROJETBI_MAIN.length == 0) {
+						commonByteArray_PROJETBI_MAIN = new byte[1024];
+					} else {
+						commonByteArray_PROJETBI_MAIN = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_PROJETBI_MAIN, 0, length);
+				strReturn = new String(commonByteArray_PROJETBI_MAIN, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_PROJETBI_MAIN) {
+
+				try {
+
+					int length = 0;
+
+					this.message = readString(dis);
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// String
+
+				writeString(this.message, dos);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("message=" + message);
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row3Struct other) {
+
+			int returnValue = -1;
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class row2Struct implements routines.system.IPersistableRow<row2Struct> {
+		final static byte[] commonByteArrayLock_PROJETBI_MAIN = new byte[0];
+		static byte[] commonByteArray_PROJETBI_MAIN = new byte[0];
+
+		public String message;
+
+		public String getMessage() {
+			return this.message;
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_PROJETBI_MAIN.length) {
+					if (length < 1024 && commonByteArray_PROJETBI_MAIN.length == 0) {
+						commonByteArray_PROJETBI_MAIN = new byte[1024];
+					} else {
+						commonByteArray_PROJETBI_MAIN = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_PROJETBI_MAIN, 0, length);
+				strReturn = new String(commonByteArray_PROJETBI_MAIN, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_PROJETBI_MAIN) {
+
+				try {
+
+					int length = 0;
+
+					this.message = readString(dis);
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// String
+
+				writeString(this.message, dos);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("message=" + message);
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row2Struct other) {
+
+			int returnValue = -1;
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class row1Struct implements routines.system.IPersistableRow<row1Struct> {
+		final static byte[] commonByteArrayLock_PROJETBI_MAIN = new byte[0];
+		static byte[] commonByteArray_PROJETBI_MAIN = new byte[0];
+
+		public java.util.Date moment;
+
+		public java.util.Date getMoment() {
+			return this.moment;
+		}
+
+		public String pid;
+
+		public String getPid() {
+			return this.pid;
+		}
+
+		public String root_pid;
+
+		public String getRoot_pid() {
+			return this.root_pid;
+		}
+
+		public String father_pid;
+
+		public String getFather_pid() {
+			return this.father_pid;
+		}
+
+		public String project;
+
+		public String getProject() {
+			return this.project;
+		}
+
+		public String job;
+
+		public String getJob() {
+			return this.job;
+		}
+
+		public String context;
+
+		public String getContext() {
+			return this.context;
+		}
+
+		public Integer priority;
+
+		public Integer getPriority() {
+			return this.priority;
+		}
+
+		public String type;
+
+		public String getType() {
+			return this.type;
+		}
+
+		public String origin;
+
+		public String getOrigin() {
+			return this.origin;
+		}
+
+		public String message;
+
+		public String getMessage() {
+			return this.message;
+		}
+
+		public Integer code;
+
+		public Integer getCode() {
+			return this.code;
+		}
+
+		private java.util.Date readDate(ObjectInputStream dis) throws IOException {
+			java.util.Date dateReturn = null;
+			int length = 0;
+			length = dis.readByte();
+			if (length == -1) {
+				dateReturn = null;
+			} else {
+				dateReturn = new Date(dis.readLong());
+			}
+			return dateReturn;
+		}
+
+		private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException {
+			if (date1 == null) {
+				dos.writeByte(-1);
+			} else {
+				dos.writeByte(0);
+				dos.writeLong(date1.getTime());
+			}
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_PROJETBI_MAIN.length) {
+					if (length < 1024 && commonByteArray_PROJETBI_MAIN.length == 0) {
+						commonByteArray_PROJETBI_MAIN = new byte[1024];
+					} else {
+						commonByteArray_PROJETBI_MAIN = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_PROJETBI_MAIN, 0, length);
+				strReturn = new String(commonByteArray_PROJETBI_MAIN, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		private Integer readInteger(ObjectInputStream dis) throws IOException {
+			Integer intReturn;
+			int length = 0;
+			length = dis.readByte();
+			if (length == -1) {
+				intReturn = null;
+			} else {
+				intReturn = dis.readInt();
+			}
+			return intReturn;
+		}
+
+		private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException {
+			if (intNum == null) {
+				dos.writeByte(-1);
+			} else {
+				dos.writeByte(0);
+				dos.writeInt(intNum);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_PROJETBI_MAIN) {
+
+				try {
+
+					int length = 0;
+
+					this.moment = readDate(dis);
+
+					this.pid = readString(dis);
+
+					this.root_pid = readString(dis);
+
+					this.father_pid = readString(dis);
+
+					this.project = readString(dis);
+
+					this.job = readString(dis);
+
+					this.context = readString(dis);
+
+					this.priority = readInteger(dis);
+
+					this.type = readString(dis);
+
+					this.origin = readString(dis);
+
+					this.message = readString(dis);
+
+					this.code = readInteger(dis);
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// java.util.Date
+
+				writeDate(this.moment, dos);
+
+				// String
+
+				writeString(this.pid, dos);
+
+				// String
+
+				writeString(this.root_pid, dos);
+
+				// String
+
+				writeString(this.father_pid, dos);
+
+				// String
+
+				writeString(this.project, dos);
+
+				// String
+
+				writeString(this.job, dos);
+
+				// String
+
+				writeString(this.context, dos);
+
+				// Integer
+
+				writeInteger(this.priority, dos);
+
+				// String
+
+				writeString(this.type, dos);
+
+				// String
+
+				writeString(this.origin, dos);
+
+				// String
+
+				writeString(this.message, dos);
+
+				// Integer
+
+				writeInteger(this.code, dos);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("moment=" + String.valueOf(moment));
+			sb.append(",pid=" + pid);
+			sb.append(",root_pid=" + root_pid);
+			sb.append(",father_pid=" + father_pid);
+			sb.append(",project=" + project);
+			sb.append(",job=" + job);
+			sb.append(",context=" + context);
+			sb.append(",priority=" + String.valueOf(priority));
+			sb.append(",type=" + type);
+			sb.append(",origin=" + origin);
+			sb.append(",message=" + message);
+			sb.append(",code=" + String.valueOf(code));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row1Struct other) {
+
+			int returnValue = -1;
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public void tLogCatcher_1Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+		globalMap.put("tLogCatcher_1_SUBPROCESS_STATE", 0);
+
+		final boolean execStat = this.execStat;
+
+		String iterateId = "";
+
+		String currentComponent = "";
+		java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+		try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { // start the resume
+				globalResumeTicket = true;
+
+				row1Struct row1 = new row1Struct();
+				row1Struct row2 = row1;
+				row3Struct row3 = new row3Struct();
+
+				/**
+				 * [tSendMail_1 begin ] start
+				 */
+
+				ok_Hash.put("tSendMail_1", false);
+				start_Hash.put("tSendMail_1", System.currentTimeMillis());
+
+				currentComponent = "tSendMail_1";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null) {
+
+						runStat.updateStatOnConnection("row3" + iterateId, 0, 0);
+
+					}
+				}
+
+				int tos_count_tSendMail_1 = 0;
+
+				/**
+				 * [tSendMail_1 begin ] stop
+				 */
+
+				/**
+				 * [tRunJob_8 begin ] start
+				 */
+
+				ok_Hash.put("tRunJob_8", false);
+				start_Hash.put("tRunJob_8", System.currentTimeMillis());
+
+				currentComponent = "tRunJob_8";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null) {
+
+						runStat.updateStatOnConnection("row2" + iterateId, 0, 0);
+
+					}
+				}
+
+				int tos_count_tRunJob_8 = 0;
+
+				/**
+				 * [tRunJob_8 begin ] stop
+				 */
+
+				/**
+				 * [tLogRow_1 begin ] start
+				 */
+
+				ok_Hash.put("tLogRow_1", false);
+				start_Hash.put("tLogRow_1", System.currentTimeMillis());
+
+				currentComponent = "tLogRow_1";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null) {
+
+						runStat.updateStatOnConnection("row1" + iterateId, 0, 0);
+
+					}
+				}
+
+				int tos_count_tLogRow_1 = 0;
+
+				///////////////////////
+
+				final String OUTPUT_FIELD_SEPARATOR_tLogRow_1 = "|";
+				java.io.PrintStream consoleOut_tLogRow_1 = null;
+
+				StringBuilder strBuffer_tLogRow_1 = null;
+				int nb_line_tLogRow_1 = 0;
+///////////////////////    			
+
+				/**
+				 * [tLogRow_1 begin ] stop
+				 */
+
+				/**
+				 * [tLogCatcher_1 begin ] start
+				 */
+
+				ok_Hash.put("tLogCatcher_1", false);
+				start_Hash.put("tLogCatcher_1", System.currentTimeMillis());
+
+				currentComponent = "tLogCatcher_1";
+
+				int tos_count_tLogCatcher_1 = 0;
+
+				try {
+					for (LogCatcherUtils.LogCatcherMessage lcm : tLogCatcher_1.getMessages()) {
+						row1.type = lcm.getType();
+						row1.origin = (lcm.getOrigin() == null || lcm.getOrigin().length() < 1 ? null
+								: lcm.getOrigin());
+						row1.priority = lcm.getPriority();
+						row1.message = lcm.getMessage();
+						row1.code = lcm.getCode();
+
+						row1.moment = java.util.Calendar.getInstance().getTime();
+
+						row1.pid = pid;
+						row1.root_pid = rootPid;
+						row1.father_pid = fatherPid;
+
+						row1.project = projectName;
+						row1.job = jobName;
+						row1.context = contextStr;
+
+						/**
+						 * [tLogCatcher_1 begin ] stop
+						 */
+
+						/**
+						 * [tLogCatcher_1 main ] start
+						 */
+
+						currentComponent = "tLogCatcher_1";
+
+						tos_count_tLogCatcher_1++;
+
+						/**
+						 * [tLogCatcher_1 main ] stop
+						 */
+
+						/**
+						 * [tLogCatcher_1 process_data_begin ] start
+						 */
+
+						currentComponent = "tLogCatcher_1";
+
+						/**
+						 * [tLogCatcher_1 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tLogRow_1 main ] start
+						 */
+
+						currentComponent = "tLogRow_1";
+
+						// row1
+						// row1
+
+						if (execStat) {
+							runStat.updateStatOnConnection("row1" + iterateId, 1, 1);
+						}
+
+///////////////////////		
+
+						strBuffer_tLogRow_1 = new StringBuilder();
+
+						if (row1.message != null) { //
+
+							strBuffer_tLogRow_1.append(String.valueOf(row1.message));
+
+						} //
+
+						if (globalMap.get("tLogRow_CONSOLE") != null) {
+							consoleOut_tLogRow_1 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+						} else {
+							consoleOut_tLogRow_1 = new java.io.PrintStream(
+									new java.io.BufferedOutputStream(System.out));
+							globalMap.put("tLogRow_CONSOLE", consoleOut_tLogRow_1);
+						}
+						consoleOut_tLogRow_1.println(strBuffer_tLogRow_1.toString());
+						consoleOut_tLogRow_1.flush();
+						nb_line_tLogRow_1++;
+//////
+
+//////                    
+
+///////////////////////    			
+
+						row2 = row1;
+
+						tos_count_tLogRow_1++;
+
+						/**
+						 * [tLogRow_1 main ] stop
+						 */
+
+						/**
+						 * [tLogRow_1 process_data_begin ] start
+						 */
+
+						currentComponent = "tLogRow_1";
+
+						/**
+						 * [tLogRow_1 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tRunJob_8 main ] start
+						 */
+
+						currentComponent = "tRunJob_8";
+
+						// row2
+						// row2
+
+						if (execStat) {
+							runStat.updateStatOnConnection("row2" + iterateId, 1, 1);
+						}
+
+						java.util.List<String> paraList_tRunJob_8 = new java.util.ArrayList<String>();
+
+						row3.message = row2.message;
+
+						paraList_tRunJob_8.add("--father_pid=" + pid);
+
+						paraList_tRunJob_8.add("--root_pid=" + rootPid);
+
+						paraList_tRunJob_8.add("--father_node=tRunJob_8");
+
+						paraList_tRunJob_8.add("--context=Default");
+
+						// for feature:10589
+
+						paraList_tRunJob_8.add("--stat_port=" + portStats);
+
+						if (resuming_logs_dir_path != null) {
+							paraList_tRunJob_8.add("--resuming_logs_dir_path=" + resuming_logs_dir_path);
+						}
+						String childResumePath_tRunJob_8 = ResumeUtil
+								.getChildJobCheckPointPath(resuming_checkpoint_path);
+						String tRunJobName_tRunJob_8 = ResumeUtil.getRighttRunJob(resuming_checkpoint_path);
+						if ("tRunJob_8".equals(tRunJobName_tRunJob_8) && childResumePath_tRunJob_8 != null) {
+							paraList_tRunJob_8.add("--resuming_checkpoint_path="
+									+ ResumeUtil.getChildJobCheckPointPath(resuming_checkpoint_path));
+						}
+						paraList_tRunJob_8.add("--parent_part_launcher=JOB:" + jobName + "/NODE:tRunJob_8");
+
+						java.util.Map<String, Object> parentContextMap_tRunJob_8 = new java.util.HashMap<String, Object>();
+
+						Object obj_tRunJob_8 = null;
+
+						obj_tRunJob_8 = (String) globalMap.get("nom_fichier");
+						if (obj_tRunJob_8 != null) {
+							paraList_tRunJob_8.add(
+									"--context_param nom_fichier=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_8));
+						} else {
+							paraList_tRunJob_8.add("--context_param nom_fichier="
+									+ NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+						}
+
+						parentContextMap_tRunJob_8.put("nom_fichier", obj_tRunJob_8);
+
+						obj_tRunJob_8 = (String) globalMap.get("nom_job_talend");
+						if (obj_tRunJob_8 != null) {
+							paraList_tRunJob_8.add("--context_param nom_job_talend="
+									+ RuntimeUtils.tRunJobConvertContext(obj_tRunJob_8));
+						} else {
+							paraList_tRunJob_8.add("--context_param nom_job_talend="
+									+ NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+						}
+
+						parentContextMap_tRunJob_8.put("nom_job_talend", obj_tRunJob_8);
+
+						obj_tRunJob_8 = String.valueOf(row2.message);
+						if (obj_tRunJob_8 != null) {
+							paraList_tRunJob_8.add(
+									"--context_param log_erreur=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_8));
+						} else {
+							paraList_tRunJob_8.add("--context_param log_erreur="
+									+ NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+						}
+
+						parentContextMap_tRunJob_8.put("log_erreur", obj_tRunJob_8);
+
+						projetbi.gestion_dossier_echouer_0_1.gestion_dossier_echouer childJob_tRunJob_8 = new projetbi.gestion_dossier_echouer_0_1.gestion_dossier_echouer();
+						// pass DataSources
+						java.util.Map<String, routines.system.TalendDataSource> talendDataSources_tRunJob_8 = (java.util.Map<String, routines.system.TalendDataSource>) globalMap
+								.get(KEY_DB_DATASOURCES);
+						if (null != talendDataSources_tRunJob_8) {
+							java.util.Map<String, javax.sql.DataSource> dataSources_tRunJob_8 = new java.util.HashMap<String, javax.sql.DataSource>();
+							for (java.util.Map.Entry<String, routines.system.TalendDataSource> talendDataSourceEntry_tRunJob_8 : talendDataSources_tRunJob_8
+									.entrySet()) {
+								dataSources_tRunJob_8.put(talendDataSourceEntry_tRunJob_8.getKey(),
+										talendDataSourceEntry_tRunJob_8.getValue().getRawDataSource());
+							}
+							childJob_tRunJob_8.setDataSources(dataSources_tRunJob_8);
+						}
+
+						childJob_tRunJob_8.parentContextMap = parentContextMap_tRunJob_8;
+
+						String[][] childReturn_tRunJob_8 = childJob_tRunJob_8
+								.runJob((String[]) paraList_tRunJob_8.toArray(new String[paraList_tRunJob_8.size()]));
+
+						errorCode = childJob_tRunJob_8.getErrorCode();
+
+						if (childJob_tRunJob_8.getErrorCode() == null) {
+							globalMap.put("tRunJob_8_CHILD_RETURN_CODE", childJob_tRunJob_8.getStatus() != null
+									&& ("failure").equals(childJob_tRunJob_8.getStatus()) ? 1 : 0);
+						} else {
+							globalMap.put("tRunJob_8_CHILD_RETURN_CODE", childJob_tRunJob_8.getErrorCode());
+						}
+						if (childJob_tRunJob_8.getExceptionStackTrace() != null) {
+							globalMap.put("tRunJob_8_CHILD_EXCEPTION_STACKTRACE",
+									childJob_tRunJob_8.getExceptionStackTrace());
+						}
+
+						if (childJob_tRunJob_8.getErrorCode() != null
+								|| ("failure").equals(childJob_tRunJob_8.getStatus())) {
+							throw new RuntimeException("Child job running failed.\n"
+									+ childJob_tRunJob_8.getException().getClass().getName() + ": "
+									+ childJob_tRunJob_8.getException().getMessage());
+						}
+
+						tos_count_tRunJob_8++;
+
+						/**
+						 * [tRunJob_8 main ] stop
+						 */
+
+						/**
+						 * [tRunJob_8 process_data_begin ] start
+						 */
+
+						currentComponent = "tRunJob_8";
+
+						/**
+						 * [tRunJob_8 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tSendMail_1 main ] start
+						 */
+
+						currentComponent = "tSendMail_1";
+
+						// row3
+						// row3
+
+						if (execStat) {
+							runStat.updateStatOnConnection("row3" + iterateId, 1, 1);
+						}
+
+						String smtpHost_tSendMail_1 = context.smtp_server;
+						String smtpPort_tSendMail_1 = context.smtp_port;
+						String from_tSendMail_1 = (context.mail_send_darties);
+						String to_tSendMail_1 = (context.mail_si_darties).replace(";", ",");
+						String cc_tSendMail_1 = (("") == null || "".equals("")) ? null : ("").replace(";", ",");
+						String bcc_tSendMail_1 = (("") == null || "".equals("")) ? null : ("").replace(";", ",");
+						String subject_tSendMail_1 = ("Erreur integration");
+
+						java.util.List<java.util.Map<String, String>> headers_tSendMail_1 = new java.util.ArrayList<java.util.Map<String, String>>();
+						java.util.List<String> attachments_tSendMail_1 = new java.util.ArrayList<String>();
+						java.util.List<String> contentTransferEncoding_tSendMail_1 = new java.util.ArrayList<String>();
+
+						String message_tSendMail_1 = (("Message d'erreur: " + String.valueOf(row3.message)) == null
+								|| "".equals("Message d'erreur: " + String.valueOf(row3.message))) ? "\"\""
+										: ("Message d'erreur: " + String.valueOf(row3.message));
+						java.util.Properties props_tSendMail_1 = System.getProperties();
+						props_tSendMail_1.put("mail.smtp.host", smtpHost_tSendMail_1);
+						props_tSendMail_1.put("mail.smtp.port", smtpPort_tSendMail_1);
+						props_tSendMail_1.put("mail.mime.encodefilename", "true");
+						props_tSendMail_1.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+						props_tSendMail_1.put("mail.smtp.socketFactory.fallback", "false");
+						props_tSendMail_1.put("mail.smtp.socketFactory.port", smtpPort_tSendMail_1);
+						try {
+
+							props_tSendMail_1.put("mail.smtp.auth", "true");
+							javax.mail.Session session_tSendMail_1 = javax.mail.Session.getInstance(props_tSendMail_1,
+									new javax.mail.Authenticator() {
+										protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+
+											final String decryptedPassword_tSendMail_1 = context.mail_send_password;
+
+											return new javax.mail.PasswordAuthentication(context.mail_send_darties,
+													decryptedPassword_tSendMail_1);
+										}
+									});
+
+							javax.mail.Message msg_tSendMail_1 = new javax.mail.internet.MimeMessage(
+									session_tSendMail_1);
+							msg_tSendMail_1.setFrom(new javax.mail.internet.InternetAddress(from_tSendMail_1, null));
+							msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.TO,
+									javax.mail.internet.InternetAddress.parse(to_tSendMail_1, false));
+							if (cc_tSendMail_1 != null)
+								msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.CC,
+										javax.mail.internet.InternetAddress.parse(cc_tSendMail_1, false));
+							if (bcc_tSendMail_1 != null)
+								msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.BCC,
+										javax.mail.internet.InternetAddress.parse(bcc_tSendMail_1, false));
+							msg_tSendMail_1.setSubject(subject_tSendMail_1);
+
+							for (int i_tSendMail_1 = 0; i_tSendMail_1 < headers_tSendMail_1.size(); i_tSendMail_1++) {
+								java.util.Map<String, String> header_tSendMail_1 = headers_tSendMail_1
+										.get(i_tSendMail_1);
+								msg_tSendMail_1.setHeader(header_tSendMail_1.get("KEY"),
+										header_tSendMail_1.get("VALUE"));
+							}
+							msg_tSendMail_1.setSentDate(new Date());
+							msg_tSendMail_1.setHeader("X-Priority", "3"); // High->1 Normal->3 Low->5
+							javax.mail.Multipart mp_tSendMail_1 = new javax.mail.internet.MimeMultipart();
+							javax.mail.internet.MimeBodyPart mbpText_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+							mbpText_tSendMail_1.setText(message_tSendMail_1, "ISO-8859-15", "plain");
+							mp_tSendMail_1.addBodyPart(mbpText_tSendMail_1);
+
+							javax.mail.internet.MimeBodyPart mbpFile_tSendMail_1 = null;
+
+							for (int i_tSendMail_1 = 0; i_tSendMail_1 < attachments_tSendMail_1
+									.size(); i_tSendMail_1++) {
+								String filename_tSendMail_1 = attachments_tSendMail_1.get(i_tSendMail_1);
+								javax.activation.FileDataSource fds_tSendMail_1 = null;
+								java.io.File file_tSendMail_1 = new java.io.File(filename_tSendMail_1);
+
+								if (!file_tSendMail_1.exists()) {
+									continue;
+								}
+
+								if (file_tSendMail_1.isDirectory()) {
+									java.io.File[] subFiles_tSendMail_1 = file_tSendMail_1.listFiles();
+									for (java.io.File subFile_tSendMail_1 : subFiles_tSendMail_1) {
+										if (subFile_tSendMail_1.isFile()) {
+											fds_tSendMail_1 = new javax.activation.FileDataSource(
+													subFile_tSendMail_1.getAbsolutePath());
+											mbpFile_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+											mbpFile_tSendMail_1
+													.setDataHandler(new javax.activation.DataHandler(fds_tSendMail_1));
+											mbpFile_tSendMail_1.setFileName(javax.mail.internet.MimeUtility
+													.encodeText(fds_tSendMail_1.getName()));
+											if (contentTransferEncoding_tSendMail_1.get(i_tSendMail_1)
+													.equalsIgnoreCase("base64")) {
+												mbpFile_tSendMail_1.setHeader("Content-Transfer-Encoding", "base64");
+											}
+											mp_tSendMail_1.addBodyPart(mbpFile_tSendMail_1);
+										}
+									}
+								} else {
+									mbpFile_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+									fds_tSendMail_1 = new javax.activation.FileDataSource(filename_tSendMail_1);
+									mbpFile_tSendMail_1
+											.setDataHandler(new javax.activation.DataHandler(fds_tSendMail_1));
+									mbpFile_tSendMail_1.setFileName(
+											javax.mail.internet.MimeUtility.encodeText(fds_tSendMail_1.getName()));
+									if (contentTransferEncoding_tSendMail_1.get(i_tSendMail_1)
+											.equalsIgnoreCase("base64")) {
+										mbpFile_tSendMail_1.setHeader("Content-Transfer-Encoding", "base64");
+									}
+									mp_tSendMail_1.addBodyPart(mbpFile_tSendMail_1);
+								}
+							}
+							// -- set the content --
+							msg_tSendMail_1.setContent(mp_tSendMail_1);
+							// add handlers for main MIME types
+							javax.activation.MailcapCommandMap mc_tSendMail_1 = (javax.activation.MailcapCommandMap) javax.activation.CommandMap
+									.getDefaultCommandMap();
+							mc_tSendMail_1
+									.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
+							mc_tSendMail_1
+									.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
+							mc_tSendMail_1
+									.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+							mc_tSendMail_1.addMailcap(
+									"multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
+							mc_tSendMail_1.addMailcap(
+									"message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
+							javax.activation.CommandMap.setDefaultCommandMap(mc_tSendMail_1);
+							// -- Send the message --
+							javax.mail.Transport.send(msg_tSendMail_1);
+						} catch (java.lang.Exception e) {
+
+							throw (e);
+
+						} finally {
+							props_tSendMail_1.remove("mail.smtp.host");
+							props_tSendMail_1.remove("mail.smtp.port");
+
+							props_tSendMail_1.remove("mail.mime.encodefilename");
+
+							props_tSendMail_1.remove("mail.smtp.socketFactory.class");
+							props_tSendMail_1.remove("mail.smtp.socketFactory.fallback");
+							props_tSendMail_1.remove("mail.smtp.socketFactory.port");
+
+							props_tSendMail_1.remove("mail.smtp.auth");
+						}
+
+						tos_count_tSendMail_1++;
+
+						/**
+						 * [tSendMail_1 main ] stop
+						 */
+
+						/**
+						 * [tSendMail_1 process_data_begin ] start
+						 */
+
+						currentComponent = "tSendMail_1";
+
+						/**
+						 * [tSendMail_1 process_data_begin ] stop
+						 */
+
+						/**
+						 * [tSendMail_1 process_data_end ] start
+						 */
+
+						currentComponent = "tSendMail_1";
+
+						/**
+						 * [tSendMail_1 process_data_end ] stop
+						 */
+
+						/**
+						 * [tRunJob_8 process_data_end ] start
+						 */
+
+						currentComponent = "tRunJob_8";
+
+						/**
+						 * [tRunJob_8 process_data_end ] stop
+						 */
+
+						/**
+						 * [tLogRow_1 process_data_end ] start
+						 */
+
+						currentComponent = "tLogRow_1";
+
+						/**
+						 * [tLogRow_1 process_data_end ] stop
+						 */
+
+						/**
+						 * [tLogCatcher_1 process_data_end ] start
+						 */
+
+						currentComponent = "tLogCatcher_1";
+
+						/**
+						 * [tLogCatcher_1 process_data_end ] stop
+						 */
+
+						/**
+						 * [tLogCatcher_1 end ] start
+						 */
+
+						currentComponent = "tLogCatcher_1";
+
+					}
+				} catch (Exception e_tLogCatcher_1) {
+					logIgnoredError(String.format(
+							"tLogCatcher_1 - tLogCatcher failed to process log message(s) due to internal error: %s",
+							e_tLogCatcher_1), e_tLogCatcher_1);
+				}
+
+				ok_Hash.put("tLogCatcher_1", true);
+				end_Hash.put("tLogCatcher_1", System.currentTimeMillis());
+
+				/**
+				 * [tLogCatcher_1 end ] stop
+				 */
+
+				/**
+				 * [tLogRow_1 end ] start
+				 */
+
+				currentComponent = "tLogRow_1";
+
+//////
+//////
+				globalMap.put("tLogRow_1_NB_LINE", nb_line_tLogRow_1);
+
+///////////////////////    			
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null || !((Boolean) resourceMap.get("inIterateVComp"))) {
+						runStat.updateStatOnConnection("row1" + iterateId, 2, 0);
+					}
+				}
+
+				ok_Hash.put("tLogRow_1", true);
+				end_Hash.put("tLogRow_1", System.currentTimeMillis());
+
+				/**
+				 * [tLogRow_1 end ] stop
+				 */
+
+				/**
+				 * [tRunJob_8 end ] start
+				 */
+
+				currentComponent = "tRunJob_8";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null || !((Boolean) resourceMap.get("inIterateVComp"))) {
+						runStat.updateStatOnConnection("row2" + iterateId, 2, 0);
+					}
+				}
+
+				ok_Hash.put("tRunJob_8", true);
+				end_Hash.put("tRunJob_8", System.currentTimeMillis());
+
+				/**
+				 * [tRunJob_8 end ] stop
+				 */
+
+				/**
+				 * [tSendMail_1 end ] start
+				 */
+
+				currentComponent = "tSendMail_1";
+
+				if (execStat) {
+					if (resourceMap.get("inIterateVComp") == null || !((Boolean) resourceMap.get("inIterateVComp"))) {
+						runStat.updateStatOnConnection("row3" + iterateId, 2, 0);
+					}
+				}
+
+				ok_Hash.put("tSendMail_1", true);
+				end_Hash.put("tSendMail_1", System.currentTimeMillis());
+
+				/**
+				 * [tSendMail_1 end ] stop
+				 */
+
+			} // end the resume
+
+		} catch (java.lang.Exception e) {
+
+			TalendException te = new TalendException(e, currentComponent, globalMap);
+
+			throw te;
+		} catch (java.lang.Error error) {
+
+			runStat.stopThreadStat();
+
+			throw error;
+		} finally {
+
+			try {
+
+				/**
+				 * [tLogCatcher_1 finally ] start
+				 */
+
+				currentComponent = "tLogCatcher_1";
+
+				/**
+				 * [tLogCatcher_1 finally ] stop
+				 */
+
+				/**
+				 * [tLogRow_1 finally ] start
+				 */
+
+				currentComponent = "tLogRow_1";
+
+				/**
+				 * [tLogRow_1 finally ] stop
+				 */
+
+				/**
+				 * [tRunJob_8 finally ] start
+				 */
+
+				currentComponent = "tRunJob_8";
+
+				/**
+				 * [tRunJob_8 finally ] stop
+				 */
+
+				/**
+				 * [tSendMail_1 finally ] start
+				 */
+
+				currentComponent = "tSendMail_1";
+
+				/**
+				 * [tSendMail_1 finally ] stop
+				 */
+
+			} catch (java.lang.Exception e) {
+				// ignore
+			} catch (java.lang.Error error) {
+				// ignore
+			}
+			resourceMap = null;
+		}
+
+		globalMap.put("tLogCatcher_1_SUBPROCESS_STATE", 1);
+	}
+
 	public void tWaitForFile_2Process(final java.util.Map<String, Object> globalMap) throws TalendException {
 		globalMap.put("tWaitForFile_2_SUBPROCESS_STATE", 0);
 
@@ -701,6 +2184,8 @@ public class MAIN implements TalendJob {
 				 */
 
 				int NB_ITERATE_tFileList_1 = 0; // for statistics
+
+				int NB_ITERATE_tJava_1 = 0; // for statistics
 
 				ok_Hash.put("tWaitForFile_2", false);
 				start_Hash.put("tWaitForFile_2", System.currentTimeMillis());
@@ -730,7 +2215,7 @@ public class MAIN implements TalendJob {
 					}
 
 					void setFiles() {
-						String directoryt = "C:/Users/d_erc/Documents/Google Drive/Cours/Cours MIAGE M2/D234/Pre╠üsentation Projet/test";
+						String directoryt = context.excel_input_repository;
 						String filemaskt = "*.*" + "$";
 
 						if (filemaskt.indexOf("^") == -1) {
@@ -871,50 +2356,87 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tWaitForFile_2 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_1++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate1", 1, "exec" + NB_ITERATE_tJava_1);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_1 begin ] start
+					 */
+
+					ok_Hash.put("tJava_1", false);
+					start_Hash.put("tJava_1", System.currentTimeMillis());
+
+					currentComponent = "tJava_1";
+
+					int tos_count_tJava_1 = 0;
+
+					globalMap.put("nom_fichier", "");
+					globalMap.put("nom_job_talend", jobName);
+
+					/**
+					 * [tJava_1 begin ] stop
+					 */
+
+					/**
+					 * [tJava_1 main ] start
+					 */
+
+					currentComponent = "tJava_1";
+
+					tos_count_tJava_1++;
+
+					/**
+					 * [tJava_1 main ] stop
+					 */
+
+					/**
+					 * [tJava_1 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_1";
+
+					/**
+					 * [tJava_1 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_1 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_1";
+
+					/**
+					 * [tJava_1 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_1 end ] start
+					 */
+
+					currentComponent = "tJava_1";
+
+					ok_Hash.put("tJava_1", true);
+					end_Hash.put("tJava_1", System.currentTimeMillis());
+
+					/**
+					 * [tJava_1 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate1", 2, "exec" + NB_ITERATE_tJava_1);
+					}
+
 					NB_ITERATE_tFileList_1++;
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate5", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("If2", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate2", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate4", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate7", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("If3", 3, 0);
-					}
 
 					if (execStat) {
 						runStat.updateStatOnConnection("If1", 3, 0);
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("If4", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate6", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate8", 3, 0);
-					}
-
-					if (execStat) {
-						runStat.updateStatOnConnection("iterate3", 3, 0);
+						runStat.updateStatOnConnection("iterate17", 3, 0);
 					}
 
 					if (execStat) {
@@ -922,7 +2444,67 @@ public class MAIN implements TalendJob {
 					}
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate1", 1, "exec" + NB_ITERATE_tFileList_1);
+						runStat.updateStatOnConnection("iterate16", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate15", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate3", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate14", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate5", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate6", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate7", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If2", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate13", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If4", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate8", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate2", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate11", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate4", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("If3", 3, 0);
+					}
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate10", 1, "exec" + NB_ITERATE_tFileList_1);
 						// Thread.sleep(1000);
 					}
 
@@ -930,7 +2512,7 @@ public class MAIN implements TalendJob {
 					 * [tFileList_1 begin ] start
 					 */
 
-					int NB_ITERATE_tDie_1 = 0; // for statistics
+					int NB_ITERATE_tJava_2 = 0; // for statistics
 
 					ok_Hash.put("tFileList_1", false);
 					start_Hash.put("tFileList_1", System.currentTimeMillis());
@@ -1052,10 +2634,61 @@ public class MAIN implements TalendJob {
 						/**
 						 * [tFileList_1 process_data_begin ] stop
 						 */
+						NB_ITERATE_tJava_2++;
+
+						if (execStat) {
+							runStat.updateStatOnConnection("iterate11", 3, 0);
+						}
+
+						if (execStat) {
+							runStat.updateStatOnConnection("iterate2", 1, "exec" + NB_ITERATE_tJava_2);
+							// Thread.sleep(1000);
+						}
+
+						/**
+						 * [tJava_2 begin ] start
+						 */
+
+						int NB_ITERATE_tDie_1 = 0; // for statistics
+
+						ok_Hash.put("tJava_2", false);
+						start_Hash.put("tJava_2", System.currentTimeMillis());
+
+						currentComponent = "tJava_2";
+
+						int tos_count_tJava_2 = 0;
+
+						globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_1_CURRENT_FILE")));
+
+						/**
+						 * [tJava_2 begin ] stop
+						 */
+
+						/**
+						 * [tJava_2 main ] start
+						 */
+
+						currentComponent = "tJava_2";
+
+						tos_count_tJava_2++;
+
+						/**
+						 * [tJava_2 main ] stop
+						 */
+
+						/**
+						 * [tJava_2 process_data_begin ] start
+						 */
+
+						currentComponent = "tJava_2";
+
+						/**
+						 * [tJava_2 process_data_begin ] stop
+						 */
 						NB_ITERATE_tDie_1++;
 
 						if (execStat) {
-							runStat.updateStatOnConnection("iterate2", 1, "exec" + NB_ITERATE_tDie_1);
+							runStat.updateStatOnConnection("iterate11", 1, "exec" + NB_ITERATE_tDie_1);
 							// Thread.sleep(1000);
 						}
 
@@ -1081,20 +2714,22 @@ public class MAIN implements TalendJob {
 						currentComponent = "tDie_1";
 
 						try {
-							talendLogs_LOGS.addMessage("tDie", "tDie_1", 5,
-									String.format("Le nom du fichier '%s' est incorrect",
-											((String) globalMap.get("tFileList_1_CURRENT_FILE"))),
-									4);
+							tLogCatcher_1.addMessage("tDie", "tDie_1", 5, String.format(
+									"Le nom du fichier '%s' est incorrect", (String) globalMap.get("nom_fichier")), 4);
+							tLogCatcher_1Process(globalMap);
+
+							talendLogs_LOGS.addMessage("tDie", "tDie_1", 5, String.format(
+									"Le nom du fichier '%s' est incorrect", (String) globalMap.get("nom_fichier")), 4);
 							talendLogs_LOGSProcess(globalMap);
 
 							globalMap.put("tDie_1_DIE_PRIORITY", 5);
 							System.err.println(String.format("Le nom du fichier '%s' est incorrect",
-									((String) globalMap.get("tFileList_1_CURRENT_FILE"))));
+									(String) globalMap.get("nom_fichier")));
 
 							globalMap.put("tDie_1_DIE_MESSAGE", String.format("Le nom du fichier '%s' est incorrect",
-									((String) globalMap.get("tFileList_1_CURRENT_FILE"))));
+									(String) globalMap.get("nom_fichier")));
 							globalMap.put("tDie_1_DIE_MESSAGES", String.format("Le nom du fichier '%s' est incorrect",
-									((String) globalMap.get("tFileList_1_CURRENT_FILE"))));
+									(String) globalMap.get("nom_fichier")));
 
 						} catch (Exception | Error e_tDie_1) {
 							logIgnoredError(String
@@ -1150,7 +2785,33 @@ public class MAIN implements TalendJob {
 						 * [tDie_1 end ] stop
 						 */
 						if (execStat) {
-							runStat.updateStatOnConnection("iterate2", 2, "exec" + NB_ITERATE_tDie_1);
+							runStat.updateStatOnConnection("iterate11", 2, "exec" + NB_ITERATE_tDie_1);
+						}
+
+						/**
+						 * [tJava_2 process_data_end ] start
+						 */
+
+						currentComponent = "tJava_2";
+
+						/**
+						 * [tJava_2 process_data_end ] stop
+						 */
+
+						/**
+						 * [tJava_2 end ] start
+						 */
+
+						currentComponent = "tJava_2";
+
+						ok_Hash.put("tJava_2", true);
+						end_Hash.put("tJava_2", System.currentTimeMillis());
+
+						/**
+						 * [tJava_2 end ] stop
+						 */
+						if (execStat) {
+							runStat.updateStatOnConnection("iterate2", 2, "exec" + NB_ITERATE_tJava_2);
 						}
 
 						/**
@@ -1250,7 +2911,7 @@ public class MAIN implements TalendJob {
 					 * [tFileList_1 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate1", 2, "exec" + NB_ITERATE_tFileList_1);
+						runStat.updateStatOnConnection("iterate10", 2, "exec" + NB_ITERATE_tFileList_1);
 					}
 
 					/**
@@ -1307,6 +2968,16 @@ public class MAIN implements TalendJob {
 				 */
 
 				/**
+				 * [tJava_1 finally ] start
+				 */
+
+				currentComponent = "tJava_1";
+
+				/**
+				 * [tJava_1 finally ] stop
+				 */
+
+				/**
 				 * [tFileList_1 finally ] start
 				 */
 
@@ -1314,6 +2985,16 @@ public class MAIN implements TalendJob {
 
 				/**
 				 * [tFileList_1 finally ] stop
+				 */
+
+				/**
+				 * [tJava_2 finally ] start
+				 */
+
+				currentComponent = "tJava_2";
+
+				/**
+				 * [tJava_2 finally ] stop
 				 */
 
 				/**
@@ -1362,6 +3043,8 @@ public class MAIN implements TalendJob {
 				 */
 
 				int NB_ITERATE_tRunJob_1 = 0; // for statistics
+
+				int NB_ITERATE_tJava_3 = 0; // for statistics
 
 				ok_Hash.put("tFileList_2", false);
 				start_Hash.put("tFileList_2", System.currentTimeMillis());
@@ -1459,10 +3142,83 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tFileList_2 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_3++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate3", 1, "exec" + NB_ITERATE_tJava_3);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_3 begin ] start
+					 */
+
+					ok_Hash.put("tJava_3", false);
+					start_Hash.put("tJava_3", System.currentTimeMillis());
+
+					currentComponent = "tJava_3";
+
+					int tos_count_tJava_3 = 0;
+
+					globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_2_CURRENT_FILE")));
+					globalMap.put("nom_job_talend", "integration_indicateur");
+
+					/**
+					 * [tJava_3 begin ] stop
+					 */
+
+					/**
+					 * [tJava_3 main ] start
+					 */
+
+					currentComponent = "tJava_3";
+
+					tos_count_tJava_3++;
+
+					/**
+					 * [tJava_3 main ] stop
+					 */
+
+					/**
+					 * [tJava_3 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_3";
+
+					/**
+					 * [tJava_3 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_3 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_3";
+
+					/**
+					 * [tJava_3 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_3 end ] start
+					 */
+
+					currentComponent = "tJava_3";
+
+					ok_Hash.put("tJava_3", true);
+					end_Hash.put("tJava_3", System.currentTimeMillis());
+
+					/**
+					 * [tJava_3 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate3", 2, "exec" + NB_ITERATE_tJava_3);
+					}
+
 					NB_ITERATE_tRunJob_1++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate3", 1, "exec" + NB_ITERATE_tRunJob_1);
+						runStat.updateStatOnConnection("iterate13", 1, "exec" + NB_ITERATE_tRunJob_1);
 						// Thread.sleep(1000);
 					}
 
@@ -1594,7 +3350,7 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_1 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate3", 2, "exec" + NB_ITERATE_tRunJob_1);
+						runStat.updateStatOnConnection("iterate13", 2, "exec" + NB_ITERATE_tRunJob_1);
 					}
 
 					/**
@@ -1649,6 +3405,16 @@ public class MAIN implements TalendJob {
 				 */
 
 				/**
+				 * [tJava_3 finally ] start
+				 */
+
+				currentComponent = "tJava_3";
+
+				/**
+				 * [tJava_3 finally ] stop
+				 */
+
+				/**
 				 * [tRunJob_1 finally ] start
 				 */
 
@@ -1693,6 +3459,8 @@ public class MAIN implements TalendJob {
 				 * [tFileList_3 begin ] start
 				 */
 
+				int NB_ITERATE_tJava_4 = 0; // for statistics
+
 				int NB_ITERATE_tRunJob_2 = 0; // for statistics
 
 				ok_Hash.put("tFileList_3", false);
@@ -1705,7 +3473,7 @@ public class MAIN implements TalendJob {
 				String directory_tFileList_3 = context.excel_input_repository;
 				final java.util.List<String> maskList_tFileList_3 = new java.util.ArrayList<String>();
 				final java.util.List<java.util.regex.Pattern> patternList_tFileList_3 = new java.util.ArrayList<java.util.regex.Pattern>();
-				maskList_tFileList_3.add(context.mask_prevision_ventes);
+				maskList_tFileList_3.add(context.mask_produits);
 				for (final String filemask_tFileList_3 : maskList_tFileList_3) {
 					String filemask_compile_tFileList_3 = filemask_tFileList_3;
 
@@ -1791,10 +3559,83 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tFileList_3 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_4++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate4", 1, "exec" + NB_ITERATE_tJava_4);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_4 begin ] start
+					 */
+
+					ok_Hash.put("tJava_4", false);
+					start_Hash.put("tJava_4", System.currentTimeMillis());
+
+					currentComponent = "tJava_4";
+
+					int tos_count_tJava_4 = 0;
+
+					globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_3_CURRENT_FILE")));
+					globalMap.put("nom_job_talend", "integration_produit");
+
+					/**
+					 * [tJava_4 begin ] stop
+					 */
+
+					/**
+					 * [tJava_4 main ] start
+					 */
+
+					currentComponent = "tJava_4";
+
+					tos_count_tJava_4++;
+
+					/**
+					 * [tJava_4 main ] stop
+					 */
+
+					/**
+					 * [tJava_4 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_4";
+
+					/**
+					 * [tJava_4 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_4 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_4";
+
+					/**
+					 * [tJava_4 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_4 end ] start
+					 */
+
+					currentComponent = "tJava_4";
+
+					ok_Hash.put("tJava_4", true);
+					end_Hash.put("tJava_4", System.currentTimeMillis());
+
+					/**
+					 * [tJava_4 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate4", 2, "exec" + NB_ITERATE_tJava_4);
+					}
+
 					NB_ITERATE_tRunJob_2++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate4", 1, "exec" + NB_ITERATE_tRunJob_2);
+						runStat.updateStatOnConnection("iterate14", 1, "exec" + NB_ITERATE_tRunJob_2);
 						// Thread.sleep(1000);
 					}
 
@@ -1926,7 +3767,7 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_2 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate4", 2, "exec" + NB_ITERATE_tRunJob_2);
+						runStat.updateStatOnConnection("iterate14", 2, "exec" + NB_ITERATE_tRunJob_2);
 					}
 
 					/**
@@ -1981,6 +3822,16 @@ public class MAIN implements TalendJob {
 				 */
 
 				/**
+				 * [tJava_4 finally ] start
+				 */
+
+				currentComponent = "tJava_4";
+
+				/**
+				 * [tJava_4 finally ] stop
+				 */
+
+				/**
 				 * [tRunJob_2 finally ] start
 				 */
 
@@ -2024,6 +3875,8 @@ public class MAIN implements TalendJob {
 				/**
 				 * [tFileList_4 begin ] start
 				 */
+
+				int NB_ITERATE_tJava_6 = 0; // for statistics
 
 				int NB_ITERATE_tRunJob_3 = 0; // for statistics
 
@@ -2123,10 +3976,83 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tFileList_4 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_6++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate5", 1, "exec" + NB_ITERATE_tJava_6);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_6 begin ] start
+					 */
+
+					ok_Hash.put("tJava_6", false);
+					start_Hash.put("tJava_6", System.currentTimeMillis());
+
+					currentComponent = "tJava_6";
+
+					int tos_count_tJava_6 = 0;
+
+					globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_4_CURRENT_FILE")));
+					globalMap.put("nom_job_talend", "integration_magasins");
+
+					/**
+					 * [tJava_6 begin ] stop
+					 */
+
+					/**
+					 * [tJava_6 main ] start
+					 */
+
+					currentComponent = "tJava_6";
+
+					tos_count_tJava_6++;
+
+					/**
+					 * [tJava_6 main ] stop
+					 */
+
+					/**
+					 * [tJava_6 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_6";
+
+					/**
+					 * [tJava_6 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_6 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_6";
+
+					/**
+					 * [tJava_6 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_6 end ] start
+					 */
+
+					currentComponent = "tJava_6";
+
+					ok_Hash.put("tJava_6", true);
+					end_Hash.put("tJava_6", System.currentTimeMillis());
+
+					/**
+					 * [tJava_6 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate5", 2, "exec" + NB_ITERATE_tJava_6);
+					}
+
 					NB_ITERATE_tRunJob_3++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate5", 1, "exec" + NB_ITERATE_tRunJob_3);
+						runStat.updateStatOnConnection("iterate16", 1, "exec" + NB_ITERATE_tRunJob_3);
 						// Thread.sleep(1000);
 					}
 
@@ -2258,7 +4184,7 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_3 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate5", 2, "exec" + NB_ITERATE_tRunJob_3);
+						runStat.updateStatOnConnection("iterate16", 2, "exec" + NB_ITERATE_tRunJob_3);
 					}
 
 					/**
@@ -2313,6 +4239,16 @@ public class MAIN implements TalendJob {
 				 */
 
 				/**
+				 * [tJava_6 finally ] start
+				 */
+
+				currentComponent = "tJava_6";
+
+				/**
+				 * [tJava_6 finally ] stop
+				 */
+
+				/**
 				 * [tRunJob_3 finally ] start
 				 */
 
@@ -2357,9 +4293,11 @@ public class MAIN implements TalendJob {
 				 * [tFileList_5 begin ] start
 				 */
 
-				int NB_ITERATE_tRunJob_6 = 0; // for statistics
+				int NB_ITERATE_tJava_7 = 0; // for statistics
 
 				int NB_ITERATE_tRunJob_5 = 0; // for statistics
+
+				int NB_ITERATE_tRunJob_6 = 0; // for statistics
 
 				ok_Hash.put("tFileList_5", false);
 				start_Hash.put("tFileList_5", System.currentTimeMillis());
@@ -2457,10 +4395,83 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tFileList_5 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_7++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate6", 1, "exec" + NB_ITERATE_tJava_7);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_7 begin ] start
+					 */
+
+					ok_Hash.put("tJava_7", false);
+					start_Hash.put("tJava_7", System.currentTimeMillis());
+
+					currentComponent = "tJava_7";
+
+					int tos_count_tJava_7 = 0;
+
+					globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_5_CURRENT_FILE")));
+					globalMap.put("nom_job_talend", "integration_objectif");
+
+					/**
+					 * [tJava_7 begin ] stop
+					 */
+
+					/**
+					 * [tJava_7 main ] start
+					 */
+
+					currentComponent = "tJava_7";
+
+					tos_count_tJava_7++;
+
+					/**
+					 * [tJava_7 main ] stop
+					 */
+
+					/**
+					 * [tJava_7 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_7";
+
+					/**
+					 * [tJava_7 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_7 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_7";
+
+					/**
+					 * [tJava_7 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_7 end ] start
+					 */
+
+					currentComponent = "tJava_7";
+
+					ok_Hash.put("tJava_7", true);
+					end_Hash.put("tJava_7", System.currentTimeMillis());
+
+					/**
+					 * [tJava_7 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate6", 2, "exec" + NB_ITERATE_tJava_7);
+					}
+
 					NB_ITERATE_tRunJob_6++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate6", 1, "exec" + NB_ITERATE_tRunJob_6);
+						runStat.updateStatOnConnection("iterate8", 1, "exec" + NB_ITERATE_tRunJob_6);
 						// Thread.sleep(1000);
 					}
 
@@ -2592,13 +4603,13 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_6 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate6", 2, "exec" + NB_ITERATE_tRunJob_6);
+						runStat.updateStatOnConnection("iterate8", 2, "exec" + NB_ITERATE_tRunJob_6);
 					}
 
 					NB_ITERATE_tRunJob_5++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate8", 1, "exec" + NB_ITERATE_tRunJob_5);
+						runStat.updateStatOnConnection("iterate17", 1, "exec" + NB_ITERATE_tRunJob_5);
 						// Thread.sleep(1000);
 					}
 
@@ -2730,7 +4741,7 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_5 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate8", 2, "exec" + NB_ITERATE_tRunJob_5);
+						runStat.updateStatOnConnection("iterate17", 2, "exec" + NB_ITERATE_tRunJob_5);
 					}
 
 					/**
@@ -2782,6 +4793,16 @@ public class MAIN implements TalendJob {
 
 				/**
 				 * [tFileList_5 finally ] stop
+				 */
+
+				/**
+				 * [tJava_7 finally ] start
+				 */
+
+				currentComponent = "tJava_7";
+
+				/**
+				 * [tJava_7 finally ] stop
 				 */
 
 				/**
@@ -2838,6 +4859,8 @@ public class MAIN implements TalendJob {
 				/**
 				 * [tFileList_6 begin ] start
 				 */
+
+				int NB_ITERATE_tJava_5 = 0; // for statistics
 
 				int NB_ITERATE_tRunJob_4 = 0; // for statistics
 
@@ -2937,10 +4960,83 @@ public class MAIN implements TalendJob {
 					/**
 					 * [tFileList_6 process_data_begin ] stop
 					 */
+					NB_ITERATE_tJava_5++;
+
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate7", 1, "exec" + NB_ITERATE_tJava_5);
+						// Thread.sleep(1000);
+					}
+
+					/**
+					 * [tJava_5 begin ] start
+					 */
+
+					ok_Hash.put("tJava_5", false);
+					start_Hash.put("tJava_5", System.currentTimeMillis());
+
+					currentComponent = "tJava_5";
+
+					int tos_count_tJava_5 = 0;
+
+					globalMap.put("nom_fichier", ((String) globalMap.get("tFileList_6_CURRENT_FILE")));
+					globalMap.put("nom_job_talend", "integration_indicateur");
+
+					/**
+					 * [tJava_5 begin ] stop
+					 */
+
+					/**
+					 * [tJava_5 main ] start
+					 */
+
+					currentComponent = "tJava_5";
+
+					tos_count_tJava_5++;
+
+					/**
+					 * [tJava_5 main ] stop
+					 */
+
+					/**
+					 * [tJava_5 process_data_begin ] start
+					 */
+
+					currentComponent = "tJava_5";
+
+					/**
+					 * [tJava_5 process_data_begin ] stop
+					 */
+
+					/**
+					 * [tJava_5 process_data_end ] start
+					 */
+
+					currentComponent = "tJava_5";
+
+					/**
+					 * [tJava_5 process_data_end ] stop
+					 */
+
+					/**
+					 * [tJava_5 end ] start
+					 */
+
+					currentComponent = "tJava_5";
+
+					ok_Hash.put("tJava_5", true);
+					end_Hash.put("tJava_5", System.currentTimeMillis());
+
+					/**
+					 * [tJava_5 end ] stop
+					 */
+					if (execStat) {
+						runStat.updateStatOnConnection("iterate7", 2, "exec" + NB_ITERATE_tJava_5);
+					}
+
 					NB_ITERATE_tRunJob_4++;
 
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate7", 1, "exec" + NB_ITERATE_tRunJob_4);
+						runStat.updateStatOnConnection("iterate15", 1, "exec" + NB_ITERATE_tRunJob_4);
 						// Thread.sleep(1000);
 					}
 
@@ -3072,7 +5168,7 @@ public class MAIN implements TalendJob {
 					 * [tRunJob_4 end ] stop
 					 */
 					if (execStat) {
-						runStat.updateStatOnConnection("iterate7", 2, "exec" + NB_ITERATE_tRunJob_4);
+						runStat.updateStatOnConnection("iterate15", 2, "exec" + NB_ITERATE_tRunJob_4);
 					}
 
 					/**
@@ -3124,6 +5220,16 @@ public class MAIN implements TalendJob {
 
 				/**
 				 * [tFileList_6 finally ] stop
+				 */
+
+				/**
+				 * [tJava_5 finally ] start
+				 */
+
+				currentComponent = "tJava_5";
+
+				/**
+				 * [tJava_5 finally ] stop
 				 */
 
 				/**
@@ -5504,6 +7610,36 @@ public class MAIN implements TalendJob {
 					}
 					context.setContextType("excel_input_repository", "id_Directory");
 					context.excel_input_repository = (String) context.getProperty("excel_input_repository");
+					context.setContextType("excel_output_done_repository", "id_Directory");
+					context.excel_output_done_repository = (String) context.getProperty("excel_output_done_repository");
+					context.setContextType("excel_output_erreur_repository", "id_Directory");
+					context.excel_output_erreur_repository = (String) context
+							.getProperty("excel_output_erreur_repository");
+					context.setContextType("excel_output_warning_repository", "id_Directory");
+					context.excel_output_warning_repository = (String) context
+							.getProperty("excel_output_warning_repository");
+					context.setContextType("mail_send_darties", "id_String");
+					context.mail_send_darties = (String) context.getProperty("mail_send_darties");
+					context.setContextType("mail_send_password", "id_Password");
+					String pwd_mail_send_password_value = context.getProperty("mail_send_password");
+					context.mail_send_password = null;
+					if (pwd_mail_send_password_value != null) {
+						if (context_param.containsKey("mail_send_password")) {// no need to decrypt if it come from
+																				// program argument or parent job
+																				// runtime
+							context.mail_send_password = pwd_mail_send_password_value;
+						} else if (!pwd_mail_send_password_value.isEmpty()) {
+							try {
+								context.mail_send_password = routines.system.PasswordEncryptUtil
+										.decryptPassword(pwd_mail_send_password_value);
+								context.put("mail_send_password", context.mail_send_password);
+							} catch (java.lang.RuntimeException e) {
+								// do nothing
+							}
+						}
+					}
+					context.setContextType("mail_si_darties", "id_String");
+					context.mail_si_darties = (String) context.getProperty("mail_si_darties");
 					context.setContextType("mask_fichier_indicateurs", "id_String");
 					context.mask_fichier_indicateurs = (String) context.getProperty("mask_fichier_indicateurs");
 					context.setContextType("mask_fichier_magasins", "id_String");
@@ -5514,6 +7650,10 @@ public class MAIN implements TalendJob {
 					context.mask_produits = (String) context.getProperty("mask_produits");
 					context.setContextType("mask_ventes", "id_String");
 					context.mask_ventes = (String) context.getProperty("mask_ventes");
+					context.setContextType("smtp_port", "id_String");
+					context.smtp_port = (String) context.getProperty("smtp_port");
+					context.setContextType("smtp_server", "id_String");
+					context.smtp_server = (String) context.getProperty("smtp_server");
 				}
 
 				public void processAllContext() {
@@ -5551,6 +7691,26 @@ public class MAIN implements TalendJob {
 			if (parentContextMap.containsKey("excel_input_repository")) {
 				context.excel_input_repository = (String) parentContextMap.get("excel_input_repository");
 			}
+			if (parentContextMap.containsKey("excel_output_done_repository")) {
+				context.excel_output_done_repository = (String) parentContextMap.get("excel_output_done_repository");
+			}
+			if (parentContextMap.containsKey("excel_output_erreur_repository")) {
+				context.excel_output_erreur_repository = (String) parentContextMap
+						.get("excel_output_erreur_repository");
+			}
+			if (parentContextMap.containsKey("excel_output_warning_repository")) {
+				context.excel_output_warning_repository = (String) parentContextMap
+						.get("excel_output_warning_repository");
+			}
+			if (parentContextMap.containsKey("mail_send_darties")) {
+				context.mail_send_darties = (String) parentContextMap.get("mail_send_darties");
+			}
+			if (parentContextMap.containsKey("mail_send_password")) {
+				context.mail_send_password = (java.lang.String) parentContextMap.get("mail_send_password");
+			}
+			if (parentContextMap.containsKey("mail_si_darties")) {
+				context.mail_si_darties = (String) parentContextMap.get("mail_si_darties");
+			}
 			if (parentContextMap.containsKey("mask_fichier_indicateurs")) {
 				context.mask_fichier_indicateurs = (String) parentContextMap.get("mask_fichier_indicateurs");
 			}
@@ -5566,6 +7726,12 @@ public class MAIN implements TalendJob {
 			if (parentContextMap.containsKey("mask_ventes")) {
 				context.mask_ventes = (String) parentContextMap.get("mask_ventes");
 			}
+			if (parentContextMap.containsKey("smtp_port")) {
+				context.smtp_port = (String) parentContextMap.get("smtp_port");
+			}
+			if (parentContextMap.containsKey("smtp_server")) {
+				context.smtp_server = (String) parentContextMap.get("smtp_server");
+			}
 		}
 
 		// Resume: init the resumeUtil
@@ -5575,6 +7741,7 @@ public class MAIN implements TalendJob {
 
 		List<String> parametersToEncrypt = new java.util.ArrayList<String>();
 		parametersToEncrypt.add("db_pwd");
+		parametersToEncrypt.add("mail_send_password");
 		// Resume: jobStart
 		resumeUtil.addLog("JOB_STARTED", "JOB:" + jobName, parent_part_launcher, Thread.currentThread().getId() + "",
 				"", "", "", "", resumeUtil.convertToJsonText(context, parametersToEncrypt));
@@ -5776,6 +7943,6 @@ public class MAIN implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 178860 characters generated by Talend Open Studio for Data Integration on the
- * 2 mai 2019 22:43:21 CEST
+ * 236518 characters generated by Talend Open Studio for Data Integration on the
+ * 10 mai 2019 18:49:58 SBT
  ************************************************************************************************/

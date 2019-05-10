@@ -1,5 +1,0 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<expression:EMFExpression xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore" id="tMap_2=>" expression="months.get(row2.SEQ_NUM2)">
-  <variables name="row2.SEQ_NUM2" value="null" talendType="id_Integer" nullable="true"/>
-  <variables name="projetBi.getNormalizedMonthList()" value="null" talendType="id_String"/>
-</expression:EMFExpression>

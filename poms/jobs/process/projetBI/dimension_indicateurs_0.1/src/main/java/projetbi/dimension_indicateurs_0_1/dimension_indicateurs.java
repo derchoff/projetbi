@@ -495,6 +495,15 @@ private class TalendException extends Exception {
 					tFileList_1_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tRunJob_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_1_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tAdvancedHash_row9_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -4084,15 +4093,17 @@ row7Struct row7 = new row7Struct();
 	 */
 
 				
+			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
+						
+			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
+						
 			int NB_ITERATE_tRunJob_3 = 0; //for statistics
+						
+			int NB_ITERATE_tRunJob_4 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_1 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_2 = 0; //for statistics
-						
-			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
-						
-			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
 			
 
 	
@@ -4224,7 +4235,7 @@ row7Struct row7 = new row7Struct();
 	
 	
 				if(execStat){
-					runStat.updateStatOnConnection("iterate3", 1, "exec" + NB_ITERATE_tRunJob_1);
+					runStat.updateStatOnConnection("iterate4", 1, "exec" + NB_ITERATE_tRunJob_1);
 					//Thread.sleep(1000);
 				}				
 			
@@ -4431,7 +4442,7 @@ end_Hash.put("tRunJob_1", System.currentTimeMillis());
  * [tRunJob_1 end ] stop
  */
 						if(execStat){
-							runStat.updateStatOnConnection("iterate3", 2, "exec" + NB_ITERATE_tRunJob_1);
+							runStat.updateStatOnConnection("iterate4", 2, "exec" + NB_ITERATE_tRunJob_1);
 						}				
 					
 
@@ -4442,7 +4453,7 @@ end_Hash.put("tRunJob_1", System.currentTimeMillis());
 	
 	
 				if(execStat){
-					runStat.updateStatOnConnection("iterate4", 1, "exec" + NB_ITERATE_tRunJob_2);
+					runStat.updateStatOnConnection("iterate5", 1, "exec" + NB_ITERATE_tRunJob_2);
 					//Thread.sleep(1000);
 				}				
 			
@@ -4649,7 +4660,7 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
  * [tRunJob_2 end ] stop
  */
 						if(execStat){
-							runStat.updateStatOnConnection("iterate4", 2, "exec" + NB_ITERATE_tRunJob_2);
+							runStat.updateStatOnConnection("iterate5", 2, "exec" + NB_ITERATE_tRunJob_2);
 						}				
 					
 
@@ -4660,7 +4671,7 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 	
 	
 				if(execStat){
-					runStat.updateStatOnConnection("iterate5", 1, "exec" + NB_ITERATE_tRunJob_3);
+					runStat.updateStatOnConnection("iterate1", 1, "exec" + NB_ITERATE_tRunJob_3);
 					//Thread.sleep(1000);
 				}				
 			
@@ -4876,7 +4887,7 @@ end_Hash.put("tRunJob_3", System.currentTimeMillis());
  * [tRunJob_3 end ] stop
  */
 						if(execStat){
-							runStat.updateStatOnConnection("iterate5", 2, "exec" + NB_ITERATE_tRunJob_3);
+							runStat.updateStatOnConnection("iterate1", 2, "exec" + NB_ITERATE_tRunJob_3);
 						}				
 					
 
@@ -4891,11 +4902,11 @@ end_Hash.put("tRunJob_3", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row4", 3, 0);
+	       				runStat.updateStatOnConnection("row1", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
+	       				runStat.updateStatOnConnection("row2", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -4903,11 +4914,11 @@ end_Hash.put("tRunJob_3", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row2", 3, 0);
+	       				runStat.updateStatOnConnection("row4", 3, 0);
 					}           			
 				
 				if(execStat){
-					runStat.updateStatOnConnection("iterate1", 1, "exec" + NB_ITERATE_tFileInputExcel_1);
+					runStat.updateStatOnConnection("iterate2", 1, "exec" + NB_ITERATE_tFileInputExcel_1);
 					//Thread.sleep(1000);
 				}				
 			
@@ -6534,7 +6545,7 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 
 
 						if(execStat){
-							runStat.updateStatOnConnection("iterate1", 2, "exec" + NB_ITERATE_tFileInputExcel_1);
+							runStat.updateStatOnConnection("iterate2", 2, "exec" + NB_ITERATE_tFileInputExcel_1);
 						}				
 					
 
@@ -6545,7 +6556,7 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
+	       				runStat.updateStatOnConnection("row5", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6553,7 +6564,7 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row7", 3, 0);
+	       				runStat.updateStatOnConnection("row9", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6561,15 +6572,15 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row5", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("row6", 3, 0);
 					}           			
 				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row7", 3, 0);
+					}           			
+				
 				if(execStat){
-					runStat.updateStatOnConnection("iterate2", 1, "exec" + NB_ITERATE_tFileInputExcel_2);
+					runStat.updateStatOnConnection("iterate8", 1, "exec" + NB_ITERATE_tFileInputExcel_2);
 					//Thread.sleep(1000);
 				}				
 			
@@ -7824,7 +7835,225 @@ end_Hash.put("tDie_1", System.currentTimeMillis());
 
 
 						if(execStat){
-							runStat.updateStatOnConnection("iterate2", 2, "exec" + NB_ITERATE_tFileInputExcel_2);
+							runStat.updateStatOnConnection("iterate8", 2, "exec" + NB_ITERATE_tFileInputExcel_2);
+						}				
+					
+
+
+
+
+	NB_ITERATE_tRunJob_4++;
+	
+	
+				if(execStat){
+					runStat.updateStatOnConnection("iterate9", 1, "exec" + NB_ITERATE_tRunJob_4);
+					//Thread.sleep(1000);
+				}				
+			
+
+	
+	/**
+	 * [tRunJob_4 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tRunJob_4", false);
+		start_Hash.put("tRunJob_4", System.currentTimeMillis());
+		
+	
+	currentComponent="tRunJob_4";
+
+	
+		int tos_count_tRunJob_4 = 0;
+		
+
+
+ 
+
+
+
+/**
+ * [tRunJob_4 begin ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+	java.util.List<String> paraList_tRunJob_4 = new java.util.ArrayList<String>();
+	
+	        			paraList_tRunJob_4.add("--father_pid="+pid);
+	      			
+	        			paraList_tRunJob_4.add("--root_pid="+rootPid);
+	      			
+	        			paraList_tRunJob_4.add("--father_node=tRunJob_4");
+	      			
+	        			paraList_tRunJob_4.add("--context=Default");
+	      			
+	//for feature:10589
+	
+		paraList_tRunJob_4.add("--stat_port=" + portStats);
+	
+
+	if(resuming_logs_dir_path != null){
+		paraList_tRunJob_4.add("--resuming_logs_dir_path=" + resuming_logs_dir_path);
+	}
+	String childResumePath_tRunJob_4 = ResumeUtil.getChildJobCheckPointPath(resuming_checkpoint_path);
+	String tRunJobName_tRunJob_4 = ResumeUtil.getRighttRunJob(resuming_checkpoint_path);
+	if("tRunJob_4".equals(tRunJobName_tRunJob_4) && childResumePath_tRunJob_4 != null){
+		paraList_tRunJob_4.add("--resuming_checkpoint_path=" + ResumeUtil.getChildJobCheckPointPath(resuming_checkpoint_path));
+	}
+	paraList_tRunJob_4.add("--parent_part_launcher=JOB:" + jobName + "/NODE:tRunJob_4");
+	
+	java.util.Map<String, Object> parentContextMap_tRunJob_4 = new java.util.HashMap<String, Object>();
+
+	
+
+	Object obj_tRunJob_4 = null;
+
+	
+		obj_tRunJob_4 = ((String)globalMap.get("tFileList_1_CURRENT_FILE"));
+		if(obj_tRunJob_4!=null) {
+			paraList_tRunJob_4.add("--context_param nom_fichier=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_4));
+		} else {
+			paraList_tRunJob_4.add("--context_param nom_fichier=" + NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+		}
+		
+		parentContextMap_tRunJob_4.put("nom_fichier", obj_tRunJob_4);
+	
+		obj_tRunJob_4 = jobName;
+		if(obj_tRunJob_4!=null) {
+			paraList_tRunJob_4.add("--context_param nom_job_talend=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_4));
+		} else {
+			paraList_tRunJob_4.add("--context_param nom_job_talend=" + NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+		}
+		
+		parentContextMap_tRunJob_4.put("nom_job_talend", obj_tRunJob_4);
+	
+	
+		projetbi.gestion_dossier_reussi_0_1.gestion_dossier_reussi childJob_tRunJob_4 = new projetbi.gestion_dossier_reussi_0_1.gestion_dossier_reussi();
+	    // pass DataSources
+	    java.util.Map<String, routines.system.TalendDataSource> talendDataSources_tRunJob_4 = (java.util.Map<String, routines.system.TalendDataSource>) globalMap
+	            .get(KEY_DB_DATASOURCES);
+	    if (null != talendDataSources_tRunJob_4) {
+	        java.util.Map<String, javax.sql.DataSource> dataSources_tRunJob_4 = new java.util.HashMap<String, javax.sql.DataSource>();
+	        for (java.util.Map.Entry<String, routines.system.TalendDataSource> talendDataSourceEntry_tRunJob_4 : talendDataSources_tRunJob_4
+			        .entrySet()) {
+	            dataSources_tRunJob_4.put(talendDataSourceEntry_tRunJob_4.getKey(),
+	                    talendDataSourceEntry_tRunJob_4.getValue().getRawDataSource());
+	        }
+	        childJob_tRunJob_4.setDataSources(dataSources_tRunJob_4);
+	    }
+		  
+			childJob_tRunJob_4.parentContextMap = parentContextMap_tRunJob_4;
+		  
+		
+		String[][] childReturn_tRunJob_4 = childJob_tRunJob_4.runJob((String[]) paraList_tRunJob_4.toArray(new String[paraList_tRunJob_4.size()]));
+		
+	  	
+				errorCode = childJob_tRunJob_4.getErrorCode();
+		    
+	            
+	    	if(childJob_tRunJob_4.getErrorCode() == null){
+				globalMap.put("tRunJob_4_CHILD_RETURN_CODE", childJob_tRunJob_4.getStatus() != null && ("failure").equals(childJob_tRunJob_4.getStatus()) ? 1 : 0);
+	    	}else{
+				globalMap.put("tRunJob_4_CHILD_RETURN_CODE", childJob_tRunJob_4.getErrorCode());
+		    }
+		    if (childJob_tRunJob_4.getExceptionStackTrace() != null) { 
+		    	globalMap.put("tRunJob_4_CHILD_EXCEPTION_STACKTRACE", childJob_tRunJob_4.getExceptionStackTrace());
+		    }
+	  
+			 
+				if (childJob_tRunJob_4.getErrorCode() != null || ("failure").equals(childJob_tRunJob_4.getStatus())) {
+	        		throw new RuntimeException("Child job running failed.\n"+childJob_tRunJob_4.getException().getClass().getName() + ": " + childJob_tRunJob_4.getException().getMessage());
+				}
+			
+	  	
+
+ 
+
+
+	tos_count_tRunJob_4++;
+
+/**
+ * [tRunJob_4 main ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 process_data_end ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+ok_Hash.put("tRunJob_4", true);
+end_Hash.put("tRunJob_4", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tRunJob_4 end ] stop
+ */
+						if(execStat){
+							runStat.updateStatOnConnection("iterate9", 2, "exec" + NB_ITERATE_tRunJob_4);
 						}				
 					
 
@@ -8283,6 +8512,30 @@ end_Hash.put("tFileList_1", System.currentTimeMillis());
 
 
 
+
+
+
+
+	
+	/**
+	 * [tRunJob_4 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 finally ] stop
+ */
 
 
 
@@ -11767,6 +12020,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     268204 characters generated by Talend Open Studio for Data Integration 
- *     on the 2 mai 2019 22:43:19 CEST
+ *     274235 characters generated by Talend Open Studio for Data Integration 
+ *     on the 10 mai 2019 18:49:57 SBT
  ************************************************************************************************/
