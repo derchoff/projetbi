@@ -1,0 +1,22 @@
+squash-tm-pg:
+  environment:
+    POSTGRES_DB: squashtm
+    POSTGRES_PASSWORD: NFoqHeUvnrpqD
+    POSTGRES_USER: squashtm
+  image: postgres
+  volumes:
+  - squash-tm-db:/var/lib/postgresql
+
+squash-tm:
+  ports:
+  - 8080:8080/tcp
+  image: fjudith/squash-tm
+  links:
+  - squash-tm-pg:postgres
+  volumes:
+  - squash-tm-tmp:/usr/share/squash-tm/tmp
+  - squash-tm-bundles:/usr/share/squash-tm/bundles
+  - squash-tm-logs:/usr/share/squash-tm/logs
+  - squash-tm-jettyhome:/usr/share/squash-tm/jettyhome
+  - squash-tm-luceneindexes:/usr/share/squash-tm/luceneindexes
+  - squash-tm-plugins:/usr/share/squash-tm/plugins
