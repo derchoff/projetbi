@@ -11,18 +11,18 @@
   <groupId>org.example.projet_bi.job</groupId>
   <artifactId>integration_objectif</artifactId>
   <version>0.1.0</version>
-  <name>PROJECTBI integration_objectif-0.1.0 (0.1,Jobs)</name>
+  <name>PROJETBI integration_objectif-0.1.0 (0.1,Jobs)</name>
   <properties>
     <output.resources.dir>${talend.job.name}/src/main/resources</output.resources.dir>
     <talend.job.applyContextToChildren>false</talend.job.applyContextToChildren>
     <current.test.resources.dir>${basedir}/src/test/resources</current.test.resources.dir>
     <current.int-resources.dir>${basedir}/src/main/resources</current.int-resources.dir>
     <talend.job.version>0.1</talend.job.version>
-    <talend.project.name.lowercase>projectbi</talend.project.name.lowercase>
-    <talend.job.path>projectbi/integration_objectif_0_1</talend.job.path>
+    <talend.project.name.lowercase>projetbi</talend.project.name.lowercase>
+    <talend.job.path>projetbi/integration_objectif_0_1</talend.job.path>
     <project.distribution-management.repository.id>${project.distributionManagement.repository.id}</project.distribution-management.repository.id>
     <maven.build.timestamp.format>yyyy-MM-dd HHmmssSSS</maven.build.timestamp.format>
-    <talend.project.name>PROJECTBI</talend.project.name>
+    <talend.project.name>PROJETBI</talend.project.name>
     <talend.product.version>7.2.1.20190325_1906-M4</talend.product.version>
     <talend.job.finalName>integration_objectif_0_1</talend.job.finalName>
     <talend.pigudf.groupid>org.example.projet_bi.pigudf</talend.pigudf.groupid>
@@ -155,17 +155,22 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
+      <artifactId>gestion_dossier_reussi</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.example.projet_bi.job</groupId>
       <artifactId>verification_annee_fichier</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>verification_nom_des_colonnes</artifactId>
+      <artifactId>verification_du_nom_des_onglets</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
-      <artifactId>verification_du_nom_des_onglets</artifactId>
+      <artifactId>verification_nom_des_colonnes</artifactId>
       <version>0.1.0</version>
     </dependency>
   </dependencies>

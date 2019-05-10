@@ -11,7 +11,7 @@
   <groupId>org.example.projet_bi.code</groupId>
   <artifactId>routines</artifactId>
   <version>7.2.1</version>
-  <name>PROJECTBI Routines</name>
+  <name>PROJETBI Routines</name>
   <properties>
     <talend.codes.package>routines</talend.codes.package>
   </properties>

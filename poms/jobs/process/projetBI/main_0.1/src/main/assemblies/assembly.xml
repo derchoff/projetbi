@@ -245,10 +245,13 @@
                 <include>org.talend.libraries:jlo-talendcomp-excel-8.9:jar:6.0.0-SNAPSHOT</include>
                 <include>org.example.projet_bi.code:routines:jar:7.2.1</include>
                 <include>org.talend.libraries:poi-ooxml-schemas-3.16:jar:6.0.0-SNAPSHOT</include>
+                <include>org.talend.libraries:talend_file_enhanced_20070724:jar:6.0.0</include>
+                <include>org.talend.libraries:filecopy:jar:6.0.0</include>
                 <include>org.talend.libraries:advancedPersistentLookupLib-1.2:jar:6.0.0</include>
                 <include>org.talend.libraries:jakarta-oro-2.0.8:jar:6.0.0</include>
                 <include>org.talend.libraries:curvesapi-1.04:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:poi-3.16:jar:6.0.0-SNAPSHOT</include>
+                <include>org.talend.libraries:talendcsv:jar:6.0.0</include>
                 <include>org.talend.libraries:mail-1.4:jar:6.0.0</include>
                 <include>org.talend.libraries:external_sort:jar:6.0.0</include>
                 <include>org.talend.libraries:mysql-connector-java-5.1.30-bin:jar:6.0.0</include>
@@ -279,11 +282,13 @@
                 <include>org.example.projet_bi.job:MAIN:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_nom_des_colonnes:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_annee_fichier:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:gestion_dossier_reussi:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_date:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_indicateurs:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_produit:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:integration_ventes:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_du_nom_des_onglets:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:gestion_dossier_echouer:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:integration_magasins:jar:0.1.0</include>
             </includes>
             <outputFileNameMapping>${artifact.build.finalName}.${artifact.extension}</outputFileNameMapping>
