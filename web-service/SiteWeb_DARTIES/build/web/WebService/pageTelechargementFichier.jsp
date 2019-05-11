@@ -18,7 +18,7 @@
 
         <center> 
             <h2>ESPACE - TRANSFERER UN FICHIER</h2> 
-            <form action="gestionWSFichier.jsp" method="post"> 
+            <form action="./FileuploadServelet" method="post" enctype='multipart/form-data'> 
                 <br/>
                 <label for="file" class="label-file">Sélectionner un fichier</label>
                 <input type="file" class="input-file" name="parcourirFichier" id="parcourirFichier"/>

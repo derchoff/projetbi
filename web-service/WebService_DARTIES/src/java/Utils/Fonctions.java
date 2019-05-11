@@ -44,17 +44,21 @@ public class Fonctions {
         
         String dossierATraiter = prop.getProperty(DOSSIER_A_TRAITER);
         
+        System.out.println("PROJETBI : FICHIER SORTIE : " + dossierATraiter + File.separator + fileName);
+        
         FileOutputStream outputFile = null;
         
-        try {
+        try {                        
             //copie le fichier                              
             //DENIS : utilisation de la variable File.separator
             //          car dépend du système d'exploitation
             //          où sera exécuter le WS
             outputFile = new FileOutputStream(dossierATraiter + File.separator + fileName);
+            
             outputFile.write(buffer, 0, buffer.length);
         }
         catch(IOException e) {
+            System.out.println("PROJETBI : EXCEPTION : " + e.getLocalizedMessage());
             throw e;
         }
         finally {

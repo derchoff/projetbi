@@ -5,7 +5,7 @@
  */
 package test;
 
-import WebService.DARTIES_TransfererFichier;
+import Darties.DARTIES_WS;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -59,7 +59,7 @@ public class WSTransfererFichierTest {
         String fileName = "";        
         byte[] buffer = new byte[4096];
 
-        DARTIES_TransfererFichier ws = new DARTIES_TransfererFichier();
+        DARTIES_WS ws = new DARTIES_WS();
         
         int wsret = ws.TransfererFichier(fileName, buffer);
         
@@ -75,7 +75,7 @@ public class WSTransfererFichierTest {
         String fileName = File.separator + ".xls";        
         byte[] buffer = new byte[4096];        
         
-        DARTIES_TransfererFichier ws = new DARTIES_TransfererFichier();
+        DARTIES_WS ws = new DARTIES_WS();
         
         int wsret = ws.TransfererFichier(fileName, buffer);
         

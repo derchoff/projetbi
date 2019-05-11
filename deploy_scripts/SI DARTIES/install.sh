@@ -21,11 +21,13 @@ startme() {
     export TOMCAT_PWD;
 
     mkdir /usr/src/tomcat;
+    mkdir /usr/src/excel;
+    mkdir /usr/src/excel/excel_input;
     
     docker-compose up -d --build;
         
-    sudo cp /usr/src/projetbi/web-service/SiteWeb_DARTIES/dist/SiteWeb_DARTIES.war /usr/src/tomcat/tomcat/data/;
-    sudo cp /usr/src/projetbi/web-service/WebService_DARTIES/dist/WebService_DARTIES.war /usr/src/tomcat/tomcat/data/;
+#    sudo cp /usr/src/projetbi/web-service/SiteWeb_DARTIES/dist/SiteWeb_DARTIES.war /usr/src/tomcat/tomcat/data/;
+#    sudo cp /usr/src/projetbi/web-service/WebService_DARTIES/dist/WebService_DARTIES.war /usr/src/tomcat/tomcat/data/;
     
     #attend que la bdd mysql soit instancié
 #    until nc -z -v -w30 localhost 3306;

@@ -9,14 +9,15 @@
             <file>file:/C:/Users/apoizat/Documents/Miage/D234/SiteWeb_DARTIES/SiteWeb_DARTIES/web/WebService/pageTelechargementFichier.jsp</file>
         </group>
         <group name="DARTIES">
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/build/generated-sources/jax-ws/WebService/DARTIESTransfererFichier_Service.java</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WebService/pageTelechargementFichier.jsp</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/build/generated-sources/jax-ws/WebService/TransfererFichier.java</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/build/generated-sources/jax-ws/WebService/TransfererFichierResponse.java</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/build/generated-sources/jax-ws/WebService/DARTIESTransfererFichier.java</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WEB-INF/jax-ws-catalog.xml</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WEB-INF/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WEB-INF/wsdl/35.181.49.147_80/WebService_DARTIES/DARTIES_WS.xsd_1.xsd</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147_80/WebService_DARTIES/DARTIES_WS.xsd_1.xsd</file>
             <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/WebService/gestionWSFichier.jsp</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/build/generated-sources/jax-ws/WebService/package-info.java</file>
-            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/index.html</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/d_erc/Documents/Google%20Drive/Cours/Cours%20MIAGE%20M2/D234/Pre╠üsentation%20Projet/projetbi/web-service/SiteWeb_DARTIES/src/conf/MANIFEST.MF</file>
         </group>
     </open-files>
 </project-private>

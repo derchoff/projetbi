@@ -31,6 +31,7 @@ services:
        - '80:8080'
      volumes:
        - /usr/src/tomcat:/bitnami
+       - /usr/src/excel/excel_input:/usr/src/excel/excel_input
      networks:
        mysql_network:         
          

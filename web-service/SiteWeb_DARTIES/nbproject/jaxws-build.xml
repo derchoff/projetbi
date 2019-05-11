@@ -26,21 +26,21 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-DARTIES_TransfererFichier" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier" destdir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_TransfererFichier/wsdl/localhost_13137/WebService_DARTIES/DARTIES_TransfererFichier.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:13137/WebService_DARTIES/DARTIES_TransfererFichier?WSDL" xnocompile="true" xendorsed="true" package="WebService">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_TransfererFichier/wsdl/localhost_13137/WebService_DARTIES/DARTIES_TransfererFichier.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier"/>
+    <target name="wsimport-client-DARTIES_WS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/DARTIES_WS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" destdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://35.181.49.147/WebService_DARTIES/DARTIES_WS?wsdl" xnocompile="true" xendorsed="true" package="DARTIES_WS">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/DARTIES_WS"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier">
+            <fileset dir="${build.generated.dir}/jax-wsCache/DARTIES_WS">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-DARTIES_TransfererFichier" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/WebService"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/DARTIES_TransfererFichier"/>
+    <target name="wsimport-client-clean-DARTIES_WS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/DARTIES_WS"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/DARTIES_WS"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-DARTIES_TransfererFichier"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-DARTIES_WS"/>
 </project>
