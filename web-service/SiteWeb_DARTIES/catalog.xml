@@ -5,4 +5,6 @@
     <system systemId="http://35.181.49.147/WebService_DARTIES/DARTIES_WS?WSDL" uri="src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl"/>
     <system systemId="http://35.181.49.147/WebService_DARTIES/DARTIES_WS?wsdl" uri="src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl"/>
     <system systemId="http://35.181.49.147:80/WebService_DARTIES/DARTIES_WS?xsd=1" uri="src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147_80/WebService_DARTIES/DARTIES_WS.xsd_1.xsd"/>
+    <system systemId="http://35.180.255.232/WebService_DARTIES/DARTIES_WS?wsdl" uri="src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.180.255.232/WebService_DARTIES/DARTIES_WS.wsdl"/>
+    <system systemId="http://35.180.255.232:80/WebService_DARTIES/DARTIES_WS?xsd=1" uri="src/conf/xml-resources/web-service-references/DARTIES_WS/wsdl/35.180.255.232_80/WebService_DARTIES/DARTIES_WS.xsd_1.xsd"/>
 </catalog>

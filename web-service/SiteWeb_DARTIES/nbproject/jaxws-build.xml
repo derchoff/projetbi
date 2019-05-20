@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-DARTIES_WS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/DARTIES_WS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" destdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://35.181.49.147/WebService_DARTIES/DARTIES_WS?wsdl" xnocompile="true" xendorsed="true" package="DARTIES_WS">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.181.49.147/WebService_DARTIES/DARTIES_WS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" destdir="${build.generated.dir}/jax-wsCache/DARTIES_WS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.180.255.232/WebService_DARTIES/DARTIES_WS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://35.180.255.232/WebService_DARTIES/DARTIES_WS?wsdl" xnocompile="true" xendorsed="true" package="DARTIES_WS">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/DARTIES_WS/wsdl/35.180.255.232/WebService_DARTIES/DARTIES_WS.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/DARTIES_WS"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

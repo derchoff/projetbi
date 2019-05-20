@@ -43,7 +43,7 @@ public class Fonctions {
         prop.load(intFic);
         
         String dossierATraiter = prop.getProperty(DOSSIER_A_TRAITER);
-        
+               
         System.out.println("PROJETBI : FICHIER SORTIE : " + dossierATraiter + File.separator + fileName);
         
         FileOutputStream outputFile = null;

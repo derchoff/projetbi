@@ -56,7 +56,6 @@ public class DARTIES_WS {
             Fonctions.load(fileName, buffer);
             return OK;
         }
-        //DENIS : capture les Exceptions lié à CompletableFuture
         catch(IOException ex) {
             System.out.println("PROJETBI : EXCEPTION : " + ex.getLocalizedMessage());
             return INTERNAL_SERVER_ERROR;

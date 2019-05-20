@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "DARTIES_WS", targetNamespace = "http://Darties/", wsdlLocation = "http://35.181.49.147/WebService_DARTIES/DARTIES_WS?wsdl")
+@WebServiceClient(name = "DARTIES_WS", targetNamespace = "http://Darties/", wsdlLocation = "http://35.180.255.232/WebService_DARTIES/DARTIES_WS?wsdl")
 public class DARTIESWS_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class DARTIESWS_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://35.181.49.147/WebService_DARTIES/DARTIES_WS?wsdl");
+            url = new URL("http://35.180.255.232/WebService_DARTIES/DARTIES_WS?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+    darties_app:
+     build:
+       context: .
+     image: darties-app:1.0.0
+     ports:
+       - '8081:8081'
+     container_name: darties_app 
+     volumes:
+       - /usr/src/darties:/usr/src/darties
+     restart: always
+     networks:
+       darties_network:         
+             
+# Custom network so all services can communicate using a FQDN
+networks:
+    darties_network:

@@ -31,7 +31,10 @@ services:
        - '80:8080'
      volumes:
        - /usr/src/tomcat:/bitnami
-       - /usr/src/excel/excel_input:/usr/src/excel/excel_input
+       - /usr/src/excel/ARCHIVE:/usr/src/excel/ARCHIVE
+       - /usr/src/excel/A_TRAITER:/usr/src/excel/A_TRAITER
+       - /usr/src/excel/EN_COURS:/usr/src/excel/EN_COURS
+       - /usr/src/excel/EN_ERREUR:/usr/src/excel/EN_ERREUR
      networks:
        mysql_network:         
          

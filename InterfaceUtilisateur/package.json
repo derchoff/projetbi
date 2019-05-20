@@ -1,0 +1,13 @@
+{
+  "name": "DARTIES_web_app",
+  "version": "1.0.0",
+  "description": "DARTIES",
+  "author": "Denis ERCHOFF <derchoff@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.17.0"
+  }
+}

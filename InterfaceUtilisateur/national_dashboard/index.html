@@ -1,0 +1,182 @@
+<html>
+    <title>DARTIES</title>
+    <head>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
+        <LINK href="/css/main.css" rel="stylesheet" type="text/css">
+            <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="jquery-ui-1.10.0.custom.js"></script>            
+        <script src="https://online.tableau.com/javascripts/api/tableau-2.js"></script>
+        <script src="/js/darties_tableau_national.js"></script>
+    </head>
+   <body>
+
+    <div class="container-fluid h-100">
+        <!-- ENTETE -->
+        <div class="row display-flex justify-content-center align-items-center">
+            <div class="col-2 mx-auto">
+                <div class="card card-body mb-2 pb-2 pt-2 blue-background justify-content-center align-items-center">
+                    <img src="/images/logo darties.png"/>
+                </div>                
+            </div>
+            <div class="col-10 mx-auto pt-2 mb-2 ">
+                <div class="card card-body blue-background justify-content-center align-items-center">
+                        <label>Tableau de bord National</label>
+                </div>                
+            </div>
+        </div>
+                
+        <div class="row">
+            <div class="col-2 mx-auto">
+                <div class="card card-body mb-2 h-100 blue-background">
+                <button id="retour_accueille">Accueille</button>
+                <label><b>Filtres</b></label>
+                <!-- FILTRES -->
+                <!-- taux conversion -->
+                <div class="row">
+                    <div class="col-1 col-sm-4 mb-2">
+                        <select id="taux" class="filter">
+                                <option value="1" selected>Euros</option>
+                                <option value="2">Dollars</option>
+                        </select>                        
+                    </div>
+                    <div class="col-1 col-sm-4 mb-2">
+                        <select class="filter">
+                                <option value="1" selected>Taux 1 | Mai 2019</option>
+                                <option value="2">Taux 2 | Avril 2019</option>
+                        </select>                         
+                    </div>                    
+                </div>
+                <!-- zones commerciales -->
+                <div class="row">
+                        <div class="col-1 col-sm-4 mb-2">
+                            <select id="regions" class="filter">
+                                    <option value="tout" selected>Régions commerciale</option>
+                                    <option value="Region_parisienne">Région parisienne</option>
+                                    <option value="Nord_Ouest">Nord ouest</option>
+                                    <option value="Nord_Est">Nord est</option>
+                                    <option value="Sud_Est">Sud est</option>
+                                    <option value="Sud_Ouest">Sud ouest</option>
+                            </select>                        
+                        </div>
+                    </div>                
+                    <!-- indicateurs -->                    
+                    <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select class="filter">
+                                            <option value="tout" selected>Toutes mes indicateurs</option>
+                                            <option value="CA">Chiffre d'affaire</option>
+                                            <option value="MB">Marge brute</option>
+                                            <option value="V">Ventes</option>
+                                        </select>                        
+                            </div>
+                        </div>  
+                        <!-- types produits -->     
+                        <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select class="filter">
+                                            <option value="tout" selected>Tous les produits</option>
+                                            <option value="Fours">Fours</option>
+                                            <option value="Magneto">Magnéto</option>
+                                            <option value="Hifi">Hi-fi</option>
+                                        </select>                        
+                            </div>
+                        </div>
+                        <!-- enseignes -->
+                        <div class="row">
+                                <div class="col-1 col-sm-4 mb-2">
+                                        <select class="filter">
+                                                <option value="tout" selected>Toutes les enseignes</option>
+                                                <option value="61000">Alencon - Darty</option>
+                                                <option value="80000">Amiens - Leroy_merlin</option>
+                                                <option value="49000">Angers - Boulanger</option>
+                                                <option value="16000">Angouleme - Darty</option>
+                                                <option value="62000">Arras - Leroy_merlin</option>
+                                                <option value="20600">Bastia - Boulanger</option>
+                                                <option value="25000">Besancon - Darty</option>
+                                                <option value="93000">Bobigny - Darty</option>
+                                                <option value="33000">Bordeaux - Leroy_merlin</option>
+                                                <option value="18000">Bourges - Boulanger</option>
+                                                <option value="11000">Carcassonne - Darty</option>
+                                                <option value="95000">Cergy_Pontoise - Leroy_merlin</option>
+                                                <option value="73000">Chambery - Boulanger</option>
+                                                <option value="63000">Clermont_Ferrand - Darty</option>
+                                                <option value="94000">Creteil - Darty</option>
+                                                <option value="04000">Digne - Leroy_merlin</option>
+                                                <option value="21000">Dijon - Boulanger</option>
+                                                <option value="91000">Evry - Darty</option>
+                                                <option value="09000">Foix - Leroy_merlin</option>
+                                                <option value="38000">Grenoble - Boulanger</option>
+                                                <option value="59000">Lille - Darty</option>
+                                                <option value="87000">Limoges - Darty</option>
+                                                <option value="69001">Lyon - Darty</option>
+                                                <option value="13001">Marseille - Leroy_merlin</option>
+                                                <option value="77000">Melun - Boulanger</option>
+                                                <option value="57000">Metz - Darty</option>
+                                                <option value="30000">Nimes - Leroy_merlin</option>
+                                                <option value="54000">Nancy - Boulanger</option>
+                                                <option value="92000">Nanterre - Darty</option>
+                                                <option value="44000">Nantes - Darty</option>
+                                                <option value="06000">Nice - Leroy_merlin</option>
+                                                <option value="24000">Perigueux - Boulanger</option>
+                                                <option value="75011">Paris_Nord - Darty</option>
+                                                <option value="75015">Paris_Sud - Leroy_merlin</option>
+                                                <option value="64000">Pau - Darty</option>
+                                                <option value="29000">Quimper - Leroy_merlin</option>
+                                                <option value="12000">Rodez - Boulanger</option>
+                                                <option value="76000">Rouen - Darty</option>
+                                                <option value="22000">St_Brieuc - Leroy_merlin</option>
+                                                <option value="42000">St_Etienne - Boulanger</option>
+                                                <option value="67000">Strasbourg - Darty</option>
+                                                <option value="65000">Tarbes - Darty</option>
+                                                <option value="83000">Toulon - Leroy_merlin</option>
+                                                <option value="37000">Tours - Boulanger</option>
+                                                <option value="10000">Troyes - Darty</option>
+                                                <option value="26000">Valence - Leroy_merlin</option>
+                                                <option value="59300">Valenciennes - Boulanger</option>
+                                                <option value="78000">Versailles - Darty</option>                                                       
+                                            </select>                        
+                                </div>
+                            </div>   
+                            <!-- enseignes -->
+                            <div class="row">
+                                    <div class="col-1 col-sm-4 mb-2">
+                                            <select class="filter">
+                                                    <option value="201901" selected>Janvier 2019</option>
+                                                    <option value="201902">Fevrier 2019</option>
+                                                    <option value="201903">Mars 2019</option>
+                                                    <option value="201904">Avril 2019</option>
+                                                    <option value="201905">Mai 2019</option>
+                                                    <option value="201906">Juin 2019</option>
+                                                    <option value="201907">Juillet 2019</option>
+                                                    <option value="201908">Aout 2019</option>
+                                                    <option value="201909">Septembre 2019</option>
+                                                    <option value="201910">Octobre 2019</option>
+                                                    <option value="201911">Novembre 2019</option>
+                                                    <option value="201912">Decembre 2019</option>                                                    
+                                            </select>                        
+                                    </div>
+                                </div>                                                                                           
+                </div>
+            </div>
+                <div class="col-10 mx-auto h-100 w-100">
+                    <div class="card card-body mb-2 h-100 w-100">                    
+                        <!-- TABLEAU -->
+                        <div id="tableauViz" class="h-100 w-100">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <script type="text/javascript">
+            $(document).ready( function () {
+                initDarties();
+            });        
+        </script>
+      
+   </body>
+</html>

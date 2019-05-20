@@ -1,0 +1,27 @@
+img { width:50px; height: 50px; }
+
+table {
+    border: 1px solid black;
+    border-spacing: 5px;
+  }
+
+th {
+  border: 1px solid black;
+}
+
+tr {
+  border: 1px solid black;
+}
+
+td {
+  border:1px dotted orange;
+}
+
+.blue-background {
+  background-color: lightskyblue;
+}
+
+.center_div{
+  margin: 0 auto;
+  width:80% /* value of your choice which suits your alignment */
+}
