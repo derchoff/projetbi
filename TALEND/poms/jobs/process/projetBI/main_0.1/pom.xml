@@ -89,6 +89,11 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
+      <artifactId>gestion_dossier_avertissement</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.example.projet_bi.job</groupId>
       <artifactId>dimension_indicateurs</artifactId>
       <version>0.1.0</version>
     </dependency>

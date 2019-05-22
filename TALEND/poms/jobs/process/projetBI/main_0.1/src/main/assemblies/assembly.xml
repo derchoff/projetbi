@@ -279,17 +279,20 @@
             <outputDirectory>${talend.job.name}</outputDirectory>
             <includes>
                 <include>org.example.projet_bi.job:integration_objectif:jar:0.1.0</include>
-                <include>org.example.projet_bi.job:MAIN:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_nom_des_colonnes:jar:0.1.0</include>
-                <include>org.example.projet_bi.job:verification_annee_fichier:jar:0.1.0</include>
-                <include>org.example.projet_bi.job:gestion_dossier_reussi:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:gestion_dossier_avertissement:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_date:jar:0.1.0</include>
-                <include>org.example.projet_bi.job:dimension_indicateurs:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_produit:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:dimension_indicateurs:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:integration_ventes:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_du_nom_des_onglets:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:gestion_dossier_echouer:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:integration_magasins:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:MAIN:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:verification_annee_fichier:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:controle_qualite_objectif:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:gestion_dossier_reussi:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:controle_qualite_reel:jar:0.1.0</include>
             </includes>
             <outputFileNameMapping>${artifact.build.finalName}.${artifact.extension}</outputFileNameMapping>
             <useProjectArtifact>true</useProjectArtifact>

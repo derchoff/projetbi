@@ -170,6 +170,11 @@
     </dependency>
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
+      <artifactId>controle_qualite_reel</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.example.projet_bi.job</groupId>
       <artifactId>verification_nom_des_colonnes</artifactId>
       <version>0.1.0</version>
     </dependency>

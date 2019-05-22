@@ -3,7 +3,7 @@
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="Nom du fichier" name="nom_fichier" prompt="nom_fichier?" promptNeeded="false" type="id_String" value="context.nom_fichier"/>
     <contextParameter comment="Nom du job qui a intégré le fichier" name="nom_job_talend" prompt="nom_job_talend?" promptNeeded="false" type="id_String" value="context.nom_job_talend"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Fichier traité" name="excel_output_done_repository" prompt="excel_output_done_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Desktop/traitement/output_done/"/>
   </context>
   <parameters>

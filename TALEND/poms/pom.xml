@@ -25,6 +25,10 @@
     <module>jobs/process/projetBI/integration_magasins_0.1</module>
     <module>jobs/process/projetBI/gestion_dossier_reussi_0.1</module>
     <module>jobs/process/projetBI/gestion_dossier_echouer_0.1</module>
+    <module>jobs/process/projetBI/verification_chiffre_reel_objectif_0.1</module>
+    <module>jobs/process/projetBI/gestion_dossier_avertissement_0.1</module>
+    <module>jobs/process/projetBI/controle_qualite_objectif_0.1</module>
+    <module>jobs/process/projetBI/controle_qualite_reel_0.1</module>
   </modules>
   <properties>
     <talend.project.name>PROJETBI</talend.project.name>

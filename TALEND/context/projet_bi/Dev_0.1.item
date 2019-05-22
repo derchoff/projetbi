@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ContextType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:id="_vDHv0GHNEemeqeVfACt5KQ" confirmationNeeded="false" name="Default">
-  <contextParameter xmi:id="_vDHv0WHNEemeqeVfACt5KQ" comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichiers excel prêts/"/>
+  <contextParameter xmi:id="_vDHv0WHNEemeqeVfACt5KQ" comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
   <contextParameter xmi:id="__92NwGHcEemdZ_ulKloHcw" comment="Adresse du serveur hébergeant l’entrepôt" name="db_host" prompt="db_host?" promptNeeded="false" type="id_String" value="localhost"/>
   <contextParameter xmi:id="__92NwWHcEemdZ_ulKloHcw" comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" type="id_String" value="3306"/>
   <contextParameter xmi:id="__92NwmHcEemdZ_ulKloHcw" comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" type="id_String" value="root"/>
