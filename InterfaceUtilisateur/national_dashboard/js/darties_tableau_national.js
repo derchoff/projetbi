@@ -5,19 +5,29 @@ const TOUT = "tout";
 const INDICATEUR_FILTER = "Abbreviation";
 // nom du filtre Type produit dans le tableau de bord
 const PRODUIT_FILTER = "Type Produit";
+// nom du filtre enseigne dans le tableau de bord
+const CODE_POSTAL_FILTER = "Code Postal";
 // Nom du filtre pour sélectionner la région a afficher
 // dans le tableau de bord
 const BL_REGION_FILTRE = "BL Filtre Region";
 // Nom du filtre pour sélectionner la région parente
 // dans le tableau de bord
 const BL_FILTRE_REGION_PARENTE = "BL Filtre région parente";                                  
+// Nom du filtre pour sélectionner la période
+// dans le tableau de bord
+const PERIODE_FILTER_NAME = "Id (Date)";                                  
+
 // Nom du filtre pour sélectionner le profile
 // dans le tableau de bord
 const PROFILE = "Profile";
 // Nom du champ donnant la sous région sélectionnée dans le tableau de bord
-const BL_SOUS_REGION = "BL Sous Region";
+const BL_SOUS_REGION = "AGG(BL Sous Region)";
 const UI_NOM_VILLE_AFFICHEE = "UI Nom Ville Affichée";
 const UI_NOM_REGION_AFFICHEE = "UI Nom Région affichée";
+
+const MSG_APPLY_FILTER_SUCCES = "Filtre appliqué : ";
+const MSG_CLEAR_FILTER_SUCCES = "Filtre effacé : ";
+const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
 
 var viz = null;
 var workbook = null;
@@ -92,10 +102,12 @@ function initDarties() {
         onFirstInteractive: function() {
 
             // The viz is now ready and can be safely used.
-            workbook = viz.getWorkbook();
-            activesheet = workbook.getActiveSheet();   
+            //workbook = viz.getWorkbook();
+            //activesheet = workbook.getActiveSheet();   
 
-            switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
+            //switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
+            //applyFilter(PERIODE_FILTER_NAME,"201901").then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+            //err => console.log(MSG_APPLY_FILTER_ERROR + err));
 
             //l'on peut réactiver les filtres
             $(".filter").prop('disabled', false);
@@ -103,9 +115,10 @@ function initDarties() {
     };
 
     //Valorise les filtres de départ
-    // options[PROFILE] = start_profile;
-    // options[BL_REGION_FILTRE] = start_filtre_region;
-    // options[BL_FILTRE_REGION_PARENTE] = start_filtre_region_parente;    
+    // options[`${PROFILE}`] = start_profile;
+    // options[`${BL_REGION_FILTRE}`] = start_filtre_region;
+    // options[`${BL_FILTRE_REGION_PARENTE}`] = start_filtre_region_parente;
+    //options[`${PERIODE_FILTER_NAME}`] = '201903';
 
     //créer l'objet vis de Tableau software
     viz = new tableau.Viz(placeholderDiv, url, options);
@@ -130,13 +143,41 @@ function applyFilter(filterName, values) {
         
         var lastCall = null;
         for(var i=0; i < sheetArray.length; ++i) {
-           if ( lastCall == null) 
+           if ( lastCall == null) {
             lastCall =  sheetArray[i].applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE);
+           }
            else 
-            lastCall.then(function(){ return sheetArray[i].applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE); });
+           lastCall.then(function(){ return sheetArray[i].applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE); });
         }
 
-        return lastCall;        
+        return lastCall.then(function(){ console.log("last filter called.") });        
+    }
+}
+
+
+//applique le filtre ALL à la vue active
+// ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
+// alors il faut parcourir toutes les feuille de l'objet pour appliquer le filtre
+function applyFilterALL(filterName) {
+    const activesheet = viz.getWorkbook().getActiveSheet();
+
+    if ( activesheet.getSheetType() == 'worksheet') {
+        console.log("c'est bien une feuille");
+        return activesheet.applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL);
+    } else {
+        console.log("ce n'est pas une feuille");
+        const sheetArray = activesheet.getWorksheets();
+        
+        var lastCall = null;
+        for(var i=0; i < sheetArray.length; ++i) {
+           if ( lastCall == null) {
+            lastCall =  sheetArray[i].applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL);
+           }
+           else 
+           lastCall.then(function(){ return sheetArray[i].applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL); });
+        }
+
+        return lastCall;
     }
 }
 
@@ -161,7 +202,7 @@ function clearFilter(filterName) {
             lastCall.then(function(){ return sheetArray[i].clearFilterAsync(filterName); });
         }
 
-        return lastCall;        
+        return lastCall.then(function(){ console.log("last filter called.") });
     }
 }
 
@@ -181,7 +222,7 @@ function clearSelectedMark() {
         var lastCall = null;
         for(var i=0; i < sheetArray.length; ++i) {
            if ( lastCall == null) 
-            lastCall =  sheetArray[i].clearSelectedMarksAsync();
+            lastCall = sheetArray[i].clearSelectedMarksAsync();
            else 
             lastCall.then(function(){ return sheetArray[i].clearSelectedMarksAsync(); });
         }
@@ -221,28 +262,39 @@ function regionschange(e) {
 
 }
 
-function indicateurschange(e) {     
-    if (e.target.value==TOUT) {
-        clearFilter(INDICATEUR_FILTER);
+function indicateurschange(e) {
+    if (e.target.value==TOUT) { debugger;
+        applyFilterALL(INDICATEUR_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(INDICATEUR_FILTER, e.target.value);
+        applyFilter(INDICATEUR_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }
 }
 
 function produitschange(e) {    
     if (e.target.value==TOUT) {
-        clearFilter(PRODUIT_FILTER);
+        applyFilterALL(PRODUIT_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(PRODUIT_FILTER, e.target.value);
+        applyFilter(PRODUIT_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                        err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }    
 }
 
 function enseigneschange(e) {
-
+    if (e.target.value==TOUT) {
+        applyFilterALL(CODE_POSTAL_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
+    } else {
+        applyFilter(CODE_POSTAL_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                        err => console.log(MSG_APPLY_FILTER_ERROR + err));
+    }
 }
 
-function periodeschange(e) {
-
+function periodeschange(e) {    
+    applyFilter(PERIODE_FILTER_NAME, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );
 }
 
 ////////////////////////////////////////////
@@ -266,7 +318,7 @@ function reportSelectedMarks(marks) {
     var blSousRegion = "";
     var uiNomvilleAffichee = "";
     var uiNomRegionAffichee = "";
-debugger;
+
     for (var markIndex = 0; markIndex < marks.length; markIndex++) {
         //récupère les champs associé à la marque
         var pairs = marks[markIndex].getPairs();
@@ -296,7 +348,7 @@ debugger;
 
     // on efface la sélection de l'utilisateur
     return clearSelectedMark().then( function() {
-        if ( (uiNomRegionAffichee != "" ||uiNomRegionAffichee != "")
+        if ( (uiNomRegionAffichee != "" || uiNomvilleAffichee != "")
             && blSousRegion != "") {
             // l'utilisateur a cliqué sur une région de la carte
             // donc il est dirigé vers la sous région
@@ -312,7 +364,7 @@ debugger;
 function switchTosubRegion(profile, region_parente, region) {
 
     console.log(`Changement de région. Destination : '${region}' avec le profile '${profile}' et région parente : '${region_parente}'`);
-
+debugger;
     //re définit les filtres courant
     current_filtre_region_parente = region_parente;
     current_filtre_region = region;                    
