@@ -25,6 +25,7 @@ services:
      environment:
         TOMCAT_USERNAME: root
         TOMCAT_PASSWORD: ${TOMCAT_PWD}
+        TOMCAT_ALLOW_REMOTE_MANAGEMENT: 1
      links:
        - mysqldb:mysql
      ports:
