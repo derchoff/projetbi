@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
-  <TalendMetadata:FileExcelConnection xmi:id="_EF5tsGOdEem3g57GDjk1DQ" name="liste_magasins" dataPackage="_EF5tsWOdEem3g57GDjk1DQ _nn8lsGOkEemuoKzv44Ep9Q" Server="Localhost 127.0.0.1" FilePath="C:/Talend/TOS_DI-Win32-20190325_1906-V7.2.1M4/workspace/PROJETBI/magasin_region_responsable_2019.xls" Encoding="windows-1252" UseHeader="true" HeaderValue="1" FirstLineCaption="true" SheetName="magasins" firstColumn="1" thousandSeparator="','" decimalSeparator="'.'" selectAllSheets="true" sheetList="magasins:w&#xA;">
+  <TalendMetadata:FileExcelConnection xmi:id="_vGSnQH1mEemMSb7veM8vSQ" name="liste_magasins" dataPackage="_vGSnQX1mEemMSb7veM8vSQ" Server="Localhost 127.0.0.1" FilePath="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/magasin_region_responsable_2019.xls" Encoding="UTF-8" UseHeader="true" HeaderValue="1" FirstLineCaption="true" SheetName="magasins" firstColumn="1" thousandSeparator="','" decimalSeparator="'.'" selectAllSheets="true" sheetList="magasins:w&#xA;">
     <sheetColumns>A</sheetColumns>
     <sheetColumns>B</sheetColumns>
     <sheetColumns>C</sheetColumns>
@@ -9,15 +9,15 @@
     <sheetColumns>F</sheetColumns>
     <sheetColumns>G</sheetColumns>
   </TalendMetadata:FileExcelConnection>
-  <orgomg.cwm.resource.record:RecordFile xmi:id="_EF5tsWOdEem3g57GDjk1DQ" name="default" dataManager="_EF5tsGOdEem3g57GDjk1DQ">
-    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_EF5tsmOdEem3g57GDjk1DQ" id="__E1AgGOcEem3g57GDjk1DQ" label="metadata">
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5ts2OdEem3g57GDjk1DQ" label="Villes" length="16" talendType="id_String" key="true" pattern="&quot;dd-MM-yyyy&quot;"/>
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5ttGOdEem3g57GDjk1DQ" label="Enseignes" length="12" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5ttWOdEem3g57GDjk1DQ" label="REGION" length="17" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5tt2OdEem3g57GDjk1DQ" label="Responsable_Magasin" length="9" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5tuGOdEem3g57GDjk1DQ" label="Directeur_Regional" length="11" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
-      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_EF5tuWOdEem3g57GDjk1DQ" label="Directeur_Commercial" length="8" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_vGSnQX1mEemMSb7veM8vSQ" name="default" dataManager="_vGSnQH1mEemMSb7veM8vSQ">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_vGSnQn1mEemMSb7veM8vSQ" id="_au7skH1mEemMSb7veM8vSQ" label="metadata">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnQ31mEemMSb7veM8vSQ" label="Villes" length="16" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnRH1mEemMSb7veM8vSQ" label="Code_postal" length="-1" talendType="id_String" key="true" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnRX1mEemMSb7veM8vSQ" label="Enseignes" length="12" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnRn1mEemMSb7veM8vSQ" label="Region" length="17" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnR31mEemMSb7veM8vSQ" label="Responsable_Magasin" length="9" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnSH1mEemMSb7veM8vSQ" label="Directeur_Regional" length="11" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_vGSnSX1mEemMSb7veM8vSQ" label="Directeur_Commercial" length="8" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
     </ownedElement>
   </orgomg.cwm.resource.record:RecordFile>
-  <orgomg.cwm.resource.record:RecordFile xmi:id="_nn8lsGOkEemuoKzv44Ep9Q" name="default" dataManager="_EF5tsGOdEem3g57GDjk1DQ"/>
 </xmi:XMI>
