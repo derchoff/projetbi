@@ -6,11 +6,11 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Mask des fichiers ventes réelles" name="mask_ventes" prompt="mask_ventes?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="ventes_DARTIES_*.xls"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32" show="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="32" show="false"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" value="" show="false"/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" value="" show="false"/>
@@ -596,28 +596,10 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <metadata connector="FLOW" label="ventes_controle_reel_objectif" name="ventes_controle_reel_objectif">
-      <column comment="" key="false" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="true" length="10" name="id_produit" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="true" length="10" name="id_magasin" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="id_devise" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="true" length="10" name="id_date" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="true" length="10" name="id_indicateur" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
+      <column comment="" key="true" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="12" name="reel" nullable="false" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
@@ -635,14 +617,8 @@
         <mapperTableEntries name="objectif" expression="" type="id_Float" nullable="true"/>
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="ventes_controle_reel_objectif">
-        <mapperTableEntries name="id" expression=" " type="id_Integer"/>
-        <mapperTableEntries name="id_produit" expression="row2.id  " type="id_Integer"/>
-        <mapperTableEntries name="id_magasin" expression="row4.id  " type="id_Integer"/>
-        <mapperTableEntries name="id_devise" expression="row12.id  " type="id_Integer"/>
-        <mapperTableEntries name="id_date" expression="row3.id  " type="id_Integer"/>
-        <mapperTableEntries name="id_indicateur" expression="row5.id  " type="id_Integer"/>
+        <mapperTableEntries name="id" expression="row3.id*1000000+row5.id*100000+row2.id*10000+row4.id" type="id_Integer"/>
         <mapperTableEntries name="reel" expression="Float.parseFloat(row6.pivot_value) " type="id_Float"/>
-        <mapperTableEntries name="objectif" expression=" " type="id_Float" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row6" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="Villes" type="id_String" nullable="true"/>
@@ -1042,7 +1018,7 @@
       <column comment="" key="false" length="-1" name="objectif" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_Float" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="reel_objectif_compa">
         <mapperTableEntries name="reel" expression="ventes_controle_reel_objectif.reel  " type="id_Float" nullable="true"/>
@@ -1050,19 +1026,11 @@
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="ventes_controle_reel_objectif" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="id" type="id_Integer"/>
-        <mapperTableEntries name="id_produit" type="id_Integer"/>
-        <mapperTableEntries name="id_magasin" type="id_Integer"/>
-        <mapperTableEntries name="id_devise" type="id_Integer"/>
-        <mapperTableEntries name="id_date" type="id_Integer"/>
-        <mapperTableEntries name="id_indicateur" type="id_Integer"/>
         <mapperTableEntries name="reel" type="id_Float"/>
-        <mapperTableEntries name="objectif" type="id_Float" nullable="true"/>
       </inputTables>
       <inputTables sizeState="INTERMEDIATE" name="row13" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="id_date" expression="ventes_controle_reel_objectif.id_date " type="id_Integer" nullable="true" operator="="/>
-        <mapperTableEntries name="id_magasin" expression="ventes_controle_reel_objectif.id_magasin " type="id_Integer" nullable="true" operator="="/>
-        <mapperTableEntries name="id_produit" expression="ventes_controle_reel_objectif.id_produit " type="id_Integer" nullable="true" operator="="/>
-        <mapperTableEntries name="objectif" expression="" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="id" expression="ventes_controle_reel_objectif.id " type="id_Long" operator="="/>
+        <mapperTableEntries name="objectif" type="id_Float" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1077,12 +1045,14 @@
     <elementParameter field="TEXT" name="TYPE" value="MySQL" show="false"/>
     <elementParameter field="TEXT" name="USER" value="context.db_user"/>
     <elementParameter field="PASSWORD" name="PASS" value="8pW6Nmy2kue4tYZkziUUTw=="/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_Sork8GHMEemeqeVfACt5KQ - vente" show="false"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;vente&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xD;&#xA;&#x9;`vente`.`id_date`, &#xD;&#xA;    `vente`.`id_magasin`, &#xD;&#xA;    `vente`.`id_produit`, &#xD;&#xA;    `vente`.`objectif`&#xD;&#xA;FROM `vente`&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xA;  `vente`.`id`, &#xA;  `vente`.`objectif`&#xA;FROM `vente`&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -1093,22 +1063,39 @@
     <elementParameter field="CHECK" name="ENABLE_STREAM" value="false"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_date"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_magasin"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_produit"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="objectif"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LABEL" value="&quot;vente&quot;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tDBInput_8">
-      <column comment="" key="false" length="-1" name="id_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="INT" type="id_Integer" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="id_magasin" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="id_produit" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="objectif" nullable="true" pattern="" precision="-1" sourceType="FLOAT" type="id_Float" originalLength="-1" usefulColumn="true"/>
+    <metadata connector="FLOW" label="vente" name="tDBInput_8">
+      <column comment="" key="true" length="-1" name="id" nullable="false" pattern="" precision="0" sourceType="BIGINT UNSIGNED" type="id_Long" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_produit" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_magasin" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_devise" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_date" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_indicateur" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="12" name="reel" nullable="false" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="false">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <additionalProperties key="Comment" value=""/>
     </metadata>
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1216" posY="672">

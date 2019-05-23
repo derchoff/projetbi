@@ -7,7 +7,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Mask des fichiers ventes réelles" name="mask_ventes" prompt="mask_ventes?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="ventes_DARTIES_*.xls"/>
   </context>
   <parameters>
@@ -257,6 +257,9 @@
       <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="-1" name="ville" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="abreviation" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="type_produit" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <metadata connector="FLOW" label="vente" name="vente_not_found">
@@ -281,9 +284,10 @@
       <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="-1" name="ville" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="ventes">
         <mapperTableEntries name="id_produit" expression="row2.id " type="id_Integer"/>
@@ -293,6 +297,9 @@
         <mapperTableEntries name="id_indicateur" expression="row5.id " type="id_Integer"/>
         <mapperTableEntries name="reel" expression="Float.parseFloat(row6.pivot_value)" type="id_Float" nullable="true"/>
         <mapperTableEntries name="objectif" expression="" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="ville" expression="row4.ville " type="id_String" nullable="true"/>
+        <mapperTableEntries name="abreviation" expression="row5.abbreviation " type="id_String" nullable="true"/>
+        <mapperTableEntries name="type_produit" expression="row2.type_produit " type="id_String" nullable="true"/>
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="vente_not_found" rejectInnerJoin="true">
         <mapperTableEntries name="id_produit" expression="row2.id  " type="id_Integer"/>
@@ -301,7 +308,8 @@
         <mapperTableEntries name="id_date" expression="row3.id  " type="id_Integer"/>
         <mapperTableEntries name="id_indicateur" expression="row5.id  " type="id_Integer"/>
         <mapperTableEntries name="reel" expression="Float.parseFloat(row6.pivot_value)" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="objectif" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="objectif" expression="" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="ville" expression="row4.ville " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row6" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="Villes" type="id_String" nullable="true"/>
@@ -545,14 +553,14 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (ventes.reel &lt; 0 || ventes.reel == null){&#xA;&#x9;throw new Exception(&quot;Un chiffre négative ou une case vide a été trouvé dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier : *_yyyy.xls.&quot;);&#xA;}&#xA;&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if (ventes.reel &lt; 0 || ventes.reel == null){&#xA;&#x9;throw new Exception(&quot;Un chiffre négative ou une case vide a été trouvé dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier : *_yyyy.xls. Ville=&quot; + ventes.ville + &quot;, indicateur=&quot;+ventes.abreviation+&quot;,produit=&quot;+ventes.type_produit);&#xA;}&#xA;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_1"/>
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_2" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if(true){&#xA;&#x9;throw new Exception(&quot;Une ou plusieurs ligne n'a/ont pas pu être inséré car aucun augun magasins n'est la/les ville(s) spécifié dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier.&quot;);&#xA;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if(true){&#xA;&#x9;throw new Exception(&quot;Une ou plusieurs ligne n'a(ont) pas pu être insérée(s) car aucun augun magasin n'est la(les) ville(s) spécifié dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier. Ville=&quot; + vente_not_found.ville);&#xA;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="vente" name="tJavaRow_2">
@@ -650,7 +658,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="384" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_3" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Janvier. Veuillez corriger le fichier&quot;);&#xA;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Janvier. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_3"/>
@@ -674,10 +682,32 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="ventes" lineStyle="0" metaname="ventes" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tJavaRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="abreviation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ville"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="type_produit"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="ventes" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="vente_not_found" lineStyle="0" metaname="vente_not_found" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tJavaRow_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="abreviation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ville"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="type_produit"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="vente_not_found" show="false"/>
   </connection>

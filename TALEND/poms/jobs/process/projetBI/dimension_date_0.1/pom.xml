@@ -11,18 +11,18 @@
   <groupId>org.example.projet_bi.job</groupId>
   <artifactId>dimension_date</artifactId>
   <version>0.1.0</version>
-  <name>PROJET_BI_2 dimension_date-0.1.0 (0.1,Job Designs)</name>
+  <name>PROJET_BI_3 dimension_date-0.1.0 (0.1,Jobs)</name>
   <properties>
     <output.resources.dir>${talend.job.name}/src/main/resources</output.resources.dir>
     <talend.job.applyContextToChildren>false</talend.job.applyContextToChildren>
     <current.test.resources.dir>${basedir}/src/test/resources</current.test.resources.dir>
     <current.int-resources.dir>${basedir}/src/main/resources</current.int-resources.dir>
     <talend.job.version>0.1</talend.job.version>
-    <talend.project.name.lowercase>projet_bi_2</talend.project.name.lowercase>
-    <talend.job.path>projet_bi_2/dimension_date_0_1</talend.job.path>
+    <talend.project.name.lowercase>projet_bi_3</talend.project.name.lowercase>
+    <talend.job.path>projet_bi_3/dimension_date_0_1</talend.job.path>
     <project.distribution-management.repository.id>${project.distributionManagement.repository.id}</project.distribution-management.repository.id>
     <maven.build.timestamp.format>yyyy-MM-dd HHmmssSSS</maven.build.timestamp.format>
-    <talend.project.name>PROJET_BI_2</talend.project.name>
+    <talend.project.name>PROJET_BI_3</talend.project.name>
     <talend.product.version>7.2.1.20190325_1906-M4</talend.product.version>
     <talend.job.finalName>dimension_date_0_1</talend.job.finalName>
     <talend.pigudf.groupid>org.example.projet_bi.pigudf</talend.pigudf.groupid>

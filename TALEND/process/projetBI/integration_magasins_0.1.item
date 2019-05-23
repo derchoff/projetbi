@@ -6,7 +6,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Mask des fichiers magasins" name="mask_fichier_magasins" prompt="mask_fichier_magasins?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="magasin_region_responsable_*.xls"/>
   </context>
   <context confirmationNeeded="false" name="Default">
@@ -15,7 +15,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Mask des fichiers magasins" name="mask_fichier_magasins" prompt="mask_fichier_magasins?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="magasin_region_responsable_*.xls"/>
   </context>
   <parameters>
@@ -201,7 +201,7 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="efface_magasin" activateCondensedTool="true" rejectInnerJoin="true">
         <mapperTableEntries name="id" expression="row8.id " type="id_Integer"/>
@@ -642,7 +642,7 @@
       <column comment="" key="false" length="-1" name="Region" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="villes_corrigee">
         <mapperTableEntries name="Villes" expression="StringHandling.CHANGE(StringHandling.CHANGE(row1.Villes, &quot;St_&quot;, &quot;Saint-&quot;), &quot;_&quot;, &quot;-&quot;) " type="id_String" nullable="true"/>
@@ -683,7 +683,7 @@
       <column comment="" key="false" length="60" name="ville" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="5" name="code_postal" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
+      <column comment="" key="true" length="5" name="code_postal" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="10" name="code_departement" nullable="false" pattern="" precision="0" sourceType="INT" type="id_String" usefulColumn="true">
@@ -716,6 +716,10 @@
         <mapperTableEntries name="department_code" type="id_String"/>
         <mapperTableEntries name="insee_code" type="id_String" nullable="true"/>
         <mapperTableEntries name="zip_code" expression="villes_corrigee.Code_postal " type="id_String" nullable="true" operator="="/>
+        <mapperTableEntries name="name" type="id_String"/>
+        <mapperTableEntries name="slug" type="id_String"/>
+        <mapperTableEntries name="gps_lat" type="id_Double"/>
+        <mapperTableEntries name="gps_lng" type="id_Double"/>
       </inputTables>
     </nodeData>
   </node>
@@ -737,7 +741,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xA;  `cities`.`id`, &#xA;  `cities`.`department_code`, &#xA;  `cities`.`insee_code`, &#xA;  `cities`.`zip_code`&#xA;FROM `cities`&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xA;  `cities`.`id`, &#xA;  `cities`.`department_code`, &#xA;  `cities`.`insee_code`, &#xA;  `cities`.`zip_code`, &#xA;  `cities`.`name`, &#xA;  `cities`.`slug`, &#xA;  `cities`.`gps_lat`, &#xA;  `cities`.`gps_lng`&#xA;FROM `cities`&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -756,6 +760,14 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="zip_code"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="slug"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gps_lat"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gps_lng"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LABEL" value="villes officielles"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -772,16 +784,16 @@
       <column comment="" key="false" length="5" name="zip_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="255" name="name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="false">
+      <column comment="" key="false" length="255" name="name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="255" name="slug" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="false">
+      <column comment="" key="false" length="255" name="slug" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="16" name="gps_lat" nullable="false" pattern="" precision="14" sourceType="DOUBLE" type="id_Double" usefulColumn="false">
+      <column comment="" key="false" length="16" name="gps_lat" nullable="false" pattern="" precision="14" sourceType="DOUBLE" type="id_Double" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="17" name="gps_lng" nullable="false" pattern="" precision="14" sourceType="DOUBLE" type="id_Double" usefulColumn="false">
+      <column comment="" key="false" length="17" name="gps_lng" nullable="false" pattern="" precision="14" sourceType="DOUBLE" type="id_Double" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <additionalProperties key="Comment" value=""/>
@@ -811,7 +823,10 @@
       <column comment="" key="true" length="5" name="code_postal" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="10" name="id_departement" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true">
+      <column comment="" key="false" length="10" name="id_departement" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="10" name="id_region" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="true" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
@@ -827,6 +842,7 @@
         <mapperTableEntries name="ville" expression="magasins.ville " type="id_String"/>
         <mapperTableEntries name="code_postal" expression="magasins.code_postal " type="id_String"/>
         <mapperTableEntries name="id_departement" expression="row3.id " type="id_Integer"/>
+        <mapperTableEntries name="id_region" expression="row4.id " type="id_Integer"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="magasins" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="enseigne" type="id_String"/>
@@ -937,10 +953,10 @@
       <column comment="" key="true" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="45" name="nom" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="false">
+      <column comment="" key="false" length="45" name="slug" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="45" name="slug" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
+      <column comment="" key="false" length="45" name="nom" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="false">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="10" name="id_pays" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
@@ -980,6 +996,11 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="true"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="id_region"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="enseigne"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -992,7 +1013,7 @@
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="code_postal"/>
       <elementValue elementRef="UPDATE_KEY" value="true"/>
-      <elementValue elementRef="DELETE_KEY" value="true"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="id_departement"/>
@@ -1010,6 +1031,9 @@
     <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="magasin" name="tDBOutput_2">
+      <column comment="" key="false" length="10" name="id_region" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column comment="" key="false" length="60" name="enseigne" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
@@ -1028,6 +1052,9 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <metadata connector="REJECT" label="magasin" name="REJECT">
+      <column comment="" key="false" length="10" name="id_region" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column comment="" key="false" length="60" name="enseigne" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
@@ -1068,7 +1095,7 @@
       <column comment="" key="true" length="-1" name="Code_Postal" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="v">
         <mapperTableEntries name="Villes" expression="StringHandling.CHANGE(StringHandling.CHANGE(row2.Villes, &quot;St_&quot;, &quot;Saint-&quot;), &quot;_&quot;, &quot;-&quot;) " type="id_String" nullable="true"/>
@@ -1153,6 +1180,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="magin_record" lineStyle="0" metaname="magin_record" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tDBOutput_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="id_region"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="magin_record" show="false"/>
   </connection>

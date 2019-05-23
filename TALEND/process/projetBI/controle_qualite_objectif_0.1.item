@@ -8,7 +8,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/derchoff.FME/Documents/COURS/Cours MIAGE M2/D234/projetbi/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
     <contextParameter comment="Mask des fichiers prévisions" name="mask_prevision_ventes" prompt="mask_prevision_ventes?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="previsionsventes_DARTIES_*.xls"/>
   </context>
   <parameters>
@@ -489,6 +489,7 @@
       <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="-1" name="ville" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" label="vente_output_good" name="vente_output_good">
       <column comment="" key="true" length="10" name="id_produit" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true">
@@ -512,9 +513,12 @@
       <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="-1" name="type_produit" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ville" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="abreviation" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="vente" activateCondensedTool="true" rejectInnerJoin="true">
         <mapperTableEntries name="id_produit" expression="row2.id  " type="id_Integer"/>
@@ -524,6 +528,7 @@
         <mapperTableEntries name="id_indicateur" expression="row5.id  " type="id_Integer"/>
         <mapperTableEntries name="reel" expression=" " type="id_Float"/>
         <mapperTableEntries name="objectif" expression="Float.parseFloat(row6.pivot_value) " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="ville" expression="row4.ville " type="id_String" nullable="true"/>
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="vente_output_good">
         <mapperTableEntries name="id_produit" expression="row2.id   " type="id_Integer"/>
@@ -533,6 +538,9 @@
         <mapperTableEntries name="id_indicateur" expression="row5.id   " type="id_Integer"/>
         <mapperTableEntries name="reel" expression="  " type="id_Float"/>
         <mapperTableEntries name="objectif" expression="Float.parseFloat(row6.pivot_value)  " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="type_produit" expression="row2.type_produit " type="id_String" nullable="true"/>
+        <mapperTableEntries name="ville" expression="row4.ville " type="id_String" nullable="true"/>
+        <mapperTableEntries name="abreviation" expression="row5.abbreviation " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row6" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="Villes" type="id_String" nullable="true"/>
@@ -602,7 +610,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="928" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if(true){&#xA;&#x9;throw new Exception(&quot;Une ou plusieurs ligne n'a/ont pas pu être inséré car aucun augun magasins n'est la/les ville(s) spécifié dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier.&quot;);&#xA;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if(true){&#xA;&#x9;throw new Exception(&quot;Une ou plusieurs ligne n'a/ont pas pu être inséré car aucun augun magasins n'est la/les ville(s) spécifié dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier. Ville=&quot;+vente.ville);&#xA;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="vente" name="tJavaRow_1">
@@ -805,7 +813,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="928" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_2" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (vente_output_good.objectif &lt; 0 || vente_output_good.objectif == null){&#xA;&#x9;globalMap.put(&quot;nom_job_talend&quot;, &quot;controle_qualite_objectif&quot;);&#xA;&#x9;throw new Exception(&quot;Un chiffre négative ou une case vide a été trouvé dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier.&quot;);&#xA;}&#xA;&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if (vente_output_good.objectif &lt; 0 || vente_output_good.objectif == null){&#xA;&#x9;globalMap.put(&quot;nom_job_talend&quot;, &quot;controle_qualite_objectif&quot;);&#xA;&#x9;throw new Exception(&quot;Un chiffre négatif ou une case vide a été trouvé dans le fichier: '&quot;+  context.nom_fichier +&quot;'. Veuillez corriger le fichier. Ville=&quot; + vente_output_good.ville + &quot;, produit=&quot; + vente_output_good.type_produit + &quot;, indicateur=&quot;+vente_output_good.abreviation);&#xA;}&#xA;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_2"/>
@@ -1112,7 +1120,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_3" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Janvier. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Fevrier == 0 &amp;&amp; (row7.MB_Fevrier != 0 || row7.V_Fevrier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Février. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Mars == 0 &amp;&amp; (row7.MB_Mars != 0 || row7.V_Mars != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Mars. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Avril == 0 &amp;&amp; (row7.MB_Avril != 0 || row7.V_Avril != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Avril. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Mai == 0 &amp;&amp; (row7.MB_Mai != 0 || row7.V_Mai != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Mai. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Juin == 0 &amp;&amp; (row7.MB_Juin != 0 || row7.V_Juin != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Juin. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Juillet == 0 &amp;&amp; (row7.MB_Juillet != 0 || row7.V_Juillet != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Juillet. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Aout == 0 &amp;&amp; (row7.MB_Aout != 0 || row7.V_Aout != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Août. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Septembre == 0 &amp;&amp; (row7.MB_Septembre != 0 || row7.V_Septembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Septembre. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Octobre == 0 &amp;&amp; (row7.MB_Octobre != 0 || row7.V_Octobre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Octobre. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Novembre == 0 &amp;&amp; (row7.MB_Novembre != 0 || row7.V_Novembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Novembre. Veuillez corriger le fichier&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Decembre == 0 &amp;&amp; (row7.MB_Decembre != 0 || row7.V_Decembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Décembre. Veuillez corriger le fichier&quot;);&#xA;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Janvier. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Fevrier == 0 &amp;&amp; (row7.MB_Fevrier != 0 || row7.V_Fevrier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Février. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Mars == 0 &amp;&amp; (row7.MB_Mars != 0 || row7.V_Mars != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Mars. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Avril == 0 &amp;&amp; (row7.MB_Avril != 0 || row7.V_Avril != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Avril. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Mai == 0 &amp;&amp; (row7.MB_Mai != 0 || row7.V_Mai != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Mai. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Juin == 0 &amp;&amp; (row7.MB_Juin != 0 || row7.V_Juin != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Juin. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Juillet == 0 &amp;&amp; (row7.MB_Juillet != 0 || row7.V_Juillet != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Juillet. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Aout == 0 &amp;&amp; (row7.MB_Aout != 0 || row7.V_Aout != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Août. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Septembre == 0 &amp;&amp; (row7.MB_Septembre != 0 || row7.V_Septembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Septembre. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Octobre == 0 &amp;&amp; (row7.MB_Octobre != 0 || row7.V_Octobre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois d'Octobre. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Novembre == 0 &amp;&amp; (row7.MB_Novembre != 0 || row7.V_Novembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Novembre. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;&#xA;if (row7.CA_Decembre == 0 &amp;&amp; (row7.MB_Decembre != 0 || row7.V_Decembre != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Décembre. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_3"/>
@@ -1136,10 +1144,29 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="vente" lineStyle="0" metaname="vente" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tJavaRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="type_produit"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ville"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="vente" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="vente_output_good" lineStyle="0" metaname="vente_output_good" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tJavaRow_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="type_produit"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="abreviation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ville"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="vente_output_good" show="false"/>
   </connection>
