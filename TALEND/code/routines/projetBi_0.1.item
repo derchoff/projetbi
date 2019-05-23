@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.text.DateFormatSymbols;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.text.Normalizer;
 
 /*
@@ -58,15 +57,27 @@ public class projetBi {
     	}
     	return ret;
     }
-
-    private static String normalizeMonth(String month) {
-    	return Normalizer.normalize(month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase(), Normalizer.Form.NFD)
-	              .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    
+    /**
+     * 
+     * @param month description du mois à normaliser
+     * @param removeAccent si true alors retire les accents de "month"
+     * @return le nom du mois normaliser
+     */
+    private static String normalizeMonth(String month, boolean removeAccent) {
+    	// première lettre en majuscule
+    	String ret = Normalizer.normalize(month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase(), Normalizer.Form.NFD);
+    	
+    	if (removeAccent) {
+    	   // retrait des accents
+	       ret = ret.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    	}
+    	return ret;
     }
     
     /**
      * getNormalizedMonthList: retourne la liste des nom de mois normalisés
-     * Par normalisé il faut entendre : pas d'accent, première lettre en majuscule
+     * Par normalisé il faut entendre : première lettre en majuscule
      * 
      * 
      * {talendTypes} String[]
@@ -76,10 +87,10 @@ public class projetBi {
      * 
      * {example} getNormalizedMonthList # {"Janvier", "Fevrier", ... }
      */
-    public static List<String> getNormalizedMonthList() {
+    public static List<String> getNormalizedMonthList(boolean removeAccent) {
 
     	return Arrays.asList(getMonthList()).stream()
-									.map( s -> normalizeMonth(s))    													
+									.map( s -> normalizeMonth(s, removeAccent))    													
 									.collect(Collectors.toList());
 
     }
@@ -118,11 +129,11 @@ public class projetBi {
      */
     public static Date getDateFromMonthAndYear(String month, int year) throws Exception {
     	//Première letter en majusculen,sans accent
-    	String normalizedMonth = normalizeMonth(month);    	   
+    	String normalizedMonth = normalizeMonth(month, true);    	   
 
     	//recherche l'index du mois à l'aide de sont nom
     	// sur une liste normalisée : minuscule sans accent
-    	int idx_month = getNormalizedMonthList().indexOf(normalizedMonth);    	    	
+    	int idx_month = getNormalizedMonthList(true).indexOf(normalizedMonth);    	    	
     	
     	//si le mois n'a pas été trouvé alors exception
     	if (idx_month == -1) {
