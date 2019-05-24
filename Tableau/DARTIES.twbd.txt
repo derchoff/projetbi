@@ -1,0 +1,74 @@
+        * BL Filtre Region :
+            Utilisé pour filtrer les données afin de calculer le total de la région associé au profile. 
+            "Total par sous région", "Total de la région", "Tooltip: Total par ville", "Tooltip Total par sous région",
+            "Tooltip : Total ville par produit", "CA alentour et classement".
+            Aussi utilisé comme filtre dans "Détails par produit", "Détails par poids produit"
+        * BL Pivot Sous Region :
+            Utilisé pour adapter le pivot des grilles selon le profile : "Total par sous région", 
+            "Tooltip : Total par ville", "Tooltip : total par sous région"
+        * UI Region Affichée : 
+            Utilisé pour colorer les régions sur la carte, sur le premier layer, pour tous les profiles            
+        * UI Code Postal affichée : 
+            Utilisé pour placer les marqueurs des villes sur la carte, dans le deuxième layer de la carte.
+            Seulement pour les profiles "Directeur régional", "Responsable magasins", "Chef produit".
+            Aussi utilisée par le tooltip "Tooltip : Total ville par produit".
+        * TOOLTIP Filtre affiché :
+            Utiliser pour filtrer la grille des résultats par produit dans le tooltip lorsque le pointeur 
+            est au dessus d'une ville sous la carte. Que pour profile "Directeur regional" et "Responsble magasins".
+            "Tooltip : Total par ville"
+        * UI Nom Region Affichée :
+            Affiche le nom de la région sur la carte lorsque l'affichage est 
+            dans le profile "Directeur europe" ou "Directeur commercial"
+        * UI Nom Ville Affichée :
+            Affiche le nom des villes sur la carte lorsque le profile est "Directeur Regional", 
+            "Responsable magasins" ou "Chef produit"            
+        * BL Filtre région parente : 
+            Filtre la région parente, utile pour afficher le CA des régions alentours et leur classement
+        * UI Ville - Enseigne :
+            Affiche la ville et l'enseigne sous ce format : "Ville - Format". 
+            Utilisée par Palmarès
+        * UI Reel / Ratio :
+            Utilisé pour affiche rle réel et le ratio sous la forme : "Réel / Ration"
+        * BL Sous Region :
+            Utilisé lorsque l'utilisateur clique sur une région pour savoir dans quelle sous région
+            il doit naviguer
+        * UI Ville - Enseigne Classement 
+            Affiche le nom de la ville et de l'enseigne dans la source de données du classement
+        * Reel mois précédent
+            Affiche le réel du mois précédent. 
+            Utilisé par "CHART Palmarès rang Régional" et "CHART Palmarès rang National"
+        * BL Rang National :  
+            utilisé pour synchroniser le tri entre les vues dans l'onglet palmarès
+        * UI Abbréviation affichée : utilisée pour savoir s'il faut afficher "Tout indicateur".
+        * UI Abbréviation affichée détails : pareil mais pour la vue détail
+        * UI Produit affiché : utilisé pour savoir s'il faut afficher "Tout produit".
+        * UI Enseigne affichée : utilisée pour savoir s'il faut afficher "Toute enseigne".
+        * BL DateTime Range Filter : filtre de plage de date. Utilisé dans les vues de l'onglet détails car il faut afficher les dates des deux années pour effectuer les calculs de variation.
+                                     Pour n'afficher que la dernière année ce camp calculé est inséré dans la section "Pages".
+        * BL Rang National INV : utilisé dans palmarès = 1/rang pour l'affichage du graphique à bulle
+        * BL Rang National Selon Indicateur : utilisé pour trier selon l'indicateur 
+        * Afficher Rang ou Evolution : c'est un paramètre qui permet de choisir ce que l'on veut mettre en évidence
+                                        dans les graphiques du palmarès.
+        * UI Colorer Rang ou Evolution : en fonction du paramètre 'Afficher Rang ou Evolution' choisi la coloration en fonction des champs que l'on souhaite mettre en évidence
+        * Palmarès : ordre du tri des rang nationaux : "Ordre de tri"
+        * Ordre de Tri  : Paramètre utiliser pour syncrhoniser le tri entre les deux grilles de l'onglet palmarès
+        * BL Rang National Filtré : utilisé pour filtrer la grille dans palmarès. Dépend de BL Palmarès Sort Order
+        * BL Quinze Premier? : indique si selon 'Ordre de Tri' la ligne est dans les 15 premières
+            
+    Configurer les affichages :
+       
+    Profile Europe : 
+        BL Filtre Region = Europe
+        BL Filtre région parente = ""
+     
+    Profile Directeur commercial :
+        BL Filtre Region = France
+        BL Filtre Region parente = Europe        
+        
+    Profile Directeur régional :
+        BL Filtre Region = Une des régions (Nord Est, Nord Ouest, Région Parisienne, Sud Est, sud Ouest), doit être une des région
+        BL Filtre Region parente = France        
+
+    Profile Responsable magasin :
+        BL Filtre Region = Une des villes
+        BL Filtre Region parente = Une des régions (Nord Est, Nord Ouest, Région Parisienne, Sud Est, sud Ouest) : doit correspondre à la région de la ville.

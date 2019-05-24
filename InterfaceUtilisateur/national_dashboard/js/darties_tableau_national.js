@@ -102,12 +102,12 @@ function initDarties() {
         onFirstInteractive: function() {
 
             // The viz is now ready and can be safely used.
-            //workbook = viz.getWorkbook();
-            //activesheet = workbook.getActiveSheet();   
+            workbook = viz.getWorkbook();
+            activesheet = workbook.getActiveSheet();   
 
-            //switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
-            //applyFilter(PERIODE_FILTER_NAME,"201901").then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-            //err => console.log(MSG_APPLY_FILTER_ERROR + err));
+            switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
+            applyFilter(PERIODE_FILTER_NAME,"201901").then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
 
             //l'on peut réactiver les filtres
             $(".filter").prop('disabled', false);
