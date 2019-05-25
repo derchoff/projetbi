@@ -13,21 +13,35 @@ const BL_REGION_FILTRE = "BL Filtre Region";
 // Nom du filtre pour sélectionner la région parente
 // dans le tableau de bord
 const BL_FILTRE_REGION_PARENTE = "BL Filtre région parente";                                  
+const BL_REGION_FILTRE_CARTE = "BL Filtre Region Carte";
+// Nom du filtre pour sélectionner la région parente
+// dans le tableau de bord
+const BL_FILTRE_REGION_PARENTE_CARTE = "BL Filtre région parente Carte";
+
 // Nom du filtre pour sélectionner la période
 // dans le tableau de bord
 const PERIODE_FILTER_NAME = "Id (Date)";                                  
+
+// Nom du filtre pour la période cumulée
+// dans le tableau de bord
+const PERIODE_CUMULE_FILTER_NAME = "BL Numéro Mois";
 
 // Nom du filtre pour sélectionner le profile
 // dans le tableau de bord
 const PROFILE = "Profile";
 // Nom du champ donnant la sous région sélectionnée dans le tableau de bord
-const BL_SOUS_REGION = "AGG(BL Sous Region)";
+const BL_SOUS_REGION = "BL Sous Region";
 const UI_NOM_VILLE_AFFICHEE = "UI Nom Ville Affichée";
 const UI_NOM_REGION_AFFICHEE = "UI Nom Région affichée";
 
 const MSG_APPLY_FILTER_SUCCES = "Filtre appliqué : ";
 const MSG_CLEAR_FILTER_SUCCES = "Filtre effacé : ";
 const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
+
+// nom des feuilles dans les tableau de bord
+// auxquelles il faut appliquer les filtres
+const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
+const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
 
 var viz = null;
 var workbook = null;
@@ -64,6 +78,8 @@ function initDarties() {
     //retour au premier écran
     $('#retour_accueille').on('click', backToStartScreen);
 
+    $('#debbugButton').on('click', debugListeFiltre);
+
     //l'on désative les filtres le temps que le tableau de bord soit chargé
     $(".filter").prop('disabled', true);
 
@@ -94,8 +110,8 @@ function initDarties() {
     var options = {
         hideTabs: false,
         hideToolbar: true,
-        width: "1400px",
-        height: "924px",   
+        width: "1300px",
+        height: "850px",   
 
         //Cette fonction est appellé par l'API Javascript de Tableau 
         //lorsque le tableau de bord est prêt à l'utilisation.
@@ -105,12 +121,27 @@ function initDarties() {
             workbook = viz.getWorkbook();
             activesheet = workbook.getActiveSheet();   
 
+            //on intercept la capture de l'évènement changement d'onglet    
+            viz.addEventListener(tableau.TableauEventName.TAB_SWITCH, tabViewchange);
+            viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, function(marksEvent) { return marksEvent.getMarksAsync().then(reportSelectedMarks); } );            
+
             switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
-            applyFilter(PERIODE_FILTER_NAME,"201901").then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
+
+            //Sélectionne la péiode courante
+            const today = new Date();
+            const mm = today.getMonth() + 1;
+            const yyyy = today.getFullYear();
+            const id_date = yyyy * 100 + mm;
+
+            $("#periodes").val(id_date);
+
+            applyFilter(PERIODE_FILTER_NAME,`${id_date}`, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));            
+
 
             //l'on peut réactiver les filtres
             $(".filter").prop('disabled', false);
+
         }
     };
 
@@ -123,130 +154,101 @@ function initDarties() {
     //créer l'objet vis de Tableau software
     viz = new tableau.Viz(placeholderDiv, url, options);
 
-    //on intercept la capture de l'évènement changement d'onglet    
-    viz.addEventListener(tableau.TableauEventName.TAB_SWITCH, tabViewchange);
-    viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, function(marksEvent) { return marksEvent.getMarksAsync().then(reportSelectedMarks); } );
+}
+
+// retourne la liste des feuilles de la vue active
+function getWorksheets() {
+    
+    const activesheet = viz.getWorkbook().getActiveSheet();
+
+    if ( activesheet.getSheetType() == 'worksheet')
+        return [activesheet];
+     else 
+        return activesheet.getWorksheets();        
 }
 
 //applique un filtre à la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
 // alors il faut parcourir toutes les feuille de l'objet pour appliquer le filtre
-function applyFilter(filterName, values) {
-    const activesheet = viz.getWorkbook().getActiveSheet();
+function applyFilter(filterName, values, masterSheet) {    
 
-    if ( activesheet.getSheetType() == 'worksheet') {
-        console.log("c'est bien une feuille");
-        return activesheet.applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE);
-    } else {
-        console.log("ce n'est pas une feuille");
-        const sheetArray = activesheet.getWorksheets();
-        
-        var lastCall = null;
-        for(var i=0; i < sheetArray.length; ++i) {
-           if ( lastCall == null) {
-            lastCall =  sheetArray[i].applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE);
-           }
-           else 
-           lastCall.then(function(){ return sheetArray[i].applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE); });
-        }
+    const sheetArray = getWorksheets();        
 
-        return lastCall.then(function(){ console.log("last filter called.") });        
-    }
+    var lastCall = null;
+    //retrouve la première feuille master dans la vue
+    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
+                     .forEach(el => lastCall = el.applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE));
+    return lastCall;
 }
 
 
 //applique le filtre ALL à la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
 // alors il faut parcourir toutes les feuille de l'objet pour appliquer le filtre
-function applyFilterALL(filterName) {
-    const activesheet = viz.getWorkbook().getActiveSheet();
+function applyFilterALL(filterName, masterSheet) {
 
-    if ( activesheet.getSheetType() == 'worksheet') {
-        console.log("c'est bien une feuille");
-        return activesheet.applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL);
-    } else {
-        console.log("ce n'est pas une feuille");
-        const sheetArray = activesheet.getWorksheets();
-        
-        var lastCall = null;
-        for(var i=0; i < sheetArray.length; ++i) {
-           if ( lastCall == null) {
-            lastCall =  sheetArray[i].applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL);
-           }
-           else 
-           lastCall.then(function(){ return sheetArray[i].applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL); });
-        }
+    const sheetArray = getWorksheets();        
 
-        return lastCall;
-    }
+    var lastCall = null;
+    //retrouve la première feuille master dans la vue
+    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
+                        .forEach(el => lastCall = el.applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL));
+    return lastCall;
+                        
 }
 
 //efface un filtre de la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
 // alors il faut parcourir toutes les feuille de l'objet pour appliquer le filtre
-function clearFilter(filterName) {
-    const activesheet = viz.getWorkbook().getActiveSheet();
+function clearFilter(filterName, masterSheet) {
 
-    if ( activesheet.getSheetType() == 'worksheet') {
-        console.log("c'est bien une feuille");
-        return activesheet.clearFilterAsync(filterName);
-    } else {
-        console.log("ce n'est pas une feuille");
-        const sheetArray = activesheet.getWorksheets();
+    const sheetArray = getWorksheets();    
 
-        var lastCall = null;
-        for(var i=0; i < sheetArray.length; ++i) {
-           if ( lastCall == null) 
-            lastCall =  sheetArray[i].clearFilterAsync(filterName);
-           else 
-            lastCall.then(function(){ return sheetArray[i].clearFilterAsync(filterName); });
-        }
+    var lastCall = null;
+    //retrouve la première feuille master dans la vue
+    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
+                        .forEach(el => lastCall = el.clearFilterAsync(filterName));
+    return lastCall;
 
-        return lastCall.then(function(){ console.log("last filter called.") });
-    }
 }
 
 //efface une sélection de la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
 // alors il faut parcourir toutes les feuille de l'objet pour appliquer le filtre
 function clearSelectedMark() {
-    const activesheet = viz.getWorkbook().getActiveSheet();
+    const sheetArray = getWorksheets();    
 
-    if ( activesheet.getSheetType() == 'worksheet') {
-        console.log("c'est bien une feuille");
-        return activesheet.clearSelectedMarksAsync();
-    } else {
-        console.log("ce n'est pas une feuille");
-        const sheetArray = activesheet.getWorksheets();
+    sheetArray.forEach( el => lastCall = el.clearSelectedMarksAsync());    
 
-        var lastCall = null;
-        for(var i=0; i < sheetArray.length; ++i) {
-           if ( lastCall == null) 
-            lastCall = sheetArray[i].clearSelectedMarksAsync();
-           else 
-            lastCall.then(function(){ return sheetArray[i].clearSelectedMarksAsync(); });
-        }
-
-        return lastCall;
-    }
+    return lastCall;        
 }
 
 // remet tous les filtres sur "Tous ..."
 function resetFilters() {
     $(".filter").val(TOUT);
+
+    const today = new Date();
+    const mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    const id_date = yyyy * 100 + mm;
+
+    $("#periodes").val(id_date);
+}
+
+function applyAllFilters() {
+    $(".filter").trigger("onchange");
 }
 
 // appellé lorsque l'utilisateur change de vue
 function tabViewchange(e) {
     console.log("TAB_SWITCH");
-    resetFilters();
+    //resetFilters();
+
+    //réappliquer les filtres de région actuels
+    applyRegionFilters();
+    applyAllFilters();
 }
 
-// evènement lorsque l'utilisateur clique sur un menu en haut à gauche
-// function switchView(e) {
-//     console.log($(e.target).html());
-//     viz.getWorkbook().activateSheetAsync($(e.target).html());
-// }
 
 ////////////////////////////////////////////
 // Les fonctions suivantes sont les callback
@@ -263,38 +265,50 @@ function regionschange(e) {
 }
 
 function indicateurschange(e) {
-    if (e.target.value==TOUT) { debugger;
-        applyFilterALL(INDICATEUR_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+    if (e.target.value==TOUT) { 
+        applyFilterALL(INDICATEUR_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(INDICATEUR_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+        applyFilter(INDICATEUR_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }
 }
 
 function produitschange(e) {    
     if (e.target.value==TOUT) {
-        applyFilterALL(PRODUIT_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+        applyFilterALL(PRODUIT_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(PRODUIT_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+        applyFilter(PRODUIT_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                         err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }    
 }
 
 function enseigneschange(e) {
     if (e.target.value==TOUT) {
-        applyFilterALL(CODE_POSTAL_FILTER).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+        applyFilterALL(CODE_POSTAL_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(CODE_POSTAL_FILTER, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+        applyFilter(CODE_POSTAL_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                         err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }
 }
 
 function periodeschange(e) {    
-    applyFilter(PERIODE_FILTER_NAME, e.target.value).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+    
+    const periode = e.target.value;
+
+    //on ne retiens que le mois pour la vue du cumulé
+    const numero_mois = periode - 201900;
+    
+    applyFilter(PERIODE_FILTER_NAME, periode, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err) );
+
+
+    applyFilter(PERIODE_CUMULE_FILTER_NAME, numero_mois, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );
+                                                            
+                                                            
 }
 
 ////////////////////////////////////////////
@@ -345,26 +359,24 @@ function reportSelectedMarks(marks) {
             }
         }
     }
-
-    // on efface la sélection de l'utilisateur
-    return clearSelectedMark().then( function() {
-        if ( (uiNomRegionAffichee != "" || uiNomvilleAffichee != "")
+    debugger;
+    clearSelectedMark();
+    if ( (uiNomRegionAffichee != "" 
+            || uiNomvilleAffichee != "")
             && blSousRegion != "") {
-            // l'utilisateur a cliqué sur une région de la carte
-            // donc il est dirigé vers la sous région
-            // efface d'abord la région sélectionnée car Tableau 
-            // la mémorise.        
-            return switchTosubRegion(getSubProfile(current_profile), current_filtre_region, blSousRegion);                    
-        }
-    });
-
+        // l'utilisateur a cliqué sur une région de la carte
+        // donc il est dirigé vers la sous région
+        // efface d'abord la région sélectionnée car Tableau 
+        // la mémorise.        
+        switchTosubRegion(getSubProfile(current_profile), current_filtre_region, blSousRegion);        
+    }    
 }
 
 //modifie les filtres pour naviguer vers la sous région
 function switchTosubRegion(profile, region_parente, region) {
 
     console.log(`Changement de région. Destination : '${region}' avec le profile '${profile}' et région parente : '${region_parente}'`);
-debugger;
+
     //re définit les filtres courant
     current_filtre_region_parente = region_parente;
     current_filtre_region = region;                    
@@ -372,19 +384,48 @@ debugger;
 
     // applique les filtres au Tableau de bord
     // pour naviguer dans les sous région
-    return workbook.changeParameterValueAsync(PROFILE,current_profile)        
-    .then(
-        function() {
-            return applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente);
-        }
-    ).then(
-        function() {
-            return applyFilter(BL_REGION_FILTRE,current_filtre_region);        
-        }
-    );        
+    workbook.changeParameterValueAsync(PROFILE,current_profile);
+    applyRegionFilters();
+}
+
+function applyRegionFilters() {
+
+    applyFilter(BL_FILTRE_REGION_PARENTE_CARTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);        
+    applyFilter(BL_REGION_FILTRE_CARTE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
+
+    applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);        
+    applyFilter(BL_REGION_FILTRE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
 }
 
 // retourne le profile enfant du profile passé en paramètre
 function getSubProfile(profile) {    
     return subProfile[profile];
+}
+
+
+function debugListeFiltre() {
+    const activesheet = viz.getWorkbook().getActiveSheet();
+
+    var filtre = null;
+
+    if ( activesheet.getSheetType() == 'worksheet') {
+        console.log("c'est bien une feuille");
+        filtre = activesheet.getFiltersAsync();
+    } else {
+        console.log("ce n'est pas une feuille");
+        const sheetArray = activesheet.getWorksheets();
+        
+        var lastCall = null;
+        for(var i=0; i < sheetArray.length; ++i) {
+           if ( lastCall == null) {
+            lastCall =  sheetArray[i].getFiltersAsync();
+           }
+           else 
+           lastCall.then(function(x){ debugger; return sheetArray[i].getFiltersAsync();})
+        }
+
+        filter = lastCall;
+    }
+
+        filter.then(x=> { debugger; console.log("filter : " + x);});       
 }
