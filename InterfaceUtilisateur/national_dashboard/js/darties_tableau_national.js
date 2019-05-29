@@ -22,6 +22,11 @@ const BL_FILTRE_REGION_PARENTE_CARTE = "BL Filtre région parente Carte";
 // dans le tableau de bord
 const PERIODE_FILTER_NAME = "Id (Date)";                                  
 
+// Nom du filtre pour afficher les résultats cumulé
+// dans le tableau de bord
+const CUMULE_FILTER_NAME = "cumulé";                                  
+
+
 // Nom du filtre pour la période cumulée
 // dans le tableau de bord
 const PERIODE_CUMULE_FILTER_NAME = "BL Numéro Mois";
@@ -41,7 +46,7 @@ const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
 // nom des feuilles dans les tableau de bord
 // auxquelles il faut appliquer les filtres
 const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
-const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
+const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Détails par poids produit"];
 
 var viz = null;
 var workbook = null;
@@ -74,6 +79,10 @@ function initDarties() {
     $('#produits').on('change',  produitschange);
     $('#enseignes').on('change',  enseigneschange);
     $('#periodes').on('change',  periodeschange);
+    $('#switchCumul').on('click',  cumulClick);
+    $('#effacerFiltres').on('click',  effacerfiltresClick);
+    
+    
     
     //retour au premier écran
     $('#retour_accueille').on('click', backToStartScreen);
@@ -104,7 +113,7 @@ function initDarties() {
     // mémorise les profile de départ pour revenir à la hiérarchie initiale
 
     //URL où sont sauvegardé les tableau de bord
-    const url = "https://eu-west-1a.online.tableau.com/t/dartiesap/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+    const url = "https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
     //const url = "https://public.tableau.com/views/DARTIES/Carte"; //?:embed=y&:display_count=yes&publish=yes&:origin=viz_share_link#6";
 
     var options = {
@@ -135,7 +144,7 @@ function initDarties() {
 
             $("#periodes").val(id_date);
 
-            applyFilter(PERIODE_FILTER_NAME,`${id_date}`, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+            applyFilter(PERIODE_FILTER_NAME,[`${id_date}`,`${id_date+1000000}`], MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));            
 
 
@@ -225,7 +234,7 @@ function clearSelectedMark() {
 
 // remet tous les filtres sur "Tous ..."
 function resetFilters() {
-    $(".filter").val(TOUT);
+    $(".select-filter").val(TOUT);
 
     const today = new Date();
     const mm = today.getMonth() + 1;
@@ -233,17 +242,30 @@ function resetFilters() {
     const id_date = yyyy * 100 + mm;
 
     $("#periodes").val(id_date);
+    $(".checkbox-filter").prop("checked", false);
+    
+    $(".select-filter").trigger("onchange");
+    $(".checkbox-filter").trigger("onclick");
 }
 
 function applyAllFilters() {
-    $(".filter").trigger("onchange");
+    $('#taux').on('change',  tauxchange);
+    $('#regions').on('change',  regionschange);
+    $('#indicateurs').on('change',  indicateurschange);
+    $('#produits').on('change',  produitschange);
+    $('#enseignes').on('change',  enseigneschange);
+    $('#periodes').on('change',  periodeschange);
+    $('#switchCumul').on('click',  cumulClick);
+    $('#effacerFiltres').on('click',  effacerfiltresClick);
+
+    $(".select-filter").trigger("onchange");
+    $(".checkbox-filter").trigger("onclick");
 }
 
 // appellé lorsque l'utilisateur change de vue
+// via les onglets de Tableau
 function tabViewchange(e) {
     console.log("TAB_SWITCH");
-    //resetFilters();
-
     //réappliquer les filtres de région actuels
     applyRegionFilters();
     applyAllFilters();
@@ -296,19 +318,32 @@ function enseigneschange(e) {
 
 function periodeschange(e) {    
     
-    const periode = e.target.value;
+    const periode = parseInt(e.target.value);
 
     //on ne retiens que le mois pour la vue du cumulé
     const numero_mois = periode - 201900;
     
-    applyFilter(PERIODE_FILTER_NAME, periode, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+    //filtre le mois courant
+    //ces dates ont leur id = yyyyMM
+    // et 1yyyyMM pour les dates correspodnates aux cumulés
+    applyFilter(PERIODE_FILTER_NAME, periode , MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err) );
-
 
     applyFilter(PERIODE_CUMULE_FILTER_NAME, numero_mois, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err) );
                                                             
                                                             
+}
+
+function cumulClick(e) {    
+    //Number($("#switchCumul").prop('checked'))
+    //applique le filtre en convertissant le boolean en entier
+    applyFilter(CUMULE_FILTER_NAME,$("#switchCumul").prop('checked')?"1":"0", MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+                                                                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );    
+}
+
+function effacerfiltresClick(e) {
+    resetFilters();
 }
 
 ////////////////////////////////////////////

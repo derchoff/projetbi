@@ -55,7 +55,7 @@
                 <!-- zones commerciales -->
                 <div class="row">
                         <div class="col-1 col-sm-4 mb-2">
-                            <select id="regions" class="filter">
+                            <select id="regions" class="filter select-filter">
                                     <option value="tout" selected>Régions commerciale</option>
                                     <option value="Region_parisienne">Région parisienne</option>
                                     <option value="Nord_Ouest">Nord ouest</option>
@@ -68,7 +68,7 @@
                     <!-- indicateurs -->                    
                     <div class="row">
                             <div class="col-1 col-sm-4 mb-2">
-                                    <select id="indicateurs" class="filter">
+                                    <select id="indicateurs" class="filter select-filter">
                                             <option value="tout" selected>Toutes mes indicateurs</option>
                                             <option value="CA">Chiffre d'affaire</option>
                                             <option value="Marge">Marge brute</option>
@@ -79,7 +79,7 @@
                         <!-- types produits -->     
                         <div class="row">
                             <div class="col-1 col-sm-4 mb-2">
-                                    <select id="produits" class="filter">
+                                    <select id="produits" class="filter select-filter">
                                             <option value="tout" selected>Tous les produits</option>
                                             <option value="Fours">Fours</option>
                                             <option value="Magneto">Magnéto</option>
@@ -90,7 +90,7 @@
                         <!-- enseignes -->
                         <div class="row">
                                 <div class="col-1 col-sm-4 mb-2">
-                                        <select id="enseignes" class="filter">
+                                        <select id="enseignes" class="filter select-filter">
                                                 <option value="tout" selected>Toutes les enseignes</option>
                                                 <option value="61000">Alencon - Darty</option>
                                                 <option value="80000">Amiens - Leroy_merlin</option>
@@ -143,10 +143,10 @@
                                             </select>                        
                                 </div>
                             </div>   
-                            <!-- enseignes -->
+                            <!-- dates -->
                             <div class="row">
                                     <div class="col-1 col-sm-4 mb-2">
-                                            <select id="periodes" class="filter">
+                                            <select id="periodes" class="filter select-filter">
                                                     <option value="201901" selected>Janvier 2019</option>
                                                     <option value="201902">Fevrier 2019</option>
                                                     <option value="201903">Mars 2019</option>
@@ -161,7 +161,21 @@
                                                     <option value="201912">Decembre 2019</option>                                                    
                                             </select>                        
                                     </div>
-                                </div>                                                                                           
+                                </div>
+                            <!-- Cumulé/non cumulé -->
+                            <div class="row">
+                                <div class="col-1 col-sm-4 mb-2">
+                                    <div class="row">
+                                            <div class="col-1 col-sm-4 mb-2">
+                                                <input type="checkbox" id="switchCumul" class="filter checkbox-filter"/>
+                                            </div>
+                                            <div class="col-4 col-sm-4 mb-2 text-nowrap">
+                                                <label for="switchCumul">Cumulé / Non cumulé</label>                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <button id="effacerFiltres">Effacer les filtres</button>                                                                                                                                                   
                 </div>
             </div>
                 <div class="col-10 mx-auto h-100 w-100">

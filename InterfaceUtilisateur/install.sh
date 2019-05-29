@@ -7,7 +7,7 @@
 startme() {
     
 #    docker-compose up -d --build;
-docker build --tag darties-app:1.0.0 .;
+docker build --tag darties-app:1.0.0 ./;
 docker run -d -p 8081:8081 --name darties_app darties-app:1.0.0 npm start;   
 }
 

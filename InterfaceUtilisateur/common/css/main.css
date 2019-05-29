@@ -25,3 +25,12 @@ td {
   margin: 0 auto;
   width:80% /* value of your choice which suits your alignment */
 }
+
+a {
+  color: #FFFFFF; /* CSS link color */
+  font-weight: bold;
+}
+a:hover {
+  color: #FFFFFF; /* CSS link color */
+  font-weight: bold;
+}
