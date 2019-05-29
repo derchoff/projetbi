@@ -1,3 +1,9 @@
+// URL du tableau sur Tableau Online
+const TABLEAU_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+//const TABLEAU_PRINT_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
+const TABLEAU_PRINT_URL="?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
+const TABLEAU_WIDTH="1300px";
+const TABLEAU_HEIGHT="850px";
 //valeur pou rles filtres lorsque l'on veut tput sélectionner 
 // => aucun filtre
 const TOUT = "tout";
@@ -61,10 +67,13 @@ var current_filtre_region_parente;
 var current_profile;    
 
 //dictionnaire des profiles enfants
+const PROFILE_DIRECTEUR_COMMERCIAL = "Directeur commercial";
+const PROFILE_DIRECTEUR_REGIONAL = "Directeur Régional";
+const PROFILE_RESPONSABLE_MAGASIN = "Responsable magasin";
 const subProfile = new Object();
-subProfile["Directeur commercial"]="Directeur Régional";
-subProfile["Directeur Régional"]="Responsable magasin";
-subProfile["Responsable magasin"]="Chef produit";
+subProfile[PROFILE_DIRECTEUR_COMMERCIAL]=PROFILE_DIRECTEUR_REGIONAL;
+subProfile[PROFILE_DIRECTEUR_REGIONAL]=PROFILE_RESPONSABLE_MAGASIN;
+subProfile[PROFILE_RESPONSABLE_MAGASIN]="Chef produit";
 
 
 function initDarties() {
@@ -82,8 +91,11 @@ function initDarties() {
     $('#switchCumul').on('click',  cumulClick);
     $('#effacerFiltres').on('click',  effacerfiltresClick);
     
-    
-    
+    $('#pdf-export').on('click', e => viz.showExportPDFDialog());
+    $('#excel-export').on('click', e => exportToExcel());
+    $('#print').on('click', e => printDashBoard());
+    $('#email').on('click', e => viz.showShareDialog());
+
     //retour au premier écran
     $('#retour_accueille').on('click', backToStartScreen);
 
@@ -113,14 +125,14 @@ function initDarties() {
     // mémorise les profile de départ pour revenir à la hiérarchie initiale
 
     //URL où sont sauvegardé les tableau de bord
-    const url = "https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+    // const url = "https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
     //const url = "https://public.tableau.com/views/DARTIES/Carte"; //?:embed=y&:display_count=yes&publish=yes&:origin=viz_share_link#6";
 
     var options = {
         hideTabs: false,
         hideToolbar: true,
-        width: "1300px",
-        height: "850px",   
+        width: TABLEAU_WIDTH,
+        height: TABLEAU_HEIGHT,   
 
         //Cette fonction est appellé par l'API Javascript de Tableau 
         //lorsque le tableau de bord est prêt à l'utilisation.
@@ -144,7 +156,7 @@ function initDarties() {
 
             $("#periodes").val(id_date);
 
-            applyFilter(PERIODE_FILTER_NAME,[`${id_date}`,`${id_date+1000000}`], MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+            applyFilter(PERIODE_FILTER_NAME,`${id_date}`, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));            
 
 
@@ -161,7 +173,7 @@ function initDarties() {
     //options[`${PERIODE_FILTER_NAME}`] = '201903';
 
     //créer l'objet vis de Tableau software
-    viz = new tableau.Viz(placeholderDiv, url, options);
+    viz = new tableau.Viz(placeholderDiv, TABLEAU_URL, options);
 
 }
 
@@ -338,7 +350,7 @@ function periodeschange(e) {
 function cumulClick(e) {    
     //Number($("#switchCumul").prop('checked'))
     //applique le filtre en convertissant le boolean en entier
-    applyFilter(CUMULE_FILTER_NAME,$("#switchCumul").prop('checked')?"1":"0", MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+    applyFilter(CUMULE_FILTER_NAME,$("#switchCumul").prop('checked')?1:0, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err) );    
 }
 
@@ -347,7 +359,133 @@ function effacerfiltresClick(e) {
 }
 
 ////////////////////////////////////////////
-// Fonctions de navigations dans la hiérarchie
+// Fonctions d'exportation Pdf, excel et impression
+////////////////////////////////////////////
+
+//callback appellé lorsque l'utilisateur demande l'impression du tableau de bord.
+// L'impression directe d'un tableau de bord génère des grosse erreur d'affichage : les éléments se chevauche
+// donc il faut importer le tableau de bord au format image et imprimer la page
+// après avoir caché les autres éléments.
+function printDashBoard() {  
+    
+    //créé une image HTML avec la génération du tableau au format PNG
+    // Applications de tous les filtres courant 
+    debugger;
+    let url =  `${viz.getWorkbook().getActiveSheet().getUrl()}${TABLEAU_PRINT_URL}`;
+
+    //définit le profile courrant
+    url += `profile=${encodeURIComponent(current_profile)}&filtre_region=${encodeURIComponent(current_filtre_region)}&filtre_region_parente=${encodeURIComponent(current_filtre_region_parente)}`;
+
+    //indicateur
+    if ($('#indicateurs').val()!=TOUT) {
+        url += `&${encodeURIComponent(INDICATEUR_FILTER)}=${encodeURIComponent($('#indicateurs').val())}`;
+    }
+
+    //produit
+    if ($('#produits').val()!=TOUT) {
+        url += `&${encodeURIComponent(PRODUIT_FILTER)}=${encodeURIComponent($('#produits').val())}`;
+    }    
+
+    //période sélectionnée
+    const periode = parseInt($('#periodes').val());
+    //on ne retiens que le mois pour la vue du cumulé
+    const numero_mois = periode - 201900;    
+    url += `&${encodeURIComponent(PERIODE_FILTER_NAME)}=${periode}`;
+    url += `&${encodeURIComponent(PERIODE_CUMULE_FILTER_NAME)}=${numero_mois}`;
+
+    //cumulé ? 
+    url += `&${encodeURIComponent(CUMULE_FILTER_NAME)}=${$("#switchCumul").prop('checked')?1:0}`;
+
+    var $img = $('<img src="'+ url +'" style="width:'+ TABLEAU_WIDTH +'; height:'+ TABLEAU_HEIGHT + ';"/>');
+
+    $img.on('load', function() {
+
+        //dès que l'image est chargée il faut cacher les autres éléments et imprimer la page
+        // afin de n'imprimer que l'image
+        $("#titreTableauDeBord").hide();
+        $("#panelFiltres").hide();
+        $("#tableauViz").hide();
+        $(".container-fluid").hide();
+            
+        $img.appendTo(document.getElementsByTagName('body')[0]);
+
+        window.print();
+
+        //impression terminée on réaffiche tout 
+        // après avoir supprimer l'image
+        $img.remove();
+
+        $("#titreTableauDeBord").show();
+        $("#panelFiltres").show();
+        $("#tableauViz").show();
+        $(".container-fluid").show();    
+    });
+}
+
+//les fonctions suivantes sont utilisées pour exporter au format excel
+// inspiré de https://github.com/alexlokhov/export-to-excel/blob/master/xlsx_exporter.html						
+function exportToExcel(){
+    let dashboardname = '';
+    let exportData = [];
+    let sheetNames = [];
+    let doneSheets = 0;
+    let sheets = [];
+    
+    workbook = viz.getWorkbook();
+    
+    dashboardname = workbook.getActiveSheet().getName()
+    sheets = workbook.getActiveSheet().getWorksheets()
+    
+    options = {
+        maxRows: 0, 
+        ignoreSelection: true,
+        ignoreAliases: false,
+        includeAllColumns: false
+    };
+    
+    for (let i = 0; i < sheets.length; i++) {
+        sheetName = sheets[i].getName()
+        sheetNames.push({sheetid:sheetName, header:true})
+        //sheets[i].getSummaryDataAsync (options).then(function(t) {
+        sheets[i].getUnderlyingDataAsync (options).then(function(t) {             
+            let niceData = buildData(t);
+            exportData.push(niceData);
+            doneSheets++;
+            if (doneSheets == sheets.length)
+                writeToFile(dashboardname,sheetNames, exportData);
+        });
+    }
+}
+			
+function buildData(table) {
+    let columns = table.getColumns();
+    let data = table.getData();
+    
+    function reduceToObjects(cols, data) {
+        debugger;
+        let fieldNameMap = $.map(cols, function(col) {
+            return col.getFieldName()
+        });
+        let dataToReturn = $.map(data, function(d) {
+            return d.reduce(function(memo, value, idx) {
+                memo[fieldNameMap[idx]] = value.formattedValue; //value.value;
+                return memo;
+            }, {});
+        });
+        return dataToReturn;
+    }
+    
+    let niceData = reduceToObjects(columns, data);
+    return (niceData)
+}
+			
+function writeToFile(dashboardname, sheetNames, exportData) {
+    let sql = 'SELECT INTO XLSX("' + dashboardname + '.xlsx",?) FROM ?';
+    let res = alasql(sql, [sheetNames, exportData]);
+}
+
+////////////////////////////////////////////
+// Fonctions de navigation dans la hiérarchie
 ////////////////////////////////////////////
 
 function backToStartScreen() {
@@ -407,6 +545,9 @@ function reportSelectedMarks(marks) {
     }    
 }
 
+
+
+
 //modifie les filtres pour naviguer vers la sous région
 function switchTosubRegion(profile, region_parente, region) {
 
@@ -421,6 +562,21 @@ function switchTosubRegion(profile, region_parente, region) {
     // pour naviguer dans les sous région
     workbook.changeParameterValueAsync(PROFILE,current_profile);
     applyRegionFilters();
+
+    switch(current_profile) {
+        case PROFILE_DIRECTEUR_COMMERCIAL: {
+            $("#TitreTableauDeBord").html(`Tableau de bord national ${current_filtre_region}`)
+            break;
+        }
+        case PROFILE_DIRECTEUR_REGIONAL: {
+            $("#TitreTableauDeBord").html(`Tableau de bord régional ${current_filtre_region}`)
+            break;
+        }
+        case PROFILE_RESPONSABLE_MAGASIN: {
+            $("#TitreTableauDeBord").html(`Tableau de bord magasin ${current_filtre_region}`)
+            break;
+        }
+    }
 }
 
 function applyRegionFilters() {

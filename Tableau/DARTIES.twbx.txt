@@ -1,4 +1,4 @@
-        * BL Filtre Region :
+* BL Filtre Region & BL Filtre Region Carte:
             Utilisé pour filtrer les données afin de calculer le total de la région associé au profile. 
             "Total par sous région", "Total de la région", "Tooltip: Total par ville", "Tooltip Total par sous région",
             "Tooltip : Total ville par produit", "CA alentour et classement".
@@ -22,7 +22,7 @@
         * UI Nom Ville Affichée :
             Affiche le nom des villes sur la carte lorsque le profile est "Directeur Regional", 
             "Responsable magasins" ou "Chef produit"            
-        * BL Filtre région parente : 
+        * BL Filtre région parente  & BL Filtre région parente Carte : 
             Filtre la région parente, utile pour afficher le CA des régions alentours et leur classement
         * UI Ville - Enseigne :
             Affiche la ville et l'enseigne sous ce format : "Ville - Format". 
@@ -54,6 +54,7 @@
         * Ordre de Tri  : Paramètre utiliser pour syncrhoniser le tri entre les deux grilles de l'onglet palmarès
         * BL Rang National Filtré : utilisé pour filtrer la grille dans palmarès. Dépend de BL Palmarès Sort Order
         * BL Quinze Premier? : indique si selon 'Ordre de Tri' la ligne est dans les 15 premières
+        * BL Numéro Mois : numéro du mois à retenir pour la vue des cumulés.
             
     Configurer les affichages :
        
@@ -72,3 +73,4 @@
     Profile Responsable magasin :
         BL Filtre Region = Une des villes
         BL Filtre Region parente = Une des régions (Nord Est, Nord Ouest, Région Parisienne, Sud Est, sud Ouest) : doit correspondre à la région de la ville.
+    

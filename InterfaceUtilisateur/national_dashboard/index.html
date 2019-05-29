@@ -8,6 +8,8 @@
             src="https://code.jquery.com/jquery-1.12.4.js"
             integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
             crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.2.7/alasql.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.12/xlsx.core.min.js" crossorigin="anonymous"></script>            
         <script type="text/javascript" src="jquery-ui-1.10.0.custom.js"></script>            
         <script src="https://online.tableau.com/javascripts/api/tableau-2.js"></script>
         <script src="/js/darties_tableau_national.js"></script>
@@ -16,7 +18,7 @@
 
     <div class="container-fluid h-100">
         <!-- ENTETE -->
-        <div class="row display-flex justify-content-center align-items-center">
+        <div id="titreTableauDeBord"  class="row display-flex justify-content-center align-items-center">
             <div class="col-2 mx-auto">
                 <div class="card card-body mb-2 pb-2 pt-2 blue-background justify-content-center align-items-center">
                     <img src="/images/logo darties.png"/>
@@ -24,13 +26,13 @@
             </div>
             <div class="col-10 mx-auto pt-2 mb-2 ">
                 <div class="card card-body blue-background justify-content-center align-items-center">
-                        <label>Tableau de bord National</label>
+                        <label id="TitreTableauDeBord">Tableau de bord National</label>
                 </div>                
             </div>
         </div>
                 
         <div class="row">
-            <div class="col-2 mx-auto">
+            <div id="panelFiltres" class="col-2 mx-auto">
                 <div class="card card-body mb-2 h-100 blue-background">
                 <button id="retour_accueille">Accueille</button>
                 <button id="debbugButton">Liste filtre vue</button>
@@ -174,7 +176,25 @@
                                             </div>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
+                            <div class="row">
+                                    <div class="col-4 col-sm-4 mb-2">
+                                        <div class="row flex-nowrap">
+                                                <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                    <input id="pdf-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/pdf.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                    <input id="excel-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/ms-excel.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                    <input id="print" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/send-to-printer.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                    <input id="email" class="export-btn" type="image" src="https://img.icons8.com/ios/50/000000/secured-letter.png"/>
+                                                </div>                                                                                                                                                    
+                                        </div>
+                                    </div>
+                                </div>                                
                             <button id="effacerFiltres">Effacer les filtres</button>                                                                                                                                                   
                 </div>
             </div>
