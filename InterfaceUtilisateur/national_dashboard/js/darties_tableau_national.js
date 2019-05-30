@@ -3,7 +3,7 @@ const TABLEAU_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DA
 //const TABLEAU_PRINT_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
 const TABLEAU_PRINT_URL="?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
 const TABLEAU_WIDTH="1300px";
-const TABLEAU_HEIGHT="850px";
+const TABLEAU_HEIGHT="820px";
 //valeur pou rles filtres lorsque l'on veut tput sélectionner 
 // => aucun filtre
 const TOUT = "tout";
@@ -12,7 +12,7 @@ const INDICATEUR_FILTER = "Abbreviation";
 // nom du filtre Type produit dans le tableau de bord
 const PRODUIT_FILTER = "Type Produit";
 // nom du filtre enseigne dans le tableau de bord
-const CODE_POSTAL_FILTER = "Code Postal";
+const ENSEIGNE_FILTER = "Enseigne";
 // Nom du filtre pour sélectionner la région a afficher
 // dans le tableau de bord
 const BL_REGION_FILTRE = "BL Filtre Region";
@@ -52,6 +52,8 @@ const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
 // nom des feuilles dans les tableau de bord
 // auxquelles il faut appliquer les filtres
 const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
+const MASTER_SHEET_CA_ALENTOUR =  ["CA alentour et classement"];
+const MASTER_SHEET_INDICATEURS =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
 const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Détails par poids produit"];
 
 var viz = null;
@@ -78,9 +80,7 @@ subProfile[PROFILE_RESPONSABLE_MAGASIN]="Chef produit";
 
 function initDarties() {
     //capture les évènement "onchage" des input dans le script HTML
-    // cela afin de modifier les filtres dans les feuilles de Tableau Software
-
-    resetFilters();
+    // cela afin de modifier les filtres dans les feuilles de Tableau Software    
 
     $('#taux').on('change',  tauxchange);
     $('#regions').on('change',  regionschange);
@@ -110,10 +110,16 @@ function initDarties() {
     var placeholderDiv = document.getElementById('tableauViz');
 
     //récupère les filtres région à appliquer
+    // mémorise les profiles de départ pour revenir à la hiérarchie initiale
     start_filtre_region = $.urlParam("filtre_region");
     start_filtre_region_parente = $.urlParam("filtre_region_parente");    
     start_profile = $.urlParam("profile");
     
+    //désactive les filtres du directeur commercial si besoin
+    if ( start_profile != PROFILE_DIRECTEUR_COMMERCIAL ) {
+        $(".directeur-commercial").hide();
+    }
+
     current_filtre_region = $.urlParam("filtre_region");
     current_filtre_region_parente = $.urlParam("filtre_region_parente");    
     current_profile = $.urlParam("profile");    
@@ -121,8 +127,6 @@ function initDarties() {
     console.log("Region : " + start_filtre_region);
     console.log("Region parente : " + start_filtre_region_parente);
     console.log("profile : " + start_profile);
-
-    // mémorise les profile de départ pour revenir à la hiérarchie initiale
 
     //URL où sont sauvegardé les tableau de bord
     // const url = "https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
@@ -137,6 +141,7 @@ function initDarties() {
         //Cette fonction est appellé par l'API Javascript de Tableau 
         //lorsque le tableau de bord est prêt à l'utilisation.
         onFirstInteractive: function() {
+            resetFilters();
 
             // The viz is now ready and can be safely used.
             workbook = viz.getWorkbook();
@@ -158,7 +163,6 @@ function initDarties() {
 
             applyFilter(PERIODE_FILTER_NAME,`${id_date}`, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));            
-
 
             //l'on peut réactiver les filtres
             $(".filter").prop('disabled', false);
@@ -253,23 +257,17 @@ function resetFilters() {
     const yyyy = today.getFullYear();
     const id_date = yyyy * 100 + mm;
 
-    $("#periodes").val(id_date);
     $(".checkbox-filter").prop("checked", false);
-    
-    $(".select-filter").trigger("onchange");
-    $(".checkbox-filter").trigger("onclick");
+    $("#periodes").val(id_date);    
+
+    //les triggers ne fonctionne pas très bien
+    // parce la fonction est appellée dans un "event"
+    $(".select-filter").change();
+    //$(".checkbox-filter").click();
+    cumulClick(null);
 }
 
 function applyAllFilters() {
-    $('#taux').on('change',  tauxchange);
-    $('#regions').on('change',  regionschange);
-    $('#indicateurs').on('change',  indicateurschange);
-    $('#produits').on('change',  produitschange);
-    $('#enseignes').on('change',  enseigneschange);
-    $('#periodes').on('change',  periodeschange);
-    $('#switchCumul').on('click',  cumulClick);
-    $('#effacerFiltres').on('click',  effacerfiltresClick);
-
     $(".select-filter").trigger("onchange");
     $(".checkbox-filter").trigger("onclick");
 }
@@ -300,10 +298,10 @@ function regionschange(e) {
 
 function indicateurschange(e) {
     if (e.target.value==TOUT) { 
-        applyFilterALL(INDICATEUR_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+        applyFilterALL(INDICATEUR_FILTER, MASTER_SHEET_INDICATEURS).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(INDICATEUR_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+        applyFilter(INDICATEUR_FILTER, e.target.value, MASTER_SHEET_INDICATEURS).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }
 }
@@ -320,10 +318,10 @@ function produitschange(e) {
 
 function enseigneschange(e) {
     if (e.target.value==TOUT) {
-        applyFilterALL(CODE_POSTAL_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
+        applyFilterALL(ENSEIGNE_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
                                             err => console.log(MSG_APPLY_FILTER_ERROR + err));
     } else {
-        applyFilter(CODE_POSTAL_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
+        applyFilter(ENSEIGNE_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
                                                         err => console.log(MSG_APPLY_FILTER_ERROR + err));
     }
 }
@@ -584,7 +582,14 @@ function applyRegionFilters() {
     applyFilter(BL_FILTRE_REGION_PARENTE_CARTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);        
     applyFilter(BL_REGION_FILTRE_CARTE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
 
-    applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);        
+    applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);    
+
+    if (current_profile==PROFILE_RESPONSABLE_MAGASIN) {
+        applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_CA_ALENTOUR);            
+    } else {
+        clearFilter(BL_FILTRE_REGION_PARENTE, MASTER_SHEET_CA_ALENTOUR);
+    }
+    
     applyFilter(BL_REGION_FILTRE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
 }
 

@@ -34,21 +34,20 @@
         <div class="row">
             <div id="panelFiltres" class="col-2 mx-auto">
                 <div class="card card-body mb-2 h-100 blue-background">
-                <button id="retour_accueille">Accueille</button>
-                <button id="debbugButton">Liste filtre vue</button>
+                <!-- <button id="debbugButton">Liste filtre vue</button> -->
 
                 <label><b>Filtres</b></label>
                 <!-- FILTRES -->
                 <!-- taux conversion -->
-                <div class="row">
+                <div class="directeur-commercial row">
                     <div class="col-1 col-sm-4 mb-2">
-                        <select id="taux" class="filter">
+                        <select id="taux" class="directeur-commercial filter">
                                 <option value="1" selected>Euros</option>
                                 <option value="2">Dollars</option>
                         </select>                        
                     </div>
                     <div class="col-1 col-sm-4 mb-2">
-                        <select class="filter">
+                        <select class="directeur-commercial filter">
                                 <option value="1" selected>Taux 1 | Mai 2019</option>
                                 <option value="2">Taux 2 | Avril 2019</option>
                         </select>                         
@@ -66,7 +65,18 @@
                                     <option value="Sud_Ouest">Sud ouest</option>
                             </select>                        
                         </div>
-                    </div>                
+                    </div>           
+                    <!-- enseignes -->
+                    <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select id="enseignes" class="filter select-filter">
+                                            <option value="tout" selected>Toutes les enseignes</option>
+                                            <option value="Boulanger">Boulanger</option>
+                                            <option value="Darty">Darty</option>
+                                            <option value="Leroy Merlin">Leroy Merlin</option>
+                                        </select>                        
+                            </div>
+                        </div>                          
                     <!-- indicateurs -->                    
                     <div class="row">
                             <div class="col-1 col-sm-4 mb-2">
@@ -89,62 +99,7 @@
                                         </select>                        
                             </div>
                         </div>
-                        <!-- enseignes -->
-                        <div class="row">
-                                <div class="col-1 col-sm-4 mb-2">
-                                        <select id="enseignes" class="filter select-filter">
-                                                <option value="tout" selected>Toutes les enseignes</option>
-                                                <option value="61000">Alencon - Darty</option>
-                                                <option value="80000">Amiens - Leroy_merlin</option>
-                                                <option value="49000">Angers - Boulanger</option>
-                                                <option value="16000">Angouleme - Darty</option>
-                                                <option value="62000">Arras - Leroy_merlin</option>
-                                                <option value="20600">Bastia - Boulanger</option>
-                                                <option value="25000">Besancon - Darty</option>
-                                                <option value="93000">Bobigny - Darty</option>
-                                                <option value="33000">Bordeaux - Leroy_merlin</option>
-                                                <option value="18000">Bourges - Boulanger</option>
-                                                <option value="11000">Carcassonne - Darty</option>
-                                                <option value="95000">Cergy_Pontoise - Leroy_merlin</option>
-                                                <option value="73000">Chambery - Boulanger</option>
-                                                <option value="63000">Clermont_Ferrand - Darty</option>
-                                                <option value="94000">Creteil - Darty</option>
-                                                <option value="04000">Digne - Leroy_merlin</option>
-                                                <option value="21000">Dijon - Boulanger</option>
-                                                <option value="91000">Evry - Darty</option>
-                                                <option value="09000">Foix - Leroy_merlin</option>
-                                                <option value="38000">Grenoble - Boulanger</option>
-                                                <option value="59000">Lille - Darty</option>
-                                                <option value="87000">Limoges - Darty</option>
-                                                <option value="69001">Lyon - Darty</option>
-                                                <option value="13001">Marseille - Leroy_merlin</option>
-                                                <option value="77000">Melun - Boulanger</option>
-                                                <option value="57000">Metz - Darty</option>
-                                                <option value="30000">Nimes - Leroy_merlin</option>
-                                                <option value="54000">Nancy - Boulanger</option>
-                                                <option value="92000">Nanterre - Darty</option>
-                                                <option value="44000">Nantes - Darty</option>
-                                                <option value="06000">Nice - Leroy_merlin</option>
-                                                <option value="24000">Perigueux - Boulanger</option>
-                                                <option value="75011">Paris_Nord - Darty</option>
-                                                <option value="75015">Paris_Sud - Leroy_merlin</option>
-                                                <option value="64000">Pau - Darty</option>
-                                                <option value="29000">Quimper - Leroy_merlin</option>
-                                                <option value="12000">Rodez - Boulanger</option>
-                                                <option value="76000">Rouen - Darty</option>
-                                                <option value="22000">St_Brieuc - Leroy_merlin</option>
-                                                <option value="42000">St_Etienne - Boulanger</option>
-                                                <option value="67000">Strasbourg - Darty</option>
-                                                <option value="65000">Tarbes - Darty</option>
-                                                <option value="83000">Toulon - Leroy_merlin</option>
-                                                <option value="37000">Tours - Boulanger</option>
-                                                <option value="10000">Troyes - Darty</option>
-                                                <option value="26000">Valence - Leroy_merlin</option>
-                                                <option value="59300">Valenciennes - Boulanger</option>
-                                                <option value="78000">Versailles - Darty</option>                                                       
-                                            </select>                        
-                                </div>
-                            </div>   
+  
                             <!-- dates -->
                             <div class="row">
                                     <div class="col-1 col-sm-4 mb-2">
@@ -180,6 +135,11 @@
                             <div class="row">
                                     <div class="col-4 col-sm-4 mb-2">
                                         <div class="row flex-nowrap">
+                                            <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                <input id="retour_accueille" class="export-btn" type="image"  src="https://img.icons8.com/ios/50/000000/home-page.png"/>
+                                            </div>
+                                        </div>
+                                        <div class="row flex-nowrap">
                                                 <div class="col-1 col-sm-4 mb-2 ml-2">
                                                     <input id="pdf-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/pdf.png"/>
                                                 </div>
@@ -192,7 +152,7 @@
                                                 <div class="col-1 col-sm-4 mb-2 ml-3">
                                                     <input id="email" class="export-btn" type="image" src="https://img.icons8.com/ios/50/000000/secured-letter.png"/>
                                                 </div>                                                                                                                                                    
-                                        </div>
+                                        </div>                                                                                
                                     </div>
                                 </div>                                
                             <button id="effacerFiltres">Effacer les filtres</button>                                                                                                                                                   
@@ -201,7 +161,7 @@
                 <div class="col-10 mx-auto h-100 w-100">
                     <div class="card card-body mb-2 h-100 w-100">                    
                         <!-- TABLEAU -->
-                        <div id="tableauViz" class="h-100 w-100">
+                        <div id="tableauViz" class="w-100">
                         
                         </div>
                     </div>

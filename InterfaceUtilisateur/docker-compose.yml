@@ -10,11 +10,15 @@ services:
        - '8081:8081'
      container_name: darties_app 
      volumes:
-       - /usr/src/darties:/usr/src/darties
+       - darties_app:/usr/src/darties
      restart: always
      networks:
        darties_network:         
-             
+
+volumes:
+    darties_app:
+        driver: local             
+        
 # Custom network so all services can communicate using a FQDN
 networks:
     darties_network:
