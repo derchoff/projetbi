@@ -8,7 +8,7 @@ services:
      image: darties-talend:1.0.0
      container_name: darties_talend 
      volumes:
-       - /usr/src/darties_talend:/usr/src/darties_talend
+       - darties_talend:/usr/src/darties_talend
        - /usr/src/excel/ARCHIVE:/usr/src/excel/ARCHIVE
        - /usr/src/excel/A_TRAITER:/usr/src/excel/A_TRAITER
        - /usr/src/excel/EN_COURS:/usr/src/excel/EN_COURS
@@ -18,7 +18,7 @@ services:
        darties_talend_network:         
        
 volumes:
-    db_data:
+    darties_talend:
         driver: local             
 # Custom network so all services can communicate using a FQDN
 networks:
