@@ -658,7 +658,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="384" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_3" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour le mois de Janvier. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="&#xA;if (row7.CA_Janvier == 0 &amp;&amp; (row7.MB_Janvier != 0 || row7.V_Janvier != 0)){&#xA;&#x9;throw new Exception(&quot;Une des valeurs est fausse dans le fichier '&quot;+  context.nom_fichier +&quot;' pour la ville '&quot; + row7.Villes + &quot;', pour le produit '&quot; + ((String)globalMap.get(&quot;tFileInputExcel_2_CURRENT_SHEET&quot;)) + &quot;'. Veuillez corriger le fichier : elle est à zéro.&quot;);&#xA;}&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_3"/>
