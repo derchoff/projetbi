@@ -22,7 +22,7 @@ startme() {
 
     mkdir /usr/src/tomcat;
     mkdir /usr/src/excel;
-    mkdir /usr/src/excel/excel_input;
+    mkdir /usr/src/excel/A_TRAITER;
     
     docker-compose up -d --build;
         

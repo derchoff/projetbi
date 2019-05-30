@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+    darties_talend:
+     build:
+       context: .
+     image: darties-talend:1.0.0
+     container_name: darties_talend 
+     volumes:
+       - /usr/src/darties_talend:/usr/src/darties_talend
+       - /usr/src/tomcat:/bitnami
+       - /usr/src/excel/ARCHIVE:/usr/src/excel/ARCHIVE
+       - /usr/src/excel/A_TRAITER:/usr/src/excel/A_TRAITER
+       - /usr/src/excel/EN_COURS:/usr/src/excel/EN_COURS
+       - /usr/src/excel/EN_ERREUR:/usr/src/excel/EN_ERREUR
+       - /usr/src/darties_talend:/usr/src/darties_talend
+     restart: always
+     networks:
+       darties_talend_network:         
+       
+volumes:
+    db_data:
+        driver: local             
+# Custom network so all services can communicate using a FQDN
+networks:
+    darties_talend_network:
