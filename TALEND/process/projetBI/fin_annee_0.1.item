@@ -6,7 +6,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="+XtTanWr1yAXBebsAYDcuQ=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/A_TRAITER"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/A_TRAITER"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>

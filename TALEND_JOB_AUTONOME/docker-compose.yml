@@ -9,7 +9,6 @@ services:
      container_name: darties_talend 
      volumes:
        - /usr/src/darties_talend:/usr/src/darties_talend
-       - /usr/src/tomcat:/bitnami
        - /usr/src/excel/ARCHIVE:/usr/src/excel/ARCHIVE
        - /usr/src/excel/A_TRAITER:/usr/src/excel/A_TRAITER
        - /usr/src/excel/EN_COURS:/usr/src/excel/EN_COURS

@@ -8,7 +8,7 @@
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
     <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="+XtTanWr1yAXBebsAYDcuQ=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/A_TRAITER"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/A_TRAITER"/>
     <contextParameter comment="Mask des fichiers prévisions" name="mask_prevision_ventes" prompt="mask_prevision_ventes?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="previsionsventes_DARTIES_*.xls"/>
   </context>
   <parameters>
@@ -373,7 +373,7 @@
       <column comment="" key="false" length="-1" name="colonne" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="liste_mois" expression="projetBi.getNormalizedMonthList(true)" type="id_List"/>
       </varTables>
