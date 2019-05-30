@@ -6,4 +6,4 @@ WORKDIR /usr/src/darties_talend
 COPY ./lib ./lib
 COPY ./MAIN ./MAIN
 
-CMD [ "./MAIN/MAIN_run.sh" ]
+CMD [ "/bin/bash", "./MAIN/MAIN_run.sh" ]
