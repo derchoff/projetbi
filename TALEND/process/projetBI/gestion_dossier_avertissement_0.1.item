@@ -5,7 +5,7 @@
     <contextParameter comment="Nom du job talend" name="nom_job_talend" prompt="nom_job_talend?" promptNeeded="false" type="id_String" value="context.nom_job_talend"/>
     <contextParameter comment="" name="log_warning" prompt="log_warning?" promptNeeded="false" type="id_String" value="context.log_warning"/>
     <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/A_TRAITER"/>
-    <contextParameter comment="Fichier traité avec avertissement" name="excel_output_warning_repository" prompt="excel_output_warning_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/ARCHIVE/"/>
+    <contextParameter comment="Fichier traité avec avertissement" name="excel_output_warning_repository" prompt="excel_output_warning_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/ARCHIVE"/>
     <contextParameter comment="Email qui va envoyer les logs d'erreur" name="mail_send_darties" prompt="mail_send_darties?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="derchoff@gmail.com"/>
     <contextParameter comment="Mot de passe du mail" name="mail_send_password" prompt="mail_send_password?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="Nk3+8092RWdQLOWkY/L3ep2omjwbuZPY"/>
     <contextParameter comment="Email qui va recevoir les logs d'erreur" name="mail_si_darties" prompt="mail_si_darties?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="derchoff@gmail.com"/>
@@ -187,10 +187,10 @@
   </node>
   <node componentName="tFileCopy" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileCopy_1" show="false"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.excel_input_repository + context.nom_fichier"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.excel_input_repository +&quot;/&quot; + context.nom_fichier"/>
     <elementParameter field="CHECK" name="ENABLE_COPY_DIRECTORY" value="false"/>
     <elementParameter field="DIRECTORY" name="SOURCE_DERECTORY" value="&quot;C:/Talend/TOS_DI-Win32-20190325_1906-V7.2.1M4/workspace&quot;" show="false"/>
-    <elementParameter field="DIRECTORY" name="DESTINATION" value="context.excel_output_warning_repository + TalendDate.getDate(&quot;YYYY-MM-dd&quot;)+&quot;/&quot;"/>
+    <elementParameter field="DIRECTORY" name="DESTINATION" value="context.excel_output_warning_repository +&quot;/&quot; + TalendDate.getDate(&quot;YYYY-MM-dd&quot;)+&quot;/&quot;"/>
     <elementParameter field="CHECK" name="RENAME" value="false"/>
     <elementParameter field="TEXT" name="DESTINATION_RENAME" value="&quot;NewName.temp&quot;" show="false"/>
     <elementParameter field="CHECK" name="REMOVE_FILE" value="true"/>
