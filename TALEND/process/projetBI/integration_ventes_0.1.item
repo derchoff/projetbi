@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="darties_db"/>
-    <contextParameter comment="Adresse du serveur hébergeant l’entrepôt" name="db_host" prompt="db_host?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="localhost"/>
+    <contextParameter comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="darties_db_v2"/>
+    <contextParameter comment="Adresse du serveur hébergeant l’entrepôt" name="db_host" prompt="db_host?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="35.180.255.232"/>
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
-    <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
+    <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="+XtTanWr1yAXBebsAYDcuQ=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/A_TRAITER"/>
     <contextParameter comment="Mask des fichiers ventes réelles" name="mask_ventes" prompt="mask_ventes?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="ventes_DARTIES_*.xls"/>
   </context>
   <parameters>
@@ -604,7 +604,7 @@
       </column>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="ventes">
         <mapperTableEntries name="id" expression="row3.id*1000000+row5.id*100000+row2.id*10000+row4.id" type="id_Integer"/>
@@ -1018,7 +1018,7 @@
       <column comment="" key="false" length="-1" name="objectif" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_Float" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="reel_objectif_compa">
         <mapperTableEntries name="reel" expression="ventes_controle_reel_objectif.reel  " type="id_Float" nullable="true"/>
@@ -1074,6 +1074,9 @@
       <column comment="" key="true" length="-1" name="id" nullable="false" pattern="" precision="0" sourceType="BIGINT UNSIGNED" type="id_Long" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column comment="" key="false" length="10" name="id_produit" nullable="false" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="false">
         <additionalField key="Comment" value=""/>
       </column>
@@ -1090,9 +1093,6 @@
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="12" name="reel" nullable="false" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="false">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="12" name="objectif" nullable="true" pattern="" precision="0" sourceType="FLOAT" type="id_Float" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <additionalProperties key="Comment" value=""/>

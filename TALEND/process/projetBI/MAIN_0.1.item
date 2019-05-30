@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="darties_db"/>
-    <contextParameter comment="Adresse du serveur hébergeant l’entrepôt" name="db_host" prompt="db_host?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="localhost"/>
+    <contextParameter comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="darties_db_v2"/>
+    <contextParameter comment="Adresse du serveur hébergeant l’entrepôt" name="db_host" prompt="db_host?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="35.180.255.232"/>
     <contextParameter comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="3306"/>
-    <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="x9CRMuBER8Jutsymm/KyEw=="/>
+    <contextParameter comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="+XtTanWr1yAXBebsAYDcuQ=="/>
     <contextParameter comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="root"/>
     <contextParameter comment="nombre de secondes à attendre avant de vérifier la présence de fichier Excel dans le dossier" name="delai_attente_traitement_fichier" prompt="delai_attente_traitement_fichier?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Integer" value="1"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Documents/GitHub/projetbi/fichier excels/fichiers excel prêts/"/>
-    <contextParameter comment="Fichier traité" name="excel_output_done_repository" prompt="excel_output_done_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Desktop/traitement/output_done/"/>
-    <contextParameter comment="Fichier non intégré" name="excel_output_erreur_repository" prompt="excel_output_erreur_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Desktop/traitement/output_error/"/>
-    <contextParameter comment="Fichier traité avec avertissement" name="excel_output_warning_repository" prompt="excel_output_warning_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:/Users/Laurent/Desktop/traitement/output_warning/"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/A_TRAITER"/>
+    <contextParameter comment="Fichier traité" name="excel_output_done_repository" prompt="excel_output_done_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/ARCHIVE"/>
+    <contextParameter comment="Fichier non intégré" name="excel_output_erreur_repository" prompt="excel_output_erreur_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/EN_ERREUR"/>
+    <contextParameter comment="Fichier traité avec avertissement" name="excel_output_warning_repository" prompt="excel_output_warning_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/ARCHIVE"/>
     <contextParameter comment="Email qui va envoyer les logs d'erreur" name="mail_send_darties" prompt="mail_send_darties?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="send@exemple.com"/>
     <contextParameter comment="Mot de passe du mail" name="mail_send_password" prompt="mail_send_password?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Password" value="jqUiPpqwiNk="/>
     <contextParameter comment="Email qui va recevoir les logs d'erreur" name="mail_si_darties" prompt="mail_si_darties?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="receiver@exemple.com"/>
@@ -23,7 +23,7 @@
     <contextParameter comment="Le serveur smtp de darties" name="smtp_server" prompt="smtp_server?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_String" value="smtp.exemple.com"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32" show="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0" show="false"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" value="" show="false"/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" value="" show="false"/>
@@ -708,7 +708,7 @@
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="(String)globalMap.get(&quot;nom_fichier&quot;)"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="nom_job_talend"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="(String)globalMap.get(&quot;nom_job_talend&quot;)"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="log_erreur"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="log_warning"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="String.valueOf(row5.message)"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROPAGATE_CHILD_RESULT" value="false"/>
