@@ -6,15 +6,15 @@
   
 startme() {
     
-#    docker-compose up -d --build;
-docker build --tag darties-app:1.0.0 ./;
-docker run -d -p 8081:8081 --name darties_app darties-app:1.0.0 npm start;   
+  docker-compose up -d --build;
+# docker build --tag darties-app:1.0.0 ./;
+# docker run -d -p 8081:8081 --name darties_app darties-app:1.0.0 npm start;   
 }
 
 stopme() {
-#    docker-compose down;
-    docker stop darties_app;
-    docker system prune --force --volumes;
+  docker-compose down;
+#    docker stop darties_app;
+  docker system prune --force --volumes;
 }
 
 logmysqldb() {
