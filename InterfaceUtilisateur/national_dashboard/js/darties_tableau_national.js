@@ -51,14 +51,12 @@ const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
 
 // nom des feuilles dans les tableau de bord
 // auxquelles il faut appliquer les filtres
-const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
+const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Total de la région"];
 const MASTER_SHEET_CA_ALENTOUR =  ["CA alentour et classement"];
 const MASTER_SHEET_INDICATEURS =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
 const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Détails par poids produit"];
 
 var viz = null;
-var workbook = null;
-var activesheet = null; 
 
 var start_filtre_region;
 var start_filtre_region_parente;    
@@ -132,49 +130,45 @@ function initDarties() {
     // const url = "https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link";
     //const url = "https://public.tableau.com/views/DARTIES/Carte"; //?:embed=y&:display_count=yes&publish=yes&:origin=viz_share_link#6";
 
+    //modifie le titre du tableau de bord
+    setBoardTitleFromProfile();
+
+    //Sélectionne la période courante
+    const today = new Date();
+    const mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    const id_date = yyyy * 100 + mm;
+
+
     var options = {
         hideTabs: false,
         hideToolbar: true,
         width: TABLEAU_WIDTH,
         height: TABLEAU_HEIGHT,   
 
+        "BL Filtre Region Carte":start_filtre_region,
+        "BL Filtre région parente Carte" :start_filtre_region_parente,        
+        "Profile": start_profile,
+        "BL Filtre Region": start_filtre_region,
+        "BL Filtre région parente": start_filtre_region_parente,
+        "Id (Date)": id_date,
+
         //Cette fonction est appellé par l'API Javascript de Tableau 
         //lorsque le tableau de bord est prêt à l'utilisation.
         onFirstInteractive: function() {
             resetFilters();
 
-            // The viz is now ready and can be safely used.
-            workbook = viz.getWorkbook();
-            activesheet = workbook.getActiveSheet();   
-
             //on intercept la capture de l'évènement changement d'onglet    
             viz.addEventListener(tableau.TableauEventName.TAB_SWITCH, tabViewchange);
             viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, function(marksEvent) { return marksEvent.getMarksAsync().then(reportSelectedMarks); } );            
-
-            switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
-
-            //Sélectionne la péiode courante
-            const today = new Date();
-            const mm = today.getMonth() + 1;
-            const yyyy = today.getFullYear();
-            const id_date = yyyy * 100 + mm;
-
-            $("#periodes").val(id_date);
-
-            applyFilter(PERIODE_FILTER_NAME,`${id_date}`, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));            
-
+        
+            // switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);
+            clearFilter(BL_REGION_FILTRE, MASTER_SHEET_CA_ALENTOUR);
             //l'on peut réactiver les filtres
             $(".filter").prop('disabled', false);
 
         }
     };
-
-    //Valorise les filtres de départ
-    // options[`${PROFILE}`] = start_profile;
-    // options[`${BL_REGION_FILTRE}`] = start_filtre_region;
-    // options[`${BL_FILTRE_REGION_PARENTE}`] = start_filtre_region_parente;
-    //options[`${PERIODE_FILTER_NAME}`] = '201903';
 
     //créer l'objet vis de Tableau software
     viz = new tableau.Viz(placeholderDiv, TABLEAU_URL, options);
@@ -544,22 +538,7 @@ function reportSelectedMarks(marks) {
 }
 
 
-
-
-//modifie les filtres pour naviguer vers la sous région
-function switchTosubRegion(profile, region_parente, region) {
-
-    console.log(`Changement de région. Destination : '${region}' avec le profile '${profile}' et région parente : '${region_parente}'`);
-
-    //re définit les filtres courant
-    current_filtre_region_parente = region_parente;
-    current_filtre_region = region;                    
-    current_profile = profile;
-
-    // applique les filtres au Tableau de bord
-    // pour naviguer dans les sous région
-    workbook.changeParameterValueAsync(PROFILE,current_profile);
-    applyRegionFilters();
+function setBoardTitleFromProfile() {
 
     switch(current_profile) {
         case PROFILE_DIRECTEUR_COMMERCIAL: {
@@ -575,6 +554,24 @@ function switchTosubRegion(profile, region_parente, region) {
             break;
         }
     }
+
+}
+
+//modifie les filtres pour naviguer vers la sous région
+function switchTosubRegion(profile, region_parente, region) {
+
+    console.log(`Changement de région. Destination : '${region}' avec le profile '${profile}' et région parente : '${region_parente}'`);
+
+    //re définit les filtres courant
+    current_filtre_region_parente = region_parente;
+    current_filtre_region = region;                    
+    current_profile = profile;
+
+    // applique les filtres au Tableau de bord
+    // pour naviguer dans les sous région
+    viz.getWorkbook().changeParameterValueAsync(PROFILE,current_profile);
+    applyRegionFilters();
+    setBoardTitleFromProfile();
 }
 
 function applyRegionFilters() {
