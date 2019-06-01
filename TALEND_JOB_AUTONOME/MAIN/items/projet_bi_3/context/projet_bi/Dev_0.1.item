@@ -5,7 +5,7 @@
   <contextParameter xmi:id="__92NwWHcEemdZ_ulKloHcw" comment="Port du SGBD" name="db_port" prompt="db_port?" promptNeeded="false" type="id_String" value="3306"/>
   <contextParameter xmi:id="__92NwmHcEemdZ_ulKloHcw" comment="Utilisateur du SGBD" name="db_user" prompt="db_user?" promptNeeded="false" type="id_String" value="root"/>
   <contextParameter xmi:id="__92Nw2HcEemdZ_ulKloHcw" comment="Password pour db_user" name="db_pwd" prompt="db_pwd?" promptNeeded="false" type="id_Password" value="+XtTanWr1yAXBebsAYDcuQ=="/>
-  <contextParameter xmi:id="__92NxGHcEemdZ_ulKloHcw" comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" type="id_String" value="darties_db_v2"/>
+  <contextParameter xmi:id="__92NxGHcEemdZ_ulKloHcw" comment="Nom de la base de données" name="db_database" prompt="db_database?" promptNeeded="false" type="id_String" value="darties_db"/>
   <contextParameter xmi:id="_cCAIMGOiEemhFf7pnHLt4w" comment="Mask des fichiers indicateur" name="mask_fichier_indicateurs" prompt="mask_fichier_indicateurs?" promptNeeded="false" type="id_String" value="indicateurs_*.xls"/>
   <contextParameter xmi:id="_cCAIMWOiEemhFf7pnHLt4w" comment="Mask des fichiers magasins" name="mask_fichier_magasins" prompt="mask_fichier_magasins?" promptNeeded="false" type="id_String" value="magasin_region_responsable_*.xls"/>
   <contextParameter xmi:id="_DqHVUGO4EemeCqdBCCBwiA" comment="Mask des fichiers prévisions" name="mask_prevision_ventes" prompt="mask_prevision_ventes?" promptNeeded="false" type="id_String" value="previsionsventes_DARTIES_*.xls"/>
