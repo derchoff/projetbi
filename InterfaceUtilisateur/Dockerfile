@@ -11,8 +11,9 @@ RUN npm install mysql --save
 
 COPY package.json ./
 COPY ./common ./common
-COPY ./national_dashboard ./national_dashboard
+COPY ./dashboard ./dashboard
 COPY ./server.js .
+COPY ./login.js .
 
 EXPOSE 8081
 
