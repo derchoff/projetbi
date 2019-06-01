@@ -7,6 +7,7 @@ RUN npm install express --save
 RUN npm install body-parser --save
 RUN npm install cookie-parser --save
 RUN npm install multer --save
+RUN npm install mysql --save
 
 COPY package.json ./
 COPY ./common ./common

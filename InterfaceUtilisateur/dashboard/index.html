@@ -1,0 +1,180 @@
+<html>
+    <title>DARTIES</title>
+    <head>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
+        <LINK href="/css/main.css" rel="stylesheet" type="text/css">
+            <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.2.7/alasql.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.core.min.js" crossorigin="anonymous"></script>                    
+        <script src="https://online.tableau.com/javascripts/api/tableau-2.js"></script>
+        <script src="/js/darties_tableau.js"></script>
+    </head>
+   <body>
+
+    <div class="container-fluid h-100">
+        <!-- ENTETE -->
+        <div id="titreTableauDeBord"  class="row display-flex justify-content-center align-items-center">
+            <div class="col-2 mx-auto">
+                <div class="card card-body mb-2 pb-2 pt-2 blue-background justify-content-center align-items-center">
+                    <img src="/images/logo darties.png"/>
+                </div>                
+            </div>
+            <div class="col-10 mx-auto pt-2 mb-2 ">
+                <div class="card card-body blue-background justify-content-center align-items-center">
+                        <label id="TitreTableauDeBord">Tableau de bord National</label>
+                </div>                
+            </div>
+        </div>
+                
+        <div class="row">
+            <div id="panelFiltres" class="col-2 mx-auto">
+                <div class="card card-body mb-2 h-100 blue-background">
+                <!-- <button id="debbugButton">Liste filtre vue</button> -->
+
+                <label><b>Filtres</b></label>
+                <!-- FILTRES -->
+                <!-- taux conversion -->
+                <div class="directeur-commercial row">
+                    <div class="col-1 col-sm-4 mb-2">
+                        <select id="taux" class="directeur-commercial filter">
+                                <option value="1" selected>Euros</option>
+                                <option value="2">Dollars</option>
+                        </select>                        
+                    </div>
+                    <div class="col-1 col-sm-4 mb-2">
+                        <select class="directeur-commercial filter">
+                                <option value="1" selected>Taux 1 | Mai 2019</option>
+                                <option value="2">Taux 2 | Avril 2019</option>
+                        </select>                         
+                    </div>                    
+                </div>
+                <!-- zones commerciales -->
+                <div class="row">
+                        <div class="col-1 col-sm-4 mb-2">
+                            <select id="regions" class="filter select-filter">
+                                    <option value="tout" selected>Régions commerciale</option>
+                                    <option value="Region_parisienne">Région parisienne</option>
+                                    <option value="Nord_Ouest">Nord ouest</option>
+                                    <option value="Nord_Est">Nord est</option>
+                                    <option value="Sud_Est">Sud est</option>
+                                    <option value="Sud_Ouest">Sud ouest</option>
+                            </select>                        
+                        </div>
+                    </div>           
+                    <!-- enseignes -->
+                    <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select id="enseignes" class="filter select-filter">
+                                            <option value="tout" selected>Toutes les enseignes</option>
+                                            <option value="Boulanger">Boulanger</option>
+                                            <option value="Darty">Darty</option>
+                                            <option value="Leroy Merlin">Leroy Merlin</option>
+                                        </select>                        
+                            </div>
+                        </div>                          
+                    <!-- indicateurs -->                    
+                    <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select id="indicateurs" class="filter select-filter">
+                                            <option value="tout" selected>Toutes mes indicateurs</option>
+                                            <option value="CA">Chiffre d'affaire</option>
+                                            <option value="Marge">Marge brute</option>
+                                            <option value="Ventes">Ventes</option>
+                                        </select>                        
+                            </div>
+                        </div>  
+                        <!-- types produits -->     
+                        <div class="row">
+                            <div class="col-1 col-sm-4 mb-2">
+                                    <select id="produits" class="filter select-filter">
+                                            <option value="tout" selected>Tous les produits</option>
+                                            <option value="Fours">Fours</option>
+                                            <option value="Magneto">Magnéto</option>
+                                            <option value="Hifi">Hi-fi</option>
+                                        </select>                        
+                            </div>
+                        </div>
+  
+                            <!-- dates -->
+                            <div class="row">
+                                    <div class="col-1 col-sm-4 mb-2">
+                                            <select id="periodes" class="filter select-filter">
+                                                    <option value="201901" selected>Janvier 2019</option>
+                                                    <option value="201902">Fevrier 2019</option>
+                                                    <option value="201903">Mars 2019</option>
+                                                    <option value="201904">Avril 2019</option>
+                                                    <option value="201905">Mai 2019</option>
+                                                    <option value="201906">Juin 2019</option>
+                                                    <option value="201907">Juillet 2019</option>
+                                                    <option value="201908">Aout 2019</option>
+                                                    <option value="201909">Septembre 2019</option>
+                                                    <option value="201910">Octobre 2019</option>
+                                                    <option value="201911">Novembre 2019</option>
+                                                    <option value="201912">Decembre 2019</option>                                                    
+                                            </select>                        
+                                    </div>
+                                </div>
+                            <!-- Cumulé/non cumulé -->
+                            <div class="row">
+                                <div class="col-1 col-sm-4 mb-2">
+                                    <div class="row">
+                                            <div class="col-1 col-sm-4 mb-2">
+                                                <input type="checkbox" id="switchCumul" class="filter checkbox-filter"/>
+                                            </div>
+                                            <div class="col-4 col-sm-4 mb-2 text-nowrap">
+                                                <label for="switchCumul">Cumulé / Non cumulé</label>                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-4 col-sm-4 mb-2">
+                                        <div class="row flex-nowrap">
+                                            <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                <input id="retour_accueille" class="export-btn" type="image"  src="https://img.icons8.com/ios/50/000000/home-page.png"/>
+                                            </div>
+                                            <div class="col-1 col-sm-4 mb-2 ml-4">
+                                                <input id="logout" class="logout-btn" type="image" src="https://img.icons8.com/color/48/000000/shutdown.png"/>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row flex-nowrap">
+                                                <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                    <input id="pdf-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/pdf.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                    <input id="excel-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/ms-excel.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                    <input id="print" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/send-to-printer.png"/>
+                                                </div>
+                                                <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                    <input id="email" class="export-btn" type="image" src="https://img.icons8.com/ios/50/000000/secured-letter.png"/>
+                                                </div>                                                                                                                                                    
+                                        </div>                                                                                
+                                    </div>
+                                </div>                                
+                            <button id="effacerFiltres">Effacer les filtres</button>                                                                                                                                                   
+                </div>
+            </div>
+                <div class="col-10 mx-auto h-100 w-100">
+                    <div class="card card-body mb-2 h-100 w-100">                    
+                        <!-- TABLEAU -->
+                        <div id="tableauViz" class="w-100">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <script type="text/javascript">
+            $(document).ready( function () {
+                initDarties();
+            });        
+        </script>
+      
+   </body>
+</html>

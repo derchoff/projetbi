@@ -1,0 +1,83 @@
+<html>    
+    <head>
+        <title>DARTIES</title>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
+        <LINK href="/css/main.css" rel="stylesheet" type="text/css">
+            <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="jquery-ui-1.10.0.custom.js"></script>            
+        <script src="https://online.tableau.com/javascripts/api/tableau-2.js"></script>
+        <script src="/js/darties_tableau_national.js"></script>
+    </head>
+   <body>
+
+        <div class="container-fluid h-100">
+                <!-- ENTETE -->
+                <div class="row display-flex justify-content-center align-items-center">
+                    <div class="col-6 mx-auto pt-2 mb-4">
+                        <div class="card card-body blue-background justify-content-center align-items-center">
+                                <img src="/images/logo darties.png"/>
+                                <h4><label class="text-white">Login</label></h4>
+                        </div>                
+                    </div>
+                </div>    
+
+                <form method="POST" action="/login" enctype="application/x-www-form-urlencoded">
+                    <div class="row">
+                            <div class="col-6 mx-auto ">
+                                <div class="card card-body mb-2 h-100 blue-background justify-content-center align-items-center">
+                                <div class="row">
+                                        <div class="col-6 text-nowrap mb-2 text-white">
+                                            <ul>
+                                                <li>Directeur commercial : username=dc / password = dcpwd</li>
+                                                <li>Directeur Région parisienne : drrp/drrppwd</li>
+                                                <li>Directeur Nord ouest : drno/drnopwd</li>
+                                                <li>Directeur Nord est : drne/drnepwd</li>
+                                                <li>Directeur Sud ouest : drso/drsopwd</li>
+                                                <li>Directeur sud est : drse/drsepwd</li>
+                                                <li>Responsable magasin Bobigny : rmbobigny/rmbobignypwd</li> 
+                                                <li>Responsable magasin Amiens : rmamiens/rmamienspwd</li>
+                                                <li>Responsable magasin Alençon : rmalencon/rmalenconpwd</li>
+                                                <li>Responsable magasin Bastia : rmbastia/rmbastiapwd</li>
+                                                <li>Responsable magasin Angouleme : rmangouleme/rmangoulemepwd</li>
+
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                    <div class="row">
+                                        <div class="col-6 text-nowrap mb-2 text-white">
+                                            Utilisateur
+                                        </div>
+                                        <div class="col-3 mb-2">
+                                                <input type="text" id="username" name="username" required/>
+                                        </div>                                                                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6  text-nowrap mb-2 text-white">
+                                            Mot de passe
+                                        </div>
+                                        <div class="col-3 mb-2">
+                                            <input type="password" id="password" name="password" required />
+                                        </div>                                                                            
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-6  text-nowrap mb-2">
+                                                    <button type="submit">Connexion</button>
+                                            </div>
+                                        </div>                                                                                                                                        
+                                </div>
+                            </div>
+                    </div>
+                </form>             
+        </div>   
+
+        <script type="text/javascript">
+            $(document).ready( function () {
+
+            });        
+        </script>      
+   </body>
+</html>

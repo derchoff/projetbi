@@ -55,8 +55,9 @@
         * BL Rang National Filtré : utilisé pour filtrer la grille dans palmarès. Dépend de BL Palmarès Sort Order
         * BL Quinze Premier? : indique si selon 'Ordre de Tri' la ligne est dans les 15 premières
         * BL Numéro Mois : numéro du mois à retenir pour la vue des cumulés.
-	* BL Filtre Enseigne : utilisé par la ficher "Carte" lorsqu'elle affiche les villes 
+        * BL Filtre Enseigne : utilisé par la ficher "Carte" lorsqu'elle affiche les villes 
 				=> sert à filter les villes qui doivent être affichée selon l'enseigne filtrée.
+        * UI Titre Région Affichée : Description de la région à afficher dans les titres
 
     Configurer les affichages :
        
