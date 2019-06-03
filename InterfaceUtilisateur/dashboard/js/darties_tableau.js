@@ -64,7 +64,7 @@ subProfile[PROFILE_DIRECTEUR_REGIONAL]=PROFILE_RESPONSABLE_MAGASIN;
 subProfile[PROFILE_RESPONSABLE_MAGASIN]="Chef produit";
 
 
-function initDataviz(placeholderDiv, asImage, id_date, URLParameters) {
+function initDataviz(placeholderDiv, id_date) {
     var ret = null;    
 
     var options = {
@@ -79,20 +79,12 @@ function initDataviz(placeholderDiv, asImage, id_date, URLParameters) {
         "Période":id_date,                
     };
 
-    let URL = "";
-
-    if ( asImage) {
-        URL = TABLEAU_URL+"&"+TABLEAU_REQUEST_AS_IMAGE+"&"+URLParameters; 
-    } else {
-        URL = TABLEAU_URL; 
-    }
-
     //configure les filtres de départ    
     //créer l'objet vis de Tableau software
     return new Promise(function(resolve,reject) { 
         
         let ret = new tableau.Viz(placeholderDiv, 
-                                URL, 
+                                TABLEAU_URL, 
                                 {...options,                                                                 
                                     //Cette fonction est appellé par l'API Javascript de Tableau 
                                     //lorsque le tableau de bord est prêt à l'utilisation.
@@ -103,25 +95,7 @@ function initDataviz(placeholderDiv, asImage, id_date, URLParameters) {
                                         resolve(ret);
                                     }                                                                
                                 });
-        if (asImage) {
-            //si réclamé comme une image, l'API n'exécute pas onFirstInteractive
-            // donc je fais un truc asser moche parce l'event load 
-            // des iframe ne répond pas très bien selon la navigateur.               
-            function checkPlaceholderIsFilled(ph, resolve) {
-                if ($(ph).find('iframe').length>0) {
-                    
-                    clearInterval(interval_id);
-
-                    $(ph).find('iframe').on('load', function() {                                   
-                        resolve(ret);
-                    });
-                }
-            }
-
-            var interval_id = setInterval(checkPlaceholderIsFilled, 20, placeholderDiv, resolve);
-        }
-    });  
-                                                                                                
+    });                                                                                                  
 }
 
 async function initDarties() {
@@ -181,9 +155,10 @@ async function initDarties() {
 
     try {
         //document.getElementById('tableauViz') => 
-        //      récupère le placeholder qui contiendra les feuilles de Tableau software        
-        viz = await initDataviz(document.getElementById('tableauViz'), false, id_date);
+        //      récupère le placeholder qui contiendra les feuilles de Tableau software                
+        viz = await initDataviz(document.getElementById('tableauViz'), id_date);
         debugger;
+
         //remise à zéro des filtres
         resetFilters();
             
@@ -336,66 +311,78 @@ function effacerfiltresClick(e) {
 // après avoir caché les autres éléments.
 async function printDashBoard() {  
     
+    //indicateur visuel pour indiquer qu'il faut patienter
+    $('#print').addClass('spinner-border');
+
     //créé une image HTML avec la génération du tableau au format PNG
     // Applications de tous les filtres courant 
     
     // les filtres liées au profile sont initialisés dans la fonction initDataviz()
-    let url = `${BL_REGION_FILTRE_CARTE}=${encodeURIComponent(current_filtre_region)}&${BL_FILTRE_REGION_PARENTE_CARTE}=${encodeURIComponent(current_filtre_region_parente)}`;
+    let url_parameters = `${PROFILE_PARAMETER}=${current_profile}`;
+    url_parameters += `&${FILTRE_REGION_PARAMETER}=${current_filtre_region}`;
+    url_parameters += `&${FILTRE_REGION_PARENTE_PARAMETER}=${current_filtre_region_parente}`;
 
     //indicateur
-    if ($('#indicateurs').val()!="") {
-        url += `&${encodeURIComponent(INDICATEUR_FILTER)}=${encodeURIComponent($('#indicateurs').val())}`;
-    }
+    url_parameters += `&${INDICATEUR_PARAMETER}=${$('#indicateurs').val()}`;
 
     //produit
-    if ($('#produits').val()!="") {
-        url += `&${encodeURIComponent(PRODUIT_FILTER)}=${encodeURIComponent($('#produits').val())}`;
-    }    
+    url_parameters += `&${PRODUIT_PARAMETER}=${$('#produits').val()}`;
 
     //période sélectionnée
     const periode = parseInt($('#periodes').val());
     //on ne retiens que le mois pour la vue du cumulé
     const numero_mois = periode - 201900;    
-    url += `&${encodeURIComponent(PERIODE_CUMULE_FILTER_NAME)}=${numero_mois}`;
+    const periode_precedente = (periode-2019)==1?201812:periode-1;
+
+    if ($("#switchCumul").prop('checked')) {
+        periode += 1000000;
+        periode_precedente += 1000000;
+    }
+
+    url_parameters += `&${PERIODE_PARAMETER}=${periode}`;
+    url_parameters += `&${PERIODE_PRECEDENTE_PARAMETER}=${periode_precedente}`;
+    url_parameters += `&${MOIS_PARAMETER}=${numero_mois}`;
 
     //cumulé ? 
-    url += `&${encodeURIComponent(CUMULE_FILTER_NAME)}=${$("#switchCumul").prop('checked')?1:0}`;
+    url_parameters += `&${CUMULE_PARAMETER}=${$("#switchCumul").prop('checked')?'Vrai':'Faux'}`;
 
-    debugger;
-    const $fake_div = $('<div id="printdiv" style="width:'+ TABLEAU_WIDTH +'; height:'+ TABLEAU_HEIGHT + ';"></div>');
+    //Enseigne
+    url_parameters += `&${ENSEIGNE_PARAMETER}=${$("#enseignes").val()}`;
 
+    let url =  `${viz.getWorkbook().getActiveSheet().getUrl()}${TABLEAU_PRINT_URL}`;
+    url += `&${url_parameters}`;
+
+    var $img = $('<img src="'+ url +'" style="width:'+ TABLEAU_WIDTH +'; height:'+ TABLEAU_HEIGHT + ';"/>');
+
+    $img.on('load', function() {
     //dès que l'image est chargée il faut cacher les autres éléments et imprimer la page
-    // afin de n'imprimer que l'image
-    $("#titreTableauDeBord").hide();
-    $("#panelFiltres").hide();
-    $("#tableauViz").hide();
-    $(".container-fluid").hide();
-        
-    $fake_div.appendTo(document.getElementsByTagName('body')[0]);    
-
-    //document.getElementById('tableauViz') => 
-    //      récupère le placeholder qui contiendra les feuilles de Tableau software
-    let img_viz = img_viz = await initDataviz($fake_div[0], true, periode, url);
-
-    window.print();
-
-    //libéaration de l'objet et nettoyage
-    img_viz.dispose();
-
-    //impression terminée on réaffiche tout 
-    // après avoir supprimer l'image
-    $fake_div.remove();
-
-    $("#titreTableauDeBord").show();
-    $("#panelFiltres").show();
-    $("#tableauViz").show();
-    $(".container-fluid").show();
+            // afin de n'imprimer que l'image
+            $('#print').removeClass('spinner-border');
+            $("#titreTableauDeBord").hide();
+            $("#panelFiltres").hide();
+            $("#tableauViz").hide();
+            $(".container-fluid").hide();
+    
+            $img.appendTo(document.getElementsByTagName('body')[0]);
+            window.print();
+            
+            //impression terminée on réaffiche tout 
+            // après avoir supprimer l'image
+            $img.remove();
+            
+            $("#titreTableauDeBord").show();
+            $("#panelFiltres").show();
+            $("#tableauViz").show();
+            $(".container-fluid").show();                
+        });      
 }
 
 //les fonctions suivantes sont utilisées pour exporter au format excel
 // inspiré de https://github.com/alexlokhov/export-to-excel/blob/master/xlsx_exporter.html						
 async function exportToExcel(){
     
+    $('#excel-export').addClass('spinner-border');
+
     let dashboardname = '';
     let exportData = [];
     let sheetNames = [];
@@ -420,12 +407,14 @@ async function exportToExcel(){
         //la cartes ne sont pas à exporter ( elle exporte des latitudes!)
         if ( SHEET_TO_EXCLUDE_FROM_EXCEL_EXPORT.findIndex(it => it==sheetName) >=0) continue;
 
-        sheetNames.push({sheetid:sheetName, header:false})
+        sheetNames.push({sheetid:sheetName, headers:false})
         //sheets[i].getSummaryDataAsync (options).then(function(t) {
         let t = await sheets[i].getSummaryDataAsync(options);
         let niceData = buildData(t);
         exportData.push(niceData);
     }
+    
+    $('#excel-export').removeClass('spinner-border');
 
     writeToFile(dashboardname,sheetNames, exportData);
 }
