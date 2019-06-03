@@ -7,42 +7,28 @@ const TABLEAU_REQUEST_AS_IMAGE="format=png";
 const TABLEAU_PRINT_URL="?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
 const TABLEAU_WIDTH="1300px";
 const TABLEAU_HEIGHT="820px";
-//valeur pou rles filtres lorsque l'on veut tput sélectionner 
-// => aucun filtre
-const TOUT = "tout";
-// nom du filtre indicateur dans le tableau de bord
-const INDICATEUR_FILTER = "Abbreviation";
-// nom du filtre Type produit dans le tableau de bord
-const PRODUIT_FILTER = "Type Produit";
-// nom du filtre enseigne dans le tableau de bord
-const ENSEIGNE_FILTER = "Enseigne";
-// Nom du filtre pour sélectionner la région a afficher
-// dans le tableau de bord
-const BL_REGION_FILTRE = "BL Filtre Region";
-// Nom du filtre pour sélectionner la région parente
-// dans le tableau de bord
-const BL_FILTRE_REGION_PARENTE = "BL Filtre région parente";                                  
-const BL_REGION_FILTRE_CARTE = "BL Filtre Region Carte";
-// Nom du filtre pour sélectionner la région parente
-// dans le tableau de bord
-const BL_FILTRE_REGION_PARENTE_CARTE = "BL Filtre région parente Carte";
 
-// Nom du filtre pour sélectionner la période
-// dans le tableau de bord
-const PERIODE_FILTER_NAME = "Id (Date)";                                  
-
-// Nom du filtre pour afficher les résultats cumulé
-// dans le tableau de bord
-const CUMULE_FILTER_NAME = "cumulé";                                  
-
-
-// Nom du filtre pour la période cumulée
-// dans le tableau de bord
-const PERIODE_CUMULE_FILTER_NAME = "BL Numéro Mois";
+//Nom de l'onglet Palmarès
+const TAB_NAME_PALMARES = "Palmarès";
 
 // Nom du filtre pour sélectionner le profile
 // dans le tableau de bord
-const PROFILE = "Profile";
+const PROFILE_PARAMETER = "Profile";
+//paramètre pour choisir la période
+const PERIODE_PARAMETER ="Période";
+//paramètre pour choisir la prériode de confrontation
+const PERIODE_PRECEDENTE_PARAMETER ="Période précédente";
+const MOIS_PARAMETER ="Mois";
+const CUMULE_PARAMETER ="Cumulé";
+// nom du filtre Type produit dans le tableau de bord
+const PRODUIT_PARAMETER = "Produit";
+// nom du filtre indicateur dans le tableau de bord
+const INDICATEUR_PARAMETER = "Indicateur Filtre";
+// nom du filtre enseigne dans le tableau de bord
+const ENSEIGNE_PARAMETER = "Enseigne";
+const FILTRE_REGION_PARAMETER = "Filtre région";
+const FILTRE_REGION_PARENTE_PARAMETER = "Filtre région parente";
+
 // Nom du champ donnant la sous région sélectionnée dans le tableau de bord
 const BL_SOUS_REGION = "BL Sous Region";
 const UI_NOM_VILLE_AFFICHEE = "UI Nom Ville Affichée";
@@ -54,12 +40,11 @@ const MSG_APPLY_FILTER_ERROR = "Erreur lors de l'application du filtre : ";
 
 // nom des feuilles dans les tableau de bord
 // auxquelles il faut appliquer les filtres
-const MASTER_SHEET_NAMES_REGION =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Total de la région"];
-const MASTER_SHEET_CA_ALENTOUR =  ["CA alentour et classement"];
-const MASTER_SHEET_INDICATEURS =  ["Carte", "Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région"];
-const MASTER_SHEET_NAMES_DATES =  ["Détails par produit", "Cumulé", "Palmarès Détails", "Total par sous région", "Détails par poids produit"];
 const SHEET_TO_EXCLUDE_FROM_EXCEL_EXPORT = ["Carte", "Titre Carte", "Titre cumulé"];
 var viz = null;
+
+//nom de l'onglet courant
+var current_tab_view = "Accueil";
 
 var start_filtre_region;
 var start_filtre_region_parente;    
@@ -88,12 +73,10 @@ function initDataviz(placeholderDiv, asImage, id_date, URLParameters) {
         width: TABLEAU_WIDTH,
         height: TABLEAU_HEIGHT,   
 
-        "BL Filtre Region Carte":current_filtre_region,
-        "BL Filtre région parente Carte":current_filtre_region_parente,
+        "Filtre région":current_filtre_region,
+        "Filtre région parente":current_filtre_region_parente,
         "Profile":current_profile,
-        "BL Filtre Region":current_filtre_region,
-        "BL Filtre région parente":current_filtre_region_parente,
-        "Id (Date)":id_date,                
+        "Période":id_date,                
     };
 
     let URL = "";
@@ -200,15 +183,13 @@ async function initDarties() {
         //document.getElementById('tableauViz') => 
         //      récupère le placeholder qui contiendra les feuilles de Tableau software        
         viz = await initDataviz(document.getElementById('tableauViz'), false, id_date);
-        
+        debugger;
         //remise à zéro des filtres
         resetFilters();
             
         //on intercept la capture de l'évènement changement d'onglet    
         viz.addEventListener(tableau.TableauEventName.TAB_SWITCH, tabViewchange);
         viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, function(marksEvent) { return marksEvent.getMarksAsync().then(reportSelectedMarks); } );            
-
-        clearFilter(BL_REGION_FILTRE, MASTER_SHEET_CA_ALENTOUR);
 
         //l'on peut réactiver les filtres
         // appeler lorsque le tableau de bord est prêt
@@ -235,47 +216,16 @@ function getWorksheets() {
 //applique un filtre à la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
 // alors il faut parcourir toutes les feuilles de l'objet pour appliquer le filtre
-async function applyFilter(filterName, values, masterSheet) {    
+async function applyFilter(filterName, values) {    
 
     const sheetArray = getWorksheets();        
 
     var lastCall = null;
     //retrouve la première feuille master dans la vue
-    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
-              .forEach(el => lastCall = el.applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE));
+    sheetArray.forEach(el => lastCall = el.applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE));
     return lastCall;
 }
 
-
-//applique le filtre ALL à la vue active
-// ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
-// alors il faut parcourir toutes les feuilles de l'objet pour appliquer le filtre
-function applyFilterALL(filterName, masterSheet) {
-
-    const sheetArray = getWorksheets();        
-
-    var lastCall = null;
-    //retrouve la première feuille master dans la vue
-    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
-                        .forEach(el => lastCall = el.applyFilterAsync(filterName, "", tableau.FilterUpdateType.ALL));
-    return lastCall;
-                        
-}
-
-//efface un filtre de la vue active
-// ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
-// alors il faut parcourir toutes les feuilles de l'objet pour appliquer le filtre
-function clearFilter(filterName, masterSheet) {
-
-    const sheetArray = getWorksheets();    
-
-    var lastCall = null;
-    //retrouve la première feuille master dans la vue
-    sheetArray.filter( el => masterSheet.findIndex(it => it==el.getName()) >=0 )
-                        .forEach(el => lastCall = el.clearFilterAsync(filterName));
-    return lastCall;
-
-}
 
 //efface une sélection de la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
@@ -290,7 +240,7 @@ function clearSelectedMark() {
 
 // remet tous les filtres sur "Tous ..."
 function resetFilters() {
-    $(".select-filter").val(TOUT);
+    $(".select-filter").val("");
 
     const today = new Date();
     const mm = today.getMonth() + 1;
@@ -316,6 +266,8 @@ function applyAllFilters() {
 // via les onglets de Tableau
 function tabViewchange(e) {
     console.log("TAB_SWITCH");
+    current_tab_view = e.getNewSheetName();
+    debugger;
     //réappliquer les filtres de région actuels
     applyRegionFilters();
     applyAllFilters();
@@ -337,59 +289,37 @@ function regionschange(e) {
 }
 
 function indicateurschange(e) {
-    if (e.target.value==TOUT) { 
-        applyFilterALL(INDICATEUR_FILTER, MASTER_SHEET_INDICATEURS).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
-                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    } else {
-        applyFilter(INDICATEUR_FILTER, e.target.value, MASTER_SHEET_INDICATEURS).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    }
+    viz.getWorkbook().changeParameterValueAsync(INDICATEUR_PARAMETER,e.target.value);
 }
 
-function produitschange(e) {    
-    if (e.target.value==TOUT) {
-        applyFilterALL(PRODUIT_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
-                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    } else {
-        applyFilter(PRODUIT_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                        err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    }    
+function produitschange(e) {        
+    viz.getWorkbook().changeParameterValueAsync(PRODUIT_PARAMETER,e.target.value);
 }
 
 function enseigneschange(e) {
-    if (e.target.value==TOUT) {
-        applyFilterALL(ENSEIGNE_FILTER, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_ERROR + e), 
-                                            err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    } else {
-        applyFilter(ENSEIGNE_FILTER, e.target.value, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                        err => console.log(MSG_APPLY_FILTER_ERROR + err));
-    }
+    viz.getWorkbook().changeParameterValueAsync(ENSEIGNE_PARAMETER,e.target.value);
 }
 
 function periodeschange(e) {    
     
+    //période = yyyyMM
     const periode = parseInt(e.target.value);
-
+    const periode_precedente = (periode-2019)==1?201812:periode-1;
     //on ne retiens que le mois pour la vue du cumulé
     const numero_mois = periode - 201900;
-    
-    //filtre le mois courant
-    //ces dates ont leur id = yyyyMM
-    // et 1yyyyMM pour les dates correspodnates aux cumulés
-    applyFilter(PERIODE_FILTER_NAME, periode , MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );
 
-    applyFilter(PERIODE_CUMULE_FILTER_NAME, numero_mois, MASTER_SHEET_NAMES_DATES).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );
-                                                            
-                                                            
+    if ($("#switchCumul").prop('checked')) {
+        periode += 1000000;
+        periode_precedente += 1000000;
+    }
+    debugger;
+    viz.getWorkbook().changeParameterValueAsync(PERIODE_PARAMETER,periode);
+    viz.getWorkbook().changeParameterValueAsync(PERIODE_PRECEDENTE_PARAMETER,periode_precedente);
+    viz.getWorkbook().changeParameterValueAsync(MOIS_PARAMETER,numero_mois);        
 }
 
 function cumulClick(e) {    
-    //Number($("#switchCumul").prop('checked'))
-    //applique le filtre en convertissant le boolean en entier
-    applyFilter(CUMULE_FILTER_NAME,$("#switchCumul").prop('checked')?1:0, MASTER_SHEET_NAMES_REGION).then(e=>console.log(MSG_APPLY_FILTER_SUCCES + e), 
-                                                                                                            err => console.log(MSG_APPLY_FILTER_ERROR + err) );    
+    viz.getWorkbook().changeParameterValueAsync(CUMULE_PARAMETER,$("#switchCumul").prop('checked')?'Vrai':'Faux');
 }
 
 function effacerfiltresClick(e) {
@@ -413,12 +343,12 @@ async function printDashBoard() {
     let url = `${BL_REGION_FILTRE_CARTE}=${encodeURIComponent(current_filtre_region)}&${BL_FILTRE_REGION_PARENTE_CARTE}=${encodeURIComponent(current_filtre_region_parente)}`;
 
     //indicateur
-    if ($('#indicateurs').val()!=TOUT) {
+    if ($('#indicateurs').val()!="") {
         url += `&${encodeURIComponent(INDICATEUR_FILTER)}=${encodeURIComponent($('#indicateurs').val())}`;
     }
 
     //produit
-    if ($('#produits').val()!=TOUT) {
+    if ($('#produits').val()!="") {
         url += `&${encodeURIComponent(PRODUIT_FILTER)}=${encodeURIComponent($('#produits').val())}`;
     }    
 
@@ -446,7 +376,6 @@ async function printDashBoard() {
     //document.getElementById('tableauViz') => 
     //      récupère le placeholder qui contiendra les feuilles de Tableau software
     let img_viz = img_viz = await initDataviz($fake_div[0], true, periode, url);
-    await clearFilter(BL_REGION_FILTRE, MASTER_SHEET_CA_ALENTOUR);
 
     window.print();
 
@@ -628,25 +557,14 @@ function switchTosubRegion(profile, region_parente, region) {
 
     // applique les filtres au Tableau de bord
     // pour naviguer dans les sous région
-    viz.getWorkbook().changeParameterValueAsync(PROFILE,current_profile);
+    viz.getWorkbook().changeParameterValueAsync(PROFILE_PARAMETER,current_profile);
     applyRegionFilters();
     setBoardTitleFromProfile();
 }
 
-function applyRegionFilters() {
-
-    applyFilter(BL_FILTRE_REGION_PARENTE_CARTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);        
-    applyFilter(BL_REGION_FILTRE_CARTE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
-
-    applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_NAMES_REGION);    
-
-    if (current_profile==PROFILE_RESPONSABLE_MAGASIN) {
-        applyFilter(BL_FILTRE_REGION_PARENTE,current_filtre_region_parente, MASTER_SHEET_CA_ALENTOUR);            
-    } else {
-        clearFilter(BL_FILTRE_REGION_PARENTE, MASTER_SHEET_CA_ALENTOUR);
-    }
-    
-    applyFilter(BL_REGION_FILTRE,current_filtre_region, MASTER_SHEET_NAMES_REGION);        
+function applyRegionFilters() {    
+    viz.getWorkbook().changeParameterValueAsync(FILTRE_REGION_PARAMETER, current_filtre_region);
+    viz.getWorkbook().changeParameterValueAsync(FILTRE_REGION_PARENTE_PARAMETER, current_filtre_region_parente);
 }
 
 // retourne le profile enfant du profile passé en paramètre
