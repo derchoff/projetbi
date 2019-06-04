@@ -7260,3 +7260,8 @@ INSERT INTO vente (reel, objectif, id_date, id_produit, id_indicateur, id_magasi
 INSERT INTO vente (reel, objectif, id_date, id_produit, id_indicateur, id_magasin, id_devise) VALUES(0,1.1*0.66, 201911, 6, 7, 91, 2);
 
 UPDATE vente set id=id_date*1000000+id_indicateur*100000+id_produit*10000+id_magasin WHERE id_date >= 201901
+
+-- correction vente => pas de nombre à virgule
+UPDATE vente set reel=TRUNCATE(reel,0)+1, objectif=TRUNCATE(objectif,0)+1 
+where id_date >= 201901
+and id_indicateur=8
