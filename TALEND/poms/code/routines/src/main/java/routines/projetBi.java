@@ -1,6 +1,7 @@
 package routines;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,10 @@ public class projetBi {
     public static String[] getMonthList() {
     	
     	String[] ret = new String[12];
-    	Object[] liste = Arrays.asList(DateFormatSymbols.getInstance().getMonths())
+    	//force à utiliser la localisation fr-FR
+    	// langue fr pour la région France
+    	Locale localeFR = new Locale("fr", "FR");
+    	Object[] liste = Arrays.asList(DateFormatSymbols.getInstance(localeFR).getMonths())
     									.stream()
     									.limit(12)
     									.toArray();
@@ -156,6 +160,8 @@ public class projetBi {
      * {example} getCurrentYear() # 2019
      */
     public static int getCurrentYear() {
+    	//force à utiliser la localisation fr-FR
+    	// langue fr pour la région France    	
     	return Calendar.getInstance().get(Calendar.YEAR);
     }
     

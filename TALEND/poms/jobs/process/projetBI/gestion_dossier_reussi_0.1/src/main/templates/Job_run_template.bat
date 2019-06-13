@@ -1,3 +1,3 @@
 %~d0
 cd %~dp0
-java -Dtalend.component.manager.m2.repository=%cd%/../lib -Xms256M -Xmx1024M -Dfile.encoding=UTF-8 -cp .;../lib/routines.jar;../lib/log4j-1.2.17.jar;../lib/filecopy.jar;../lib/dom4j-1.6.1.jar;../lib/talendcsv.jar;../lib/talend_file_enhanced_20070724.jar;gestion_dossier_reussi_0_1.jar; projet_bi_2.gestion_dossier_reussi_0_1.gestion_dossier_reussi  %*
+java -Dtalend.component.manager.m2.repository=%cd%/../lib -Xms256M -Xmx1024M -Dfile.encoding=UTF-8 -cp .;../lib/routines.jar;../lib/dom4j-1.6.1.jar;../lib/filecopy.jar;../lib/log4j-1.2.17.jar;../lib/mysql-connector-java-8.0.12.jar;../lib/talend_file_enhanced_20070724.jar;../lib/talendcsv.jar;gestion_dossier_reussi_0_1.jar; projetbi.gestion_dossier_reussi_0_1.gestion_dossier_reussi  %*

@@ -248,6 +248,7 @@
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <includes>
+                <include>mysql:mysql-connector-java:jar:8.0.12</include>
                 <include>dom4j:dom4j:jar:1.6.1</include>
                 <include>log4j:log4j:jar:1.2.17</include>
             </includes>
