@@ -1,5 +1,8 @@
 // URL du tableau sur Tableau Online
-const TABLEAU_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Accueil?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
+
+const TABLEAU_URL="https://eu-west-1a.online.tableau.com/t/pbily2019/views/DARTIES/Accueil?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link"
+
+//const TABLEAU_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Accueil?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link";
 //                 https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link;
 //                 https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Accueil?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link
 //const TABLEAU_PRINT_URL="https://eu-west-1a.online.tableau.com/t/projetbilyon/views/DARTIES/Acceuil?:embed=yes&:display_count=no&:showVizHome=no&:origin=viz_share_link&format=png";
@@ -124,7 +127,6 @@ async function initDarties() {
     //l'on désative les filtres le temps que le tableau de bord soit chargé
     $(".filter").prop('disabled', true);
 
-
     //récupère les filtres région à appliquer
     // mémorise les profiles de départ pour revenir à la hiérarchie initiale
     start_filtre_region = $.urlParam("filtre_region");
@@ -171,6 +173,11 @@ async function initDarties() {
         // sinon si l'utilisateur modifie un filtre pendant
         // l'initialisation c'est le bazard!
         $(".filter").prop('disabled', false);
+
+        //désactive les converisons de monnaie car elles ne sont
+        // pas implémentée 
+        $("#monnaie").prop('disabled', true);
+        $("#taux").prop('disabled', true);
 
     } catch(e) {
         console.error(e);
@@ -306,7 +313,7 @@ function effacerfiltresClick(e) {
 ////////////////////////////////////////////
 
 //callback appellé lorsque l'utilisateur demande l'impression du tableau de bord.
-// L'impression directe d'un tableau de bord génère des grosse erreur d'affichage : les éléments se chevauche
+// L'impression directe d'un tableau de bord génère des grosses erreurs d'affichage : les éléments se chevauchent
 // donc il faut importer le tableau de bord au format image et imprimer la page
 // après avoir caché les autres éléments.
 async function printDashBoard() {  
@@ -367,7 +374,7 @@ async function printDashBoard() {
             window.print();
             
             //impression terminée on réaffiche tout 
-            // après avoir supprimer l'image
+            // après avoir supprimé l'image
             $img.remove();
             
             $("#titreTableauDeBord").show();
