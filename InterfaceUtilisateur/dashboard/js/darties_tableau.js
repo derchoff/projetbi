@@ -105,14 +105,8 @@ async function initDarties() {
     //capture les évènement "onchage" des input dans le script HTML
     // cela afin de modifier les filtres dans les feuilles de Tableau Software    
 
-    $('#taux').on('change',  tauxchange);
-    $('#regions').on('change',  regionschange);
-    $('#indicateurs').on('change',  indicateurschange);
-    $('#produits').on('change',  produitschange);
-    $('#enseignes').on('change',  enseigneschange);
-    $('#periodes').on('change',  periodeschange);
-    $('#switchCumul').on('click',  cumulClick);
     $('#effacerFiltres').on('click',  effacerfiltresClick);
+    $('#validerFiltres').on('click',  validerfiltresClick);
     
     $('#pdf-export').on('click', e => viz.showExportPDFDialog());
     $('#excel-export').on('click', e => exportToExcel());
@@ -138,6 +132,12 @@ async function initDarties() {
         $(".directeur-commercial").hide();
     }
 
+    // le responsable de magasin ne peut pas changer
+    // le niveau hierarchique
+    if (start_profile == PROFILE_RESPONSABLE_MAGASIN) {
+        $('#regions').hide();
+    }
+
     current_filtre_region = $.urlParam("filtre_region");
     current_filtre_region_parente = $.urlParam("filtre_region_parente");    
     current_profile = $.urlParam("profile");    
@@ -148,6 +148,9 @@ async function initDarties() {
 
     //modifie le titre du tableau de bord
     setBoardTitleFromProfile();
+
+    //récupère les taux de conversion
+    initTauxConversion();
 
     //Sélectionne la période courante
     const today = new Date();
@@ -174,11 +177,6 @@ async function initDarties() {
         // l'initialisation c'est le bazard!
         $(".filter").prop('disabled', false);
 
-        //désactive les converisons de monnaie car elles ne sont
-        // pas implémentée 
-        $("#monnaie").prop('disabled', true);
-        $("#taux").prop('disabled', true);
-
     } catch(e) {
         console.error(e);
     }
@@ -194,20 +192,6 @@ function getWorksheets() {
      else 
         return activesheet.getWorksheets();        
 }
-
-//applique un filtre à la vue active
-// ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
-// alors il faut parcourir toutes les feuilles de l'objet pour appliquer le filtre
-async function applyFilter(filterName, values) {    
-
-    const sheetArray = getWorksheets();        
-
-    var lastCall = null;
-    //retrouve la première feuille master dans la vue
-    sheetArray.forEach(el => lastCall = el.applyFilterAsync(filterName, values, tableau.FilterUpdateType.REPLACE));
-    return lastCall;
-}
-
 
 //efface une sélection de la vue active
 // ATTENTION  : si la vue n'est pas une feuille (c'est un dashboard ou une histoire)
@@ -233,15 +217,32 @@ function resetFilters() {
     $("#periodes").val(id_date);    
 
     //et on appliqueles filtres
-    applyAllFilters()
+    applyAllFilters();
 }
 
 function applyAllFilters() {
-    //les triggers ne fonctionne pas très bien
-    // parce la fonction est appellée dans un "event"
-    $(".select-filter").change();
-    //$(".checkbox-filter").trigger("onclick");
-    cumulClick(null);
+
+    //applique tous les filtres
+    viz.getWorkbook().changeParameterValueAsync(INDICATEUR_PARAMETER, $("#indicateurs").val());
+    viz.getWorkbook().changeParameterValueAsync(PRODUIT_PARAMETER, $("#produits").val());
+    viz.getWorkbook().changeParameterValueAsync(ENSEIGNE_PARAMETER, $("#enseignes").val());
+
+    viz.getWorkbook().changeParameterValueAsync(CUMULE_PARAMETER,$("#switchCumul").prop('checked')?'Vrai':'Faux');
+
+    //période = yyyyMM
+    const periode = parseInt($("#periodes").val());
+    const periode_precedente = (periode-2019)==1?201812:periode-1;
+    //on ne retiens que le mois pour la vue du cumulé
+    const numero_mois = periode - 201900;
+
+    if ($("#switchCumul").prop('checked')) {
+        periode += 1000000;
+        periode_precedente += 1000000;
+    }
+    
+    viz.getWorkbook().changeParameterValueAsync(PERIODE_PARAMETER,periode);
+    viz.getWorkbook().changeParameterValueAsync(PERIODE_PRECEDENTE_PARAMETER,periode_precedente);
+    viz.getWorkbook().changeParameterValueAsync(MOIS_PARAMETER,numero_mois);
 }
 
 // appellé lorsque l'utilisateur change de vue
@@ -262,50 +263,12 @@ function tabViewchange(e) {
 // que l'utilisateur peut modifier
 ////////////////////////////////////////////
 
-function tauxchange(e) {
-
-}
-
-function regionschange(e) {
-
-}
-
-function indicateurschange(e) {
-    viz.getWorkbook().changeParameterValueAsync(INDICATEUR_PARAMETER,e.target.value);
-}
-
-function produitschange(e) {        
-    viz.getWorkbook().changeParameterValueAsync(PRODUIT_PARAMETER,e.target.value);
-}
-
-function enseigneschange(e) {
-    viz.getWorkbook().changeParameterValueAsync(ENSEIGNE_PARAMETER,e.target.value);
-}
-
-function periodeschange(e) {    
-    
-    //période = yyyyMM
-    const periode = parseInt(e.target.value);
-    const periode_precedente = (periode-2019)==1?201812:periode-1;
-    //on ne retiens que le mois pour la vue du cumulé
-    const numero_mois = periode - 201900;
-
-    if ($("#switchCumul").prop('checked')) {
-        periode += 1000000;
-        periode_precedente += 1000000;
-    }
-    debugger;
-    viz.getWorkbook().changeParameterValueAsync(PERIODE_PARAMETER,periode);
-    viz.getWorkbook().changeParameterValueAsync(PERIODE_PRECEDENTE_PARAMETER,periode_precedente);
-    viz.getWorkbook().changeParameterValueAsync(MOIS_PARAMETER,numero_mois);        
-}
-
-function cumulClick(e) {    
-    viz.getWorkbook().changeParameterValueAsync(CUMULE_PARAMETER,$("#switchCumul").prop('checked')?'Vrai':'Faux');
-}
-
 function effacerfiltresClick(e) {
     resetFilters();
+}
+
+function validerfiltresClick() {
+    applyAllFilters();
 }
 
 ////////////////////////////////////////////
@@ -566,4 +529,12 @@ function applyRegionFilters() {
 // retourne le profile enfant du profile passé en paramètre
 function getSubProfile(profile) {    
     return subProfile[profile];
+}
+
+function initTauxConversion() {
+    if ($("#monnaie").val() == 'Euro') {
+
+    } else {
+        
+    }
 }
