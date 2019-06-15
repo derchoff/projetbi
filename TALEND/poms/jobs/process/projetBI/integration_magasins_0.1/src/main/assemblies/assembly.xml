@@ -251,7 +251,6 @@
                 <include>org.talend.libraries:curvesapi-1.04:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:poi-3.16:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:talendcsv:jar:6.0.0</include>
-                <include>org.talend.libraries:mysql-connector-java-5.1.30-bin:jar:6.0.0</include>
                 <include>org.talend.libraries:trove:jar:6.0.0</include>
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>

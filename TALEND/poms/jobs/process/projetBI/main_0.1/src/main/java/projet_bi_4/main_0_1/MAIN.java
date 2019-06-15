@@ -1330,6 +1330,58 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate6", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate15", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate2", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate14", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate16", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate4", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate11", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate5", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate7", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate13", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If5", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If4", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate8", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("iterate17", 3, 0);
 					}           			
 				
@@ -1338,63 +1390,11 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("If4", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate15", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate5", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("iterate3", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate4", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate16", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("If5", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate11", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate14", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate7", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("If3", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate8", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate2", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate6", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate13", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -1409,9 +1409,9 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 	 */
 
 				
-			int NB_ITERATE_tSetGlobalVar_7 = 0; //for statistics
-						
 			int NB_ITERATE_tDie_1 = 0; //for statistics
+						
+			int NB_ITERATE_tSetGlobalVar_7 = 0; //for statistics
 			
 
 	
@@ -2209,9 +2209,9 @@ public void tFileList_2Process(final java.util.Map<String, Object> globalMap) th
 	 */
 
 				
-			int NB_ITERATE_tSetGlobalVar_2 = 0; //for statistics
-						
 			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+						
+			int NB_ITERATE_tSetGlobalVar_2 = 0; //for statistics
 			
 
 	
@@ -4144,11 +4144,11 @@ public void tFileList_5Process(final java.util.Map<String, Object> globalMap) th
 	 */
 
 				
-			int NB_ITERATE_tRunJob_5 = 0; //for statistics
+			int NB_ITERATE_tSetGlobalVar_6 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_6 = 0; //for statistics
 						
-			int NB_ITERATE_tSetGlobalVar_6 = 0; //for statistics
+			int NB_ITERATE_tRunJob_5 = 0; //for statistics
 			
 
 	
@@ -5395,6 +5395,10 @@ end_Hash.put("tSetGlobalVar_5", System.currentTimeMillis());
 		    	globalMap.put("tRunJob_4_CHILD_EXCEPTION_STACKTRACE", childJob_tRunJob_4.getExceptionStackTrace());
 		    }
 	  
+			 
+				if (childJob_tRunJob_4.getErrorCode() != null || ("failure").equals(childJob_tRunJob_4.getStatus())) {
+	        		throw new RuntimeException("Child job running failed.\n"+childJob_tRunJob_4.getException().getClass().getName() + ": " + childJob_tRunJob_4.getException().getMessage());
+				}
 			
 	  	
 
@@ -13069,6 +13073,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     293807 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 16:57:52 CEST
+ *     294110 characters generated by Talend Open Studio for Data Integration 
+ *     on the 15 juin 2019 20:03:27 CEST
  ************************************************************************************************/

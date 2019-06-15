@@ -793,46 +793,10 @@ public static class row8Struct implements routines.system.IPersistableRow<row8St
 					return this.id;
 				}
 				
-			    public String enseigne;
-
-				public String getEnseigne () {
-					return this.enseigne;
-				}
-				
-			    public String ville;
-
-				public String getVille () {
-					return this.ville;
-				}
-				
 			    public String code_postal;
 
 				public String getCode_postal () {
 					return this.code_postal;
-				}
-				
-			    public Integer code_departement;
-
-				public Integer getCode_departement () {
-					return this.code_departement;
-				}
-				
-			    public String departement;
-
-				public String getDepartement () {
-					return this.departement;
-				}
-				
-			    public String region;
-
-				public String getRegion () {
-					return this.region;
-				}
-				
-			    public String pays;
-
-				public String getPays () {
-					return this.pays;
 				}
 				
 
@@ -867,26 +831,6 @@ public static class row8Struct implements routines.system.IPersistableRow<row8St
 			dos.write(byteArray);
     	}
     }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
 
     public void readData(ObjectInputStream dis) {
 
@@ -898,19 +842,7 @@ public static class row8Struct implements routines.system.IPersistableRow<row8St
 		
 			        this.id = dis.readInt();
 					
-					this.enseigne = readString(dis);
-					
-					this.ville = readString(dis);
-					
 					this.code_postal = readString(dis);
-					
-						this.code_departement = readInteger(dis);
-					
-					this.departement = readString(dis);
-					
-					this.region = readString(dis);
-					
-					this.pays = readString(dis);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -936,31 +868,7 @@ public static class row8Struct implements routines.system.IPersistableRow<row8St
 					
 					// String
 				
-						writeString(this.enseigne,dos);
-					
-					// String
-				
-						writeString(this.ville,dos);
-					
-					// String
-				
 						writeString(this.code_postal,dos);
-					
-					// Integer
-				
-						writeInteger(this.code_departement,dos);
-					
-					// String
-				
-						writeString(this.departement,dos);
-					
-					// String
-				
-						writeString(this.region,dos);
-					
-					// String
-				
-						writeString(this.pays,dos);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -976,13 +884,7 @@ public static class row8Struct implements routines.system.IPersistableRow<row8St
 		sb.append(super.toString());
 		sb.append("[");
 		sb.append("id="+String.valueOf(id));
-		sb.append(",enseigne="+enseigne);
-		sb.append(",ville="+ville);
 		sb.append(",code_postal="+code_postal);
-		sb.append(",code_departement="+String.valueOf(code_departement));
-		sb.append(",departement="+departement);
-		sb.append(",region="+region);
-		sb.append(",pays="+pays);
 	    sb.append("]");
 
 	    return sb.toString();
@@ -1042,46 +944,10 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 					return this.id;
 				}
 				
-			    public String enseigne;
-
-				public String getEnseigne () {
-					return this.enseigne;
-				}
-				
-			    public String ville;
-
-				public String getVille () {
-					return this.ville;
-				}
-				
 			    public String code_postal;
 
 				public String getCode_postal () {
 					return this.code_postal;
-				}
-				
-			    public Integer code_departement;
-
-				public Integer getCode_departement () {
-					return this.code_departement;
-				}
-				
-			    public String departement;
-
-				public String getDepartement () {
-					return this.departement;
-				}
-				
-			    public String region;
-
-				public String getRegion () {
-					return this.region;
-				}
-				
-			    public String pays;
-
-				public String getPays () {
-					return this.pays;
 				}
 				
 
@@ -1117,13 +983,7 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 	public void copyDataTo(after_tDBInput_1Struct other) {
 
 		other.id = this.id;
-	            other.enseigne = this.enseigne;
-	            other.ville = this.ville;
 	            other.code_postal = this.code_postal;
-	            other.code_departement = this.code_departement;
-	            other.departement = this.departement;
-	            other.region = this.region;
-	            other.pays = this.pays;
 	            
 	}
 
@@ -1165,26 +1025,6 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 			dos.write(byteArray);
     	}
     }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
 
     public void readData(ObjectInputStream dis) {
 
@@ -1196,19 +1036,7 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 		
 			        this.id = dis.readInt();
 					
-					this.enseigne = readString(dis);
-					
-					this.ville = readString(dis);
-					
 					this.code_postal = readString(dis);
-					
-						this.code_departement = readInteger(dis);
-					
-					this.departement = readString(dis);
-					
-					this.region = readString(dis);
-					
-					this.pays = readString(dis);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -1234,31 +1062,7 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 					
 					// String
 				
-						writeString(this.enseigne,dos);
-					
-					// String
-				
-						writeString(this.ville,dos);
-					
-					// String
-				
 						writeString(this.code_postal,dos);
-					
-					// Integer
-				
-						writeInteger(this.code_departement,dos);
-					
-					// String
-				
-						writeString(this.departement,dos);
-					
-					// String
-				
-						writeString(this.region,dos);
-					
-					// String
-				
-						writeString(this.pays,dos);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -1274,13 +1078,7 @@ public static class after_tDBInput_1Struct implements routines.system.IPersistab
 		sb.append(super.toString());
 		sb.append("[");
 		sb.append("id="+String.valueOf(id));
-		sb.append(",enseigne="+enseigne);
-		sb.append(",ville="+ville);
 		sb.append(",code_postal="+code_postal);
-		sb.append(",code_departement="+String.valueOf(code_departement));
-		sb.append(",departement="+departement);
-		sb.append(",region="+region);
-		sb.append(",pays="+pays);
 	    sb.append("]");
 
 	    return sb.toString();
@@ -1575,7 +1373,7 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
 		    java.util.Date year0_tDBInput_1 = calendar_tDBInput_1.getTime();
 		    int nb_line_tDBInput_1 = 0;
 		    java.sql.Connection conn_tDBInput_1 = null;
-				String driverClass_tDBInput_1 = "com.mysql.jdbc.Driver";
+				String driverClass_tDBInput_1 = "com.mysql.cj.jdbc.Driver";
 			    java.lang.Class.forName(driverClass_tDBInput_1);
 					String dbUser_tDBInput_1 = context.db_user;
 					
@@ -1592,9 +1390,7 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
 		    
 			java.sql.Statement stmt_tDBInput_1 = conn_tDBInput_1.createStatement();
 
-		    String dbquery_tDBInput_1 = "SELECT `magasin`.`id`,\n    `magasin`.`enseigne`,\n    `magasin`.`ville`,\n    `magasin`.`code_postal`,\n    `magasin`."
-+"`code_departement`,\n    `magasin`.`departement`,\n    `magasin`.`region`,\n    `magasin`.`pays`\nFROM `darties_db`.`mag"
-+"asin`";
+		    String dbquery_tDBInput_1 = "SELECT `magasin`.`id`,\n    `magasin`.`code_postal`\nFROM `darties_db`.`magasin`";
 			
 
             	globalMap.put("tDBInput_1_QUERY",dbquery_tDBInput_1);
@@ -1621,49 +1417,10 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
             }
 		                    }
 							if(colQtyInRs_tDBInput_1 < 2) {
-								row8.enseigne = null;
-							} else {
-	                         		
-        	row8.enseigne = routines.system.JDBCUtil.getString(rs_tDBInput_1, 2, false);
-		                    }
-							if(colQtyInRs_tDBInput_1 < 3) {
-								row8.ville = null;
-							} else {
-	                         		
-        	row8.ville = routines.system.JDBCUtil.getString(rs_tDBInput_1, 3, false);
-		                    }
-							if(colQtyInRs_tDBInput_1 < 4) {
 								row8.code_postal = null;
 							} else {
 	                         		
-        	row8.code_postal = routines.system.JDBCUtil.getString(rs_tDBInput_1, 4, false);
-		                    }
-							if(colQtyInRs_tDBInput_1 < 5) {
-								row8.code_departement = null;
-							} else {
-		                          
-            row8.code_departement = rs_tDBInput_1.getInt(5);
-            if(rs_tDBInput_1.wasNull()){
-                    row8.code_departement = null;
-            }
-		                    }
-							if(colQtyInRs_tDBInput_1 < 6) {
-								row8.departement = null;
-							} else {
-	                         		
-        	row8.departement = routines.system.JDBCUtil.getString(rs_tDBInput_1, 6, false);
-		                    }
-							if(colQtyInRs_tDBInput_1 < 7) {
-								row8.region = null;
-							} else {
-	                         		
-        	row8.region = routines.system.JDBCUtil.getString(rs_tDBInput_1, 7, false);
-		                    }
-							if(colQtyInRs_tDBInput_1 < 8) {
-								row8.pays = null;
-							} else {
-	                         		
-        	row8.pays = routines.system.JDBCUtil.getString(rs_tDBInput_1, 8, false);
+        	row8.code_postal = routines.system.JDBCUtil.getString(rs_tDBInput_1, 2, false);
 		                    }
 					
 
@@ -1770,8 +1527,6 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
 								
 								hasCasePrimitiveKeyWithNull_tMap_1 = false;
 								
-                        		    		row9HashKey.Villes = row8.ville ;
-                        		    		
                         		    		row9HashKey.Code_Postal = row8.code_postal ;
                         		    		
 
@@ -1816,7 +1571,7 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
 			  							
 			  						
 									 		
-									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row9' and it contains more one result from keys :  row9.Villes = '" + row9HashKey.Villes + "', row9.Code_Postal = '" + row9HashKey.Code_Postal + "'");
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row9' and it contains more one result from keys :  row9.Code_Postal = '" + row9HashKey.Code_Postal + "'");
 								} // G 071
 							
 
@@ -3256,8 +3011,6 @@ public static class row9Struct implements routines.system.IPersistableComparable
 			final int prime = PRIME;
 			int result = DEFAULT_HASHCODE;
 	
-						result = prime * result + ((this.Villes == null) ? 0 : this.Villes.hashCode());
-					
 						result = prime * result + ((this.Code_Postal == null) ? 0 : this.Code_Postal.hashCode());
 					
     		this.hashCode = result;
@@ -3273,14 +3026,6 @@ public static class row9Struct implements routines.system.IPersistableComparable
 		if (getClass() != obj.getClass()) return false;
 		final row9Struct other = (row9Struct) obj;
 		
-						if (this.Villes == null) {
-							if (other.Villes != null)
-								return false;
-						
-						} else if (!this.Villes.equals(other.Villes))
-						
-							return false;
-					
 						if (this.Code_Postal == null) {
 							if (other.Code_Postal != null)
 								return false;
@@ -3302,13 +3047,36 @@ public static class row9Struct implements routines.system.IPersistableComparable
 
 	public void copyKeysDataTo(row9Struct other) {
 
-		other.Villes = this.Villes;
-	            	other.Code_Postal = this.Code_Postal;
+		other.Code_Postal = this.Code_Postal;
 	            	
 	}
 
 
 
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
 
 	private String readString(ObjectInputStream dis) throws IOException{
 		String strReturn = null;
@@ -3348,8 +3116,6 @@ public static class row9Struct implements routines.system.IPersistableComparable
 
         		int length = 0;
 		
-					this.Villes = readString(dis);
-					
 					this.Code_Postal = readString(dis);
 					
         	} catch (IOException e) {
@@ -3372,10 +3138,6 @@ public static class row9Struct implements routines.system.IPersistableComparable
 		
 					// String
 				
-						writeString(this.Villes,dos);
-					
-					// String
-				
 						writeString(this.Code_Postal,dos);
 					
         	} catch (IOException e) {
@@ -3395,13 +3157,16 @@ public static class row9Struct implements routines.system.IPersistableComparable
 
 			int length = 0;
 		
+						this.Villes = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
 
 		
 
         }
 
 		
-        	finally {}
 
     }
 
@@ -3412,8 +3177,11 @@ public static class row9Struct implements routines.system.IPersistableComparable
         try {
 
 		
+						writeString(this.Villes, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
         	}
-        	finally {}
 
     }
 
@@ -3437,12 +3205,6 @@ public static class row9Struct implements routines.system.IPersistableComparable
 
 		int returnValue = -1;
 		
-						returnValue = checkNullsAndCompare(this.Villes, other.Villes);
-						if(returnValue != 0) {
-							return returnValue;
-						}
-
-					
 						returnValue = checkNullsAndCompare(this.Code_Postal, other.Code_Postal);
 						if(returnValue != 0) {
 							return returnValue;
@@ -4035,17 +3797,17 @@ row9Struct row9 = new row9Struct();
 	 */
 
 				
-			int NB_ITERATE_tRunJob_1 = 0; //for statistics
-						
-			int NB_ITERATE_tRunJob_2 = 0; //for statistics
-						
-			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
+			int NB_ITERATE_tRunJob_4 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_3 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_4 = 0; //for statistics
+			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
 						
 			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
+						
+			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+						
+			int NB_ITERATE_tRunJob_2 = 0; //for statistics
 			
 
 	
@@ -4825,15 +4587,15 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 	
 	
 					if(execStat){				
+	       				runStat.updateStatOnConnection("row1", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("magasins", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("magin_record", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6631,11 +6393,7 @@ end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
+	       				runStat.updateStatOnConnection("efface_magasin", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6643,7 +6401,11 @@ end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("efface_magasin", 3, 0);
+	       				runStat.updateStatOnConnection("row9", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row9", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -14171,6 +13933,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     317144 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 16:57:51 CEST
+ *     311206 characters generated by Talend Open Studio for Data Integration 
+ *     on the 15 juin 2019 20:03:26 CEST
  ************************************************************************************************/
