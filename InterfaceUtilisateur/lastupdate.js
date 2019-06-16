@@ -1,6 +1,6 @@
-function login(username, pwd) {
+function lastupdate() {
 
-  const GET_USER_QUERY = 'SELECT fullname, profile, pays, region, magasin FROM users WHERE username=? AND password=SHA2(?, 224)';
+  const GET_LAST_UPDATE = 'SELECT MAX(date_update) AS dt FROM data_update';
   const mysql      = require('mysql');
   const connection = mysql.createConnection({
     host     : '35.180.255.232',
@@ -18,7 +18,7 @@ function login(username, pwd) {
       console.log('connected as id ' + connection.threadId);
 
           //réclame l'utilisateur correspondant à l'username et le pwd
-        connection.query(GET_USER_QUERY, [username, pwd], function (error, results, fields) {
+        connection.query(GET_LAST_UPDATE, [], function (error, results, fields) {
           
           //ferme la connection
           connection.end();
@@ -28,7 +28,7 @@ function login(username, pwd) {
           }
 
           if ( results == null || results.length == 0)  {
-            reject('no user');
+            reject('no update date');
           }         
           else {                      
             resolve(results[0]);
@@ -39,4 +39,4 @@ function login(username, pwd) {
   }); // fin du Promise         
 }
 
-module.exports.login=login;
+module.exports.lastupdate=lastupdate;

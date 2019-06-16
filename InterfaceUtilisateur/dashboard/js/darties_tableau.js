@@ -148,21 +148,44 @@ async function initDarties() {
 
     //modifie le titre du tableau de bord
     setBoardTitleFromProfile();
+    fillsRegions();
 
-    //récupère les taux de conversion
-    initTauxConversion();
-
-    //Sélectionne la période courante
+    //initialise les périodes
+    // ajoute les périodes de janvier jusqu'au mois courant
     const today = new Date();
-    const mm = today.getMonth() + 1;
+
+    //définit la date du jour 
+    $("#datedujour").html(`Date du jour:${today.toLocaleString()}`);
+    //récupère la dernière date de mise à jour        
+    var dartiesAPI = `${location.protocol}//${location.host}/lastupdate`;        
+    $.getJSON(dartiesAPI)
+    .done(function( data ) {        
+        console.log("dernier update" + data);
+        const dateParts = data.lastupdate.split("-");
+        $("#datemiseajour").html(`Date de mise à jour : ${dateParts[2].substr(0,2)}/${dateParts[1]}/${dateParts[0]}`);
+    });    
+
     const yyyy = today.getFullYear();
+    //mois courant. Janvier = 0 d'ou le +1
+    const mm = today.getMonth() + 1;
+    //génere un tableau d'entier de 1 à today.getMonth() + 1
+    //afin de remplir la dropdown avec la liste des mois depuis Janvier
+    const months = Array.from({ length: mm }, (v, i) => i);
+
+    //génère les options avec value = yyyymm
+    $("#periodes").html( months.reverse() /* reverse car nous voulons le mois de janvier en dernier dans la liste*/
+                                .map((e,i)=>  { const idx = e+1;
+                                                today.setMonth(e);        
+                                                return `<option value='${yyyy*100+idx}' ${idx==mm?'selected':''} >${today.toLocaleString('fr-FR', { month: 'long' })} ${yyyy}</option>` ;
+                                            }));
+
+    //Sélectionne la période courante        
     const id_date = yyyy * 100 + mm;
 
     try {
         //document.getElementById('tableauViz') => 
         //      récupère le placeholder qui contiendra les feuilles de Tableau software                
-        viz = await initDataviz(document.getElementById('tableauViz'), id_date);
-        debugger;
+        viz = await initDataviz(document.getElementById('tableauViz'), id_date);        
 
         //remise à zéro des filtres
         resetFilters();
@@ -179,7 +202,27 @@ async function initDarties() {
 
     } catch(e) {
         console.error(e);
-    }
+    }    
+}
+
+//genère la liste des régions commerciale dans le filtre
+function fillsRegions() {
+    debugger;
+    //récupère la liste des régions en fonction du profile
+    var dartiesAPI = `${location.protocol}//${location.host}/regionlist`;        
+    $.getJSON(dartiesAPI,
+        {
+            parentRegion:current_filtre_region,
+            isCity:current_profile==PROFILE_DIRECTEUR_REGIONAL
+        })
+    .done(function( data ) {     
+        if (current_profile!=PROFILE_DIRECTEUR_REGIONAL){
+            $("#regions").html( [`<option value="" selected>Régions commerciales</option>`,...data.regions.map((e,i)=> `<option value='${e.slug}'>${e.nom}</option>`)] );                            
+        } else {
+            $("#regions").html( [`<option value="" selected>Régions commerciales</option>`,...data.regions.map((e,i)=> `<option value='${e.id}'>${e.enseigne} ${e.ville}</option>`)] );                            
+        }
+        debugger;
+    });     
 }
 
 // retourne la liste des feuilles de la vue active
@@ -250,7 +293,7 @@ function applyAllFilters() {
 function tabViewchange(e) {
     console.log("TAB_SWITCH");
     current_tab_view = e.getNewSheetName();
-    debugger;
+    
     //réappliquer les filtres de région actuels
     applyRegionFilters();
     applyAllFilters();
@@ -519,6 +562,7 @@ function switchTosubRegion(profile, region_parente, region) {
     viz.getWorkbook().changeParameterValueAsync(PROFILE_PARAMETER,current_profile);
     applyRegionFilters();
     setBoardTitleFromProfile();
+    fillsRegions();
 }
 
 function applyRegionFilters() {    
@@ -531,10 +575,3 @@ function getSubProfile(profile) {
     return subProfile[profile];
 }
 
-function initTauxConversion() {
-    if ($("#monnaie").val() == 'Euro') {
-
-    } else {
-        
-    }
-}

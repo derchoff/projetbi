@@ -5,6 +5,8 @@ const PROFILE_RESPONSABLE_MAGASIN = "Responsable magasin";
 var express = require('express');
 var bodyParser = require("body-parser");
 var login = require("./login");
+var lastupdate = require("./lastupdate");
+var regionlist = require("./regionlist");
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,6 +53,36 @@ app.post('/login', async function(request,response) {
          response.sendFile( __dirname + '/common/logininvalide.html');
       }
    });
+
+//gère retourne la dernière date de mise à jour de la bdd
+// au format JSON
+app.get('/lastupdate', async function(req,res) {   
+   try {
+      const update = await lastupdate.lastupdate();
+      return res.json({ lastupdate: update.dt });
+   }
+   catch(e) {
+      //erreur lors du login
+      console.log(e);
+      //bad request
+      return res.status(400);
+   }
+});   
+
+app.get('/regionlist', async function(req,res) {   
+   try {
+      const regions = await regionlist.regionlist(req.query.parentRegion, req.query.isCity=='true');
+      return res.json({ regions: regions });
+   }
+   catch(e) {
+      //erreur lors du login
+      console.log(e);
+      //bad request
+      return res.status(400);
+   }
+});
+
+
 
 var server = app.listen(8081, function () {
    var host = server.address().address

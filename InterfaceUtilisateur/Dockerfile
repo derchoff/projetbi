@@ -14,6 +14,8 @@ COPY ./common ./common
 COPY ./dashboard ./dashboard
 COPY ./server.js .
 COPY ./login.js .
+COPY ./lastupdate.js .
+COPY ./regionlist.js .
 
 EXPOSE 8081
 
