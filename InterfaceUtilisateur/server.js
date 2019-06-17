@@ -72,7 +72,7 @@ app.get('/lastupdate', async function(req,res) {
 app.get('/regionlist', async function(req,res) {   
    try {
       const regions = await regionlist.regionlist(req.query.parentRegion, req.query.isCity=='true');
-      return res.json({ regions: regions });
+      return res.json(regions);
    }
    catch(e) {
       //erreur lors du login
@@ -82,7 +82,41 @@ app.get('/regionlist', async function(req,res) {
    }
 });
 
+app.get('/produits', async function(req,res) {   
+   try {
+      return res.json(await regionlist.produitlist());
+   }
+   catch(e) {
+      //erreur lors du login
+      console.log(e);
+      //bad request
+      return res.status(400);
+   }
+});
 
+app.get('/indicateurs', async function(req,res) {   
+   try {
+      return res.json(await regionlist.indicateurlist());
+   }
+   catch(e) {
+      //erreur lors du login
+      console.log(e);
+      //bad request
+      return res.status(400);
+   }
+});
+
+app.get('/enseignes', async function(req,res) {   
+   try {
+      return res.json(await regionlist.enseignelist());
+   }
+   catch(e) {
+      //erreur lors du login
+      console.log(e);
+      //bad request
+      return res.status(400);
+   }
+});
 
 var server = app.listen(8081, function () {
    var host = server.address().address

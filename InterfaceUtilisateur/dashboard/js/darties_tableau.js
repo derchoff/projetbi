@@ -151,6 +151,7 @@ async function initDarties() {
     //modifie le titre du tableau de bord
     setBoardTitleFromProfile();
     fillsRegions();
+    fillsFilters();
 
     //initialise les périodes
     // ajoute les périodes de janvier jusqu'au mois courant
@@ -210,18 +211,14 @@ async function initDarties() {
 // la liste des sous régions d'une région donnée
 // ce peut être la liste des régions commerciales
 // ou la liste des villes
-function getRegions(region, isVille) {
-    const dartiesAPI = `${location.protocol}//${location.host}/regionlist`;        
+function getAPIData(apiname, data) {
+    const dartiesAPI = `${location.protocol}//${location.host}/${apiname}`;        
     //configure les filtres de départ    
     //créer l'objet vis de Tableau software
     return new Promise(function(resolve,reject) {         
-        $.getJSON(dartiesAPI,
-            {
-                parentRegion:region,
-                isCity:isVille
-            })
+        $.getJSON(dartiesAPI, data)
         .done(function( data ) {    
-            resolve(data.regions);
+            resolve(data);
         }).fail(function(jqxhr, textStatus, error) {
             reject(error);
           });
@@ -239,13 +236,13 @@ async function fillsRegions() {
     if (start_profile==PROFILE_DIRECTEUR_COMMERCIAL) {
 
         // récupère les régions commerciale
-        let subRegions = await getRegions(current_filtre_region, false);
+        let subRegions = await getAPIData('regionlist', {parentRegion:current_filtre_region,isCity:false});
         const subProfile = getSubProfile(start_profile);
         const cityProfile = getSubProfile(subProfile);
         // pour chaque région commerciale récupère les villes
         // de cette région
         for (const element of subRegions) {
-            let villes = await getRegions(element.nom, true);
+            let villes = await getAPIData('regionlist', {parentRegion:element.nom,isCity:true});
             regions = [...regions, 
                     `<option value='${subProfile}_${current_filtre_region}_${element.nom}'>${element.nom}</option>`, 
                     ...villes.map((e,i)=> `<option value='${cityProfile}_${element.nom}_${e.ville}'>&emsp;&emsp;${e.enseigne} ${e.ville}</option>`)];
@@ -254,7 +251,7 @@ async function fillsRegions() {
     } else {
         if (start_profile==PROFILE_DIRECTEUR_REGIONAL) {
             // récupère les régions commerciale
-            let subRegions = await getRegions(current_filtre_region, true);
+            let subRegions = await getAPIData('regionlist', {parentRegion:current_filtre_region,isCity:true});
 
             regions = [...regions,                         
                         ...subRegions.map((e,i)=> `<option value='${subProfile}_${current_filtre_region}_${e.ville}'>&emsp;&emsp;${e.enseigne} ${e.ville}</option>`)];
@@ -268,6 +265,30 @@ async function fillsRegions() {
         $("#regions").html('');
         $("#regions").hide();    
     }
+}
+
+//genère dynaliquement la liste des filtres
+// indicateurs, produits et enseigne
+async function fillsFilters() {
+    
+    const produits = await getAPIData('produits', null);
+    const indicateurs = await getAPIData('indicateurs', null);
+    const enseignes = await getAPIData('enseignes', null);
+
+    $('#enseignes').html(
+        [`<option value="" selected>Toutes les enseignes</option>`, 
+            ...enseignes.map((e,i)=> `<option value='${e.enseigne}'>${e.enseigne}</option>`)]
+    );
+
+    $('#indicateurs').html(
+        [`<option value="" selected>Toutes les indicateurs</option>`, 
+            ...indicateurs.map((e,i)=> `<option value='${e.abbreviation}'>${e.nom}</option>`)]
+    );
+    
+    $('#produits').html(
+        [`<option value="" selected>Tous les produits</option>`, 
+            ...produits.map((e,i)=> `<option value='${e.type_produit}'>${e.type_produit}</option>`)]
+    );    
 }
 
 // retourne la liste des feuilles de la vue active
@@ -619,7 +640,6 @@ function switchTosubRegion(profile, region_parente, region) {
     viz.getWorkbook().changeParameterValueAsync(PROFILE_PARAMETER,current_profile);
     applyRegionFilters();
     setBoardTitleFromProfile();
-    fillsRegions();
 }
 
 function applyRegionFilters() {    
