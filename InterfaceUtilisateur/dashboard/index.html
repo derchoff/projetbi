@@ -17,16 +17,18 @@
 
     <div class="container-fluid h-100">
         <!-- ENTETE -->
-        <div id="titreTableauDeBord"  class="row display-flex justify-content-center align-items-center">
-            <div class="col-3 mx-auto pt-2 mb-2">
-                <div class="card card-body pb-3 pt-2 blue-background justify-content-center align-items-center h-100">
+        <div id="titreTableauDeBord"  class="row display-flex">
+            <div class="col-3 mb-1">
+                <div class="card card-body blue-background justify-content-center align-items-center h-100">
                     <img src="/images/logo darties.png"/>
                 </div>                
             </div>
-            <div class="col-9 mx-auto pt-2 mb-2 ">
-                <div class="card card-body blue-background justify-content-center align-items-center">
+            <div class="col-9 mb-1">
+                <div class="card card-body blue-background ">
                     <div class="row w-100">
-                        <div class="col-9">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-6">
                             <h3><label id="TitreTableauDeBord">Tableau de bord National</label></h3>
                         </div>             
                         <div class="col-3">
@@ -38,9 +40,9 @@
             </div>
         </div>
                 
-        <div class="row pt-2 mb-2 ">
+        <div class="row">
             <div class="col-3">
-            <div class="row">
+            <div class="row mb-2 h-75">
                 <div id="panelFiltres" class="col-12 mx-auto">
                     <div class="card card-body mb-2 h-100 blue-background">
                     <!-- <button id="debbugButton">Liste filtre vue</button> -->
@@ -74,7 +76,7 @@
                                         <option value="Sud_Ouest">Sud ouest</option> -->
                                 </select>                        
                             </div>
-                        </div>           
+                        </div>
                         <!-- enseignes -->
                         <div class="row">
                                 <div class="col-10 col-sm-10 mb-2">
@@ -135,7 +137,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 ">
                                     <div class="col-2 col-sm-2">
                                         <button id="effacerFiltres">Effacer</button>
                                     </div>
@@ -149,7 +151,7 @@
             </div>
             <div class="row">
                     <div class="col-12 mx-auto">
-                            <div class="card card-body mb-2 h-100 blue-background">
+                            <div class="card card-body h-100 blue-background">
                                     <div class="row">
                                             <div class="col-4 col-sm-4 mb-2">
                                                 <div class="row flex-nowrap">
@@ -161,28 +163,39 @@
                                                     </div>                                            
                                                 </div>
                                                 <div class="row flex-nowrap">
-                                                        <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                        <div class="col-1 col-sm-4 mb-1 ml-2">
                                                             <input id="pdf-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/pdf.png"/>
                                                         </div>
-                                                        <div class="col-1 col-sm-4 mb-2 ml-2">
+                                                        <div class="col-1 col-sm-4 mb-1 ml-2">
                                                             <input id="excel-export" class="export-btn" type="image" src="https://img.icons8.com/color/48/000000/ms-excel.png"/>
                                                         </div>
-                                                        <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                        <div class="col-1 col-sm-4 mb-1 ml-3">
                                                             <input id="print" class="print-btn" type="image" src="https://img.icons8.com/color/48/000000/send-to-printer.png"/>
                                                         </div>
-                                                        <div class="col-1 col-sm-4 mb-2 ml-3">
+                                                        <div class="col-1 col-sm-4 mb-1 ml-3">
                                                             <input id="email" class="email-btn" type="image" src="https://img.icons8.com/ios/50/000000/secured-letter.png"/>
                                                         </div>                                                                                                                                                    
-                                                </div>                                                                                
+                                                </div>                                                                                                                                 
                                             </div>
-                                        </div>
+                                    </div>
+                                    <div class="row flex-nowrap ">
+                                            <div class="col-10 col-sm-10 ml-2 mt-1">
+                                                <input id="search-input" type="text" class="w-100"/>
+                                            </div>
+                                            <div class="col-1 col-sm-1 d-flex justify-content-start ">
+                                                <input id="search-btn"                                                        
+                                                        class="search-btn" 
+                                                        type="image" 
+                                                        src="https://img.icons8.com/ios/50/000000/search-filled.png"/>
+                                            </div>                           
+                                    </div>                                    
                             </div>
                     </div>
             </div>
             </div>
 
                 <div class="col-9 mx-auto h-100 w-100">
-                    <div class="card card-body mb-2 h-100 w-100">                    
+                    <div class="card card-body h-100 w-100">                    
                         <!-- TABLEAU -->
                         <div id="tableauViz" class="w-100">
                         

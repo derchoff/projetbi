@@ -113,6 +113,8 @@ async function initDarties() {
     $('#print').on('click', e => printDashBoard());
     $('#email').on('click', e => viz.showShareDialog());
 
+    $('#search-btn').on('click', e => window.open( `http://google.com/search?q=${$('#search-input').val()}`, '_blank'));
+
     //retour au premier écran
     $('#retour_accueille').on('click', backToStartScreen);
 
@@ -135,8 +137,8 @@ async function initDarties() {
     // le responsable de magasin ne peut pas changer
     // le niveau hierarchique
     if (start_profile == PROFILE_RESPONSABLE_MAGASIN) {
-        $('#regions').hide();
-    }
+        $('#regions').hide();        
+    }    
 
     current_filtre_region = $.urlParam("filtre_region");
     current_filtre_region_parente = $.urlParam("filtre_region_parente");    
@@ -155,7 +157,7 @@ async function initDarties() {
     const today = new Date();
 
     //définit la date du jour 
-    $("#datedujour").html(`Date du jour:${today.toLocaleString()}`);
+    $("#datedujour").html(`Date du jour : ${today.toLocaleString()}`);
     //récupère la dernière date de mise à jour        
     var dartiesAPI = `${location.protocol}//${location.host}/lastupdate`;        
     $.getJSON(dartiesAPI)
@@ -205,24 +207,67 @@ async function initDarties() {
     }    
 }
 
+// la liste des sous régions d'une région donnée
+// ce peut être la liste des régions commerciales
+// ou la liste des villes
+function getRegions(region, isVille) {
+    const dartiesAPI = `${location.protocol}//${location.host}/regionlist`;        
+    //configure les filtres de départ    
+    //créer l'objet vis de Tableau software
+    return new Promise(function(resolve,reject) {         
+        $.getJSON(dartiesAPI,
+            {
+                parentRegion:region,
+                isCity:isVille
+            })
+        .done(function( data ) {    
+            resolve(data.regions);
+        }).fail(function(jqxhr, textStatus, error) {
+            reject(error);
+          });
+    });    
+}
+
 //genère la liste des régions commerciale dans le filtre
-function fillsRegions() {
-    debugger;
-    //récupère la liste des régions en fonction du profile
-    var dartiesAPI = `${location.protocol}//${location.host}/regionlist`;        
-    $.getJSON(dartiesAPI,
-        {
-            parentRegion:current_filtre_region,
-            isCity:current_profile==PROFILE_DIRECTEUR_REGIONAL
-        })
-    .done(function( data ) {     
-        if (current_profile!=PROFILE_DIRECTEUR_REGIONAL){
-            $("#regions").html( [`<option value="" selected>Régions commerciales</option>`,...data.regions.map((e,i)=> `<option value='${e.slug}'>${e.nom}</option>`)] );                            
-        } else {
-            $("#regions").html( [`<option value="" selected>Régions commerciales</option>`,...data.regions.map((e,i)=> `<option value='${e.id}'>${e.enseigne} ${e.ville}</option>`)] );                            
-        }
-        debugger;
-    });     
+// génère une liste d'élément <option/> dans le <select /> #regions
+// chaque value de ces options est une concaténation de 
+// 'profile_regionparente_region'
+async function fillsRegions() {
+    
+    let regions = [`<option value="" selected>Régions commerciales</option>`];
+
+    if (start_profile==PROFILE_DIRECTEUR_COMMERCIAL) {
+
+        // récupère les régions commerciale
+        let subRegions = await getRegions(current_filtre_region, false);
+        const subProfile = getSubProfile(start_profile);
+        const cityProfile = getSubProfile(subProfile);
+        // pour chaque région commerciale récupère les villes
+        // de cette région
+        for (const element of subRegions) {
+            let villes = await getRegions(element.nom, true);
+            regions = [...regions, 
+                    `<option value='${subProfile}_${current_filtre_region}_${element.nom}'>${element.nom}</option>`, 
+                    ...villes.map((e,i)=> `<option value='${cityProfile}_${element.nom}_${e.ville}'>&emsp;&emsp;${e.enseigne} ${e.ville}</option>`)];
+        }            
+
+    } else {
+        if (start_profile==PROFILE_DIRECTEUR_REGIONAL) {
+            // récupère les régions commerciale
+            let subRegions = await getRegions(current_filtre_region, true);
+
+            regions = [...regions,                         
+                        ...subRegions.map((e,i)=> `<option value='${subProfile}_${current_filtre_region}_${e.ville}'>&emsp;&emsp;${e.enseigne} ${e.ville}</option>`)];
+        }        
+    }
+
+    if (regions.length>1) {
+        $("#regions").html(regions);
+        $("#regions").show();
+    } else {
+        $("#regions").html('');
+        $("#regions").hide();    
+    }
 }
 
 // retourne la liste des feuilles de la vue active
@@ -286,6 +331,17 @@ function applyAllFilters() {
     viz.getWorkbook().changeParameterValueAsync(PERIODE_PARAMETER,periode);
     viz.getWorkbook().changeParameterValueAsync(PERIODE_PRECEDENTE_PARAMETER,periode_precedente);
     viz.getWorkbook().changeParameterValueAsync(MOIS_PARAMETER,numero_mois);
+    
+
+    if ($("#regions").is(":visible")) {
+        //profile actuel = directeur commercial
+        const regionSelectionee = $("#regions").val();     
+        if (regionSelectionee=='') {
+            backToStartScreen();
+        } else {
+            switchTosubRegion(...regionSelectionee.split('_'));
+        }
+    }
 }
 
 // appellé lorsque l'utilisateur change de vue
@@ -469,6 +525,7 @@ function writeToFile(dashboardname, sheetNames, exportData) {
 
 //Reviens à la région de départ = celle juste après le login.
 function backToStartScreen() {
+    $("#regions").val('')
     switchTosubRegion(start_profile, start_filtre_region_parente, start_filtre_region);  
 }
 
