@@ -2,6 +2,8 @@ function lastupdate() {
 
   const GET_LAST_UPDATE = 'SELECT MAX(date_update) AS dt FROM data_update';
   const mysql      = require('mysql');
+  //il faudrait utiliser un mecanisme centralisé 
+  // pour la configuration de la bdd
   const connection = mysql.createConnection({
     host     : '35.180.255.232',
     user     : 'darties_app',

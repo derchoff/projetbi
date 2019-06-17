@@ -2,6 +2,8 @@ function login(username, pwd) {
 
   const GET_USER_QUERY = 'SELECT fullname, profile, pays, region, magasin FROM users WHERE username=? AND password=SHA2(?, 224)';
   const mysql      = require('mysql');
+  //il faudrait utiliser un mecanisme centralisé 
+  // pour la configuration de la bdd
   const connection = mysql.createConnection({
     host     : '35.180.255.232',
     user     : 'darties_app',

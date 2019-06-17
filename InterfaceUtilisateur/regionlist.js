@@ -1,6 +1,8 @@
 const mysql      = require('mysql');
 
 function execQuery(query, data) {  
+  //il faudrait utiliser un mecanisme centralisé 
+  // pour la configuration de la bdd
   const connection = mysql.createConnection({
     host     : '35.180.255.232',
     user     : 'darties_app',
