@@ -3,7 +3,7 @@
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="nom_fichier" prompt="nom_fichier?" promptNeeded="false" type="id_String" value="context.nom_fichier"/>
     <contextParameter comment="" name="nom_colonnes" prompt="nom_colonnes?" promptNeeded="false" type="id_String" value="context.nom_colonnes"/>
-    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="/usr/src/excel/A_TRAITER"/>
+    <contextParameter comment="Dossier où sont stocké les fichier Excel en attente" name="excel_input_repository" prompt="excel_input_repository?" promptNeeded="false" repositoryContextId="_vC8JoGHNEemeqeVfACt5KQ" type="id_Directory" value="C:\Users\d_erc\Documents\Google Drive\Cours\Cours MIAGE M2\D234\Pre╠üsentation Projet\excel_incomming"/>
     <contextParameter comment="" name="nom_onglet" prompt="nom_onglet?" promptNeeded="false" type="id_String" value="context.nom_onglet"/>
   </context>
   <parameters>
