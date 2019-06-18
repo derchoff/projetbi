@@ -47,6 +47,15 @@ import java.util.Comparator;
 
 
 
+	//the import part of tJavaRow_4
+	//import java.util.List;
+
+	//the import part of tJavaRow_1
+	//import java.util.List;
+
+	//the import part of tJavaRow_5
+	//import java.util.List;
+
 
 @SuppressWarnings("unused")
 
@@ -432,7 +441,43 @@ private class TalendException extends Exception {
 					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tJavaRow_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tUniqRow_2_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tJavaRow_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tMap_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tJavaRow_5_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
 				
@@ -1383,7 +1428,7 @@ efface_magasinStruct efface_magasin_tmp = new efface_magasinStruct();
 					
 					String dbPwd_tDBInput_1 = decryptedPassword_tDBInput_1;
 				
-				String url_tDBInput_1 = "jdbc:mysql://" + context.db_host + ":" + context.db_port + "/" + context.db_database + "?" + "noDatetimeStringSync=true";
+				String url_tDBInput_1 = "jdbc:mysql://" + context.db_host + ":" + context.db_port + "/" + context.db_database + "?" + "noDatetimeStringSync=true&useSSL=false";
 				
 				conn_tDBInput_1 = java.sql.DriverManager.getConnection(url_tDBInput_1,dbUser_tDBInput_1,dbPwd_tDBInput_1);
 		        
@@ -2172,6 +2217,225 @@ end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 	
 
 
+public static class rejected_regionStruct implements routines.system.IPersistableRow<rejected_regionStruct> {
+    final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
+    static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String ville;
+
+				public String getVille () {
+					return this.ville;
+				}
+				
+			    public String code_postal;
+
+				public String getCode_postal () {
+					return this.code_postal;
+				}
+				
+			    public String Region;
+
+				public String getRegion () {
+					return this.Region;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.code_postal == null) ? 0 : this.code_postal.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final rejected_regionStruct other = (rejected_regionStruct) obj;
+		
+						if (this.code_postal == null) {
+							if (other.code_postal != null)
+								return false;
+						
+						} else if (!this.code_postal.equals(other.code_postal))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(rejected_regionStruct other) {
+
+		other.ville = this.ville;
+	            other.code_postal = this.code_postal;
+	            other.Region = this.Region;
+	            
+	}
+
+	public void copyKeysDataTo(rejected_regionStruct other) {
+
+		other.code_postal = this.code_postal;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_PROJET_BI_4_integration_magasins.length) {
+				if(length < 1024 && commonByteArray_PROJET_BI_4_integration_magasins.length == 0) {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[1024];
+				} else {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_PROJET_BI_4_integration_magasins, 0, length);
+			strReturn = new String(commonByteArray_PROJET_BI_4_integration_magasins, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_PROJET_BI_4_integration_magasins) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.ville = readString(dis);
+					
+					this.code_postal = readString(dis);
+					
+					this.Region = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.ville,dos);
+					
+					// String
+				
+						writeString(this.code_postal,dos);
+					
+					// String
+				
+						writeString(this.Region,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("ville="+ville);
+		sb.append(",code_postal="+code_postal);
+		sb.append(",Region="+Region);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(rejected_regionStruct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.code_postal, other.code_postal);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
 public static class magin_recordStruct implements routines.system.IPersistableRow<magin_recordStruct> {
     final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
     static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
@@ -2419,7 +2683,254 @@ public static class magin_recordStruct implements routines.system.IPersistableRo
 
 }
 
-public static class magasinsStruct implements routines.system.IPersistableRow<magasinsStruct> {
+public static class row7Struct implements routines.system.IPersistableRow<row7Struct> {
+    final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
+    static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String enseigne;
+
+				public String getEnseigne () {
+					return this.enseigne;
+				}
+				
+			    public String ville;
+
+				public String getVille () {
+					return this.ville;
+				}
+				
+			    public String code_postal;
+
+				public String getCode_postal () {
+					return this.code_postal;
+				}
+				
+			    public String code_departement;
+
+				public String getCode_departement () {
+					return this.code_departement;
+				}
+				
+			    public String Region;
+
+				public String getRegion () {
+					return this.Region;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.code_postal == null) ? 0 : this.code_postal.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row7Struct other = (row7Struct) obj;
+		
+						if (this.code_postal == null) {
+							if (other.code_postal != null)
+								return false;
+						
+						} else if (!this.code_postal.equals(other.code_postal))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row7Struct other) {
+
+		other.enseigne = this.enseigne;
+	            other.ville = this.ville;
+	            other.code_postal = this.code_postal;
+	            other.code_departement = this.code_departement;
+	            other.Region = this.Region;
+	            
+	}
+
+	public void copyKeysDataTo(row7Struct other) {
+
+		other.code_postal = this.code_postal;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_PROJET_BI_4_integration_magasins.length) {
+				if(length < 1024 && commonByteArray_PROJET_BI_4_integration_magasins.length == 0) {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[1024];
+				} else {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_PROJET_BI_4_integration_magasins, 0, length);
+			strReturn = new String(commonByteArray_PROJET_BI_4_integration_magasins, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_PROJET_BI_4_integration_magasins) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.enseigne = readString(dis);
+					
+					this.ville = readString(dis);
+					
+					this.code_postal = readString(dis);
+					
+					this.code_departement = readString(dis);
+					
+					this.Region = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.enseigne,dos);
+					
+					// String
+				
+						writeString(this.ville,dos);
+					
+					// String
+				
+						writeString(this.code_postal,dos);
+					
+					// String
+				
+						writeString(this.code_departement,dos);
+					
+					// String
+				
+						writeString(this.Region,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("enseigne="+enseigne);
+		sb.append(",ville="+ville);
+		sb.append(",code_postal="+code_postal);
+		sb.append(",code_departement="+code_departement);
+		sb.append(",Region="+Region);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row7Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.code_postal, other.code_postal);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row6Struct implements routines.system.IPersistableRow<row6Struct> {
     final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
     static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
 
@@ -2569,10 +3080,462 @@ public static class magasinsStruct implements routines.system.IPersistableRow<ma
     /**
      * Compare keys
      */
+    public int compareTo(row6Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class rejected_joinStruct implements routines.system.IPersistableRow<rejected_joinStruct> {
+    final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
+    static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String Code_postal;
+
+				public String getCode_postal () {
+					return this.Code_postal;
+				}
+				
+			    public String Villes;
+
+				public String getVilles () {
+					return this.Villes;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.Code_postal == null) ? 0 : this.Code_postal.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final rejected_joinStruct other = (rejected_joinStruct) obj;
+		
+						if (this.Code_postal == null) {
+							if (other.Code_postal != null)
+								return false;
+						
+						} else if (!this.Code_postal.equals(other.Code_postal))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(rejected_joinStruct other) {
+
+		other.Code_postal = this.Code_postal;
+	            other.Villes = this.Villes;
+	            
+	}
+
+	public void copyKeysDataTo(rejected_joinStruct other) {
+
+		other.Code_postal = this.Code_postal;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_PROJET_BI_4_integration_magasins.length) {
+				if(length < 1024 && commonByteArray_PROJET_BI_4_integration_magasins.length == 0) {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[1024];
+				} else {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_PROJET_BI_4_integration_magasins, 0, length);
+			strReturn = new String(commonByteArray_PROJET_BI_4_integration_magasins, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_PROJET_BI_4_integration_magasins) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.Code_postal = readString(dis);
+					
+					this.Villes = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.Code_postal,dos);
+					
+					// String
+				
+						writeString(this.Villes,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("Code_postal="+Code_postal);
+		sb.append(",Villes="+Villes);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(rejected_joinStruct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.Code_postal, other.Code_postal);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class magasinsStruct implements routines.system.IPersistableRow<magasinsStruct> {
+    final static byte[] commonByteArrayLock_PROJET_BI_4_integration_magasins = new byte[0];
+    static byte[] commonByteArray_PROJET_BI_4_integration_magasins = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String enseigne;
+
+				public String getEnseigne () {
+					return this.enseigne;
+				}
+				
+			    public String ville;
+
+				public String getVille () {
+					return this.ville;
+				}
+				
+			    public String code_postal;
+
+				public String getCode_postal () {
+					return this.code_postal;
+				}
+				
+			    public String code_departement;
+
+				public String getCode_departement () {
+					return this.code_departement;
+				}
+				
+			    public String Region;
+
+				public String getRegion () {
+					return this.Region;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.code_postal == null) ? 0 : this.code_postal.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final magasinsStruct other = (magasinsStruct) obj;
+		
+						if (this.code_postal == null) {
+							if (other.code_postal != null)
+								return false;
+						
+						} else if (!this.code_postal.equals(other.code_postal))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(magasinsStruct other) {
+
+		other.enseigne = this.enseigne;
+	            other.ville = this.ville;
+	            other.code_postal = this.code_postal;
+	            other.code_departement = this.code_departement;
+	            other.Region = this.Region;
+	            
+	}
+
+	public void copyKeysDataTo(magasinsStruct other) {
+
+		other.code_postal = this.code_postal;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_PROJET_BI_4_integration_magasins.length) {
+				if(length < 1024 && commonByteArray_PROJET_BI_4_integration_magasins.length == 0) {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[1024];
+				} else {
+   					commonByteArray_PROJET_BI_4_integration_magasins = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_PROJET_BI_4_integration_magasins, 0, length);
+			strReturn = new String(commonByteArray_PROJET_BI_4_integration_magasins, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_PROJET_BI_4_integration_magasins) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.enseigne = readString(dis);
+					
+					this.ville = readString(dis);
+					
+					this.code_postal = readString(dis);
+					
+					this.code_departement = readString(dis);
+					
+					this.Region = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.enseigne,dos);
+					
+					// String
+				
+						writeString(this.ville,dos);
+					
+					// String
+				
+						writeString(this.code_postal,dos);
+					
+					// String
+				
+						writeString(this.code_departement,dos);
+					
+					// String
+				
+						writeString(this.Region,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("enseigne="+enseigne);
+		sb.append(",ville="+ville);
+		sb.append(",code_postal="+code_postal);
+		sb.append(",code_departement="+code_departement);
+		sb.append(",Region="+Region);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
     public int compareTo(magasinsStruct other) {
 
 		int returnValue = -1;
 		
+						returnValue = checkNullsAndCompare(this.code_postal, other.code_postal);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
 	    return returnValue;
     }
 
@@ -3783,7 +4746,11 @@ public void tFileList_2Process(final java.util.Map<String, Object> globalMap) th
 
 		row1Struct row1 = new row1Struct();
 villes_corrigeeStruct villes_corrigee = new villes_corrigeeStruct();
+rejected_joinStruct rejected_join = new rejected_joinStruct();
 magasinsStruct magasins = new magasinsStruct();
+row7Struct row7 = new row7Struct();
+row6Struct row6 = new row6Struct();
+rejected_regionStruct rejected_region = new rejected_regionStruct();
 magin_recordStruct magin_record = new magin_recordStruct();
 row2Struct row2 = new row2Struct();
 vStruct v = new vStruct();
@@ -3797,7 +4764,9 @@ row9Struct row9 = new row9Struct();
 	 */
 
 				
-			int NB_ITERATE_tRunJob_4 = 0; //for statistics
+			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+						
+			int NB_ITERATE_tRunJob_2 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_3 = 0; //for statistics
 						
@@ -3805,9 +4774,7 @@ row9Struct row9 = new row9Struct();
 						
 			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_1 = 0; //for statistics
-						
-			int NB_ITERATE_tRunJob_2 = 0; //for statistics
+			int NB_ITERATE_tRunJob_4 = 0; //for statistics
 			
 
 	
@@ -4591,7 +5558,7 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("magasins", 3, 0);
+	       				runStat.updateStatOnConnection("row6", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -4602,12 +5569,152 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 	       				runStat.updateStatOnConnection("villes_corrigee", 3, 0);
 					}           			
 				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row7", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("rejected_region", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("rejected_join", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("magasins", 3, 0);
+					}           			
+				
 				if(execStat){
 					runStat.updateStatOnConnection("iterate2", 1, "exec" + NB_ITERATE_tFileInputExcel_1);
 					//Thread.sleep(1000);
 				}				
 			
 
+
+
+
+	
+	/**
+	 * [tJavaRow_4 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tJavaRow_4", false);
+		start_Hash.put("tJavaRow_4", System.currentTimeMillis());
+		
+	
+	currentComponent="tJavaRow_4";
+
+	
+			if (execStat) {
+				if(resourceMap.get("inIterateVComp") == null){
+					
+						runStat.updateStatOnConnection("rejected_join" + iterateId, 0, 0);
+					
+				}
+			} 
+
+		
+		int tos_count_tJavaRow_4 = 0;
+		
+
+int nb_line_tJavaRow_4 = 0;
+
+ 
+
+
+
+/**
+ * [tJavaRow_4 begin ] stop
+ */
+
+
+
+
+
+	
+	/**
+	 * [tJavaRow_1 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tJavaRow_1", false);
+		start_Hash.put("tJavaRow_1", System.currentTimeMillis());
+		
+	
+	currentComponent="tJavaRow_1";
+
+	
+			if (execStat) {
+				if(resourceMap.get("inIterateVComp") == null){
+					
+						runStat.updateStatOnConnection("row7" + iterateId, 0, 0);
+					
+				}
+			} 
+
+		
+		int tos_count_tJavaRow_1 = 0;
+		
+
+int nb_line_tJavaRow_1 = 0;
+
+ 
+
+
+
+/**
+ * [tJavaRow_1 begin ] stop
+ */
+
+
+
+
+
+	
+	/**
+	 * [tJavaRow_5 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tJavaRow_5", false);
+		start_Hash.put("tJavaRow_5", System.currentTimeMillis());
+		
+	
+	currentComponent="tJavaRow_5";
+
+	
+			if (execStat) {
+				if(resourceMap.get("inIterateVComp") == null){
+					
+						runStat.updateStatOnConnection("rejected_region" + iterateId, 0, 0);
+					
+				}
+			} 
+
+		
+		int tos_count_tJavaRow_5 = 0;
+		
+
+int nb_line_tJavaRow_5 = 0;
+
+ 
+
+
+
+/**
+ * [tJavaRow_5 begin ] stop
+ */
 
 
 
@@ -4744,7 +5851,7 @@ int count_tDBOutput_2=0;
 			if (execStat) {
 				if(resourceMap.get("inIterateVComp") == null){
 					
-						runStat.updateStatOnConnection("magasins" + iterateId, 0, 0);
+						runStat.updateStatOnConnection("row6" + iterateId, 0, 0);
 					
 				}
 			} 
@@ -4789,6 +5896,7 @@ Var__tMap_4__Struct Var__tMap_4 = new Var__tMap_4__Struct();
 
 // ###############################
 // # Outputs initialization
+rejected_regionStruct rejected_region_tmp = new rejected_regionStruct();
 magin_recordStruct magin_record_tmp = new magin_recordStruct();
 // ###############################
 
@@ -4813,6 +5921,97 @@ magin_recordStruct magin_record_tmp = new magin_recordStruct();
 
 /**
  * [tMap_4 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tUniqRow_2 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tUniqRow_2", false);
+		start_Hash.put("tUniqRow_2", System.currentTimeMillis());
+		
+	
+	currentComponent="tUniqRow_2";
+
+	
+			if (execStat) {
+				if(resourceMap.get("inIterateVComp") == null){
+					
+						runStat.updateStatOnConnection("magasins" + iterateId, 0, 0);
+					
+				}
+			} 
+
+		
+		int tos_count_tUniqRow_2 = 0;
+		
+
+	
+		class KeyStruct_tUniqRow_2 {
+	
+			private static final int DEFAULT_HASHCODE = 1;
+		    private static final int PRIME = 31;
+		    private int hashCode = DEFAULT_HASHCODE;
+		    public boolean hashCodeDirty = true;
+	
+	        
+					String code_postal;        
+	        
+		    @Override
+			public int hashCode() {
+				if (this.hashCodeDirty) {
+					final int prime = PRIME;
+					int result = DEFAULT_HASHCODE;
+			
+								result = prime * result + ((this.code_postal == null) ? 0 : this.code_postal.hashCode());
+								
+		    		this.hashCode = result;
+		    		this.hashCodeDirty = false;		
+				}
+				return this.hashCode;
+			}
+			
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj) return true;
+				if (obj == null) return false;
+				if (getClass() != obj.getClass()) return false;
+				final KeyStruct_tUniqRow_2 other = (KeyStruct_tUniqRow_2) obj;
+				
+									if (this.code_postal == null) {
+										if (other.code_postal != null) 
+											return false;
+								
+									} else if (!this.code_postal.equals(other.code_postal))
+								 
+										return false;
+								
+				
+				return true;
+			}
+	  
+	        
+		}
+
+	
+int nb_uniques_tUniqRow_2 = 0;
+int nb_duplicates_tUniqRow_2 = 0;
+KeyStruct_tUniqRow_2 finder_tUniqRow_2 = new KeyStruct_tUniqRow_2();
+java.util.Set<KeyStruct_tUniqRow_2> keystUniqRow_2 = new java.util.HashSet<KeyStruct_tUniqRow_2>(); 
+
+ 
+
+
+
+/**
+ * [tUniqRow_2 begin ] stop
  */
 
 
@@ -4871,6 +6070,7 @@ Var__tMap_2__Struct Var__tMap_2 = new Var__tMap_2__Struct();
 
 // ###############################
 // # Outputs initialization
+rejected_joinStruct rejected_join_tmp = new rejected_joinStruct();
 magasinsStruct magasins_tmp = new magasinsStruct();
 // ###############################
 
@@ -5160,75 +6360,78 @@ villes_corrigeeStruct villes_corrigee_tmp = new villes_corrigeeStruct();
 			try {
 							columnIndex_tFileInputExcel_1 = 0;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Villes";
-			row1.Villes = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Villes = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Villes = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 1;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Code_postal";
-			row1.Code_postal = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Code_postal = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Code_postal = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 2;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Enseignes";
-			row1.Enseignes = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Enseignes = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Enseignes = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 3;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Region";
-			row1.Region = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Region = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Region = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 4;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Responsable_Magasin";
-			row1.Responsable_Magasin = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Responsable_Magasin = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Responsable_Magasin = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 5;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Directeur_Regional";
-			row1.Directeur_Regional = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Directeur_Regional = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Directeur_Regional = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 6;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Directeur_Commercial";
-			row1.Directeur_Commercial = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Directeur_Commercial = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Directeur_Commercial = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_1 >= 7){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_1++;
 			
     } catch (java.lang.Exception e) {
@@ -5468,12 +6671,22 @@ if(villes_corrigee != null) {
 	  							
 
  								
+								  
+								  if(!tHash_Lookup_row5.hasNext()) { // G_TM_M_090
+
+  								
 		  				
+	  								
+			  							rejectedInnerJoin_tMap_2 = true;
 	  								
 						
 									
   									  		
  								
+								  
+								  } // G_TM_M_090
+
+  								
 
 
 
@@ -5533,10 +6746,24 @@ Var__tMap_2__Struct Var = Var__tMap_2;// ###############################
         // ###############################
         // # Output tables
 
+rejected_join = null;
 magasins = null;
 
 boolean rejected_tMap_2 = true;
+if(!rejectedInnerJoin_tMap_2 ) {
+} // closing inner join bracket (1)
+ else {
+rejected_tMap_2 = false;
+} // closing else inner join bracket (1)
 // ###### START REJECTS ##### 
+
+// # Output reject table : 'rejected_join'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_2 ) {
+rejected_join_tmp.Code_postal = villes_corrigee.Code_postal ;
+rejected_join_tmp.Villes = villes_corrigee.Villes ;
+rejected_join = rejected_join_tmp;
+} // closing filter/reject
 
 // # Output reject table : 'magasins'
 // # Filter conditions 
@@ -5591,8 +6818,287 @@ rejectedInnerJoin_tMap_2 = false;
 /**
  * [tMap_2 process_data_begin ] stop
  */
+// Start of branch "rejected_join"
+if(rejected_join != null) { 
+
+
+
+	
+	/**
+	 * [tJavaRow_4 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_4";
+
+	
+
+			//rejected_join
+			//rejected_join
+
+
+			
+				if(execStat){
+					runStat.updateStatOnConnection("rejected_join"+iterateId,1, 1);
+				} 
+			
+
+		
+
+    // code sample:
+//
+// multiply by 2 the row identifier
+// output_row.id = rejected_join.id * 2;
+//
+// lowercase the name
+// output_row.name = rejected_join.name.toLowerCase();
+if(true) {
+throw new Exception("Fichier "+ ((String)globalMap.get("tFileList_2_CURRENT_FILE")) + " : La ville " + rejected_join.Villes + " a un code postal invalide : " + rejected_join.Code_postal);
+}
+    nb_line_tJavaRow_4++;   
+
+ 
+
+
+	tos_count_tJavaRow_4++;
+
+/**
+ * [tJavaRow_4 main ] stop
+ */
+	
+	/**
+	 * [tJavaRow_4 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_4 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tJavaRow_4 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_4 process_data_end ] stop
+ */
+
+} // End of branch "rejected_join"
+
+
+
+
 // Start of branch "magasins"
 if(magasins != null) { 
+
+
+
+	
+	/**
+	 * [tUniqRow_2 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tUniqRow_2";
+
+	
+
+			//magasins
+			//magasins
+
+
+			
+				if(execStat){
+					runStat.updateStatOnConnection("magasins"+iterateId,1, 1);
+				} 
+			
+
+		
+row6 = null;			row7 = null;			
+if(magasins.code_postal == null){
+	finder_tUniqRow_2.code_postal = null;
+}else{
+	finder_tUniqRow_2.code_postal = magasins.code_postal.toLowerCase();
+}	
+finder_tUniqRow_2.hashCodeDirty = true;
+if (!keystUniqRow_2.contains(finder_tUniqRow_2)) {
+		KeyStruct_tUniqRow_2 new_tUniqRow_2 = new KeyStruct_tUniqRow_2();
+
+		
+if(magasins.code_postal == null){
+	new_tUniqRow_2.code_postal = null;
+}else{
+	new_tUniqRow_2.code_postal = magasins.code_postal.toLowerCase();
+}
+		
+		keystUniqRow_2.add(new_tUniqRow_2);if(row6 == null){ 
+	
+	row6 = new row6Struct();
+}row6.enseigne = magasins.enseigne;			row6.ville = magasins.ville;			row6.code_postal = magasins.code_postal;			row6.code_departement = magasins.code_departement;			row6.Region = magasins.Region;					
+		nb_uniques_tUniqRow_2++;
+	} else {
+if(row7 == null){ 
+	
+	row7 = new row7Struct();
+}				row7.enseigne = magasins.enseigne;			row7.ville = magasins.ville;			row7.code_postal = magasins.code_postal;			row7.code_departement = magasins.code_departement;			row7.Region = magasins.Region;			
+	  nb_duplicates_tUniqRow_2++;
+	}
+
+ 
+
+
+	tos_count_tUniqRow_2++;
+
+/**
+ * [tUniqRow_2 main ] stop
+ */
+	
+	/**
+	 * [tUniqRow_2 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tUniqRow_2";
+
+	
+
+ 
+
+
+
+/**
+ * [tUniqRow_2 process_data_begin ] stop
+ */
+// Start of branch "row7"
+if(row7 != null) { 
+
+
+
+	
+	/**
+	 * [tJavaRow_1 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_1";
+
+	
+
+			//row7
+			//row7
+
+
+			
+				if(execStat){
+					runStat.updateStatOnConnection("row7"+iterateId,1, 1);
+				} 
+			
+
+		
+
+    // code sample:
+//
+// multiply by 2 the row identifier
+// output_row.id = row7.id * 2;
+//
+// lowercase the name
+// output_row.name = row7.name.toLowerCase();
+if(true) {
+throw new Exception("Fichier "+ ((String)globalMap.get("tFileList_2_CURRENT_FILE")) + " : Il existe une ville en double : " + row7.ville + "/" + row7.code_postal);
+}
+    nb_line_tJavaRow_1++;   
+
+ 
+
+
+	tos_count_tJavaRow_1++;
+
+/**
+ * [tJavaRow_1 main ] stop
+ */
+	
+	/**
+	 * [tJavaRow_1 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_1 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tJavaRow_1 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_1 process_data_end ] stop
+ */
+
+} // End of branch "row7"
+
+
+
+
+// Start of branch "row6"
+if(row6 != null) { 
 
 
 
@@ -5609,13 +7115,13 @@ if(magasins != null) {
 
 	
 
-			//magasins
-			//magasins
+			//row6
+			//row6
 
 
 			
 				if(execStat){
-					runStat.updateStatOnConnection("magasins"+iterateId,1, 1);
+					runStat.updateStatOnConnection("row6"+iterateId,1, 1);
 				} 
 			
 
@@ -5650,7 +7156,7 @@ if(magasins != null) {
 								
 								hasCasePrimitiveKeyWithNull_tMap_4 = false;
 								
-                        		    		row3HashKey.code = magasins.code_departement ;
+                        		    		row3HashKey.code = row6.code_departement ;
                         		    		
 
 								
@@ -5668,12 +7174,22 @@ if(magasins != null) {
 	  							
 
  								
+								  
+								  if(!tHash_Lookup_row3.hasNext()) { // G_TM_M_090
+
+  								
 		  				
+	  								
+			  							rejectedInnerJoin_tMap_4 = true;
 	  								
 						
 									
   									  		
  								
+								  
+								  } // G_TM_M_090
+
+  								
 
 
 
@@ -5745,7 +7261,7 @@ if(magasins != null) {
 								
 								hasCasePrimitiveKeyWithNull_tMap_4 = false;
 								
-                        		    		row4HashKey.slug = magasins.Region ;
+                        		    		row4HashKey.slug = row6.Region ;
                         		    		
 
 								
@@ -5763,12 +7279,22 @@ if(magasins != null) {
 	  							
 
  								
+								  
+								  if(!tHash_Lookup_row4.hasNext()) { // G_TM_M_090
+
+  								
 		  				
+	  								
+			  							rejectedInnerJoin_tMap_4 = true;
 	  								
 						
 									
   									  		
  								
+								  
+								  } // G_TM_M_090
+
+  								
 
 
 
@@ -5829,15 +7355,28 @@ Var__tMap_4__Struct Var = Var__tMap_4;// ###############################
         // # Output tables
 
 magin_record = null;
+rejected_region = null;
 
+if(!rejectedInnerJoin_tMap_4 ) {
 
 // # Output table : 'magin_record'
 magin_record_tmp.id_region = row4.id ;
-magin_record_tmp.enseigne = magasins.enseigne ;
-magin_record_tmp.ville = magasins.ville ;
-magin_record_tmp.code_postal = magasins.code_postal ;
+magin_record_tmp.enseigne = row6.enseigne ;
+magin_record_tmp.ville = row6.ville ;
+magin_record_tmp.code_postal = row6.code_postal ;
 magin_record_tmp.id_departement = row3.id ;
 magin_record = magin_record_tmp;
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
+
+// # Output reject table : 'rejected_region'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_4 ) {
+rejected_region_tmp.ville = row6.ville ;
+rejected_region_tmp.code_postal = row6.code_postal ;
+rejected_region_tmp.Region = row6.Region ;
+rejected_region = rejected_region_tmp;
+} // closing filter/reject
 // ###############################
 
 } // end of Var scope
@@ -5881,6 +7420,103 @@ rejectedInnerJoin_tMap_4 = false;
 /**
  * [tMap_4 process_data_begin ] stop
  */
+// Start of branch "rejected_region"
+if(rejected_region != null) { 
+
+
+
+	
+	/**
+	 * [tJavaRow_5 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_5";
+
+	
+
+			//rejected_region
+			//rejected_region
+
+
+			
+				if(execStat){
+					runStat.updateStatOnConnection("rejected_region"+iterateId,1, 1);
+				} 
+			
+
+		
+
+    // code sample:
+//
+// multiply by 2 the row identifier
+// output_row.id = rejected_region.id * 2;
+//
+// lowercase the name
+// output_row.name = rejected_region.name.toLowerCase();
+if(true) {
+throw new Exception("Fichier "+ ((String)globalMap.get("tFileList_2_CURRENT_FILE")) + " : Impossible de trouver la région pour la ville " + rejected_region.ville + " " + rejected_region.code_postal + ", associée à la région " + rejected_region.Region);
+}
+
+    nb_line_tJavaRow_5++;   
+
+ 
+
+
+	tos_count_tJavaRow_5++;
+
+/**
+ * [tJavaRow_5 main ] stop
+ */
+	
+	/**
+	 * [tJavaRow_5 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_5";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_5 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tJavaRow_5 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_5";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_5 process_data_end ] stop
+ */
+
+} // End of branch "rejected_region"
+
+
+
+
 // Start of branch "magin_record"
 if(magin_record != null) { 
 
@@ -6059,6 +7695,32 @@ pstmtInsert_tDBOutput_2.setNull(4, java.sql.Types.VARCHAR);
 
 /**
  * [tMap_4 process_data_end ] stop
+ */
+
+} // End of branch "row6"
+
+
+
+
+	
+	/**
+	 * [tUniqRow_2 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tUniqRow_2";
+
+	
+
+ 
+
+
+
+/**
+ * [tUniqRow_2 process_data_end ] stop
  */
 
 } // End of branch "magasins"
@@ -6261,6 +7923,110 @@ end_Hash.put("tMap_2", System.currentTimeMillis());
 
 	
 	/**
+	 * [tJavaRow_4 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_4";
+
+	
+
+globalMap.put("tJavaRow_4_NB_LINE",nb_line_tJavaRow_4);
+			if(execStat){
+				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
+			 		runStat.updateStatOnConnection("rejected_join"+iterateId,2, 0); 
+			 	}
+			}
+		
+ 
+
+ok_Hash.put("tJavaRow_4", true);
+end_Hash.put("tJavaRow_4", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tJavaRow_4 end ] stop
+ */
+
+
+
+
+	
+	/**
+	 * [tUniqRow_2 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tUniqRow_2";
+
+	
+
+globalMap.put("tUniqRow_2_NB_UNIQUES",nb_uniques_tUniqRow_2);
+globalMap.put("tUniqRow_2_NB_DUPLICATES",nb_duplicates_tUniqRow_2);
+
+			if(execStat){
+				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
+			 		runStat.updateStatOnConnection("magasins"+iterateId,2, 0); 
+			 	}
+			}
+		
+ 
+
+ok_Hash.put("tUniqRow_2", true);
+end_Hash.put("tUniqRow_2", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tUniqRow_2 end ] stop
+ */
+
+	
+	/**
+	 * [tJavaRow_1 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_1";
+
+	
+
+globalMap.put("tJavaRow_1_NB_LINE",nb_line_tJavaRow_1);
+			if(execStat){
+				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
+			 		runStat.updateStatOnConnection("row7"+iterateId,2, 0); 
+			 	}
+			}
+		
+ 
+
+ok_Hash.put("tJavaRow_1", true);
+end_Hash.put("tJavaRow_1", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tJavaRow_1 end ] stop
+ */
+
+
+
+
+	
+	/**
 	 * [tMap_4 end ] start
 	 */
 
@@ -6283,7 +8049,7 @@ end_Hash.put("tMap_2", System.currentTimeMillis());
 
 			if(execStat){
 				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
-			 		runStat.updateStatOnConnection("magasins"+iterateId,2, 0); 
+			 		runStat.updateStatOnConnection("row6"+iterateId,2, 0); 
 			 	}
 			}
 		
@@ -6298,6 +8064,41 @@ end_Hash.put("tMap_4", System.currentTimeMillis());
 /**
  * [tMap_4 end ] stop
  */
+
+	
+	/**
+	 * [tJavaRow_5 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_5";
+
+	
+
+globalMap.put("tJavaRow_5_NB_LINE",nb_line_tJavaRow_5);
+			if(execStat){
+				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
+			 		runStat.updateStatOnConnection("rejected_region"+iterateId,2, 0); 
+			 	}
+			}
+		
+ 
+
+ok_Hash.put("tJavaRow_5", true);
+end_Hash.put("tJavaRow_5", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tJavaRow_5 end ] stop
+ */
+
+
+
 
 	
 	/**
@@ -6377,6 +8178,9 @@ end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 
 
 
+
+
+
 						if(execStat){
 							runStat.updateStatOnConnection("iterate2", 2, "exec" + NB_ITERATE_tFileInputExcel_1);
 						}				
@@ -6393,15 +8197,15 @@ end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("row9", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("efface_magasin", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("row2", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6834,75 +8638,78 @@ vStruct v_tmp = new vStruct();
 			try {
 							columnIndex_tFileInputExcel_2 = 0;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Villes";
-			row2.Villes = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Villes = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Villes = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 1;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Code_postal";
-			row2.Code_postal = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Code_postal = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Code_postal = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 2;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Enseignes";
-			row2.Enseignes = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Enseignes = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Enseignes = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 3;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Region";
-			row2.Region = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Region = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Region = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 4;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Responsable_Magasin";
-			row2.Responsable_Magasin = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Responsable_Magasin = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Responsable_Magasin = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 5;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Directeur_Regional";
-			row2.Directeur_Regional = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Directeur_Regional = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Directeur_Regional = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 6;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Directeur_Commercial";
-			row2.Directeur_Commercial = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Directeur_Commercial = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Directeur_Commercial = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_2 >= 7){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_2++;
 			
     } catch (java.lang.Exception e) {
@@ -7953,6 +9760,75 @@ end_Hash.put("tFileList_2", System.currentTimeMillis());
 
 	
 	/**
+	 * [tJavaRow_4 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_4 finally ] stop
+ */
+
+
+
+
+	
+	/**
+	 * [tUniqRow_2 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tUniqRow_2";
+
+	
+
+ 
+
+
+
+/**
+ * [tUniqRow_2 finally ] stop
+ */
+
+	
+	/**
+	 * [tJavaRow_1 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_1 finally ] stop
+ */
+
+
+
+
+	
+	/**
 	 * [tMap_4 finally ] start
 	 */
 
@@ -7971,6 +9847,30 @@ end_Hash.put("tFileList_2", System.currentTimeMillis());
 /**
  * [tMap_4 finally ] stop
  */
+
+	
+	/**
+	 * [tJavaRow_5 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tJavaRow_5";
+
+	
+
+ 
+
+
+
+/**
+ * [tJavaRow_5 finally ] stop
+ */
+
+
+
 
 	
 	/**
@@ -8018,6 +9918,9 @@ end_Hash.put("tFileList_2", System.currentTimeMillis());
 /**
  * [tDBOutput_2 finally ] stop
  */
+
+
+
 
 
 
@@ -8557,7 +10460,7 @@ public void tDBInput_4Process(final java.util.Map<String, Object> globalMap) thr
 
 			   		// connection name:row5
 			   		// source node:tDBInput_4 - inputs:(after_tFileList_2) outputs:(row5,row5) | target node:tAdvancedHash_row5 - inputs:(row5) outputs:()
-			   		// linked node: tMap_2 - inputs:(villes_corrigee,row5) outputs:(magasins)
+			   		// linked node: tMap_2 - inputs:(villes_corrigee,row5) outputs:(rejected_join,magasins)
 			   
 			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row5 = 
 			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
@@ -9328,7 +11231,7 @@ public void tDBInput_3Process(final java.util.Map<String, Object> globalMap) thr
 
 			   		// connection name:row3
 			   		// source node:tDBInput_3 - inputs:(after_tFileList_2) outputs:(row3,row3) | target node:tAdvancedHash_row3 - inputs:(row3) outputs:()
-			   		// linked node: tMap_4 - inputs:(magasins,row3,row4) outputs:(magin_record)
+			   		// linked node: tMap_4 - inputs:(row6,row3,row4) outputs:(rejected_region,magin_record)
 			   
 			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row3 = 
 			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
@@ -10044,7 +11947,7 @@ public void tDBInput_2Process(final java.util.Map<String, Object> globalMap) thr
 
 			   		// connection name:row4
 			   		// source node:tDBInput_2 - inputs:(after_tFileList_2) outputs:(row4,row4) | target node:tAdvancedHash_row4 - inputs:(row4) outputs:()
-			   		// linked node: tMap_4 - inputs:(magasins,row3,row4) outputs:(magin_record)
+			   		// linked node: tMap_4 - inputs:(row6,row3,row4) outputs:(rejected_region,magin_record)
 			   
 			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row4 = 
 			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
@@ -13933,6 +15836,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     311206 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 20:03:26 CEST
+ *     349237 characters generated by Talend Open Studio for Data Integration 
+ *     on the 19 juin 2019 01:48:58 CEST
  ************************************************************************************************/

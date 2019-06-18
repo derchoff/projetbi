@@ -4093,17 +4093,17 @@ row7Struct row7 = new row7Struct();
 	 */
 
 				
-			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
-						
-			int NB_ITERATE_tRunJob_2 = 0; //for statistics
+			int NB_ITERATE_tRunJob_3 = 0; //for statistics
 						
 			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
+						
+			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_1 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_4 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_3 = 0; //for statistics
+			int NB_ITERATE_tRunJob_2 = 0; //for statistics
 			
 
 	
@@ -4892,15 +4892,7 @@ end_Hash.put("tRunJob_3", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row4", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row2", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
+	       				runStat.updateStatOnConnection("indicateurs", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -4908,7 +4900,15 @@ end_Hash.put("tRunJob_3", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("indicateurs", 3, 0);
+	       				runStat.updateStatOnConnection("row4", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row1", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row2", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -5597,25 +5597,28 @@ java.util.Set<KeyStruct_tUniqRow_1> keystUniqRow_1 = new java.util.HashSet<KeySt
 			try {
 							columnIndex_tFileInputExcel_1 = 0;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Abbreviation";
-			row1.Abbreviation = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Abbreviation = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Abbreviation = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 							columnIndex_tFileInputExcel_1 = 1;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Nom";
-			row1.Nom = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Nom = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Nom = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_1 >= 2){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_1++;
 			
     } catch (java.lang.Exception e) {
@@ -6550,7 +6553,7 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row5", 3, 0);
+	       				runStat.updateStatOnConnection("efface_indicateur", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -6562,7 +6565,7 @@ end_Hash.put("tDie_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("efface_indicateur", 3, 0);
+	       				runStat.updateStatOnConnection("row5", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -7127,25 +7130,28 @@ java.util.Set<KeyStruct_tUniqRow_2> keystUniqRow_2 = new java.util.HashSet<KeySt
 			try {
 							columnIndex_tFileInputExcel_2 = 0;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Abbreviation";
-			row5.Abbreviation = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row5.Abbreviation = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row5.Abbreviation = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 							columnIndex_tFileInputExcel_2 = 1;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Nom";
-			row5.Nom = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row5.Nom = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row5.Nom = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_2 >= 2){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_2++;
 			
     } catch (java.lang.Exception e) {
@@ -12012,6 +12018,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     274445 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 20:03:25 CEST
+ *     274775 characters generated by Talend Open Studio for Data Integration 
+ *     on the 19 juin 2019 01:48:57 CEST
  ************************************************************************************************/

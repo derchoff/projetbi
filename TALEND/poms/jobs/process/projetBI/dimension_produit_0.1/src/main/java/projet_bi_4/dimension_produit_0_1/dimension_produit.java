@@ -396,6 +396,15 @@ private class TalendException extends Exception {
 					tFileList_1_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tRunJob_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFileList_1_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tFileInputExcel_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -2931,15 +2940,17 @@ row9Struct row9 = new row9Struct();
 	 */
 
 				
-			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+			int NB_ITERATE_tRunJob_4 = 0; //for statistics
 						
-			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
+			int NB_ITERATE_tRunJob_3 = 0; //for statistics
 						
 			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
 						
+			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+						
 			int NB_ITERATE_tRunJob_2 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_3 = 0; //for statistics
+			int NB_ITERATE_tFileInputExcel_2 = 0; //for statistics
 			
 
 	
@@ -3490,15 +3501,240 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 
 
 
+	NB_ITERATE_tRunJob_4++;
+	
+	
+				if(execStat){
+					runStat.updateStatOnConnection("iterate9", 1, "exec" + NB_ITERATE_tRunJob_4);
+					//Thread.sleep(1000);
+				}				
+			
+
+	
+	/**
+	 * [tRunJob_4 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tRunJob_4", false);
+		start_Hash.put("tRunJob_4", System.currentTimeMillis());
+		
+	
+	currentComponent="tRunJob_4";
+
+	
+		int tos_count_tRunJob_4 = 0;
+		
+
+
+ 
+
+
+
+/**
+ * [tRunJob_4 begin ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+	java.util.List<String> paraList_tRunJob_4 = new java.util.ArrayList<String>();
+	
+	        			paraList_tRunJob_4.add("--father_pid="+pid);
+	      			
+	        			paraList_tRunJob_4.add("--root_pid="+rootPid);
+	      			
+	        			paraList_tRunJob_4.add("--father_node=tRunJob_4");
+	      			
+	//for feature:10589
+	
+		paraList_tRunJob_4.add("--stat_port=" + portStats);
+	
+
+	if(resuming_logs_dir_path != null){
+		paraList_tRunJob_4.add("--resuming_logs_dir_path=" + resuming_logs_dir_path);
+	}
+	String childResumePath_tRunJob_4 = ResumeUtil.getChildJobCheckPointPath(resuming_checkpoint_path);
+	String tRunJobName_tRunJob_4 = ResumeUtil.getRighttRunJob(resuming_checkpoint_path);
+	if("tRunJob_4".equals(tRunJobName_tRunJob_4) && childResumePath_tRunJob_4 != null){
+		paraList_tRunJob_4.add("--resuming_checkpoint_path=" + ResumeUtil.getChildJobCheckPointPath(resuming_checkpoint_path));
+	}
+	paraList_tRunJob_4.add("--parent_part_launcher=JOB:" + jobName + "/NODE:tRunJob_4");
+	
+	java.util.Map<String, Object> parentContextMap_tRunJob_4 = new java.util.HashMap<String, Object>();
+
+	
+
+	Object obj_tRunJob_4 = null;
+
+	
+		obj_tRunJob_4 = ((String)globalMap.get("tFileList_1_CURRENT_FILEDIRECTORY")) + System.getProperty("file.separator") + ((String)globalMap.get("tFileList_1_CURRENT_FILE"));
+		if(obj_tRunJob_4!=null) {
+			paraList_tRunJob_4.add("--context_param nom_fichier=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_4));
+		} else {
+			paraList_tRunJob_4.add("--context_param nom_fichier=" + NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+		}
+		
+		parentContextMap_tRunJob_4.put("nom_fichier", obj_tRunJob_4);
+	
+		obj_tRunJob_4 = "Nom";
+		if(obj_tRunJob_4!=null) {
+			paraList_tRunJob_4.add("--context_param nom_colonnes=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_4));
+		} else {
+			paraList_tRunJob_4.add("--context_param nom_colonnes=" + NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+		}
+		
+		parentContextMap_tRunJob_4.put("nom_colonnes", obj_tRunJob_4);
+	
+		obj_tRunJob_4 = "produits";
+		if(obj_tRunJob_4!=null) {
+			paraList_tRunJob_4.add("--context_param nom_onglet=" + RuntimeUtils.tRunJobConvertContext(obj_tRunJob_4));
+		} else {
+			paraList_tRunJob_4.add("--context_param nom_onglet=" + NULL_VALUE_EXPRESSION_IN_COMMAND_STRING_FOR_CHILD_JOB_ONLY);
+		}
+		
+		parentContextMap_tRunJob_4.put("nom_onglet", obj_tRunJob_4);
+	
+	
+		projet_bi_4.verification_nom_des_colonnes_0_1.verification_nom_des_colonnes childJob_tRunJob_4 = new projet_bi_4.verification_nom_des_colonnes_0_1.verification_nom_des_colonnes();
+	    // pass DataSources
+	    java.util.Map<String, routines.system.TalendDataSource> talendDataSources_tRunJob_4 = (java.util.Map<String, routines.system.TalendDataSource>) globalMap
+	            .get(KEY_DB_DATASOURCES);
+	    if (null != talendDataSources_tRunJob_4) {
+	        java.util.Map<String, javax.sql.DataSource> dataSources_tRunJob_4 = new java.util.HashMap<String, javax.sql.DataSource>();
+	        for (java.util.Map.Entry<String, routines.system.TalendDataSource> talendDataSourceEntry_tRunJob_4 : talendDataSources_tRunJob_4
+			        .entrySet()) {
+	            dataSources_tRunJob_4.put(talendDataSourceEntry_tRunJob_4.getKey(),
+	                    talendDataSourceEntry_tRunJob_4.getValue().getRawDataSource());
+	        }
+	        childJob_tRunJob_4.setDataSources(dataSources_tRunJob_4);
+	    }
+		  
+			childJob_tRunJob_4.parentContextMap = parentContextMap_tRunJob_4;
+		  
+		
+		String[][] childReturn_tRunJob_4 = childJob_tRunJob_4.runJob((String[]) paraList_tRunJob_4.toArray(new String[paraList_tRunJob_4.size()]));
+		
+	  	
+				errorCode = childJob_tRunJob_4.getErrorCode();
+		    
+	            
+	    	if(childJob_tRunJob_4.getErrorCode() == null){
+				globalMap.put("tRunJob_4_CHILD_RETURN_CODE", childJob_tRunJob_4.getStatus() != null && ("failure").equals(childJob_tRunJob_4.getStatus()) ? 1 : 0);
+	    	}else{
+				globalMap.put("tRunJob_4_CHILD_RETURN_CODE", childJob_tRunJob_4.getErrorCode());
+		    }
+		    if (childJob_tRunJob_4.getExceptionStackTrace() != null) { 
+		    	globalMap.put("tRunJob_4_CHILD_EXCEPTION_STACKTRACE", childJob_tRunJob_4.getExceptionStackTrace());
+		    }
+	  
+			 
+				if (childJob_tRunJob_4.getErrorCode() != null || ("failure").equals(childJob_tRunJob_4.getStatus())) {
+	        		throw new RuntimeException("Child job running failed.\n"+childJob_tRunJob_4.getException().getClass().getName() + ": " + childJob_tRunJob_4.getException().getMessage());
+				}
+			
+	  	
+
+ 
+
+
+	tos_count_tRunJob_4++;
+
+/**
+ * [tRunJob_4 main ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 process_data_end ] stop
+ */
+	
+	/**
+	 * [tRunJob_4 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+ok_Hash.put("tRunJob_4", true);
+end_Hash.put("tRunJob_4", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tRunJob_4 end ] stop
+ */
+						if(execStat){
+							runStat.updateStatOnConnection("iterate9", 2, "exec" + NB_ITERATE_tRunJob_4);
+						}				
+					
+
+
+
+
 	NB_ITERATE_tFileInputExcel_1++;
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("produits", 3, 0);
+	       				runStat.updateStatOnConnection("row1", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
+	       				runStat.updateStatOnConnection("produits", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -3883,15 +4119,18 @@ produitsStruct produits_tmp = new produitsStruct();
 			try {
 							columnIndex_tFileInputExcel_1 = 0;
 						
-			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].length() > 0) {
+			if( temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim().length() > 0) {
 				curColNum_tFileInputExcel_1=columnIndex_tFileInputExcel_1 + start_column_tFileInputExcel_1 + 1;
 				curColName_tFileInputExcel_1 = "Nom";
-			row1.Nom = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1];
+			row1.Nom = temp_row_tFileInputExcel_1[columnIndex_tFileInputExcel_1].trim();
 			}else {
 				row1.Nom = null;
 				emptyColumnCount_tFileInputExcel_1++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_1 >= 1){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_1++;
 			
     } catch (java.lang.Exception e) {
@@ -4394,6 +4633,10 @@ end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 	
 	
 					if(execStat){				
+	       				runStat.updateStatOnConnection("row2", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("row9", 3, 0);
 					}           			
 				
@@ -4403,10 +4646,6 @@ end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("row9", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row2", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -4750,15 +4989,18 @@ java.util.Set<KeyStruct_tUniqRow_1> keystUniqRow_1 = new java.util.HashSet<KeySt
 			try {
 							columnIndex_tFileInputExcel_2 = 0;
 						
-			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].length() > 0) {
+			if( temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim().length() > 0) {
 				curColNum_tFileInputExcel_2=columnIndex_tFileInputExcel_2 + start_column_tFileInputExcel_2 + 1;
 				curColName_tFileInputExcel_2 = "Nom";
-			row2.Nom = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2];
+			row2.Nom = temp_row_tFileInputExcel_2[columnIndex_tFileInputExcel_2].trim();
 			}else {
 				row2.Nom = null;
 				emptyColumnCount_tFileInputExcel_2++;
 		}
 
+        if(emptyColumnCount_tFileInputExcel_2 >= 1){
+        	break; //if meet the empty row, there will break the iterate.
+        }
 			nb_line_tFileInputExcel_2++;
 			
     } catch (java.lang.Exception e) {
@@ -5526,6 +5768,30 @@ end_Hash.put("tFileList_1", System.currentTimeMillis());
 
 /**
  * [tRunJob_2 finally ] stop
+ */
+
+
+
+
+	
+	/**
+	 * [tRunJob_4 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tRunJob_4";
+
+	
+
+ 
+
+
+
+/**
+ * [tRunJob_4 finally ] stop
  */
 
 
@@ -9205,6 +9471,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     211317 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 20:03:25 CEST
+ *     218087 characters generated by Talend Open Studio for Data Integration 
+ *     on the 19 juin 2019 01:48:58 CEST
  ************************************************************************************************/

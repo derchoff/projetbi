@@ -157,7 +157,7 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="months" expression="projetBi.getNormalizedMonthList(false)" type="id_List"/>
         <mapperTableEntries name="year" expression="projetBi.getCurrentYear()" type="id_Integer"/>
@@ -309,7 +309,7 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="year" expression="projetBi.getCurrentYear()-2" type="id_Integer"/>
       </varTables>
@@ -444,7 +444,7 @@
       <additionalProperties key="Comment" value=""/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="months" expression="projetBi.getNormalizedMonthList(false)" type="id_List"/>
         <mapperTableEntries name="year" expression="projetBi.getCurrentYear()-1" type="id_Integer"/>

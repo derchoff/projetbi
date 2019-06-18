@@ -175,6 +175,36 @@ protected static void logIgnoredError(String message, Throwable cause) {
 				
 			}
 			
+			if(mail_send_darties != null){
+				
+					this.setProperty("mail_send_darties", mail_send_darties.toString());
+				
+			}
+			
+			if(mail_send_password != null){
+				
+					this.setProperty("mail_send_password", mail_send_password.toString());
+				
+			}
+			
+			if(mail_si_darties != null){
+				
+					this.setProperty("mail_si_darties", mail_si_darties.toString());
+				
+			}
+			
+			if(smtp_port != null){
+				
+					this.setProperty("smtp_port", smtp_port.toString());
+				
+			}
+			
+			if(smtp_server != null){
+				
+					this.setProperty("smtp_server", smtp_server.toString());
+				
+			}
+			
 		}
 
 public String nom_fichier;
@@ -215,6 +245,26 @@ public String getDb_user(){
 			return this.excel_output_done_repository;
 		}
 		
+public String mail_send_darties;
+public String getMail_send_darties(){
+	return this.mail_send_darties;
+}
+public java.lang.String mail_send_password;
+public java.lang.String getMail_send_password(){
+	return this.mail_send_password;
+}
+public String mail_si_darties;
+public String getMail_si_darties(){
+	return this.mail_si_darties;
+}
+public String smtp_port;
+public String getSmtp_port(){
+	return this.smtp_port;
+}
+public String smtp_server;
+public String getSmtp_server(){
+	return this.smtp_server;
+}
 	}
 	protected ContextProperties context = new ContextProperties(); // will be instanciated by MS.
 	public ContextProperties getContext() {
@@ -389,6 +439,15 @@ private class TalendException extends Exception {
 					tFixedFlowInput_1_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tSendMail_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tFixedFlowInput_1_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tRowGenerator_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -478,6 +537,188 @@ resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThrea
 
 
 
+
+public static class row4Struct implements routines.system.IPersistableRow<row4Struct> {
+    final static byte[] commonByteArrayLock_PROJET_BI_4_gestion_dossier_reussi = new byte[0];
+    static byte[] commonByteArray_PROJET_BI_4_gestion_dossier_reussi = new byte[0];
+
+	
+			    public String Date;
+
+				public String getDate () {
+					return this.Date;
+				}
+				
+			    public String Heure;
+
+				public String getHeure () {
+					return this.Heure;
+				}
+				
+			    public String NomFichierExcel;
+
+				public String getNomFichierExcel () {
+					return this.NomFichierExcel;
+				}
+				
+			    public String MessageErreur;
+
+				public String getMessageErreur () {
+					return this.MessageErreur;
+				}
+				
+			    public String NomJobTalend;
+
+				public String getNomJobTalend () {
+					return this.NomJobTalend;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_PROJET_BI_4_gestion_dossier_reussi.length) {
+				if(length < 1024 && commonByteArray_PROJET_BI_4_gestion_dossier_reussi.length == 0) {
+   					commonByteArray_PROJET_BI_4_gestion_dossier_reussi = new byte[1024];
+				} else {
+   					commonByteArray_PROJET_BI_4_gestion_dossier_reussi = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_PROJET_BI_4_gestion_dossier_reussi, 0, length);
+			strReturn = new String(commonByteArray_PROJET_BI_4_gestion_dossier_reussi, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_PROJET_BI_4_gestion_dossier_reussi) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.Date = readString(dis);
+					
+					this.Heure = readString(dis);
+					
+					this.NomFichierExcel = readString(dis);
+					
+					this.MessageErreur = readString(dis);
+					
+					this.NomJobTalend = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.Date,dos);
+					
+					// String
+				
+						writeString(this.Heure,dos);
+					
+					// String
+				
+						writeString(this.NomFichierExcel,dos);
+					
+					// String
+				
+						writeString(this.MessageErreur,dos);
+					
+					// String
+				
+						writeString(this.NomJobTalend,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("Date="+Date);
+		sb.append(",Heure="+Heure);
+		sb.append(",NomFichierExcel="+NomFichierExcel);
+		sb.append(",MessageErreur="+MessageErreur);
+		sb.append(",NomJobTalend="+NomJobTalend);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row4Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
 
 public static class row2Struct implements routines.system.IPersistableRow<row2Struct> {
     final static byte[] commonByteArrayLock_PROJET_BI_4_gestion_dossier_reussi = new byte[0];
@@ -1031,9 +1272,49 @@ public void tFixedFlowInput_1Process(final java.util.Map<String, Object> globalM
 
 		row1Struct row1 = new row1Struct();
 row1Struct row2 = row1;
+row1Struct row4 = row1;
 row3Struct row3 = new row3Struct();
 
 
+
+
+
+
+	
+	/**
+	 * [tSendMail_1 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tSendMail_1", false);
+		start_Hash.put("tSendMail_1", System.currentTimeMillis());
+		
+	
+	currentComponent="tSendMail_1";
+
+	
+			if (execStat) {
+				if(resourceMap.get("inIterateVComp") == null){
+					
+						runStat.updateStatOnConnection("row4" + iterateId, 0, 0);
+					
+				}
+			} 
+
+		
+		int tos_count_tSendMail_1 = 0;
+		
+
+ 
+
+
+
+/**
+ * [tSendMail_1 begin ] stop
+ */
 
 
 
@@ -1104,7 +1385,7 @@ row3Struct row3 = new row3Struct();
 		
 
 String fileName_tFileOutputDelimited_1 = "";
-    fileName_tFileOutputDelimited_1 = (new java.io.File(context.excel_output_done_repository + TalendDate.getDate("YYYY-MM-dd")+System.getProperty("file.separator") + TalendDate.getDate("YYYY-MM-dd") + ".log")).getAbsolutePath().replace("\\","/");
+    fileName_tFileOutputDelimited_1 = (new java.io.File(context.excel_output_done_repository+System.getProperty("file.separator") + TalendDate.getDate("YYYY-MM-dd")+System.getProperty("file.separator") + TalendDate.getDate("YYYY-MM-dd") + ".log")).getAbsolutePath().replace("\\","/");
     String fullName_tFileOutputDelimited_1 = null;
     String extension_tFileOutputDelimited_1 = null;
     String directory_tFileOutputDelimited_1 = null;
@@ -1408,7 +1689,12 @@ resourceMap.put("nb_line_tFileOutputDelimited_1", nb_line_tFileOutputDelimited_1
 
 		java.io.File desFile_tFileCopy_1 = new java.io.File(desDirName_tFileCopy_1, desFileName_tFileCopy_1);
 
-		if (!srcFile_tFileCopy_1.getPath().equals(desFile_tFileCopy_1.getPath())  ) {           
+		if (!srcFile_tFileCopy_1.getPath().equals(desFile_tFileCopy_1.getPath())  ) {
+				java.io.File parentFile_tFileCopy_1 = desFile_tFileCopy_1.getParentFile();
+
+				if (parentFile_tFileCopy_1 != null && !parentFile_tFileCopy_1.exists()) {
+					parentFile_tFileCopy_1.mkdirs();
+				}           
 				try {
 					org.talend.FileCopy.copyFile(srcFile_tFileCopy_1.getPath(), desFile_tFileCopy_1.getPath(), true);
 				} catch (Exception e) {
@@ -1429,6 +1715,7 @@ resourceMap.put("nb_line_tFileOutputDelimited_1", nb_line_tFileOutputDelimited_1
         
 
  
+     row4 = row2;
 
 
 	tos_count_tFileCopy_1++;
@@ -1456,6 +1743,204 @@ resourceMap.put("nb_line_tFileOutputDelimited_1", nb_line_tFileOutputDelimited_1
 /**
  * [tFileCopy_1 process_data_begin ] stop
  */
+
+	
+	/**
+	 * [tSendMail_1 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tSendMail_1";
+
+	
+
+			//row4
+			//row4
+
+
+			
+				if(execStat){
+					runStat.updateStatOnConnection("row4"+iterateId,1, 1);
+				} 
+			
+
+		
+
+ 
+
+	String smtpHost_tSendMail_1 = context.smtp_server;
+        String smtpPort_tSendMail_1 = context.smtp_port;
+	String from_tSendMail_1 = (context.mail_send_darties);
+    String to_tSendMail_1 = (context.mail_si_darties).replace(";",",");
+    String cc_tSendMail_1 = (("")==null || "".equals(""))?null:("").replace(";",",");
+    String bcc_tSendMail_1 = (("")==null || "".equals(""))?null:("").replace(";",",");
+    String subject_tSendMail_1 = ("Integration fichier DARTIES");
+    
+	java.util.List<java.util.Map<String, String>> headers_tSendMail_1 = new java.util.ArrayList<java.util.Map<String,String>>();
+	java.util.List<String> attachments_tSendMail_1 = new java.util.ArrayList<String>();
+	java.util.List<String> contentTransferEncoding_tSendMail_1 = new java.util.ArrayList<String>();
+
+	String message_tSendMail_1 = (("Fichier intégré correctement : " + context.nom_fichier) == null || "".equals("Fichier intégré correctement : " + context.nom_fichier)) ? "\"\"" : ("Fichier intégré correctement : " + context.nom_fichier) ;
+	java.util.Properties props_tSendMail_1 = System.getProperties();     
+	props_tSendMail_1.put("mail.smtp.host", smtpHost_tSendMail_1);
+	props_tSendMail_1.put("mail.smtp.port", smtpPort_tSendMail_1);
+		props_tSendMail_1.put("mail.mime.encodefilename", "true");  
+		props_tSendMail_1.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props_tSendMail_1.put("mail.smtp.socketFactory.fallback", "false");
+		props_tSendMail_1.put("mail.smtp.socketFactory.port", smtpPort_tSendMail_1);     
+	try {
+		
+		
+			props_tSendMail_1.put("mail.smtp.auth", "true");
+			javax.mail.Session session_tSendMail_1 = javax.mail.Session.getInstance(props_tSendMail_1, new javax.mail.Authenticator(){         
+				protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				
+                
+	final String decryptedPassword_tSendMail_1 = context.mail_send_password; 
+				
+				
+				return new javax.mail.PasswordAuthentication(context.mail_send_darties, decryptedPassword_tSendMail_1); 
+				}         
+			});   
+		
+		
+		javax.mail.Message msg_tSendMail_1 = new javax.mail.internet.MimeMessage(session_tSendMail_1);
+		msg_tSendMail_1.setFrom(new javax.mail.internet.InternetAddress(from_tSendMail_1, null));
+		msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.TO,javax.mail.internet.InternetAddress.parse(to_tSendMail_1, false));
+		if (cc_tSendMail_1 != null) msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.CC, javax.mail.internet.InternetAddress.parse(cc_tSendMail_1, false));
+		if (bcc_tSendMail_1 != null) msg_tSendMail_1.setRecipients(javax.mail.Message.RecipientType.BCC, javax.mail.internet.InternetAddress.parse(bcc_tSendMail_1, false));
+		msg_tSendMail_1.setSubject(subject_tSendMail_1);
+
+		for (int i_tSendMail_1 = 0; i_tSendMail_1 < headers_tSendMail_1.size(); i_tSendMail_1++) {
+			java.util.Map<String, String> header_tSendMail_1 = headers_tSendMail_1.get(i_tSendMail_1);
+			msg_tSendMail_1.setHeader(header_tSendMail_1.get("KEY"), header_tSendMail_1.get("VALUE"));    
+		}  
+		msg_tSendMail_1.setSentDate(new Date());
+		msg_tSendMail_1.setHeader("X-Priority", "3"); //High->1 Normal->3 Low->5
+		javax.mail.Multipart mp_tSendMail_1 = new javax.mail.internet.MimeMultipart();
+		javax.mail.internet.MimeBodyPart mbpText_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+		mbpText_tSendMail_1.setText(message_tSendMail_1,"ISO-8859-15", "plain");
+		mp_tSendMail_1.addBodyPart(mbpText_tSendMail_1);
+  
+		javax.mail.internet.MimeBodyPart mbpFile_tSendMail_1 = null;
+
+		for (int i_tSendMail_1 = 0; i_tSendMail_1 < attachments_tSendMail_1.size(); i_tSendMail_1++){
+			String filename_tSendMail_1 = attachments_tSendMail_1.get(i_tSendMail_1);
+			javax.activation.FileDataSource fds_tSendMail_1 = null;
+			java.io.File file_tSendMail_1 = new java.io.File(filename_tSendMail_1);
+			
+				if (!file_tSendMail_1.exists()){
+					continue;
+				}
+			
+    		if (file_tSendMail_1.isDirectory()){
+				java.io.File[] subFiles_tSendMail_1 = file_tSendMail_1.listFiles();
+				for(java.io.File subFile_tSendMail_1 : subFiles_tSendMail_1){
+					if (subFile_tSendMail_1.isFile()){
+						fds_tSendMail_1 = new javax.activation.FileDataSource(subFile_tSendMail_1.getAbsolutePath());
+						mbpFile_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+						mbpFile_tSendMail_1.setDataHandler(new javax.activation.DataHandler(fds_tSendMail_1));
+						mbpFile_tSendMail_1.setFileName(javax.mail.internet.MimeUtility.encodeText(fds_tSendMail_1.getName()));
+						if(contentTransferEncoding_tSendMail_1.get(i_tSendMail_1).equalsIgnoreCase("base64")){
+							mbpFile_tSendMail_1.setHeader("Content-Transfer-Encoding", "base64");
+						}
+						mp_tSendMail_1.addBodyPart(mbpFile_tSendMail_1);
+					}
+				}
+    		}else{
+				mbpFile_tSendMail_1 = new javax.mail.internet.MimeBodyPart();
+				fds_tSendMail_1 = new javax.activation.FileDataSource(filename_tSendMail_1);
+				mbpFile_tSendMail_1.setDataHandler(new javax.activation.DataHandler(fds_tSendMail_1)); 
+				mbpFile_tSendMail_1.setFileName(javax.mail.internet.MimeUtility.encodeText(fds_tSendMail_1.getName()));
+				if(contentTransferEncoding_tSendMail_1.get(i_tSendMail_1).equalsIgnoreCase("base64")){
+					mbpFile_tSendMail_1.setHeader("Content-Transfer-Encoding", "base64");
+				}
+				mp_tSendMail_1.addBodyPart(mbpFile_tSendMail_1);
+			}
+		}
+		// -- set the content --
+		msg_tSendMail_1.setContent(mp_tSendMail_1);
+		// add handlers for main MIME types
+		javax.activation.MailcapCommandMap mc_tSendMail_1 = ( javax.activation.MailcapCommandMap)javax.activation.CommandMap.getDefaultCommandMap();
+		mc_tSendMail_1.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
+		mc_tSendMail_1.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
+		mc_tSendMail_1.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+		mc_tSendMail_1.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
+		mc_tSendMail_1.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
+		javax.activation.CommandMap.setDefaultCommandMap(mc_tSendMail_1);
+		// -- Send the message --
+		javax.mail.Transport.send(msg_tSendMail_1);
+	} catch(java.lang.Exception e){
+  		
+			throw(e);
+		
+	}finally{
+		props_tSendMail_1.remove("mail.smtp.host");
+		props_tSendMail_1.remove("mail.smtp.port");
+		
+		props_tSendMail_1.remove("mail.mime.encodefilename");
+		  
+			props_tSendMail_1.remove("mail.smtp.socketFactory.class");
+			props_tSendMail_1.remove("mail.smtp.socketFactory.fallback");
+			props_tSendMail_1.remove("mail.smtp.socketFactory.port");
+		
+		props_tSendMail_1.remove("mail.smtp.auth");     
+	}
+
+ 
+
+
+	tos_count_tSendMail_1++;
+
+/**
+ * [tSendMail_1 main ] stop
+ */
+	
+	/**
+	 * [tSendMail_1 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tSendMail_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tSendMail_1 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tSendMail_1 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tSendMail_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tSendMail_1 process_data_end ] stop
+ */
+
+
+
 	
 	/**
 	 * [tFileCopy_1 process_data_end ] start
@@ -1572,12 +2057,12 @@ long year10000_tDBOutput_1 = calendar_tDBOutput_1.getTime().getTime();
 long date_tDBOutput_1;
 
 java.sql.Connection conn_tDBOutput_1 = null;
-		String dbProperties_tDBOutput_1 = "noDatetimeStringSync=true";
+		String dbProperties_tDBOutput_1 = "noDatetimeStringSync=true&useSSL=false";
 		String url_tDBOutput_1 = null;
 		if(dbProperties_tDBOutput_1 == null || dbProperties_tDBOutput_1.trim().length() == 0) {
 			url_tDBOutput_1 = "jdbc:mysql://" + context.db_host + ":" + context.db_port + "/" + context.db_database + "?" + "rewriteBatchedStatements=true";
 		} else {
-			String properties_tDBOutput_1 = "noDatetimeStringSync=true";
+			String properties_tDBOutput_1 = "noDatetimeStringSync=true&useSSL=false";
 			if (!properties_tDBOutput_1.contains("rewriteBatchedStatements")) {
 				properties_tDBOutput_1 += "&rewriteBatchedStatements=true";
 			}
@@ -2138,6 +2623,40 @@ end_Hash.put("tFileCopy_1", System.currentTimeMillis());
  * [tFileCopy_1 end ] stop
  */
 
+	
+	/**
+	 * [tSendMail_1 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tSendMail_1";
+
+	
+
+			if(execStat){
+				if(resourceMap.get("inIterateVComp") == null || !((Boolean)resourceMap.get("inIterateVComp"))){
+			 		runStat.updateStatOnConnection("row4"+iterateId,2, 0); 
+			 	}
+			}
+		
+ 
+
+ok_Hash.put("tSendMail_1", true);
+end_Hash.put("tSendMail_1", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tSendMail_1 end ] stop
+ */
+
+
+
+
 
 
 
@@ -2241,6 +2760,30 @@ end_Hash.put("tFileCopy_1", System.currentTimeMillis());
 /**
  * [tFileCopy_1 finally ] stop
  */
+
+	
+	/**
+	 * [tSendMail_1 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tSendMail_1";
+
+	
+
+ 
+
+
+
+/**
+ * [tSendMail_1 finally ] stop
+ */
+
+
+
 
 
 
@@ -5536,6 +6079,29 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
                             context.excel_input_repository=(String) context.getProperty("excel_input_repository");
                         context.setContextType("excel_output_done_repository", "id_Directory");
                             context.excel_output_done_repository=(String) context.getProperty("excel_output_done_repository");
+                        context.setContextType("mail_send_darties", "id_String");
+                            context.mail_send_darties=(String) context.getProperty("mail_send_darties");
+                        context.setContextType("mail_send_password", "id_Password");
+                            String pwd_mail_send_password_value = context.getProperty("mail_send_password");
+                            context.mail_send_password = null;
+                            if(pwd_mail_send_password_value!=null) {
+                                if(context_param.containsKey("mail_send_password")) {//no need to decrypt if it come from program argument or parent job runtime
+                                    context.mail_send_password = pwd_mail_send_password_value;
+                                } else if (!pwd_mail_send_password_value.isEmpty()) {
+                                    try {
+                                        context.mail_send_password = routines.system.PasswordEncryptUtil.decryptPassword(pwd_mail_send_password_value);
+                                        context.put("mail_send_password",context.mail_send_password);
+                                    } catch (java.lang.RuntimeException e) {
+                                        //do nothing
+                                    }
+                                }
+                            }
+                        context.setContextType("mail_si_darties", "id_String");
+                            context.mail_si_darties=(String) context.getProperty("mail_si_darties");
+                        context.setContextType("smtp_port", "id_String");
+                            context.smtp_port=(String) context.getProperty("smtp_port");
+                        context.setContextType("smtp_server", "id_String");
+                            context.smtp_server=(String) context.getProperty("smtp_server");
                 } 
                 public void processAllContext() {
                         processContext_0();
@@ -5567,6 +6133,16 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
                 context.excel_input_repository = (String) parentContextMap.get("excel_input_repository");
             }if (parentContextMap.containsKey("excel_output_done_repository")) {
                 context.excel_output_done_repository = (String) parentContextMap.get("excel_output_done_repository");
+            }if (parentContextMap.containsKey("mail_send_darties")) {
+                context.mail_send_darties = (String) parentContextMap.get("mail_send_darties");
+            }if (parentContextMap.containsKey("mail_send_password")) {
+                context.mail_send_password = (java.lang.String) parentContextMap.get("mail_send_password");
+            }if (parentContextMap.containsKey("mail_si_darties")) {
+                context.mail_si_darties = (String) parentContextMap.get("mail_si_darties");
+            }if (parentContextMap.containsKey("smtp_port")) {
+                context.smtp_port = (String) parentContextMap.get("smtp_port");
+            }if (parentContextMap.containsKey("smtp_server")) {
+                context.smtp_server = (String) parentContextMap.get("smtp_server");
             }
         }
 
@@ -5577,6 +6153,7 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 
 		List<String> parametersToEncrypt = new java.util.ArrayList<String>();
 			parametersToEncrypt.add("db_pwd");
+			parametersToEncrypt.add("mail_send_password");
         //Resume: jobStart
         resumeUtil.addLog("JOB_STARTED", "JOB:" + jobName, parent_part_launcher, Thread.currentThread().getId() + "", "","","","",resumeUtil.convertToJsonText(context,parametersToEncrypt));
 
@@ -5806,6 +6383,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     136634 characters generated by Talend Open Studio for Data Integration 
- *     on the 15 juin 2019 20:03:25 CEST
+ *     154159 characters generated by Talend Open Studio for Data Integration 
+ *     on the 19 juin 2019 01:48:56 CEST
  ************************************************************************************************/

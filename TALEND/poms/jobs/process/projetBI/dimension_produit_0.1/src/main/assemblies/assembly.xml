@@ -237,6 +237,7 @@
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <includes>
+                <include>org.talend.libraries:activation:jar:6.0.0</include>
                 <include>org.talend.libraries:poi-ooxml-3.16:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:jxl:jar:6.0.0</include>
                 <include>org.talend.libraries:jboss-serialization:jar:6.0.0</include>
@@ -251,6 +252,7 @@
                 <include>org.talend.libraries:curvesapi-1.04:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:poi-3.16:jar:6.0.0-SNAPSHOT</include>
                 <include>org.talend.libraries:talendcsv:jar:6.0.0</include>
+                <include>org.talend.libraries:mail-1.4:jar:6.0.0</include>
                 <include>org.talend.libraries:mysql-connector-java-5.1.30-bin:jar:6.0.0</include>
                 <include>org.talend.libraries:trove:jar:6.0.0</include>
             </includes>
@@ -274,6 +276,7 @@
         <dependencySet>
             <outputDirectory>${talend.job.name}</outputDirectory>
             <includes>
+                <include>org.example.projet_bi.job:verification_nom_des_colonnes:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_annee_fichier:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:gestion_dossier_reussi:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:dimension_produit:jar:0.1.0</include>
