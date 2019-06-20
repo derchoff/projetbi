@@ -6,7 +6,7 @@
   <artifactId>code.Master</artifactId>
   <version>7.2.1</version>
   <packaging>pom</packaging>
-  <name>PROJET_BI_4 Codes Master</name>
+  <name>PROJET_BI_5 Codes Master</name>
   <url>http://www.talend.org/</url>
   <modules>
     <module>code/routines</module>
@@ -32,7 +32,7 @@
     <module>jobs/process/projetBI/integration_departements_0.1</module>
   </modules>
   <properties>
-    <talend.project.name>PROJET_BI_4</talend.project.name>
+    <talend.project.name>PROJET_BI_5</talend.project.name>
     <encoding>UTF-8</encoding>
     <talend.version>7.2.1</talend.version>
   </properties>

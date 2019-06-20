@@ -280,6 +280,7 @@
                 <include>org.example.projet_bi.job:verification_nom_des_colonnes:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_annee_fichier:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:controle_qualite_objectif:jar:0.1.0</include>
+                <include>org.example.projet_bi.job:gestion_dossier_avertissement:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:gestion_dossier_reussi:jar:0.1.0</include>
                 <include>org.example.projet_bi.job:verification_du_nom_des_onglets:jar:0.1.0</include>
             </includes>

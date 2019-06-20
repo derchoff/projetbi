@@ -11,18 +11,18 @@
   <groupId>org.example.projet_bi.job</groupId>
   <artifactId>integration_objectif</artifactId>
   <version>0.1.0</version>
-  <name>PROJET_BI_4 integration_objectif-0.1.0 (0.1,Jobs)</name>
+  <name>PROJET_BI_5 integration_objectif-0.1.0 (0.1,Jobs)</name>
   <properties>
     <output.resources.dir>${talend.job.name}/src/main/resources</output.resources.dir>
     <talend.job.applyContextToChildren>false</talend.job.applyContextToChildren>
     <current.test.resources.dir>${basedir}/src/test/resources</current.test.resources.dir>
     <current.int-resources.dir>${basedir}/src/main/resources</current.int-resources.dir>
     <talend.job.version>0.1</talend.job.version>
-    <talend.project.name.lowercase>projet_bi_4</talend.project.name.lowercase>
-    <talend.job.path>projet_bi_4/integration_objectif_0_1</talend.job.path>
+    <talend.project.name.lowercase>projet_bi_5</talend.project.name.lowercase>
+    <talend.job.path>projet_bi_5/integration_objectif_0_1</talend.job.path>
     <project.distribution-management.repository.id>${project.distributionManagement.repository.id}</project.distribution-management.repository.id>
     <maven.build.timestamp.format>yyyy-MM-dd HHmmssSSS</maven.build.timestamp.format>
-    <talend.project.name>PROJET_BI_4</talend.project.name>
+    <talend.project.name>PROJET_BI_5</talend.project.name>
     <talend.product.version>7.2.1.20190325_1906-M4</talend.product.version>
     <talend.job.finalName>integration_objectif_0_1</talend.job.finalName>
     <talend.pigudf.groupid>org.example.projet_bi.pigudf</talend.pigudf.groupid>
@@ -42,6 +42,11 @@
     <talend.job.type>Standard</talend.job.type>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.talend.libraries</groupId>
+      <artifactId>activation</artifactId>
+      <version>6.0.0</version>
+    </dependency>
     <dependency>
       <groupId>org.talend.libraries</groupId>
       <artifactId>advancedPersistentLookupLib-1.2</artifactId>
@@ -109,6 +114,11 @@
       <version>1.2.17</version>
     </dependency>
     <dependency>
+      <groupId>org.talend.libraries</groupId>
+      <artifactId>mail-1.4</artifactId>
+      <version>6.0.0</version>
+    </dependency>
+    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.12</version>
@@ -166,6 +176,11 @@
     <dependency>
       <groupId>org.example.projet_bi.job</groupId>
       <artifactId>controle_qualite_objectif</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.example.projet_bi.job</groupId>
+      <artifactId>gestion_dossier_avertissement</artifactId>
       <version>0.1.0</version>
     </dependency>
     <dependency>

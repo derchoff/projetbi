@@ -1,12 +1,12 @@
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] -------------------< org.example.projet_bi.job:MAIN >-------------------
-[INFO] Building PROJET_BI_4 MAIN-0.1.0 (0.1,Jobs) 0.1.0
+[INFO] Building PROJET_BI_5 MAIN-0.1.0 (0.1,Jobs) 0.1.0
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
 [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ MAIN ---
 [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
-[INFO] Copying 3 resources
+[INFO] Copying 4 resources
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ MAIN ---
 [INFO] Not compiling main sources
@@ -21,14 +21,14 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ MAIN ---
-[INFO] Building jar: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_4\poms\jobs\process\projetBI\main_0.1\target\main_0_1.jar
+[INFO] Building jar: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_5\poms\jobs\process\projetBI\main_0.1\target\main_0_1.jar
 [INFO] 
 [INFO] --- maven-assembly-plugin:3.0.0:single (default) @ MAIN ---
-[INFO] Reading assembly descriptor: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_4\poms\jobs\process\projetBI\main_0.1/src/main/assemblies/assembly.xml
-[INFO] Building zip: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_4\poms\jobs\process\projetBI\main_0.1\target\main_0_1.zip
+[INFO] Reading assembly descriptor: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_5\poms\jobs\process\projetBI\main_0.1/src/main/assemblies/assembly.xml
+[INFO] Building zip: C:\Talend\TOS_DI-Win32-20190325_1906-V7.2.1M4\workspace\PROJET_BI_5\poms\jobs\process\projetBI\main_0.1\target\main_0_1.zip
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 3.127 s
-[INFO] Finished at: 2019-06-19T01:49:15+02:00
+[INFO] Total time: 3.669 s
+[INFO] Finished at: 2019-06-21T01:55:29+02:00
 [INFO] ------------------------------------------------------------------------
