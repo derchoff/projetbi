@@ -23,6 +23,7 @@ const PERIODE_PARAMETER ="Période";
 const PERIODE_PRECEDENTE_PARAMETER ="Période précédente";
 const MOIS_PARAMETER ="Mois";
 const CUMULE_PARAMETER ="Cumulé";
+const LIMITE_RANG_PARAMETER="LimiteRang";
 // nom du filtre Type produit dans le tableau de bord
 const PRODUIT_PARAMETER = "Produit";
 // nom du filtre indicateur dans le tableau de bord
@@ -31,6 +32,9 @@ const INDICATEUR_PARAMETER = "Indicateur Filtre";
 const ENSEIGNE_PARAMETER = "Enseigne";
 const FILTRE_REGION_PARAMETER = "Filtre région";
 const FILTRE_REGION_PARENTE_PARAMETER = "Filtre région parente";
+
+const LIMITE_RANG_N_PREMIERS = 15;
+const LIMITE_RANG_ILLIMITE = 10000;
 
 // Nom du champ donnant la sous région sélectionnée dans le tableau de bord
 const BL_SOUS_REGION = "BL Sous Region";
@@ -56,6 +60,7 @@ var start_profile;
 var current_filtre_region;
 var current_filtre_region_parente;    
 var current_profile;    
+var current_limite_rang=15;
 
 //dictionnaire des profiles enfants
 const PROFILE_DIRECTEUR_COMMERCIAL = "Directeur commercial";
@@ -79,7 +84,8 @@ function initDataviz(placeholderDiv, id_date) {
         "Filtre région":current_filtre_region,
         "Filtre région parente":current_filtre_region_parente,
         "Profile":current_profile,
-        "Période":id_date,                
+        "Période":id_date,    
+        "LimiteRang":current_limite_rang
     };
 
     //configure les filtres de départ    
@@ -232,12 +238,13 @@ function getAPIData(apiname, data) {
 async function fillsRegions() {
     
     let regions = [`<option value="" selected>Régions commerciales</option>`];
+    const subProfile = getSubProfile(start_profile);
 
     if (start_profile==PROFILE_DIRECTEUR_COMMERCIAL) {
 
         // récupère les régions commerciale
         let subRegions = await getAPIData('regionlist', {parentRegion:current_filtre_region,isCity:false});
-        const subProfile = getSubProfile(start_profile);
+        
         const cityProfile = getSubProfile(subProfile);
         // pour chaque région commerciale récupère les villes
         // de cette région
@@ -411,6 +418,8 @@ async function printDashBoard() {
     let url_parameters = `${PROFILE_PARAMETER}=${current_profile}`;
     url_parameters += `&${FILTRE_REGION_PARAMETER}=${current_filtre_region}`;
     url_parameters += `&${FILTRE_REGION_PARENTE_PARAMETER}=${current_filtre_region_parente}`;
+    url_parameters += `&${LIMITE_RANG_PARAMETER}=${current_limite_rang}`;
+    
 
     //indicateur
     url_parameters += `&${INDICATEUR_PARAMETER}=${$('#indicateurs').val()}`;
@@ -634,10 +643,17 @@ function switchTosubRegion(profile, region_parente, region) {
     current_filtre_region_parente = region_parente;
     current_filtre_region = region;                    
     current_profile = profile;
+    
+    if (current_profile==PROFILE_DIRECTEUR_COMMERCIAL) {
+        current_limite_rang=LIMITE_RANG_N_PREMIERS;
+    } else {
+        current_limite_rang=LIMITE_RANG_ILLIMITE;
+    }    
 
     // applique les filtres au Tableau de bord
     // pour naviguer dans les sous région
     viz.getWorkbook().changeParameterValueAsync(PROFILE_PARAMETER,current_profile);
+    viz.getWorkbook().changeParameterValueAsync(LIMITE_RANG_PARAMETER,current_limite_rang);
     applyRegionFilters();
     setBoardTitleFromProfile();
 }
