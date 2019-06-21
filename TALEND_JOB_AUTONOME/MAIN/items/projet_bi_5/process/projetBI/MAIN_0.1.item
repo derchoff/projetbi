@@ -134,7 +134,7 @@
     <elementParameter field="CHECK" name="CASE_SENSITIVE" value="true"/>
     <elementParameter field="CHECK" name="INCLUDE_PRESENT" value="true"/>
     <elementParameter field="CLOSED_LIST" name="ACTION_ON" value="fileall"/>
-    <elementParameter field="CLOSED_LIST" name="THEN" value="continue"/>
+    <elementParameter field="CLOSED_LIST" name="THEN" value="exitloop"/>
     <elementParameter field="CHECK" name="WAIT_RELEASE" value="false"/>
     <elementParameter field="TEXT" name="INTERVAL_CHECK" value="500" show="false"/>
     <elementParameter field="CHECK" name="NON_UPDATE" value="false" show="false"/>
