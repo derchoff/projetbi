@@ -4585,17 +4585,17 @@ reel_objectif_compaStruct reel_objectif_compa = new reel_objectif_compaStruct();
 	 */
 
 				
-			int NB_ITERATE_tDBInput_6 = 0; //for statistics
+			int NB_ITERATE_tFileExcelWorkbookOpen_1 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+			int NB_ITERATE_tRunJob_5 = 0; //for statistics
 						
 			int NB_ITERATE_tFileInputExcel_1 = 0; //for statistics
 						
-			int NB_ITERATE_tFileExcelWorkbookOpen_1 = 0; //for statistics
+			int NB_ITERATE_tDBInput_6 = 0; //for statistics
 						
 			int NB_ITERATE_tSetGlobalVar_1 = 0; //for statistics
 						
-			int NB_ITERATE_tRunJob_5 = 0; //for statistics
+			int NB_ITERATE_tRunJob_1 = 0; //for statistics
 						
 			int NB_ITERATE_tJava_1 = 0; //for statistics
 			
@@ -5078,15 +5078,15 @@ end_Hash.put("tRunJob_1", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("row11", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("row10", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -5881,7 +5881,7 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
+	       				runStat.updateStatOnConnection("iterate3", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -5889,15 +5889,15 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row7", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate3", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row9", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row7", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -5999,19 +5999,19 @@ end_Hash.put("tRunJob_2", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("liste_colonnes", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row7", 3, 0);
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+	       				runStat.updateStatOnConnection("row9", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row7", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -7675,7 +7675,11 @@ end_Hash.put("tRunJob_5", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row15", 3, 0);
+	       				runStat.updateStatOnConnection("ventes", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("reel_objectif_compa", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -7683,23 +7687,7 @@ end_Hash.put("tRunJob_5", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row14", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("converties", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("ventes", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row6", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -7707,7 +7695,19 @@ end_Hash.put("tRunJob_5", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("reel_objectif_compa", 3, 0);
+	       				runStat.updateStatOnConnection("row14", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row1", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row6", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row15", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -10809,19 +10809,19 @@ end_Hash.put("tJavaRow_1", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("If3", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("If1", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("If2", 3, 0);
+	       				runStat.updateStatOnConnection("If5", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("If5", 3, 0);
+	       				runStat.updateStatOnConnection("If3", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If2", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -23190,5 +23190,5 @@ if (execStat) {
 }
 /************************************************************************************************
  *     501668 characters generated by Talend Open Studio for Data Integration 
- *     on the 21 juin 2019 01:55:12 CEST
+ *     on the 21 juin 2019 09:23:21 CEST
  ************************************************************************************************/

@@ -838,9 +838,9 @@ public void tWaitForFile_2Process(final java.util.Map<String, Object> globalMap)
 	 */
 
 				
-			int NB_ITERATE_tSetGlobalVar_1 = 0; //for statistics
-						
 			int NB_ITERATE_tFileList_1 = 0; //for statistics
+						
+			int NB_ITERATE_tSetGlobalVar_1 = 0; //for statistics
 			
 
 	
@@ -1284,47 +1284,7 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate3", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("If5", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate5", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate4", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("iterate15", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate17", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("If3", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate11", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("If1", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate2", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("If4", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -1332,11 +1292,51 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("If1", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If5", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate4", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If3", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate2", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("iterate7", 3, 0);
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate5", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate6", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("If4", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate13", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("iterate16", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("iterate17", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -1348,11 +1348,11 @@ end_Hash.put("tSetGlobalVar_1", System.currentTimeMillis());
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate13", 3, 0);
+	       				runStat.updateStatOnConnection("iterate11", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("iterate6", 3, 0);
+	       				runStat.updateStatOnConnection("iterate3", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -1967,8 +1967,8 @@ end_Hash.put("tFileList_1", System.currentTimeMillis());
 	currentComponent="tWaitForFile_2";
 
 	
-
-    if(false){
+    if(true){
+		
         break;
     }
 }
@@ -2167,9 +2167,9 @@ public void tFileList_2Process(final java.util.Map<String, Object> globalMap) th
 	 */
 
 				
-			int NB_ITERATE_tSetGlobalVar_2 = 0; //for statistics
-						
 			int NB_ITERATE_tRunJob_1 = 0; //for statistics
+						
+			int NB_ITERATE_tSetGlobalVar_2 = 0; //for statistics
 			
 
 	
@@ -2812,9 +2812,9 @@ public void tFileList_3Process(final java.util.Map<String, Object> globalMap) th
 	 */
 
 				
-			int NB_ITERATE_tSetGlobalVar_3 = 0; //for statistics
-						
 			int NB_ITERATE_tRunJob_2 = 0; //for statistics
+						
+			int NB_ITERATE_tSetGlobalVar_3 = 0; //for statistics
 			
 
 	
@@ -4102,11 +4102,11 @@ public void tFileList_5Process(final java.util.Map<String, Object> globalMap) th
 	 */
 
 				
+			int NB_ITERATE_tSetGlobalVar_6 = 0; //for statistics
+						
 			int NB_ITERATE_tRunJob_5 = 0; //for statistics
 						
 			int NB_ITERATE_tRunJob_6 = 0; //for statistics
-						
-			int NB_ITERATE_tSetGlobalVar_6 = 0; //for statistics
 			
 
 	
@@ -11354,6 +11354,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     261897 characters generated by Talend Open Studio for Data Integration 
- *     on the 21 juin 2019 01:55:12 CEST
+ *     261898 characters generated by Talend Open Studio for Data Integration 
+ *     on the 21 juin 2019 09:23:22 CEST
  ************************************************************************************************/
