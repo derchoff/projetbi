@@ -60,7 +60,7 @@ var start_profile;
 var current_filtre_region;
 var current_filtre_region_parente;    
 var current_profile;    
-var current_limite_rang=15;
+var current_limite_rang=LIMITE_RANG_N_PREMIERS;
 
 //dictionnaire des profiles enfants
 const PROFILE_DIRECTEUR_COMMERCIAL = "Directeur commercial";
@@ -70,6 +70,7 @@ const subProfile = new Object();
 subProfile[PROFILE_DIRECTEUR_COMMERCIAL]=PROFILE_DIRECTEUR_REGIONAL;
 subProfile[PROFILE_DIRECTEUR_REGIONAL]=PROFILE_RESPONSABLE_MAGASIN;
 subProfile[PROFILE_RESPONSABLE_MAGASIN]="Chef produit";
+
 
 
 function initDataviz(placeholderDiv, id_date) {
@@ -190,6 +191,11 @@ async function initDarties() {
 
     //Sélectionne la période courante        
     const id_date = yyyy * 100 + mm;
+
+    //limite du nombre de ville dans la palmarès
+    if (current_profile!=PROFILE_DIRECTEUR_COMMERCIAL) {
+        current_limite_rang=LIMITE_RANG_ILLIMITE;
+    }        
 
     try {
         //document.getElementById('tableauViz') => 
