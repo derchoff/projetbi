@@ -667,10 +667,10 @@ function switchTosubRegion(profile, region_parente, region) {
     // le responsable de magasin ne peut pas changer
     // le niveau hierarchique
     if (current_profile == PROFILE_RESPONSABLE_MAGASIN) {
-        $('#regions').hide();        
+        //$('#regions').hide();        
         $('#enseignes').hide();                
     } else {
-        $('#regions').show();        
+        //$('#regions').show();        
         $('#enseignes').show();                
     }
 }
