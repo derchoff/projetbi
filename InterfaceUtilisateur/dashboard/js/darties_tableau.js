@@ -145,6 +145,7 @@ async function initDarties() {
     // le niveau hierarchique
     if (start_profile == PROFILE_RESPONSABLE_MAGASIN) {
         $('#regions').hide();        
+        $('#enseignes').hide();                
     }    
 
     current_filtre_region = $.urlParam("filtre_region");
@@ -662,6 +663,16 @@ function switchTosubRegion(profile, region_parente, region) {
     viz.getWorkbook().changeParameterValueAsync(LIMITE_RANG_PARAMETER,current_limite_rang);
     applyRegionFilters();
     setBoardTitleFromProfile();
+
+    // le responsable de magasin ne peut pas changer
+    // le niveau hierarchique
+    if (current_profile == PROFILE_RESPONSABLE_MAGASIN) {
+        $('#regions').hide();        
+        $('#enseignes').hide();                
+    } else {
+        $('#regions').show();        
+        $('#enseignes').show();                
+    }
 }
 
 function applyRegionFilters() {    
